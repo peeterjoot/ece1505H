@@ -1,0 +1,465 @@
+%
+% Copyright © 2017 Peeter Joot.  All Rights Reserved.
+% Licenced as described in the file LICENSE under the root directory of this GIT repository.
+%
+%{
+\input{../latex/blogpost.tex}
+\renewcommand{\basename}{intro}
+%\renewcommand{\dirname}{notes/phy1520/}
+\renewcommand{\dirname}{notes/ece1228-electromagnetic-theory/}
+%\newcommand{\dateintitle}{}
+%\newcommand{\keywords}{}
+
+\input{../latex/peeter_prologue_print2.tex}
+
+\usepackage{peeters_layout_exercise}
+\usepackage{peeters_braket}
+\usepackage{peeters_figures}
+\usepackage{siunitx}
+%\usepackage{mhchem} % \ce{}
+%\usepackage{macros_bm} % \bcM
+%\usepackage{macros_qed} % \qedmarker
+%\usepackage{txfonts} % \ointclockwise
+
+\beginArtNoToc
+
+\generatetitle{XXX}
+%\chapter{XXX}
+%\label{chap:intro}
+\section{What's this course about}
+
+\begin{itemize}
+\item Science of optimization.
+\item problem formulation, design, analysis of eng systems
+\end{itemize}
+
+\section{Basic concepts}
+
+\begin{itemize}
+\item Basic concepts.  convex sets, functions, problems.
+\item Theory (40 percent).  Lagrangian duality.
+\item Algorithms: gradient descent, newton's, interior point.
+\end{itemize}
+
+Homework will involve computational work (solving problems, ...)
+
+\section{goals}
+
+\begin{itemize}
+\item Recognize and formulate engineering problems as convex optimization problems.
+\item To develop (Matlab) code to solve problems numerically.
+\item To characterize the solutions via duality theory
+\item NOT a math course, but lots of proofs.
+\item NOT a communications course, but lots of ex?.
+\item NOT a CS course, but lots of useful ideas.
+\end{itemize}
+
+Mathematical program:
+
+\begin{dmath}\label{eqn:intro:n}
+\min_\Bx F_0(\Bx)
+\end{dmath}
+
+where \( \Bx = (x_1, x_2, \cdots, x_m) \el \R{m} \) is subject to
+
+\begin{dmath}\label{eqn:intro:n}
+F_i(\Bx) \le 0, \qquad i = 1, \cdots, m
+\end{dmath}
+
+The functions:
+
+\begin{dmath}\label{eqn:intro:n}
+F_0 : \R{m} \rightarrow \R{1}
+\end{dmath}
+
+is the ``objective function'', and
+
+\begin{dmath}\label{eqn:intro:n}
+F_i : \R{m} \rightarrow \R{1}
+\end{dmath}
+
+are the constraints.
+
+Solving a problem produces:
+
+An optimal \(\Bx^\conj\) is an \( \Bx \) that gives the smallest value among all the feasible \( \Bx \).
+
+F1: F_0(\Bx) vs x_1, x_2
+
+\begin{itemize}
+\item A convex objective looks like a bowl, ``holds water''.
+\item If connect two feasible points line segment in the ? above bottom of the bowl.
+\end{itemize}
+
+F2: Non-convex: wavy figure with a number of local minimums
+
+Example:
+
+Line fitting.
+
+F3: points in an x,y plane with various points and a line \( y = a x + b \) passing through them.  Here \( a, b \) are the optimization variables \( \Bx = (a, b) \).
+
+Idea1.
+
+Describe an error function, describing how far from the line a given point is.
+
+\begin{dmath}\label{eqn:intro:n}
+y_i - (a x_i + b),
+\end{dmath}
+
+Because this can be positive or negative, we can define a squared variant of this, and then sum over all data points.
+
+\begin{dmath}\label{eqn:intro:n}
+F_0 = \sum_{i=1}^N \lr{ y_i - (a x_i + b) }^2
+\end{dmath}
+
+One way to solve (for \( a, b \)): Take the derivatives
+
+\begin{dmath}\label{eqn:intro:n}
+\begin{aligned}
+\PD{a}{F_0} &= \sum_{i=1}^N 2 ( y_i - (a x_i + b) )(-x_i) = 0
+\PD{b}{F_0} &= \sum_{i=1}^N 2 ( y_i - (a x_i + b) )(-1) = 0
+\end{aligned}
+\end{dmath}
+
+Yields
+
+\begin{dmath}\label{eqn:intro:n}
+\begin{aligned}
+\sum_{i = 1}^N y_i     &= \lr{\sum_{i = 1}^N x_i} a + \lr{\sum_{i = 1}^N 1} b \\
+\sum_{i = 1}^N x_i y_i &= \lr{\sum_{i = 1}^N x_i^2} a + \lr{\sum_{i = 1}^N x_i} b
+\end{aligned}
+\end{dmath}
+
+In matrix form
+\begin{dmath}\label{eqn:intro:n}
+\begin{bmatrix}
+\sum x_i y_i \\
+\sum y_i
+\end{bmatrix}
+=
+\begin{bmatrix}
+\sum x_i^2 & \sum x_i \\
+\sum x_i & n 
+\end{bmatrix}
+\begin{bmatrix}
+a \\
+b
+\end{bmatrix}.
+\end{dmath}
+
+If invertible, have an analytic solution for \( (a^\conj, b^\conj) \).
+
+This is a convex optimization problem because \( F(x) = x^2 \) is a convex ``quadratic program''.  
+
+A quadratic program is
+
+\begin{dmath}\label{eqn:intro:n}
+F(a, b) = (\cdots) a^2 + (\cdots) a b + (\cdots) b^2.
+\end{dmath}
+
+\paragraph{Alternate approach}
+
+\begin{dmath}\label{eqn:intro:n}
+\begin{bmatrix}
+y_1 \\
+\vdots
+y_N
+\end{bmatrix}
+=
+\begin{bmatrix}
+x_1 1 \\
+\vdots
+x_N 1
+\end{bmatrix}
+\begin{bmatrix}
+a \\
+b
+\end{bmatrix}
++
+\begin{bmatrix}
+z_1 \\
+\vdots
+z_N 
+\end{bmatrix}
+,
+\end{dmath}
+
+or
+\begin{dmath}\label{eqn:intro:n}
+\By = H \Bv + \BZ.
+\end{dmath}
+
+here \( \BZ \) is the error vector.
+
+The problem is now to:
+
+Fit \( \By \) to be as close to \( H v + Z \) as possible, or to minimize the norm of the error vector
+
+\begin{dmath}\label{eqn:intro:n}
+\min_\Bv \Norm{ \By - H \Bv }^2_2 
+= \min_\Bv \lr{ \By - H \Bv }^\T \lr{ \By - H \Bv }
+= \min_\Bv 
+\lr{ \By^\T \By - 2 \By^\T H \Bv + \Bv^\T H^\T H \Bv }.
+\end{dmath}
+
+Can now take the derivative with respect to the \( \Bv \) vector
+
+\begin{dmath}\label{eqn:intro:n}
+\PD{\Bv}{} 
+\lr{ \By^\T \By - 2 \By^\T H \Bv + \Bv^\T H^\T H \Bv }
+=
+- 2 \By^\T H + 2 \Bv^\T H^\T H
+= 0,
+\end{dmath}
+
+or
+
+\begin{dmath}\label{eqn:intro:n}
+(H^\T H) \Bv = H^\T \By,
+\end{dmath}
+
+so, assuming that \( H^\T H \) is invertible
+
+\begin{dmath}\label{eqn:intro:n}
+\Bv^\conj = 
+(H^\T H)^{-1} H^\T \By,
+\end{dmath}
+
+where
+
+\begin{dmath}\label{eqn:intro:n}
+H^\T H = 
+\begin{bmatrix}
+x_1 & \cdots & x_N \\
+ 1  & \cdots & 1   \\
+\end{bmatrix}
+\begin{bmatrix}
+x_1 1 \\
+\vdots
+x_N 1
+\end{bmatrix}.
+\end{dmath}
+
+\section{Why pick the 2-norm for the objective function?}
+
+\begin{itemize}
+\item We do this in calculus, because we can solve the derivative equation.
+\item One justification: In statistics the error vector \( \Bz = \By - H \Bv \) can be modelled as an independently and identically distributed Gaussian random variable (i.e. noise).  Under this model, we've solved an ML estimation problem (see chapter 7 citep...).
+\end{itemize}
+
+Model
+
+\begin{dmath}\label{eqn:intro:n}
+y_i = a x_i + b
+\end{dmath}
+
+\begin{dmath}\label{eqn:intro:n}
+z_i = y_i - a x_i -b \sim N(O, O^2)
+\end{dmath}
+
+\begin{dmath}\label{eqn:intro:n}
+P_Z(z) = \inv{\sqrt{2 \pi \sigma}} \exp\lr{ -\inv{2} z^2/\sigma^2 }.
+\end{dmath}
+
+\paragraph{MLE: Maximum Likelyhood Estimator}
+
+Pick \( (a,b) \) to maximize the probability of observed data.
+
+\begin{dmath}\label{eqn:intro:n}
+(a^\conj, b^\conj) 
+= \arg \max P( x, y ; a, b )
+= \arg \max P_Z( y - (a x + b) )
+= \arg \max \product_{i = 1}^n 
+= \arg \max \inv{\sqrt{2 \pi \sigma}} \exp\lr{ -\inv{2} (y_i - a x_i - b)^2/\sigma^2 }.
+\end{dmath}
+
+Taking logs gives
+\begin{dmath}\label{eqn:intro:n}
+(a^\conj, b^\conj) 
+= \arg \max 
+\lr{ 
+\textrm{constant}
+   -\inv{2} \sum_i (y_i - a x_i - b)^2/\sigma^2 
+}
+= \arg \min 
+   \inv{2} \sum_i (y_i - a x_i - b)^2/\sigma^2 
+= \arg \min 
+   \sum_i (y_i - a x_i - b)^2/\sigma^2 
+\end{dmath}
+
+Here \( \arg \max \) is not the maximum of the function, but the value of the parameter (the argument) that maximizes the function.
+
+\paragraph{Double sides exponential noise}
+
+F5: %abs(e^{-x^2}}
+
+\begin{dmath}\label{eqn:intro:n}
+P_Z(z) = \inv{2 c} \exp\lr{ -\inv{c} \Abs{z} }.
+\end{dmath}
+
+\max_{a,b} \product_{i = 1}^n P_z(z_i)
+=
+\max_{a,b} \product_{i = 1}^n 
+\inv{2 c} \exp\lr{ -\inv{c} \Abs{z_i} }.
+=
+\max_{a,b} \product_{i = 1}^n 
+\inv{2 c} \exp\lr{ -\inv{c} \Abs{y_i - a x_i - b} }
+=
+\max_{a,b} 
+\inv{2 c}^n \exp\lr{ -\inv{c} \Sum \Abs{y_i - a x_i - b} }
+
+This is a L1 norm problem
+
+\begin{dmath}\label{eqn:intro:n}
+\min_{a,b} \sum_{i = 1}^n \Abs{ y_i - a x_i - b }.
+\end{dmath}
+
+i.e.
+
+\begin{dmath}\label{eqn:intro:n}
+\Norm{ \By = H \Bv }_1.
+\end{dmath}
+
+This is still convex, but has no analytic solution
+
+F6: %F(x) = \Abs{x}
+
+This is an example of a linear program.
+
+\section{Solution of linear program}
+
+Introduce helper variables \( t_1, \cdots, t_n \), and 
+minimize \( \sum_i t_i \), such that
+
+\begin{dmath}\label{eqn:intro:n}
+\Abs{ y_i - a x_i - b } \le t_i,
+\end{dmath}
+
+This is now an optimization problem for \( a, b, t_1, \cdots t_n \).  A linear program is defined as
+
+\begin{dmath}\label{eqn:intro:n}
+\min_{a, b, t_1, \cdots t_n} \sum_i t_i 
+\end{dmath}
+
+such that
+\begin{dmath}\label{eqn:intro:n}
+\begin{aligned}
+y_i - a x_i - b \le t_i
+y_i - a x_i - b \ge -t_i
+\end{aligned}
+\end{dmath}
+
+\paragraph{Single sided exponential}
+
+What if your noise doesn't look double sided, with only noise for values \( x > 0 \)
+
+F7: % \theta(x) e^-x/c
+
+Can define a single sided probability distribution
+
+\begin{dmath}\label{eqn:intro:n}
+P_Z(z) = 
+\left\{
+\begin{array}{l l}
+\inv{c} e^{-z/c} & \quad \mbox{\( z \ge 0 \)} \\
+0 & \quad \mbox{\( z < 0 \)} 
+\end{array}
+\right.
+\end{dmath}
+
+i.e. all \( z_i \) error values are always non-negative.
+
+\begin{dmath}\label{eqn:intro:n}
+\log P_z(z) = 
+\left\{
+\begin{array}{l l}
+\textrm{const} - z/c & \quad \mbox{\( z > 0\)} \\
+-\infty & \quad \mbox{\( z< 0\)} 
+\end{array}
+\right.
+\end{dmath}
+
+Problem becomes
+
+\begin{dmath}\label{eqn:intro:n}
+\min_{a, b} \sum_i \lr{ y_i - a x_i - b)
+\end{dmath}
+
+such that
+\begin{dmath}\label{eqn:intro:n}
+\begin{aligned}
+y_i - a x_i - b \ge t_i \forall i
+\end{aligned}
+\end{dmath}
+
+\paragraph{Uniform noise}
+
+F8: constant in range -c,c, zero outside that range.
+
+\begin{dmath}\label{eqn:intro:n}
+P_Z(z) = 
+\left\{
+\begin{array}{l l}
+\inv{2 c} & \quad \mbox{\( \Abs{z} \le c\)} \\
+0 & \quad \mbox{\( \Abs{z} > c. \)} 
+\end{array}
+\right.
+\end{dmath}
+
+or
+
+\begin{dmath}\label{eqn:intro:n}
+\log P_Z(z) = 
+\left\{
+\begin{array}{l l}
+\textrm{const} & \quad \mbox{\( \Abs{z} \le c\)} \\
+-\infty & \quad \mbox{\( \Abs{z} > c. \)} 
+\end{array}
+\right.
+\end{dmath}
+
+MLE solution
+
+\max_{a,b} \product_{i = 1}^n P(x, y; a, b) 
+=
+\max_{a,b} \sum_{i = 1}^n \log P_Z( y_i - a x_i - b )
+
+Here the argument is constant if \( -c \le y_i - a x_i - b \le c \), so an ML solution is \underline{any} \( (a,b) \) such that
+
+\begin{dmath}\label{eqn:intro:n}
+\Abs{ y_i - a x_i - b } \le c \forall i \in 1, \cdots, n.
+\end{dmath}
+
+This is a linear program known as a ``feasibility problem''.
+
+\begin{dmath}\label{eqn:intro:n}
+\min d
+\end{dmath}
+
+such that
+
+\begin{dmath}\label{eqn:intro:n}
+\begin{aligned}
+y_i - a x_i - b &\le d \\
+y_i - a x_i - b &\ge -d
+\end{aligned}
+\end{dmath}
+
+If \( d^\conj \le c \), then the problem is feasible, however, if \( d^\conj > c \) it is infeasible.
+
+Compare three columns: 
+- two sided exp
+- one sided exp
+- constant range
+
+three point plots respectively
+- points on both sides of line
+- points only above the line
+- error bars passing through the line (or lines)
+
+Friday: review of multivariable calc and algebra.
+
+%}
+%\EndArticle
+\EndNoBibArticle
