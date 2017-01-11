@@ -1,0 +1,2 @@
+../latex/bin/lgrep intro.tex | tee o ; . ./o
+perl -p -i ../latex/bin/latexRegex.pl intro.tex

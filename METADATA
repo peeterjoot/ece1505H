@@ -1,0 +1,10 @@
+sub ece1505Meta
+{
+my @ece1505 =
+(
+) ; # @ece1505
+
+return @ece1505 ;
+}
+
+1 ;
