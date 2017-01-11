@@ -23,10 +23,10 @@
 
 \beginArtNoToc
 
-\generatetitle{XXX}
-%\chapter{XXX}
+\generatetitle{Introduction}
+%\chapter{Introduction}
 %\label{chap:intro}
-\section{What's this course about}
+\section{What's this course about?}
 
 \begin{itemize}
 \item Science of optimization.
@@ -54,37 +54,28 @@ Homework will involve computational work (solving problems, ...)
 \item NOT a CS course, but lots of useful ideas.
 \end{itemize}
 
-Mathematical program:
+\makedefinition{Mathematical program}{dfn:intro:1}{
 
-\begin{dmath}\label{eqn:intro:n}
+\begin{dmath}\label{eqn:intro:20}
 \min_\Bx F_0(\Bx)
 \end{dmath}
 
-where \( \Bx = (x_1, x_2, \cdots, x_m) \el \R{m} \) is subject to
+where \( \Bx = (x_1, x_2, \cdots, x_m) \in \text{\R{m}} \) is subject to constraints
+\( F_i : \text{\R{m}} \rightarrow \text{\R{1}} \)
 
-\begin{dmath}\label{eqn:intro:n}
+\begin{equation}\label{eqn:intro:40}
 F_i(\Bx) \le 0, \qquad i = 1, \cdots, m
-\end{dmath}
+\end{equation}
 
-The functions:
-
-\begin{dmath}\label{eqn:intro:n}
-F_0 : \R{m} \rightarrow \R{1}
-\end{dmath}
-
-is the ``objective function'', and
-
-\begin{dmath}\label{eqn:intro:n}
-F_i : \R{m} \rightarrow \R{1}
-\end{dmath}
-
-are the constraints.
+The function \( F_0 : \text{\R{m}} \rightarrow \text{\R{1}} \) is called the 
+``objective function''.
+} % definition
 
 Solving a problem produces:
 
-An optimal \(\Bx^\conj\) is an \( \Bx \) that gives the smallest value among all the feasible \( \Bx \).
+An optimal \(\Bx^\conj\) is a value \( \Bx \) that gives the smallest value among all the feasible \( \Bx \) for the objective function \( F_0 \).  Such a function is sketched in \cref{fig:ConvexObjectiveFunction:ConvexObjectiveFunctionFig1}.
 
-F1: F_0(\Bx) vs x_1, x_2
+\imageFigure{../figures/ece1505-convex-optimization/ConvexObjectiveFunctionFig1}{Convex objective function.}{fig:ConvexObjectiveFunction:ConvexObjectiveFunctionFig1}{0.3}
 
 \begin{itemize}
 \item A convex objective looks like a bowl, ``holds water''.
@@ -103,36 +94,36 @@ Idea1.
 
 Describe an error function, describing how far from the line a given point is.
 
-\begin{dmath}\label{eqn:intro:n}
+\begin{dmath}\label{eqn:intro:100}
 y_i - (a x_i + b),
 \end{dmath}
 
 Because this can be positive or negative, we can define a squared variant of this, and then sum over all data points.
 
-\begin{dmath}\label{eqn:intro:n}
-F_0 = \sum_{i=1}^N \lr{ y_i - (a x_i + b) }^2
+\begin{dmath}\label{eqn:intro:120}
+F_0 = \sum_{i=1}^n \lr{ y_i - (a x_i + b) }^2
 \end{dmath}
 
 One way to solve (for \( a, b \)): Take the derivatives
 
-\begin{dmath}\label{eqn:intro:n}
+\begin{dmath}\label{eqn:intro:140}
 \begin{aligned}
-\PD{a}{F_0} &= \sum_{i=1}^N 2 ( y_i - (a x_i + b) )(-x_i) = 0
-\PD{b}{F_0} &= \sum_{i=1}^N 2 ( y_i - (a x_i + b) )(-1) = 0
+\PD{a}{F_0} &= \sum_{i=1}^n 2 ( y_i - (a x_i + b) )(-x_i) = 0 \\
+\PD{b}{F_0} &= \sum_{i=1}^n 2 ( y_i - (a x_i + b) )(-1) = 0
 \end{aligned}
 \end{dmath}
 
 Yields
 
-\begin{dmath}\label{eqn:intro:n}
+\begin{dmath}\label{eqn:intro:160}
 \begin{aligned}
-\sum_{i = 1}^N y_i     &= \lr{\sum_{i = 1}^N x_i} a + \lr{\sum_{i = 1}^N 1} b \\
-\sum_{i = 1}^N x_i y_i &= \lr{\sum_{i = 1}^N x_i^2} a + \lr{\sum_{i = 1}^N x_i} b
+\sum_{i = 1}^n y_i     &= \lr{\sum_{i = 1}^n x_i} a + \lr{\sum_{i = 1}^n 1} b \\
+\sum_{i = 1}^n x_i y_i &= \lr{\sum_{i = 1}^n x_i^2} a + \lr{\sum_{i = 1}^n x_i} b
 \end{aligned}
 \end{dmath}
 
 In matrix form
-\begin{dmath}\label{eqn:intro:n}
+\begin{dmath}\label{eqn:intro:180}
 \begin{bmatrix}
 \sum x_i y_i \\
 \sum y_i
@@ -140,7 +131,7 @@ In matrix form
 =
 \begin{bmatrix}
 \sum x_i^2 & \sum x_i \\
-\sum x_i & n 
+\sum x_i & n
 \end{bmatrix}
 \begin{bmatrix}
 a \\
@@ -150,27 +141,27 @@ b
 
 If invertible, have an analytic solution for \( (a^\conj, b^\conj) \).
 
-This is a convex optimization problem because \( F(x) = x^2 \) is a convex ``quadratic program''.  
+This is a convex optimization problem because \( F(x) = x^2 \) is a convex ``quadratic program''.
 
 A quadratic program is
 
-\begin{dmath}\label{eqn:intro:n}
+\begin{dmath}\label{eqn:intro:200}
 F(a, b) = (\cdots) a^2 + (\cdots) a b + (\cdots) b^2.
 \end{dmath}
 
 \paragraph{Alternate approach}
 
-\begin{dmath}\label{eqn:intro:n}
+\begin{dmath}\label{eqn:intro:220}
 \begin{bmatrix}
 y_1 \\
-\vdots
-y_N
+\vdots \\
+y_n
 \end{bmatrix}
 =
 \begin{bmatrix}
 x_1 1 \\
-\vdots
-x_N 1
+\vdots \\
+x_n 1
 \end{bmatrix}
 \begin{bmatrix}
 a \\
@@ -179,14 +170,14 @@ b
 +
 \begin{bmatrix}
 z_1 \\
-\vdots
-z_N 
+\vdots \\
+z_n
 \end{bmatrix}
 ,
 \end{dmath}
 
 or
-\begin{dmath}\label{eqn:intro:n}
+\begin{dmath}\label{eqn:intro:240}
 \By = H \Bv + \BZ.
 \end{dmath}
 
@@ -196,17 +187,17 @@ The problem is now to:
 
 Fit \( \By \) to be as close to \( H v + Z \) as possible, or to minimize the norm of the error vector
 
-\begin{dmath}\label{eqn:intro:n}
-\min_\Bv \Norm{ \By - H \Bv }^2_2 
+\begin{dmath}\label{eqn:intro:260}
+\min_\Bv \Norm{ \By - H \Bv }^2_2
 = \min_\Bv \lr{ \By - H \Bv }^\T \lr{ \By - H \Bv }
-= \min_\Bv 
+= \min_\Bv
 \lr{ \By^\T \By - 2 \By^\T H \Bv + \Bv^\T H^\T H \Bv }.
 \end{dmath}
 
 Can now take the derivative with respect to the \( \Bv \) vector
 
-\begin{dmath}\label{eqn:intro:n}
-\PD{\Bv}{} 
+\begin{dmath}\label{eqn:intro:280}
+\PD{\Bv}{}
 \lr{ \By^\T \By - 2 \By^\T H \Bv + \Bv^\T H^\T H \Bv }
 =
 - 2 \By^\T H + 2 \Bv^\T H^\T H
@@ -215,29 +206,29 @@ Can now take the derivative with respect to the \( \Bv \) vector
 
 or
 
-\begin{dmath}\label{eqn:intro:n}
+\begin{dmath}\label{eqn:intro:300}
 (H^\T H) \Bv = H^\T \By,
 \end{dmath}
 
 so, assuming that \( H^\T H \) is invertible
 
-\begin{dmath}\label{eqn:intro:n}
-\Bv^\conj = 
+\begin{dmath}\label{eqn:intro:320}
+\Bv^\conj =
 (H^\T H)^{-1} H^\T \By,
 \end{dmath}
 
 where
 
-\begin{dmath}\label{eqn:intro:n}
-H^\T H = 
+\begin{dmath}\label{eqn:intro:340}
+H^\T H =
 \begin{bmatrix}
-x_1 & \cdots & x_N \\
+x_1 & \cdots & x_n \\
  1  & \cdots & 1   \\
 \end{bmatrix}
 \begin{bmatrix}
 x_1 1 \\
-\vdots
-x_N 1
+\vdots \\
+x_n 1
 \end{bmatrix}.
 \end{dmath}
 
@@ -248,44 +239,45 @@ x_N 1
 \item One justification: In statistics the error vector \( \Bz = \By - H \Bv \) can be modelled as an independently and identically distributed Gaussian random variable (i.e. noise).  Under this model, we've solved an ML estimation problem (see chapter 7 citep...).
 \end{itemize}
 
-Model
+The model is
 
-\begin{dmath}\label{eqn:intro:n}
+\begin{subequations}
+\label{eqn:intro:n}
+\begin{dmath}\label{eqn:intro:360}
 y_i = a x_i + b
 \end{dmath}
-
-\begin{dmath}\label{eqn:intro:n}
+\begin{equation}\label{eqn:intro:380}
 z_i = y_i - a x_i -b \sim N(O, O^2)
-\end{dmath}
-
-\begin{dmath}\label{eqn:intro:n}
+\end{equation}
+\begin{dmath}\label{eqn:intro:400}
 P_Z(z) = \inv{\sqrt{2 \pi \sigma}} \exp\lr{ -\inv{2} z^2/\sigma^2 }.
 \end{dmath}
+\end{subequations}
 
 \paragraph{MLE: Maximum Likelyhood Estimator}
 
 Pick \( (a,b) \) to maximize the probability of observed data.
 
-\begin{dmath}\label{eqn:intro:n}
-(a^\conj, b^\conj) 
+\begin{dmath}\label{eqn:intro:420}
+(a^\conj, b^\conj)
 = \arg \max P( x, y ; a, b )
 = \arg \max P_Z( y - (a x + b) )
-= \arg \max \product_{i = 1}^n 
+= \arg \max \prod_{i = 1}^n
 = \arg \max \inv{\sqrt{2 \pi \sigma}} \exp\lr{ -\inv{2} (y_i - a x_i - b)^2/\sigma^2 }.
 \end{dmath}
 
 Taking logs gives
-\begin{dmath}\label{eqn:intro:n}
-(a^\conj, b^\conj) 
-= \arg \max 
-\lr{ 
+\begin{dmath}\label{eqn:intro:440}
+(a^\conj, b^\conj)
+= \arg \max
+\lr{
 \textrm{constant}
-   -\inv{2} \sum_i (y_i - a x_i - b)^2/\sigma^2 
+   -\inv{2} \sum_i (y_i - a x_i - b)^2/\sigma^2
 }
-= \arg \min 
-   \inv{2} \sum_i (y_i - a x_i - b)^2/\sigma^2 
-= \arg \min 
-   \sum_i (y_i - a x_i - b)^2/\sigma^2 
+= \arg \min
+   \inv{2} \sum_i (y_i - a x_i - b)^2/\sigma^2
+= \arg \min
+   \sum_i (y_i - a x_i - b)^2/\sigma^2
 \end{dmath}
 
 Here \( \arg \max \) is not the maximum of the function, but the value of the parameter (the argument) that maximizes the function.
@@ -294,30 +286,32 @@ Here \( \arg \max \) is not the maximum of the function, but the value of the pa
 
 F5: %abs(e^{-x^2}}
 
-\begin{dmath}\label{eqn:intro:n}
+\begin{dmath}\label{eqn:intro:460}
 P_Z(z) = \inv{2 c} \exp\lr{ -\inv{c} \Abs{z} }.
 \end{dmath}
 
-\max_{a,b} \product_{i = 1}^n P_z(z_i)
+\begin{dmath}\label{eqn:intro:480}
+\max_{a,b} \prod_{i = 1}^n P_z(z_i)
 =
-\max_{a,b} \product_{i = 1}^n 
+\max_{a,b} \prod_{i = 1}^n
 \inv{2 c} \exp\lr{ -\inv{c} \Abs{z_i} }.
 =
-\max_{a,b} \product_{i = 1}^n 
+\max_{a,b} \prod_{i = 1}^n
 \inv{2 c} \exp\lr{ -\inv{c} \Abs{y_i - a x_i - b} }
 =
-\max_{a,b} 
-\inv{2 c}^n \exp\lr{ -\inv{c} \Sum \Abs{y_i - a x_i - b} }
+\max_{a,b}
+\inv{2 c}^n \exp\lr{ -\inv{c} \sum_{i=1}^n \Abs{y_i - a x_i - b} }
+\end{dmath}
 
 This is a L1 norm problem
 
-\begin{dmath}\label{eqn:intro:n}
+\begin{dmath}\label{eqn:intro:500}
 \min_{a,b} \sum_{i = 1}^n \Abs{ y_i - a x_i - b }.
 \end{dmath}
 
 i.e.
 
-\begin{dmath}\label{eqn:intro:n}
+\begin{dmath}\label{eqn:intro:520}
 \Norm{ \By = H \Bv }_1.
 \end{dmath}
 
@@ -329,21 +323,21 @@ This is an example of a linear program.
 
 \section{Solution of linear program}
 
-Introduce helper variables \( t_1, \cdots, t_n \), and 
+Introduce helper variables \( t_1, \cdots, t_n \), and
 minimize \( \sum_i t_i \), such that
 
-\begin{dmath}\label{eqn:intro:n}
+\begin{dmath}\label{eqn:intro:540}
 \Abs{ y_i - a x_i - b } \le t_i,
 \end{dmath}
 
 This is now an optimization problem for \( a, b, t_1, \cdots t_n \).  A linear program is defined as
 
-\begin{dmath}\label{eqn:intro:n}
-\min_{a, b, t_1, \cdots t_n} \sum_i t_i 
+\begin{dmath}\label{eqn:intro:560}
+\min_{a, b, t_1, \cdots t_n} \sum_i t_i
 \end{dmath}
 
 such that
-\begin{dmath}\label{eqn:intro:n}
+\begin{dmath}\label{eqn:intro:580}
 \begin{aligned}
 y_i - a x_i - b \le t_i
 y_i - a x_i - b \ge -t_i
@@ -358,36 +352,36 @@ F7: % \theta(x) e^-x/c
 
 Can define a single sided probability distribution
 
-\begin{dmath}\label{eqn:intro:n}
-P_Z(z) = 
+\begin{dmath}\label{eqn:intro:600}
+P_Z(z) =
 \left\{
 \begin{array}{l l}
 \inv{c} e^{-z/c} & \quad \mbox{\( z \ge 0 \)} \\
-0 & \quad \mbox{\( z < 0 \)} 
+0 & \quad \mbox{\( z < 0 \)}
 \end{array}
 \right.
 \end{dmath}
 
 i.e. all \( z_i \) error values are always non-negative.
 
-\begin{dmath}\label{eqn:intro:n}
-\log P_z(z) = 
+\begin{dmath}\label{eqn:intro:620}
+\log P_z(z) =
 \left\{
 \begin{array}{l l}
 \textrm{const} - z/c & \quad \mbox{\( z > 0\)} \\
--\infty & \quad \mbox{\( z< 0\)} 
+-\infty & \quad \mbox{\( z< 0\)}
 \end{array}
 \right.
 \end{dmath}
 
 Problem becomes
 
-\begin{dmath}\label{eqn:intro:n}
-\min_{a, b} \sum_i \lr{ y_i - a x_i - b)
+\begin{dmath}\label{eqn:intro:640}
+\min_{a, b} \sum_i \lr{ y_i - a x_i - b }
 \end{dmath}
 
 such that
-\begin{dmath}\label{eqn:intro:n}
+\begin{dmath}\label{eqn:intro:660}
 \begin{aligned}
 y_i - a x_i - b \ge t_i \forall i
 \end{aligned}
@@ -397,49 +391,51 @@ y_i - a x_i - b \ge t_i \forall i
 
 F8: constant in range -c,c, zero outside that range.
 
-\begin{dmath}\label{eqn:intro:n}
-P_Z(z) = 
+\begin{dmath}\label{eqn:intro:680}
+P_Z(z) =
 \left\{
 \begin{array}{l l}
 \inv{2 c} & \quad \mbox{\( \Abs{z} \le c\)} \\
-0 & \quad \mbox{\( \Abs{z} > c. \)} 
+0 & \quad \mbox{\( \Abs{z} > c. \)}
 \end{array}
 \right.
 \end{dmath}
 
 or
 
-\begin{dmath}\label{eqn:intro:n}
-\log P_Z(z) = 
+\begin{dmath}\label{eqn:intro:700}
+\log P_Z(z) =
 \left\{
 \begin{array}{l l}
 \textrm{const} & \quad \mbox{\( \Abs{z} \le c\)} \\
--\infty & \quad \mbox{\( \Abs{z} > c. \)} 
+-\infty & \quad \mbox{\( \Abs{z} > c. \)}
 \end{array}
 \right.
 \end{dmath}
 
 MLE solution
 
-\max_{a,b} \product_{i = 1}^n P(x, y; a, b) 
+\begin{dmath}\label{eqn:intro:720}
+\max_{a,b} \prod_{i = 1}^n P(x, y; a, b)
 =
 \max_{a,b} \sum_{i = 1}^n \log P_Z( y_i - a x_i - b )
+\end{dmath}
 
 Here the argument is constant if \( -c \le y_i - a x_i - b \le c \), so an ML solution is \underline{any} \( (a,b) \) such that
 
-\begin{dmath}\label{eqn:intro:n}
+\begin{dmath}\label{eqn:intro:740}
 \Abs{ y_i - a x_i - b } \le c \forall i \in 1, \cdots, n.
 \end{dmath}
 
 This is a linear program known as a ``feasibility problem''.
 
-\begin{dmath}\label{eqn:intro:n}
+\begin{dmath}\label{eqn:intro:760}
 \min d
 \end{dmath}
 
 such that
 
-\begin{dmath}\label{eqn:intro:n}
+\begin{dmath}\label{eqn:intro:780}
 \begin{aligned}
 y_i - a x_i - b &\le d \\
 y_i - a x_i - b &\ge -d
@@ -448,7 +444,7 @@ y_i - a x_i - b &\ge -d
 
 If \( d^\conj \le c \), then the problem is feasible, however, if \( d^\conj > c \) it is infeasible.
 
-Compare three columns: 
+Compare three columns:
 - two sided exp
 - one sided exp
 - constant range
