@@ -87,7 +87,7 @@ A non-convex function is illustrated in
 
 \imageFigure{../figures/ece1505-convex-optimization/NonConvexObjectiveFunctionFig2}{Non-convex (wavy) figure with a number of local minimums.}{fig:NonConvexObjectiveFunction:NonConvexObjectiveFunctionFig2}{0.2}
 
-\subsection{Example: Line fitting.}
+\section{Example: Line fitting.}
 
 A linear fit of some points distributed around a line \( y = a x + b \) is plotted in
 \cref{fig:LinearFit:LinearFitFig3}.
@@ -95,9 +95,9 @@ Here \( a, b \) are the optimization variables \( \Bx = (a, b) \).
 
 \imageFigure{../figures/ece1505-convex-optimization/LinearFitFig3}{Linear fit of points around a line.}{fig:LinearFit:LinearFitFig3}{0.2}
 
-How do we solve this?
+How is the solution for such a best fit line obtained?
 
-\paragraph{Solution idea 1.}
+\paragraph{Approach 1:  Calculus minimization of a multivariable error function.}
 
 Describe an error function, describing how far from the line a given point is.
 
@@ -155,7 +155,7 @@ In general a quadratic program has the structure
 F(a, b) = (\cdots) a^2 + (\cdots) a b + (\cdots) b^2.
 \end{dmath}
 
-\paragraph{Alternate approach}
+\paragraph{Approach 2:  Linear algebraic formulation.}
 
 \begin{dmath}\label{eqn:intro:220}
 \begin{bmatrix}
@@ -246,14 +246,21 @@ x_n & 1
 
 as seen in the calculus approach.
 
-\subsection{Why pick the 2-norm for the objective function?}
+\section{Maximum Likelyhood Estimation (MLE).}
+
+It is reasonable to ask why the 2-norm was picked for the objective function?
 
 \begin{itemize}
-\item We do this in calculus, because we can solve the derivative equation.
-\item One justification: In statistics the error vector \( \Bz = \By - H \Bv \) can be modelled as an independently and identically distributed Gaussian random variable (i.e. noise).  Under this model, we've solved an ML estimation problem (see chapter 7 citep...).
+\item One justification is practical: Because we can solve the derivative equation.
+\item Another justification: In statistics the error vector \( \Bz = \By - H \Bv \) can be modelled as an IID
+(Independently and Identically Distributed)
+Gaussian random variable (i.e. noise).  Under this model, the use of the 2-norm can be viewed as a consequence of such an ML estimation problem (see chapter 7 in the text).
+% citep
 \end{itemize}
 
-The model is
+A Gaussian 
+\cref{fig:Gaussian:GaussianFig4}
+IID model is given by
 
 \begin{subequations}
 \label{eqn:intro:n}
@@ -267,6 +274,8 @@ z_i = y_i - a x_i -b \sim N(O, O^2)
 P_Z(z) = \inv{\sqrt{2 \pi \sigma}} \exp\lr{ -\inv{2} z^2/\sigma^2 }.
 \end{dmath}
 \end{subequations}
+
+\imageFigure{../figures/ece1505-convex-optimization/GaussianFig4}{Gaussian probability distribution.}{fig:Gaussian:GaussianFig4}{0.2}
 
 \paragraph{MLE: Maximum Likelyhood Estimator}
 
@@ -298,11 +307,15 @@ Here \( \arg \max \) is not the maximum of the function, but the value of the pa
 
 \paragraph{Double sides exponential noise}
 
-F5: %abs(e^{-x^2}}
+A double sided exponential distribution is plotted in \cref{fig:DoubleSidedExponentialDist:DoubleSidedExponentialDistFig5}, and has the mathematical form
 
 \begin{dmath}\label{eqn:intro:460}
 P_Z(z) = \inv{2 c} \exp\lr{ -\inv{c} \Abs{z} }.
 \end{dmath}
+
+\imageFigure{../figures/ece1505-convex-optimization/DoubleSidedExponentialDistFig5}{Double sided exponential probability distribution.}{fig:DoubleSidedExponentialDist:DoubleSidedExponentialDistFig5}{0.2}
+
+The optimization problem is
 
 \begin{dmath}\label{eqn:intro:480}
 \max_{a,b} \prod_{i = 1}^n P_z(z_i)
@@ -314,7 +327,7 @@ P_Z(z) = \inv{2 c} \exp\lr{ -\inv{c} \Abs{z} }.
 \inv{2 c} \exp\lr{ -\inv{c} \Abs{y_i - a x_i - b} }
 =
 \max_{a,b}
-\inv{2 c}^n \exp\lr{ -\inv{c} \sum_{i=1}^n \Abs{y_i - a x_i - b} }
+\lr{\inv{2 c}}^n \exp\lr{ -\inv{c} \sum_{i=1}^n \Abs{y_i - a x_i - b} }.
 \end{dmath}
 
 This is a L1 norm problem
@@ -326,16 +339,14 @@ This is a L1 norm problem
 i.e.
 
 \begin{dmath}\label{eqn:intro:520}
-\Norm{ \By = H \Bv }_1.
+\min_\Bv \Norm{ \By - H \Bv }_1.
 \end{dmath}
 
-This is still convex, but has no analytic solution
+This is still convex, but has no analytic solution, and
+%F6: %F(x) = \Abs{x}
+is an example of a linear program.
 
-F6: %F(x) = \Abs{x}
-
-This is an example of a linear program.
-
-\section{Solution of linear program}
+\subsection{Solution of linear program}
 
 Introduce helper variables \( t_1, \cdots, t_n \), and
 minimize \( \sum_i t_i \), such that
@@ -360,11 +371,11 @@ y_i - a x_i - b \ge -t_i
 
 \paragraph{Single sided exponential}
 
-What if your noise doesn't look double sided, with only noise for values \( x > 0 \)
+What if your noise doesn't look double sided, with only noise for values \( x > 0 \).
+Can define a single sided probability distribution, as that of
+\cref{fig:SingleSidedExponentialDist:SingleSidedExponentialDistFig6}.
 
-F7: % \theta(x) e^-x/c
-
-Can define a single sided probability distribution
+\imageFigure{../figures/ece1505-convex-optimization/SingleSidedExponentialDistFig6}{Single sided exponential distribution.}{fig:SingleSidedExponentialDist:SingleSidedExponentialDistFig6}{0.2}
 
 \begin{dmath}\label{eqn:intro:600}
 P_Z(z) =
@@ -403,7 +414,11 @@ y_i - a x_i - b \ge t_i \forall i
 
 \paragraph{Uniform noise}
 
-F8: constant in range -c,c, zero outside that range.
+For noise that is uniformly distributed in a range, as that of 
+\cref{fig:stepProbabilityDist:stepProbabilityDistFig7},
+which is constant in the range \( [-c,c] \) and zero outside that range.
+
+\imageFigure{../figures/ece1505-convex-optimization/stepProbabilityDistFig7}{Uniform probability distribution.}{fig:stepProbabilityDist:stepProbabilityDistFig7}{0.2}
 
 \begin{dmath}\label{eqn:intro:680}
 P_Z(z) =
@@ -458,17 +473,15 @@ y_i - a x_i - b &\ge -d
 
 If \( d^\conj \le c \), then the problem is feasible, however, if \( d^\conj > c \) it is infeasible.
 
-Compare three columns:
-- two sided exp
-- one sided exp
-- constant range
-
-three point plots respectively
-- points on both sides of line
-- points only above the line
-- error bars passing through the line (or lines)
-
-Friday: review of multivariable calc and algebra.
+%Compare three columns:
+%- two sided exp
+%- one sided exp
+%- constant range
+%
+%three point plots respectively
+%- points on both sides of line
+%- points only above the line
+%- error bars passing through the line (or lines)
 
 %}
 %\EndArticle
