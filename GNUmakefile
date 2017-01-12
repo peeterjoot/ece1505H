@@ -27,6 +27,8 @@ THISBOOK_DEPS += $(PDFS_FROM_EPS)
 
 include ../latex/make.rules
 
+all :: intro.pdf
+
 #julia.tex : ../julia/METADATA
 #mathematica.tex : ../mathematica/METADATA
 #matlab.tex : ../matlab/METADATA

@@ -43,7 +43,7 @@
 
 Homework will involve computational work (solving problems, ...)
 
-\section{goals}
+\section{Goals}
 
 \begin{itemize}
 \item Recognize and formulate engineering problems as convex optimization problems.
@@ -82,15 +82,22 @@ An optimal \(\Bx^\conj\) is a value \( \Bx \) that gives the smallest value amon
 \item If connect two feasible points line segment in the ? above bottom of the bowl.
 \end{itemize}
 
-F2: Non-convex: wavy figure with a number of local minimums
+A non-convex function is illustrated in 
+\cref{fig:NonConvexObjectiveFunction:NonConvexObjectiveFunctionFig2}, which has a number of local minimums.
 
-Example:
+\imageFigure{../figures/ece1505-convex-optimization/NonConvexObjectiveFunctionFig2}{Non-convex (wavy) figure with a number of local minimums.}{fig:NonConvexObjectiveFunction:NonConvexObjectiveFunctionFig2}{0.2}
 
-Line fitting.
+\subsection{Example: Line fitting.}
 
-F3: points in an x,y plane with various points and a line \( y = a x + b \) passing through them.  Here \( a, b \) are the optimization variables \( \Bx = (a, b) \).
+A linear fit of some points distributed around a line \( y = a x + b \) is plotted in
+\cref{fig:LinearFit:LinearFitFig3}.
+Here \( a, b \) are the optimization variables \( \Bx = (a, b) \).
 
-Idea1.
+\imageFigure{../figures/ece1505-convex-optimization/LinearFitFig3}{Linear fit of points around a line.}{fig:LinearFit:LinearFitFig3}{0.2}
+
+How do we solve this?
+
+\paragraph{Solution idea 1.}
 
 Describe an error function, describing how far from the line a given point is.
 
@@ -101,7 +108,7 @@ y_i - (a x_i + b),
 Because this can be positive or negative, we can define a squared variant of this, and then sum over all data points.
 
 \begin{dmath}\label{eqn:intro:120}
-F_0 = \sum_{i=1}^n \lr{ y_i - (a x_i + b) }^2
+F_0 = \sum_{i=1}^n \lr{ y_i - (a x_i + b) }^2.
 \end{dmath}
 
 One way to solve (for \( a, b \)): Take the derivatives
@@ -109,20 +116,21 @@ One way to solve (for \( a, b \)): Take the derivatives
 \begin{dmath}\label{eqn:intro:140}
 \begin{aligned}
 \PD{a}{F_0} &= \sum_{i=1}^n 2 ( y_i - (a x_i + b) )(-x_i) = 0 \\
-\PD{b}{F_0} &= \sum_{i=1}^n 2 ( y_i - (a x_i + b) )(-1) = 0
+\PD{b}{F_0} &= \sum_{i=1}^n 2 ( y_i - (a x_i + b) )(-1) = 0.
 \end{aligned}
 \end{dmath}
 
-Yields
+This yields
 
 \begin{dmath}\label{eqn:intro:160}
 \begin{aligned}
 \sum_{i = 1}^n y_i     &= \lr{\sum_{i = 1}^n x_i} a + \lr{\sum_{i = 1}^n 1} b \\
-\sum_{i = 1}^n x_i y_i &= \lr{\sum_{i = 1}^n x_i^2} a + \lr{\sum_{i = 1}^n x_i} b
+\sum_{i = 1}^n x_i y_i &= \lr{\sum_{i = 1}^n x_i^2} a + \lr{\sum_{i = 1}^n x_i} b.
 \end{aligned}
 \end{dmath}
 
-In matrix form
+In matrix form, this is
+
 \begin{dmath}\label{eqn:intro:180}
 \begin{bmatrix}
 \sum x_i y_i \\
@@ -140,10 +148,8 @@ b
 \end{dmath}
 
 If invertible, have an analytic solution for \( (a^\conj, b^\conj) \).
-
 This is a convex optimization problem because \( F(x) = x^2 \) is a convex ``quadratic program''.
-
-A quadratic program is
+In general a quadratic program has the structure
 
 \begin{dmath}\label{eqn:intro:200}
 F(a, b) = (\cdots) a^2 + (\cdots) a b + (\cdots) b^2.
@@ -159,9 +165,9 @@ y_n
 \end{bmatrix}
 =
 \begin{bmatrix}
-x_1 1 \\
-\vdots \\
-x_n 1
+x_1 & 1 \\
+\vdots & \vdots \\
+x_n & 1
 \end{bmatrix}
 \begin{bmatrix}
 a \\
@@ -178,23 +184,22 @@ z_n
 
 or
 \begin{dmath}\label{eqn:intro:240}
-\By = H \Bv + \BZ.
+\By = H \Bv + \Bz,
 \end{dmath}
 
-here \( \BZ \) is the error vector.
-
-The problem is now to:
-
-Fit \( \By \) to be as close to \( H v + Z \) as possible, or to minimize the norm of the error vector
+where \( \Bz \) is the error vector.  The problem is now reduced to to: Fit \( \By \) to be as close to \( H \Bv + \Bz \) as possible, or to minimize the norm of the error vector, or
 
 \begin{dmath}\label{eqn:intro:260}
 \min_\Bv \Norm{ \By - H \Bv }^2_2
 = \min_\Bv \lr{ \By - H \Bv }^\T \lr{ \By - H \Bv }
 = \min_\Bv
+\lr{ \By^\T \By - \By^\T H \Bv - \Bv^\T H \By + \Bv^\T H^\T H \Bv }
+= \min_\Bv
 \lr{ \By^\T \By - 2 \By^\T H \Bv + \Bv^\T H^\T H \Bv }.
 \end{dmath}
 
-Can now take the derivative with respect to the \( \Bv \) vector
+It is now possible to 
+take the derivative with respect to the \( \Bv \) vector (i.e. the gradient with respect to the coordinates of the constraint vector)
 
 \begin{dmath}\label{eqn:intro:280}
 \PD{\Bv}{}
@@ -210,7 +215,7 @@ or
 (H^\T H) \Bv = H^\T \By,
 \end{dmath}
 
-so, assuming that \( H^\T H \) is invertible
+so, assuming that \( H^\T H \) is invertible, the optimization problem has solution
 
 \begin{dmath}\label{eqn:intro:320}
 \Bv^\conj =
@@ -220,19 +225,28 @@ so, assuming that \( H^\T H \) is invertible
 where
 
 \begin{dmath}\label{eqn:intro:340}
-H^\T H =
+H^\T H 
+=
 \begin{bmatrix}
 x_1 & \cdots & x_n \\
  1  & \cdots & 1   \\
 \end{bmatrix}
 \begin{bmatrix}
-x_1 1 \\
-\vdots \\
-x_n 1
-\end{bmatrix}.
+x_1 & 1 \\
+\vdots & \vdots \\
+x_n & 1
+\end{bmatrix}
+=
+\begin{bmatrix}
+\sum x_i^2 & \sum x_i \\
+\sum x_i & n
+\end{bmatrix}
+,
 \end{dmath}
 
-\section{Why pick the 2-norm for the objective function?}
+as seen in the calculus approach.
+
+\subsection{Why pick the 2-norm for the objective function?}
 
 \begin{itemize}
 \item We do this in calculus, because we can solve the derivative equation.
