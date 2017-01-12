@@ -406,11 +406,9 @@ Problem becomes
 \end{dmath}
 
 such that
-\begin{dmath}\label{eqn:intro:660}
-\begin{aligned}
-y_i - a x_i - b \ge t_i \forall i
-\end{aligned}
-\end{dmath}
+\begin{equation}\label{eqn:intro:660}
+y_i - a x_i - b \ge t_i \qquad \forall i
+\end{equation}
 
 \paragraph{Uniform noise}
 
@@ -452,9 +450,9 @@ MLE solution
 
 Here the argument is constant if \( -c \le y_i - a x_i - b \le c \), so an ML solution is \underline{any} \( (a,b) \) such that
 
-\begin{dmath}\label{eqn:intro:740}
-\Abs{ y_i - a x_i - b } \le c \forall i \in 1, \cdots, n.
-\end{dmath}
+\begin{equation}\label{eqn:intro:740}
+\Abs{ y_i - a x_i - b } \le c \qquad \forall i \in 1, \cdots, n.
+\end{equation}
 
 This is a linear program known as a ``feasibility problem''.
 
@@ -473,15 +471,28 @@ y_i - a x_i - b &\ge -d
 
 If \( d^\conj \le c \), then the problem is feasible, however, if \( d^\conj > c \) it is infeasible.
 
-%Compare three columns:
-%- two sided exp
-%- one sided exp
-%- constant range
-%
-%three point plots respectively
+\subsection{Method comparison}
+
+The double sided exponential, single sided exponential and uniform probability distributions of
+\cref{fig:threeDistributions}
+each respectively represent the point plots of the form 
+\cref{fig:threeDistributionsSamples}.  The double sided exponential samples are distributed on both sides of the line, the single sided stritly above or on the line, and the uniform representing error bars distributed around the line of best fit.
 %- points on both sides of line
 %- points only above the line
 %- error bars passing through the line (or lines)
+
+
+\imageThreeFiguresOneLine
+{../figures/ece1505-convex-optimization/DoubleSidedExponentialDistFig5}
+{../figures/ece1505-convex-optimization/SingleSidedExponentialDistFig6}
+{../figures/ece1505-convex-optimization/stepProbabilityDistFig7}
+{Distributions}{fig:threeDistributions}{scale=0.3}
+
+\imageThreeFiguresOneLine
+{../figures/ece1505-convex-optimization/LinearFitFig3}
+{../figures/ece1505-convex-optimization/LinearFitGtFig3}
+{../figures/ece1505-convex-optimization/LinearFitErrorBarFig3}
+{Samples}{fig:threeDistributionsSamples}{scale=0.3}
 
 %}
 %\EndArticle
