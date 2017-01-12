@@ -27,7 +27,7 @@ THISBOOK_DEPS += $(PDFS_FROM_EPS)
 
 include ../latex/make.rules
 
-all :: intro.pdf
+#all :: convexL1.pdf
 
 #julia.tex : ../julia/METADATA
 #mathematica.tex : ../mathematica/METADATA

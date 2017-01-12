@@ -1,44 +1,20 @@
 %
-% Copyright © 2017 Peeter Joot.  All Rights Reserved.
+% Copyright Â© 2017 Peeter Joot.  All Rights Reserved.
 % Licenced as described in the file LICENSE under the root directory of this GIT repository.
 %
-%{
-\input{../latex/blogpost.tex}
-\renewcommand{\basename}{intro}
-%\renewcommand{\dirname}{notes/phy1520/}
-\renewcommand{\dirname}{notes/ece1228-electromagnetic-theory/}
-%\newcommand{\dateintitle}{}
-%\newcommand{\keywords}{}
-
-\input{../latex/peeter_prologue_print2.tex}
-
-\usepackage{peeters_layout_exercise}
-\usepackage{peeters_braket}
-\usepackage{peeters_figures}
-\usepackage{siunitx}
-%\usepackage{mhchem} % \ce{}
-%\usepackage{macros_bm} % \bcM
-%\usepackage{macros_qed} % \qedmarker
-%\usepackage{txfonts} % \ointclockwise
-
-\beginArtNoToc
-
-\generatetitle{Introduction}
-%\chapter{Introduction}
-%\label{chap:intro}
 \section{What's this course about?}
 
 \begin{itemize}
 \item Science of optimization.
-\item problem formulation, design, analysis of eng systems
+\item problem formulation, design, analysis of engineering systems.
 \end{itemize}
 
 \section{Basic concepts}
 
 \begin{itemize}
 \item Basic concepts.  convex sets, functions, problems.
-\item Theory (40 percent).  Lagrangian duality.
-\item Algorithms: gradient descent, newton's, interior point.
+\item Theory (about 40 \% of the material).  Specifically Lagrangian duality.
+\item Algorithms: gradient descent, Newton's, interior point, ...
 \end{itemize}
 
 Homework will involve computational work (solving problems, ...)
@@ -50,25 +26,23 @@ Homework will involve computational work (solving problems, ...)
 \item To develop (Matlab) code to solve problems numerically.
 \item To characterize the solutions via duality theory
 \item NOT a math course, but lots of proofs.
-\item NOT a communications course, but lots of ex?.
-\item NOT a CS course, but lots of useful ideas.
+\item NOT a communications course, but lots of ... (?)
+\item NOT a CS course, but lots of useful algorithms.
 \end{itemize}
 
-\makedefinition{Mathematical program}{dfn:intro:1}{
+\makedefinition{Mathematical program}{dfn:L1introduction:1}{
 
-\begin{dmath}\label{eqn:intro:20}
+\begin{dmath}\label{eqn:L1introduction:20}
 \min_\Bx F_0(\Bx)
 \end{dmath}
 
-where \( \Bx = (x_1, x_2, \cdots, x_m) \in \text{\R{m}} \) is subject to constraints
-\( F_i : \text{\R{m}} \rightarrow \text{\R{1}} \)
+where \( \Bx = (x_1, x_2, \cdots, x_m) \in \text{\R{m}} \) is subject to constraints \( F_i : \text{\R{m}} \rightarrow \text{\R{1}} \)
 
-\begin{equation}\label{eqn:intro:40}
+\begin{equation}\label{eqn:L1introduction:40}
 F_i(\Bx) \le 0, \qquad i = 1, \cdots, m
 \end{equation}
 
-The function \( F_0 : \text{\R{m}} \rightarrow \text{\R{1}} \) is called the 
-``objective function''.
+The function \( F_0 : \text{\R{m}} \rightarrow \text{\R{1}} \) is called the ``objective function''.
 } % definition
 
 Solving a problem produces:
@@ -82,16 +56,13 @@ An optimal \(\Bx^\conj\) is a value \( \Bx \) that gives the smallest value amon
 \item If connect two feasible points line segment in the ? above bottom of the bowl.
 \end{itemize}
 
-A non-convex function is illustrated in 
-\cref{fig:NonConvexObjectiveFunction:NonConvexObjectiveFunctionFig2}, which has a number of local minimums.
+A non-convex function is illustrated in \cref{fig:NonConvexObjectiveFunction:NonConvexObjectiveFunctionFig2}, which has a number of local minimums.
 
 \imageFigure{../figures/ece1505-convex-optimization/NonConvexObjectiveFunctionFig2}{Non-convex (wavy) figure with a number of local minimums.}{fig:NonConvexObjectiveFunction:NonConvexObjectiveFunctionFig2}{0.2}
 
 \section{Example: Line fitting.}
 
-A linear fit of some points distributed around a line \( y = a x + b \) is plotted in
-\cref{fig:LinearFit:LinearFitFig3}.
-Here \( a, b \) are the optimization variables \( \Bx = (a, b) \).
+A linear fit of some points distributed around a line \( y = a x + b \) is plotted in \cref{fig:LinearFit:LinearFitFig3}.  Here \( a, b \) are the optimization variables \( \Bx = (a, b) \).
 
 \imageFigure{../figures/ece1505-convex-optimization/LinearFitFig3}{Linear fit of points around a line.}{fig:LinearFit:LinearFitFig3}{0.2}
 
@@ -101,19 +72,19 @@ How is the solution for such a best fit line obtained?
 
 Describe an error function, describing how far from the line a given point is.
 
-\begin{dmath}\label{eqn:intro:100}
+\begin{dmath}\label{eqn:L1introduction:100}
 y_i - (a x_i + b),
 \end{dmath}
 
 Because this can be positive or negative, we can define a squared variant of this, and then sum over all data points.
 
-\begin{dmath}\label{eqn:intro:120}
+\begin{dmath}\label{eqn:L1introduction:120}
 F_0 = \sum_{i=1}^n \lr{ y_i - (a x_i + b) }^2.
 \end{dmath}
 
 One way to solve (for \( a, b \)): Take the derivatives
 
-\begin{dmath}\label{eqn:intro:140}
+\begin{dmath}\label{eqn:L1introduction:140}
 \begin{aligned}
 \PD{a}{F_0} &= \sum_{i=1}^n 2 ( y_i - (a x_i + b) )(-x_i) = 0 \\
 \PD{b}{F_0} &= \sum_{i=1}^n 2 ( y_i - (a x_i + b) )(-1) = 0.
@@ -122,7 +93,7 @@ One way to solve (for \( a, b \)): Take the derivatives
 
 This yields
 
-\begin{dmath}\label{eqn:intro:160}
+\begin{dmath}\label{eqn:L1introduction:160}
 \begin{aligned}
 \sum_{i = 1}^n y_i     &= \lr{\sum_{i = 1}^n x_i} a + \lr{\sum_{i = 1}^n 1} b \\
 \sum_{i = 1}^n x_i y_i &= \lr{\sum_{i = 1}^n x_i^2} a + \lr{\sum_{i = 1}^n x_i} b.
@@ -131,7 +102,7 @@ This yields
 
 In matrix form, this is
 
-\begin{dmath}\label{eqn:intro:180}
+\begin{dmath}\label{eqn:L1introduction:180}
 \begin{bmatrix}
 \sum x_i y_i \\
 \sum y_i
@@ -147,17 +118,15 @@ b
 \end{bmatrix}.
 \end{dmath}
 
-If invertible, have an analytic solution for \( (a^\conj, b^\conj) \).
-This is a convex optimization problem because \( F(x) = x^2 \) is a convex ``quadratic program''.
-In general a quadratic program has the structure
+If invertible, have an analytic solution for \( (a^\conj, b^\conj) \).  This is a convex optimization problem because \( F(x) = x^2 \) is a convex ``quadratic program''.  In general a quadratic program has the structure
 
-\begin{dmath}\label{eqn:intro:200}
+\begin{dmath}\label{eqn:L1introduction:200}
 F(a, b) = (\cdots) a^2 + (\cdots) a b + (\cdots) b^2.
 \end{dmath}
 
 \paragraph{Approach 2:  Linear algebraic formulation.}
 
-\begin{dmath}\label{eqn:intro:220}
+\begin{dmath}\label{eqn:L1introduction:220}
 \begin{bmatrix}
 y_1 \\
 \vdots \\
@@ -183,13 +152,13 @@ z_n
 \end{dmath}
 
 or
-\begin{dmath}\label{eqn:intro:240}
+\begin{dmath}\label{eqn:L1introduction:240}
 \By = H \Bv + \Bz,
 \end{dmath}
 
 where \( \Bz \) is the error vector.  The problem is now reduced to to: Fit \( \By \) to be as close to \( H \Bv + \Bz \) as possible, or to minimize the norm of the error vector, or
 
-\begin{dmath}\label{eqn:intro:260}
+\begin{dmath}\label{eqn:L1introduction:260}
 \min_\Bv \Norm{ \By - H \Bv }^2_2
 = \min_\Bv \lr{ \By - H \Bv }^\T \lr{ \By - H \Bv }
 = \min_\Bv
@@ -198,10 +167,9 @@ where \( \Bz \) is the error vector.  The problem is now reduced to to: Fit \( \
 \lr{ \By^\T \By - 2 \By^\T H \Bv + \Bv^\T H^\T H \Bv }.
 \end{dmath}
 
-It is now possible to 
-take the derivative with respect to the \( \Bv \) vector (i.e. the gradient with respect to the coordinates of the constraint vector)
+It is now possible to take the derivative with respect to the \( \Bv \) vector (i.e. the gradient with respect to the coordinates of the constraint vector)
 
-\begin{dmath}\label{eqn:intro:280}
+\begin{dmath}\label{eqn:L1introduction:280}
 \PD{\Bv}{}
 \lr{ \By^\T \By - 2 \By^\T H \Bv + \Bv^\T H^\T H \Bv }
 =
@@ -211,21 +179,21 @@ take the derivative with respect to the \( \Bv \) vector (i.e. the gradient with
 
 or
 
-\begin{dmath}\label{eqn:intro:300}
+\begin{dmath}\label{eqn:L1introduction:300}
 (H^\T H) \Bv = H^\T \By,
 \end{dmath}
 
 so, assuming that \( H^\T H \) is invertible, the optimization problem has solution
 
-\begin{dmath}\label{eqn:intro:320}
+\begin{dmath}\label{eqn:L1introduction:320}
 \Bv^\conj =
 (H^\T H)^{-1} H^\T \By,
 \end{dmath}
 
 where
 
-\begin{dmath}\label{eqn:intro:340}
-H^\T H 
+\begin{dmath}\label{eqn:L1introduction:340}
+H^\T H
 =
 \begin{bmatrix}
 x_1 & \cdots & x_n \\
@@ -252,25 +220,20 @@ It is reasonable to ask why the 2-norm was picked for the objective function?
 
 \begin{itemize}
 \item One justification is practical: Because we can solve the derivative equation.
-\item Another justification: In statistics the error vector \( \Bz = \By - H \Bv \) can be modelled as an IID
-(Independently and Identically Distributed)
-Gaussian random variable (i.e. noise).  Under this model, the use of the 2-norm can be viewed as a consequence of such an ML estimation problem (see chapter 7 in the text).
-% citep
+\item Another justification: In statistics the error vector \( \Bz = \By - H \Bv \) can be modelled as an IID (Independently and Identically Distributed) Gaussian random variable (i.e. noise).  Under this model, the use of the 2-norm can be viewed as a consequence of such an ML estimation problem (see \citep{boyd2004convex} ch. 7).
 \end{itemize}
 
-A Gaussian 
-\cref{fig:Gaussian:GaussianFig4}
-IID model is given by
+A Gaussian \cref{fig:Gaussian:GaussianFig4} IID model is given by
 
 \begin{subequations}
-\label{eqn:intro:n}
-\begin{dmath}\label{eqn:intro:360}
+\label{eqn:L1introduction:800}
+\begin{dmath}\label{eqn:L1introduction:360}
 y_i = a x_i + b
 \end{dmath}
-\begin{equation}\label{eqn:intro:380}
+\begin{equation}\label{eqn:L1introduction:380}
 z_i = y_i - a x_i -b \sim N(O, O^2)
 \end{equation}
-\begin{dmath}\label{eqn:intro:400}
+\begin{dmath}\label{eqn:L1introduction:400}
 P_Z(z) = \inv{\sqrt{2 \pi \sigma}} \exp\lr{ -\inv{2} z^2/\sigma^2 }.
 \end{dmath}
 \end{subequations}
@@ -281,7 +244,7 @@ P_Z(z) = \inv{\sqrt{2 \pi \sigma}} \exp\lr{ -\inv{2} z^2/\sigma^2 }.
 
 Pick \( (a,b) \) to maximize the probability of observed data.
 
-\begin{dmath}\label{eqn:intro:420}
+\begin{dmath}\label{eqn:L1introduction:420}
 (a^\conj, b^\conj)
 = \arg \max P( x, y ; a, b )
 = \arg \max P_Z( y - (a x + b) )
@@ -290,7 +253,7 @@ Pick \( (a,b) \) to maximize the probability of observed data.
 \end{dmath}
 
 Taking logs gives
-\begin{dmath}\label{eqn:intro:440}
+\begin{dmath}\label{eqn:L1introduction:440}
 (a^\conj, b^\conj)
 = \arg \max
 \lr{
@@ -309,7 +272,7 @@ Here \( \arg \max \) is not the maximum of the function, but the value of the pa
 
 A double sided exponential distribution is plotted in \cref{fig:DoubleSidedExponentialDist:DoubleSidedExponentialDistFig5}, and has the mathematical form
 
-\begin{dmath}\label{eqn:intro:460}
+\begin{dmath}\label{eqn:L1introduction:460}
 P_Z(z) = \inv{2 c} \exp\lr{ -\inv{c} \Abs{z} }.
 \end{dmath}
 
@@ -317,11 +280,11 @@ P_Z(z) = \inv{2 c} \exp\lr{ -\inv{c} \Abs{z} }.
 
 The optimization problem is
 
-\begin{dmath}\label{eqn:intro:480}
+\begin{dmath}\label{eqn:L1introduction:480}
 \max_{a,b} \prod_{i = 1}^n P_z(z_i)
 =
 \max_{a,b} \prod_{i = 1}^n
-\inv{2 c} \exp\lr{ -\inv{c} \Abs{z_i} }.
+\inv{2 c} \exp\lr{ -\inv{c} \Abs{z_i} }
 =
 \max_{a,b} \prod_{i = 1}^n
 \inv{2 c} \exp\lr{ -\inv{c} \Abs{y_i - a x_i - b} }
@@ -332,37 +295,35 @@ The optimization problem is
 
 This is a L1 norm problem
 
-\begin{dmath}\label{eqn:intro:500}
+\begin{dmath}\label{eqn:L1introduction:500}
 \min_{a,b} \sum_{i = 1}^n \Abs{ y_i - a x_i - b }.
 \end{dmath}
 
 i.e.
 
-\begin{dmath}\label{eqn:intro:520}
+\begin{dmath}\label{eqn:L1introduction:520}
 \min_\Bv \Norm{ \By - H \Bv }_1.
 \end{dmath}
 
-This is still convex, but has no analytic solution, and
-%F6: %F(x) = \Abs{x}
-is an example of a linear program.
+This is still convex, but has no analytic solution, and is an example of a linear program.
 
 \subsection{Solution of linear program}
 
 Introduce helper variables \( t_1, \cdots, t_n \), and
 minimize \( \sum_i t_i \), such that
 
-\begin{dmath}\label{eqn:intro:540}
+\begin{dmath}\label{eqn:L1introduction:540}
 \Abs{ y_i - a x_i - b } \le t_i,
 \end{dmath}
 
 This is now an optimization problem for \( a, b, t_1, \cdots t_n \).  A linear program is defined as
 
-\begin{dmath}\label{eqn:intro:560}
+\begin{dmath}\label{eqn:L1introduction:560}
 \min_{a, b, t_1, \cdots t_n} \sum_i t_i
 \end{dmath}
 
 such that
-\begin{dmath}\label{eqn:intro:580}
+\begin{dmath}\label{eqn:L1introduction:580}
 \begin{aligned}
 y_i - a x_i - b \le t_i
 y_i - a x_i - b \ge -t_i
@@ -371,13 +332,11 @@ y_i - a x_i - b \ge -t_i
 
 \paragraph{Single sided exponential}
 
-What if your noise doesn't look double sided, with only noise for values \( x > 0 \).
-Can define a single sided probability distribution, as that of
-\cref{fig:SingleSidedExponentialDist:SingleSidedExponentialDistFig6}.
+What if your noise doesn't look double sided, with only noise for values \( x > 0 \).  Can define a single sided probability distribution, as that of \cref{fig:SingleSidedExponentialDist:SingleSidedExponentialDistFig6}.
 
 \imageFigure{../figures/ece1505-convex-optimization/SingleSidedExponentialDistFig6}{Single sided exponential distribution.}{fig:SingleSidedExponentialDist:SingleSidedExponentialDistFig6}{0.2}
 
-\begin{dmath}\label{eqn:intro:600}
+\begin{dmath}\label{eqn:L1introduction:600}
 P_Z(z) =
 \left\{
 \begin{array}{l l}
@@ -389,7 +348,7 @@ P_Z(z) =
 
 i.e. all \( z_i \) error values are always non-negative.
 
-\begin{dmath}\label{eqn:intro:620}
+\begin{dmath}\label{eqn:L1introduction:620}
 \log P_z(z) =
 \left\{
 \begin{array}{l l}
@@ -401,24 +360,22 @@ i.e. all \( z_i \) error values are always non-negative.
 
 Problem becomes
 
-\begin{dmath}\label{eqn:intro:640}
+\begin{dmath}\label{eqn:L1introduction:640}
 \min_{a, b} \sum_i \lr{ y_i - a x_i - b }
 \end{dmath}
 
 such that
-\begin{equation}\label{eqn:intro:660}
+\begin{equation}\label{eqn:L1introduction:660}
 y_i - a x_i - b \ge t_i \qquad \forall i
 \end{equation}
 
 \paragraph{Uniform noise}
 
-For noise that is uniformly distributed in a range, as that of 
-\cref{fig:stepProbabilityDist:stepProbabilityDistFig7},
-which is constant in the range \( [-c,c] \) and zero outside that range.
+For noise that is uniformly distributed in a range, as that of \cref{fig:stepProbabilityDist:stepProbabilityDistFig7}, which is constant in the range \( [-c,c] \) and zero outside that range.
 
 \imageFigure{../figures/ece1505-convex-optimization/stepProbabilityDistFig7}{Uniform probability distribution.}{fig:stepProbabilityDist:stepProbabilityDistFig7}{0.2}
 
-\begin{dmath}\label{eqn:intro:680}
+\begin{dmath}\label{eqn:L1introduction:680}
 P_Z(z) =
 \left\{
 \begin{array}{l l}
@@ -430,7 +387,7 @@ P_Z(z) =
 
 or
 
-\begin{dmath}\label{eqn:intro:700}
+\begin{dmath}\label{eqn:L1introduction:700}
 \log P_Z(z) =
 \left\{
 \begin{array}{l l}
@@ -442,7 +399,7 @@ or
 
 MLE solution
 
-\begin{dmath}\label{eqn:intro:720}
+\begin{dmath}\label{eqn:L1introduction:720}
 \max_{a,b} \prod_{i = 1}^n P(x, y; a, b)
 =
 \max_{a,b} \sum_{i = 1}^n \log P_Z( y_i - a x_i - b )
@@ -450,19 +407,19 @@ MLE solution
 
 Here the argument is constant if \( -c \le y_i - a x_i - b \le c \), so an ML solution is \underline{any} \( (a,b) \) such that
 
-\begin{equation}\label{eqn:intro:740}
+\begin{equation}\label{eqn:L1introduction:740}
 \Abs{ y_i - a x_i - b } \le c \qquad \forall i \in 1, \cdots, n.
 \end{equation}
 
 This is a linear program known as a ``feasibility problem''.
 
-\begin{dmath}\label{eqn:intro:760}
+\begin{dmath}\label{eqn:L1introduction:760}
 \min d
 \end{dmath}
 
 such that
 
-\begin{dmath}\label{eqn:intro:780}
+\begin{dmath}\label{eqn:L1introduction:780}
 \begin{aligned}
 y_i - a x_i - b &\le d \\
 y_i - a x_i - b &\ge -d
@@ -473,14 +430,7 @@ If \( d^\conj \le c \), then the problem is feasible, however, if \( d^\conj > c
 
 \subsection{Method comparison}
 
-The double sided exponential, single sided exponential and uniform probability distributions of
-\cref{fig:threeDistributions}
-each respectively represent the point plots of the form 
-\cref{fig:threeDistributionsSamples}.  The double sided exponential samples are distributed on both sides of the line, the single sided stritly above or on the line, and the uniform representing error bars distributed around the line of best fit.
-%- points on both sides of line
-%- points only above the line
-%- error bars passing through the line (or lines)
-
+The double sided exponential, single sided exponential and uniform probability distributions of \cref{fig:threeDistributions} each respectively represent the point plots of the form \cref{fig:threeDistributionsSamples}.  The double sided exponential samples are distributed on both sides of the line, the single sided strictly above or on the line, and the uniform representing error bars distributed around the line of best fit.
 
 \imageThreeFiguresOneLine
 {../figures/ece1505-convex-optimization/DoubleSidedExponentialDistFig5}
@@ -493,7 +443,3 @@ each respectively represent the point plots of the form
 {../figures/ece1505-convex-optimization/LinearFitGtFig3}
 {../figures/ece1505-convex-optimization/LinearFitErrorBarFig3}
 {Samples}{fig:threeDistributionsSamples}{scale=0.3}
-
-%}
-%\EndArticle
-\EndNoBibArticle
