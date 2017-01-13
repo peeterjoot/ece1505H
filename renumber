@@ -1,2 +1,8 @@
 ../latex/bin/lgrep L1introduction.tex | tee o ; . ./o
 perl -p -i ../latex/bin/latexRegex.pl L1introduction.tex
+
+../latex/bin/lgrep convex-optimizationProblemSet1.tex | tee o ; . ./o
+perl -p -i ../latex/bin/latexRegex.pl convex-optimizationProblemSet1.tex
+
+../latex/bin/lgrep convex-optimizationLecture2.tex | tee o ; . ./o
+perl -p -i ../latex/bin/latexRegex.pl convex-optimizationLecture2.tex

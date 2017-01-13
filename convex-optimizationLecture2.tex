@@ -1,0 +1,631 @@
+%
+% Copyright © 2016 Peeter Joot.  All Rights Reserved.
+% Licenced as described in the file LICENSE under the root directory of this GIT repository.
+%
+\input{../latex/blogpost.tex}
+\renewcommand{\basename}{convex-optimization2}
+\renewcommand{\dirname}{notes/ece1505/}
+\newcommand{\keywords}{ECE1505H}
+\input{../latex/peeter_prologue_print2.tex}
+
+\usepackage{ece1505}
+\usepackage{peeters_braket}
+%\usepackage{peeters_layout_exercise}
+\usepackage{peeters_figures}
+\usepackage{mathtools}
+\usepackage{siunitx}
+\usepackage{peeters_layout_exercise}
+
+\beginArtNoToc
+\generatetitle{ECE1505H Convex Optimization.  Lecture 2: XXX.  Taught by Prof.\ Stark Draper}
+%\chapter{XXX}
+\label{chap:convex-optimization2}
+
+\paragraph{Disclaimer}
+
+Peeter's lecture notes from class.  These may be incoherent and rough.
+
+These are notes for the UofT course ECE1505H, Convex Optimization, taught by Prof. Stark Draper, covering \textchapref{{1}} \citep{boyd2004convex} content.
+
+\section{Mathematical background}
+
+\begin{itemize}
+\item Calculus: Derivatives and Jacobians, Gradients, Hessians, approximation functions.
+\item Linear algebra, Matrices, decompositions, ...
+\end{itemize}
+
+\subsection{Norms}
+\paragraph{Vector space}
+
+\makedefinition{Vector space}{dfn:convex-optimizationLecture2:1}{
+A set of elements (vectors) that is closed under vector addition and scaling.
+} % definition
+
+\makedefinition{Normed vector spaces}{dfn:convex-optimizationLecture2:2}{
+A vector space with a notion of lenght of any signle vector, the ``norm''.
+} % definition
+
+\makedefinition{Inner product space.}{dfn:convex-optimizationLecture2:3}{
+A normed vector space with a notion of a real angle vetween any pair of vectors.
+} % definition
+
+This course has a focus on optimization in \R{n}.  Complex spaces in the context of this course can be considered with a mapping \( \text{\C{n}} \rightarrow \text{\R{2 n}} \).
+
+\makedefinition{Norm.}{dfn:convex-optimizationLecture2:4}{
+A norm is a function operating on a vector
+
+\begin{dmath*}
+\Bx = ( x_1, x_2, \cdots, x_n )
+\end{dmath*}
+
+that provides a mapping
+
+\begin{equation*}
+\Norm{ \cdot } : \text{\{R{n}} \rightarrow \text{\{R{1}} ,
+\end{equation*}
+
+where
+
+\begin{itemize}
+\item \( \Norm{ \Bx } \ge 0 \)
+\item \( \Norm{ \Bx } = 0 \qquad \iff \Bx = 0 \)
+\item \( \Norm{ t \Bx } = \Abs{t} \Norm{ \Bx } \)
+\item \( \Norm{ \Bx + \By } \le \Norm{ \Bx } + \Norm{\By} \).  This is the triangle inequality.
+\end{itemize}
+} % definition
+
+\paragraph{Example: Euclidean norm}
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:24}
+\Norm{\Bx} = \sqrt{ \sum_{i = 1}^n x_i^2 }
+\end{dmath}
+
+\paragraph{Example: \(l_p\)-norms}
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:44}
+\Norm{\Bx}_p = \lr{ \sum_{i = 1}^n \Abs{x_i}^p }^{1/p}.
+\end{dmath}
+
+For \( p = 1 \), this is
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:64}
+\Norm{\Bx}_1 = \sum_{i = 1}^n \Abs{x_i},
+\end{dmath}
+
+For \( p = 2 \), this is the Euclidean norm \cref{eqn:convex-optimizationLecture2:24}.
+For \( p = \infty \), this is
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:324}
+\Norm{\Bx}_\infty = \max_{i = 1}^n \Abs{x_i}.
+\end{dmath}
+
+\makedefinition{Unit ball}{dfn:convex-optimizationLecture2:10}{
+
+\begin{dmath*}
+\setlr{ \Bx | \Norm{\Bx} \le 1 }
+\end{dmath*}
+
+} % definition
+
+The \( l_2 \) norm is not only familiar, but can be ``induced'' by an inner product
+
+\begin{equation}\label{eqn:convex-optimizationLecture2:84}
+\innerproduct{\Bx}{\By} = \Bx^\T \By = \sum_{i = 1}^n x_i y_i,
+\end{equation}
+
+which is not true for all norms.  The norm induced by this inner product is
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:104}
+\Norm{\Bx}_2 = \sqrt{ \innerproduct{\Bx}{\By} }
+\end{dmath}
+
+Inner product spaces have a notion of angle given by
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:124}
+\innerproduct{\Bx}{\By} = \Norm{\Bx} \Norm{\By} \cos \theta,
+\end{dmath}
+
+F3
+
+and always satify the Cauchy-Schwartz inequality
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:144}
+\innerproduct{\Bx}{\By} \le \Norm{\Bx}_2 \Norm{\By}_2.
+\end{dmath}
+
+In an inner product space we say \( \Bx \) and \( \By \) are orthogonal vectors \( \Bx \perp \By \) if
+\( \innerproduct{\Bx}{\By} = 0 \).
+
+F4
+
+\makedefinition{Dual norm}{dfn:convex-optimizationLecture2:20}{
+Let \( \Norm{ \cdot } \) be a norm in \R{n}.  The ``dual'' norm \( \Norm{ \cdot }_\conj \) is defined as
+\begin{equation*}
+\Norm{\Bz}_\conj = \sup_\Bx \setlr{ \Bz^\T \Bx | \Norm{\Bx} \le 1 }.
+\end{equation*}
+
+where \( \sup \) is roughly the ``least upper bound''.
+\index{sup}
+
+This is a limit over the unit ball of \( \Norm{\cdot} \).
+} % definition
+
+\paragraph{\( l_2 \) dual}.
+
+Dual of the \( l_2 \) is the \( l_2 \) norm.
+
+F5
+
+Proof:
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:164}
+\Norm{\Bz}_\conj
+= \sup_\Bx \setlr{ \Bz^\T \Bx | \Norm{\Bx}_2 \le 1 }
+= \sup_\Bx \setlr{ \Norm{\Bz}_2 \Norm{\Bx}_2 \cos\theta | \Norm{\Bx}_2 \le 1 }
+\le \sup_\Bx \setlr{ \Norm{\Bz}_2 \Norm{\Bx}_2 | \Norm{\Bx}_2 \le 1 }
+\le
+\Norm{\cancel{\Bz}}_2
+\Norm{
+\frac{\Bz}{ \cancel{\Norm{\Bz}_2} }
+}_2
+=
+\Norm{\Bz}_2.
+\end{dmath}
+
+\paragraph{\( l_1 \) dual}.
+For \( l_1 \), the dual is the \( l_\infty \) norm.  Proof:
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:184}
+\Norm{\Bz}_\conj
+=
+\sup_\Bx \setlr{ \Bz^\T \Bx | \Norm{\Bx}_1 \le 1 },
+\end{dmath}
+
+but
+\begin{dmath}\label{eqn:convex-optimizationLecture2:204}
+\Bz^\T \Bx
+=
+\sum_{i=1}^n z_i x_i \le
+\Abs{
+\sum_{i=1}^n z_i x_i
+}
+\le
+\sum_{i=1}^n \Abs{z_i x_i },
+\end{dmath}
+
+so
+\begin{dmath}\label{eqn:convex-optimizationLecture2:224}
+\Norm{\Bz}_\conj
+=
+\sum_{i=1}^n \Abs{z_i}\Abs{ x_i }
+\le \lr{ \max_{j=1}^n \Abs{z_j} }
+\sum_{i=1}^n \Abs{ x_i }
+\le \lr{ \max_{j=1}^n \Abs{z_j} }
+=
+\Norm{\Bz}_\infty.
+\end{dmath}
+
+F6
+
+\paragraph{\( l_\infty \) dual}.
+
+F7
+\begin{dmath}\label{eqn:convex-optimizationLecture2:244}
+\Norm{\Bz}_\conj
+=
+\sup_\Bx \setlr{ \Bz^\T \Bx | \Norm{\Bx}_\infty \le 1 }.
+\end{dmath}
+
+Here
+\begin{dmath}\label{eqn:convex-optimizationLecture2:264}
+\Bz^\T \Bx
+=
+\sum_{i=1}^n z_i x_i
+\le
+\sum_{i=1}^n \Abs{z_i}\Abs{ x_i }
+\le
+\lr{ \max_j \Abs{ x_j } }
+\sum_{i=1}^n \Abs{z_i}
+=
+\Norm{\Bx}_\infty
+\sum_{i=1}^n \Abs{z_i}.
+\end{dmath}
+
+So
+\begin{dmath}\label{eqn:convex-optimizationLecture2:284}
+\Norm{\Bz}_\conj
+\le
+\sum_{i=1}^n \Abs{z_i}
+=
+\Norm{\Bz}_1.
+\end{dmath}
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:304}
+x_i^\conj
+=
+\left\{
+\begin{array}{l l}
++1 & \quad \mbox{\( z_i \ge 0 \)} \\
+-1 & \quad \mbox{\( z_i \le 0 \)}
+\end{array}
+\right.
+\end{dmath}
+
+\subsection{Calculus}
+
+\subsubsection{Gradient}
+
+Consider a scalar function
+
+\begin{equation}\label{eqn:convex-optimizationLecture2:344}
+F: \text{\R{n}} \rightarrow \text{R{1}}
+\end{equation}
+
+where for \( \Bx \in \text{\R{n}} \)
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:364}
+\spacegrad F(\Bx)
+=
+\begin{bmatrix}
+\PD{x_1}{F(\Bx)} \\
+\PD{x_2}{F(\Bx)} \\
+\vdots \\
+\PD{x_n}{F(\Bx)}
+\end{bmatrix}
+\end{dmath}
+
+Example:
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:384}
+F(\Bx)
+= \Bx^\T P \Bx
+=
+\begin{bmatrix}
+x_1 & x_2 & \cdots & x_n
+\end{bmatrix}
+\begin{bmatrix}
+P_{11} & P_{12} & \cdots & P_{1n} \\
+P_{21} & P_{22} & \cdots & P_{2n} \\
+\cdots
+P_{n1} & P_{n2} & \cdots & P_{nn} \\
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\ x_2 \\ \vdots \\ x_n
+\end{bmatrix}
+=
+\begin{bmatrix}
+x_1 & x_2 & \cdots & x_n
+\end{bmatrix}
+\lr{
+x_1
+\begin{bmatrix}
+P_{11} \\
+P_{21} \\
+\vdots \\
+P_{n1} \\
+\end{bmatrix}
++
+x_2
+\begin{bmatrix}
+P_{12} \\
+P_{22} \\
+\vdots \\
+P_{n2} \\
+\end{bmatrix}
++
+\cdots
+}
+=
+\sum x_j
+\begin{bmatrix}
+x_1 & x_2 & \cdots & x_n
+\end{bmatrix}
+\begin{bmatrix}
+P_{1j} \\
+P_{2j} \\
+\vdots \\
+P_{nj} \\
+\end{bmatrix}
+=
+\sum_j x_j \sum_i x_i P_{ij}
+=
+\sum_{i,j = 1}^n x_i x_j P_{ij},
+\end{dmath}
+
+We want to show that
+\begin{dmath}\label{eqn:convex-optimizationLecture2:404}
+\spacegrad F(\Bx) = \lr{P + P^\T } \Bx.
+\end{dmath}
+
+Consider the k-th derivative
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:424}
+\PD{x_k}{} F(\Bx)
+=
+\PD{x_k}{}
+\lr{
+P_{kk} x_k^2
++
+\sum_{i \ne k} x_i x_k \lr{ P_{ik} + P_{ki} }
+}
+=
+2 P_{kk} x_k + 2
+\sum_{i \ne k} x_i \frac{\lr{ P_{ik} + P_{ki} }}{2}
+=
+\sum_{i}^n x_i \frac{\lr{ P_{ik} + P_{ki} }}{2}
+=
+\sum_{i}^n \lr{ P_{ik} + P_{ki} } x_i
+,
+\end{dmath}
+
+which proves \cref{eqn:convex-optimizationLecture2:404}.
+
+\paragraph{Symmetric matrices}
+
+Let \( S \) be the set of symmetric matrices
+
+\begin{equation}\label{eqn:convex-optimizationLecture2:444}
+%S = \setlr{ P \in \text{\R{$n\times n$}} | P = P^\T},
+S = \setlr{ P \in R^{n\times n} | P = P^\T},
+\end{equation}
+
+then
+%In particular, for a symmetric matrix \( P \), this means
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:464}
+\spacegrad \Bx^\T P \Bx = 2 P \Bx.
+\end{dmath}
+
+\paragraph{Gradient}
+
+The gradient provides a linear approximation of a function about a point \( \Bx_0 \in \text{\R{n}} \).
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:484}
+F(\Bx)
+\approx F(\Bx_0) + \spacegrad F(\Bx_0)^\T \lr{ \Bx - \Bx_0 }.
+=
+F(\Bx_0) + \innerproduct{ \spacegrad F(\Bx_0)}{ \Bx - \Bx_0 },
+\end{dmath}
+
+or
+\begin{equation}\label{eqn:convex-optimizationLecture2:504}
+F(\Bx + \Delta \Bx)
+=
+F(\Bx) + \innerproduct{ \spacegrad F(\Bx)}{ \Delta \Bx }.
+\end{equation}
+
+This can be thought of as the definition of the gradient in an inner product space.  It will be possible to find the structure of the gradient by considering a pertubation of a function about a point.
+
+\subsubsection{Chain rule}
+
+Gradients for compositions of functions.
+
+\paragraph{Example 1:}
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:524}
+\begin{aligned}
+F &: R^n \rightarrow R \\
+g &: R \rightarrow R,
+\end{aligned}
+\end{dmath}
+
+and let
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:544}
+h(\Bx) = g(F(\Bx)),
+\end{dmath}
+
+for \( \Bx \in \text{\R{n}} \), then
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:564}
+\spacegrad h(\Bx)
+=
+g'(F(\Bx)) \spacegrad F(\Bx).
+\end{dmath}
+
+\paragraph{Example 2:}
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:584}
+\begin{aligned}
+F &: R^n \rightarrow R^n \\
+g &: R^n \rightarrow R,
+\end{aligned}
+\end{dmath}
+
+and let
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:604}
+h(\Bx)
+= g(F(\Bx))
+= g\lr{
+\begin{bmatrix}
+F_1(\Bx) \\
+F_2(\Bx) \\
+\vdots \\
+F_n(\Bx) \\
+\end{bmatrix}
+}
+\end{dmath}
+
+for \( \Bx \in \text{\R{n}} \), then
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:624}
+\PD{x_k}{h(\Bx)}
+=
+\PD{F_1}{g}
+\PD{x_k}{F_1}
++
+\PD{F_2}{g}
+\PD{x_k}{F_2}
++
+\cdots
+\end{dmath}
+
+Let
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:644}
+D F(\Bx)
+=
+\begin{bmatrix}
+\PD{x_1}{F_1} & \PD{x_2}{F_1} & \PD{x_n}{F_1} \\
+\PD{x_1}{F_2} & \PD{x_2}{F_2} & \PD{x_n}{F_2} \\
+\vdots \\
+\PD{x_1}{F_n} & \PD{x_2}{F_n} & \PD{x_n}{F_n} \\
+\end{bmatrix}
+\end{dmath}
+
+so
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:664}
+\spacegrad h(\Bx)
+=
+\lr{ D F(\Bx) }^\T
+\spacegrad g(F(\Bx)).
+\end{dmath}
+
+\paragraph{In general}
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:684}
+\begin{aligned}
+F &: R^n \rightarrow R^m \\
+g &: R^m \rightarrow R^p,
+\end{aligned}
+\end{dmath}
+
+With \( h(\Bx) = g(F(\Bx) \),
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:704}
+D h(\Bx) = D g(F(\Bx)) D F(\Bx),
+\end{dmath}
+
+and
+\begin{dmath}\label{eqn:convex-optimizationLecture2:724}
+\spacegrad h(\Bx) =
+\lr{
+D F(\Bx)
+}^\T
+\spacegrad g(F(\Bx))
+\end{dmath}
+
+Note: \( \spacegrad h(\Bx) = D h(\Bx)^\T \) if \( p = 1 \).
+
+EXERSIZE: work this out for a general non-square case such as \( n = 4, m = 3, p = 2 \).
+
+\paragraph{Affine functions}
+
+An important example are affine functions of \( \Bx \)
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:744}
+\begin{aligned}
+F &: R^n \rightarrow R^n \\
+g &: R^n \rightarrow R,
+\end{aligned}
+\end{dmath}
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:764}
+F(\Bx) = A \Bx + \Bb,
+\end{dmath}
+
+where \( A \) is an \( n \times n \) matrix and \( \Bb \) is an \( n \times 1 \) column vector.
+
+Given a function
+
+\begin{equation}\label{eqn:convex-optimizationLecture2:784}
+h(\Bx) = g(F(\Bx)) = g(A \Bx + \Bb).
+\end{equation}
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:804}
+F(\Bx)
+= A \Bx + \Bb
+=
+\begin{bmatrix}
+a_1^\T \\
+a_2^\T \\
+\vdots \\
+a_n^\T \\
+\end{bmatrix}
+\Bx
++
+\Bb
+=
+\begin{bmatrix}
+\innerproduct{a_1}{\Bx} \\
+\innerproduct{a_2}{\Bx} \\
+\vdots \\
+\innerproduct{a_n}{\Bx}
+\end{bmatrix}
++
+\Bb
+=
+\begin{bmatrix}
+\sum_{i = 1}^n a_{1i} x_i \\
+\sum_{i = 1}^n a_{2i} x_i \\
+\vdots \\
+\sum_{i = 1}^n a_{ni} x_i
+\vdots \\
+\end{bmatrix}
++
+\Bb
+=
+\begin{bmatrix}
+F_1(\Bx) \\
+F_2(\Bx) \\
+\vdots \\
+F_n(\Bx) \\
+\end{bmatrix}
++
+\Bb,
+\end{dmath}
+
+so
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:824}
+D F(\Bx) = A.
+\end{dmath}
+
+\subsubsection{Second derivative.}
+
+The second derivative for \( R^n \rightarrow R \), the ``Hessian'' is
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:844}
+\spacegrad^2 F =
+\begin{bmatrix}
+\frac{\partial^2 F}{\partial x_i \partial x_j }
+\end{bmatrix}
+=
+\begin{bmatrix}
+\frac{\partial^2 F}{\partial x_1^2 } & \frac{\partial^2 F}{\partial x_1 \partial x_2} & \cdots & \frac{\partial^2 F}{\partial x_1 \partial x_n} \\
+\frac{\partial^2 F}{\partial x_2 \partial x_1 } & \frac{\partial^2 F}{\partial x_2^2 } & \cdots & \frac{\partial^2 F}{\partial x_2 \partial x_n} \\
+\vdots \\
+\end{bmatrix}
+\end{dmath}
+
+\paragraph{Example}
+
+Given
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:864}
+F(\Bx)
+= \inv{2} \Bx^\T P \Bx
++ \Bq^\T \Bx
++ \Bc,
+\end{dmath}
+
+where \( P = P^\T \), then
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:884}
+\spacegrad F
+=
+\inv{2} \lr{ P + P^\T } \Bx + \Bq
+=
+P \Bx + \Bq,
+\end{dmath}
+
+and
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:904}
+\spacegrad^2 F  P.
+\end{dmath}
+
+\EndArticle
+%\EndNoBibArticle
