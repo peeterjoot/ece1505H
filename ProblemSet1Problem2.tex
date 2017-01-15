@@ -5,14 +5,14 @@
 \makeproblem{Inversion formula for ``small'' matrices}{convex-optimization:problemSet1:2}{
 Prove the relation
 
-\begin{dmath}\label{eqn:convex-optimizationproblemSet1Problem2:20}
+\begin{dmath}\label{eqn:ProblemSet1Problem2:20}
 (I + A)^{-1} = I - A,
 \end{dmath}
 
 for \(A\) ``small''.  We used this in class to derive the second order expansion of
 
-\begin{dmath}\label{eqn:convex-optimizationproblemSet1Problem2:40}
-\log det(I + A).
+\begin{dmath}\label{eqn:ProblemSet1Problem2:40}
+\log \det(I + A).
 \end{dmath}
 
 Prove this result in two ways:
@@ -23,23 +23,27 @@ This is what we needed in class. Use a decomposition of \( A \) and Taylor appro
 \makesubproblem{}{convex-optimization:problemSet1:2b}
 Next prove the general relation: If \( A \in \Rm{n \times n} \) and \( \Norm{A}_p < 1 \) then \( I - A \) is nonsingular, and
 
-\begin{dmath}\label{eqn:convex-optimizationproblemSet1Problem2:60}
+\begin{dmath}\label{eqn:ProblemSet1Problem2:60}
 \lr{ I - A }^{-1} = \sum_{k=0}^\infty A^k
 \end{dmath}
 
 where
 
-\begin{dmath}\label{eqn:convex-optimizationproblemSet1Problem2:80}
+\begin{dmath}\label{eqn:ProblemSet1Problem2:80}
 \Norm{(I - A)^{-1}}_p \le \inv{1 - \Norm{A}_p}.
 \end{dmath}
 
 The pth matrix norm \( \Norm{A}_p \) is defined in terms of the vector p-norm as
 
-\begin{dmath}\label{eqn:convex-optimizationproblemSet1Problem2:100}
+\begin{dmath}\label{eqn:ProblemSet1Problem2:100}
 \Norm{A}_p = \sup_{\Bx \ne 0} \frac{\Norm{A \Bx }_p}{\Norm{\Bx}_p}
 \end{dmath}
 
-which, using the scaling property of a norm, can be seen to be equivalent to \( \Norm{A}_p = \max_{\Norm{\Bx}_p = 1} \Norm{A \Bx}_p \).
+which, using the scaling property of a norm, can be seen to be equivalent to
+
+\begin{dmath}\label{eqn:ProblemSet1Problem2:n}
+\Norm{A}_p = \max_{\Norm{\Bx}_p = 1} \Norm{A \Bx}_p.
+\end{dmath}
 
 In our derivation in class we used only the zeroth and first-order terms of the expansion.
 } % makeproblem

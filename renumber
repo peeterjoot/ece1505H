@@ -7,26 +7,26 @@ perl -p -i ../latex/bin/latexRegex.pl convexOptimizationProblemSet1.tex
 ../latex/bin/lgrep convexOptimizationLecture2.tex | tee o ; . ./o
 perl -p -i ../latex/bin/latexRegex.pl convexOptimizationLecture2.tex
 
-../latex/bin/lgrep convexOptimizationProblemSet1Problem1.tex | tee o ; . ./o
-perl -p -i ../latex/bin/latexRegex.pl convexOptimizationProblemSet1Problem1.tex
+../latex/bin/lgrep ProblemSet1Problem1.tex | tee o ; . ./o
+perl -p -i ../latex/bin/latexRegex.pl ProblemSet1Problem1.tex
 
-../latex/bin/lgrep convexOptimizationProblemSet1Problem2.tex | tee o ; . ./o
-perl -p -i ../latex/bin/latexRegex.pl convexOptimizationProblemSet1Problem2.tex
+../latex/bin/lgrep ProblemSet1Problem2.tex | tee o ; . ./o
+perl -p -i ../latex/bin/latexRegex.pl ProblemSet1Problem2.tex
 
-../latex/bin/lgrep convexOptimizationProblemSet1Problem3.tex | tee o ; . ./o
-perl -p -i ../latex/bin/latexRegex.pl convexOptimizationProblemSet1Problem3.tex
+../latex/bin/lgrep ProblemSet1Problem3.tex | tee o ; . ./o
+perl -p -i ../latex/bin/latexRegex.pl ProblemSet1Problem3.tex
 
-../latex/bin/lgrep convexOptimizationProblemSet1Problem4.tex | tee o ; . ./o
-perl -p -i ../latex/bin/latexRegex.pl convexOptimizationProblemSet1Problem4.tex
+../latex/bin/lgrep ProblemSet1Problem4.tex | tee o ; . ./o
+perl -p -i ../latex/bin/latexRegex.pl ProblemSet1Problem4.tex
 
-../latex/bin/lgrep convexOptimizationProblemSet1Problem5.tex | tee o ; . ./o
-perl -p -i ../latex/bin/latexRegex.pl convexOptimizationProblemSet1Problem5.tex
+../latex/bin/lgrep ProblemSet1Problem5.tex | tee o ; . ./o
+perl -p -i ../latex/bin/latexRegex.pl ProblemSet1Problem5.tex
 
-../latex/bin/lgrep convexOptimizationProblemSet1Problem6.tex | tee o ; . ./o
-perl -p -i ../latex/bin/latexRegex.pl convexOptimizationProblemSet1Problem6.tex
+../latex/bin/lgrep ProblemSet1Problem6.tex | tee o ; . ./o
+perl -p -i ../latex/bin/latexRegex.pl ProblemSet1Problem6.tex
 
-../latex/bin/lgrep convexOptimizationProblemSet1Problem7.tex | tee o ; . ./o
-perl -p -i ../latex/bin/latexRegex.pl convexOptimizationProblemSet1Problem7.tex
+../latex/bin/lgrep ProblemSet1Problem7.tex | tee o ; . ./o
+perl -p -i ../latex/bin/latexRegex.pl ProblemSet1Problem7.tex
 
-../latex/bin/lgrep convexOptimizationProblemSet1Problem8.tex | tee o ; . ./o
-perl -p -i ../latex/bin/latexRegex.pl convexOptimizationProblemSet1Problem8.tex
+../latex/bin/lgrep ProblemSet1Problem8.tex | tee o ; . ./o
+perl -p -i ../latex/bin/latexRegex.pl ProblemSet1Problem8.tex

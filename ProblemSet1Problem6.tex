@@ -3,13 +3,13 @@
 % Licenced as described in the file LICENSE under the root directory of this GIT repository.
 %
 \makeproblem{Ellipses, eigenvalues, eigenvectors, and volume}{convex-optimization:problemSet1:6}{
-Make neat and clearly-labelled sketches of the ellipsoid \( E = \setlr{\Bx | (\Bx - \Bx_c)^\T P{-1} (\Bx - \Bx_c) = 1} \) for the following sets of parameters:
+Make neat and clearly-labelled sketches of the ellipsoid \( \calE = \setlr{\Bx | (\Bx - \Bx_c)^\T P^{-1} (\Bx - \Bx_c) = 1} \) for the following sets of parameters:
 \makesubproblem{}{convex-optimization:problemSet1:6a}
 
 Center \( \Bx_c =
-{\begin{bmatrix}
-0 & 0
-\end{bmatrix}}^\T \)
+\begin{bmatrix}
+0 \\ 0
+\end{bmatrix} \)
 and \( P =
 \begin{bmatrix}
 1.5 & -0.5 \\
@@ -18,9 +18,9 @@ and \( P =
 
 \makesubproblem{}{convex-optimization:problemSet1:6b}
 Center \( \Bx_c =
-{\begin{bmatrix}
-1 & -2
-\end{bmatrix}}^\T \)
+\begin{bmatrix}
+1 \\ -2
+\end{bmatrix} \)
 and \( P =
 \begin{bmatrix}
 3 & 1 \\
@@ -29,9 +29,9 @@ and \( P =
 
 \makesubproblem{}{convex-optimization:problemSet1:6c}
 Center \( \Bx_c =
-{\begin{bmatrix}
--2 & 1
-\end{bmatrix}}^\T \)
+\begin{bmatrix}
+-2 \\ 1
+\end{bmatrix} \)
 and \( P =
 \begin{bmatrix}
 9 & -2 \\
@@ -41,9 +41,9 @@ and \( P =
 For each part (a)-(c) also compute each pair of eigenvalues and corresponding eigenvectors.
 
 \makesubproblem{}{convex-optimization:problemSet1:6d}
-Recall that the most geometrically meaningful property of the determinant of a square real matrix \(A\) is that its magnitude \( \Abs{A} \) is equal to the volume of the parallelepiped \( \calP \) formed by applying \( A \) to the unit cube \( \calC = \setlr{x|0 \le x \le 1} \).
+Recall that the most geometrically meaningful property of the determinant of a square real matrix \(A\) is that its magnitude \( \Abs{\det A} \) is equal to the volume of the parallelepiped \( \calP \) formed by applying \( A \) to the unit cube \( \calC = \setlr{x|0 \le x \le 1} \).
 (Recall that since \( x \in \Rm{n} \) we interpret the inequalities coordinate-wise, i.e., \( 0 \le x_i \le 1 \) for all \( i = 1, \cdots, n \).)
-In other words, if \( \calP = \setlr{ A x| x \in \calC} \) then \( \Abs{det(A)}\) is equal to the volume of \( \calP\).
+In other words, if \( \calP = \setlr{ A x| x \in \calC} \) then \( \Abs{\det(A)}\) is equal to the volume of \( \calP\).
 Furthermore, recall that the determinant of a matrix is zero if any of its eigenvalues are zero.
 Explain how to interpret this latter fact in terms of the interpretation of \( \Abs{det(A)} \) as the volume of \( \calP\).
 } % makeproblem
