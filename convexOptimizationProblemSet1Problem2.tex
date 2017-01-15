@@ -1,0 +1,54 @@
+%
+% Copyright © 2017 Peeter Joot.  All Rights Reserved.
+% Licenced as described in the file LICENSE under the root directory of this GIT repository.
+%
+\makeproblem{Inversion formula for ``small'' matrices}{convex-optimization:problemSet1:2}{
+Prove the relation
+
+\begin{dmath}\label{eqn:convex-optimizationproblemSet1Problem2:20}
+(I + A)^{-1} = I - A,
+\end{dmath}
+
+for \(A\) ``small''.  We used this in class to derive the second order expansion of
+
+\begin{dmath}\label{eqn:convex-optimizationproblemSet1Problem2:40}
+\log det(I + A).
+\end{dmath}
+
+Prove this result in two ways:
+\makesubproblem{}{convex-optimization:problemSet1:2a}
+First, prove this for the special case of \( A \in S^n_{++} \) where the eigenvalues are small.
+This is what we needed in class. Use a decomposition of \( A \) and Taylor approximation of the eigenvalues.
+
+\makesubproblem{}{convex-optimization:problemSet1:2b}
+Next prove the general relation: If \( A \in \Rm{n \times n} \) and \( \Norm{A}_p < 1 \) then \( I - A \) is nonsingular, and
+
+\begin{dmath}\label{eqn:convex-optimizationproblemSet1Problem2:60}
+\lr{ I - A }^{-1} = \sum_{k=0}^\infty A^k
+\end{dmath}
+
+where
+
+\begin{dmath}\label{eqn:convex-optimizationproblemSet1Problem2:80}
+\Norm{(I - A)^{-1}}_p \le \inv{1 - \Norm{A}_p}.
+\end{dmath}
+
+The pth matrix norm \( \Norm{A}_p \) is defined in terms of the vector p-norm as
+
+\begin{dmath}\label{eqn:convex-optimizationproblemSet1Problem2:100}
+\Norm{A}_p = \sup_{\Bx \ne 0} \frac{\Norm{A \Bx }_p}{\Norm{\Bx}_p}
+\end{dmath}
+
+which, using the scaling property of a norm, can be seen to be equivalent to \( \Norm{A}_p = \max_{\Norm{\Bx}_p = 1} \Norm{A \Bx}_p \).
+
+In our derivation in class we used only the zeroth and first-order terms of the expansion.
+} % makeproblem
+
+\makeanswer{convex-optimization:problemSet1:2}{
+\makeSubAnswer{}{convex-optimization:problemSet1:2a}
+
+TODO.
+\makeSubAnswer{}{convex-optimization:problemSet1:2b}
+
+TODO.
+}

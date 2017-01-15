@@ -49,7 +49,7 @@ A vector space with a notion of lenght of any signle vector, the ``norm''.
 A normed vector space with a notion of a real angle vetween any pair of vectors.
 } % definition
 
-This course has a focus on optimization in \R{n}.  Complex spaces in the context of this course can be considered with a mapping \( \text{\C{n}} \rightarrow \text{\R{2 n}} \).
+This course has a focus on optimization in \R{n}.  Complex spaces in the context of this course can be considered with a mapping \( \text{\C{n}} \rightarrow \Rm{2 n} \).
 
 \makedefinition{Norm.}{dfn:convex-optimizationLecture2:4}{
 A norm is a function operating on a vector
@@ -61,7 +61,7 @@ A norm is a function operating on a vector
 that provides a mapping
 
 \begin{equation*}
-\Norm{ \cdot } : \text{\{R{n}} \rightarrow \text{\{R{1}} ,
+\Norm{ \cdot } : \Rm{n} \rightarrow \bbR,
 \end{equation*}
 
 where
@@ -258,10 +258,10 @@ x_i^\conj
 Consider a scalar function
 
 \begin{equation}\label{eqn:convex-optimizationLecture2:344}
-F: \text{\R{n}} \rightarrow \text{R{1}}
+F: \Rm{n} \rightarrow \bbR
 \end{equation}
 
-where for \( \Bx \in \text{\R{n}} \)
+where for \( \Bx \in \Rm{n} \)
 
 \begin{dmath}\label{eqn:convex-optimizationLecture2:364}
 \spacegrad F(\Bx)
@@ -365,8 +365,7 @@ which proves \cref{eqn:convex-optimizationLecture2:404}.
 Let \( S \) be the set of symmetric matrices
 
 \begin{equation}\label{eqn:convex-optimizationLecture2:444}
-%S = \setlr{ P \in \text{\R{$n\times n$}} | P = P^\T},
-S = \setlr{ P \in R^{n\times n} | P = P^\T},
+S = \setlr{ P \in \Rm{n\times n} | P = P^\T},
 \end{equation}
 
 then
@@ -378,7 +377,7 @@ then
 
 \paragraph{Gradient}
 
-The gradient provides a linear approximation of a function about a point \( \Bx_0 \in \text{\R{n}} \).
+The gradient provides a linear approximation of a function about a point \( \Bx_0 \in \Rm{n} \).
 
 \begin{dmath}\label{eqn:convex-optimizationLecture2:484}
 F(\Bx)
@@ -404,8 +403,8 @@ Gradients for compositions of functions.
 
 \begin{dmath}\label{eqn:convex-optimizationLecture2:524}
 \begin{aligned}
-F &: R^n \rightarrow R \\
-g &: R \rightarrow R,
+F &: \Rm{n} \rightarrow \bbR \\
+g &: \bbR \rightarrow \bbR,
 \end{aligned}
 \end{dmath}
 
@@ -415,7 +414,7 @@ and let
 h(\Bx) = g(F(\Bx)),
 \end{dmath}
 
-for \( \Bx \in \text{\R{n}} \), then
+for \( \Bx \in \Rm{n} \), then
 
 \begin{dmath}\label{eqn:convex-optimizationLecture2:564}
 \spacegrad h(\Bx)
@@ -427,8 +426,8 @@ g'(F(\Bx)) \spacegrad F(\Bx).
 
 \begin{dmath}\label{eqn:convex-optimizationLecture2:584}
 \begin{aligned}
-F &: R^n \rightarrow R^n \\
-g &: R^n \rightarrow R,
+F &: \Rm{n} \rightarrow \Rm{n} \\
+g &: \Rm{n} \rightarrow \bbR,
 \end{aligned}
 \end{dmath}
 
@@ -447,7 +446,7 @@ F_n(\Bx) \\
 }
 \end{dmath}
 
-for \( \Bx \in \text{\R{n}} \), then
+for \( \Bx \in \Rm{n} \), then
 
 \begin{dmath}\label{eqn:convex-optimizationLecture2:624}
 \PD{x_k}{h(\Bx)}
@@ -487,8 +486,8 @@ so
 
 \begin{dmath}\label{eqn:convex-optimizationLecture2:684}
 \begin{aligned}
-F &: R^n \rightarrow R^m \\
-g &: R^m \rightarrow R^p,
+F &: \Rm{n} \rightarrow \Rm{m} \\
+g &: \Rm{m} \rightarrow \Rm{p},
 \end{aligned}
 \end{dmath}
 
@@ -517,8 +516,8 @@ An important example are affine functions of \( \Bx \)
 
 \begin{dmath}\label{eqn:convex-optimizationLecture2:744}
 \begin{aligned}
-F &: R^n \rightarrow R^n \\
-g &: R^n \rightarrow R,
+F &: \Rm{n} \rightarrow \Rm{n} \\
+g &: \Rm{n} \rightarrow \bbR,
 \end{aligned}
 \end{dmath}
 
@@ -585,7 +584,7 @@ D F(\Bx) = A.
 
 \subsubsection{Second derivative.}
 
-The second derivative for \( R^n \rightarrow R \), the ``Hessian'' is
+The second derivative for \( \Rm{n} \rightarrow \bbR \), the ``Hessian'' is
 
 \begin{dmath}\label{eqn:convex-optimizationLecture2:844}
 \spacegrad^2 F =
