@@ -27,13 +27,12 @@ THISBOOK_DEPS += $(PDFS_FROM_EPS)
 
 include ../latex/make.rules
 
-p1 : convex-optimizationProblemSet1.pdf
+all :: convexOptimizationProblemSet1.pdf
 
-l2: convex-optimizationLecture2.pdf
+l2: convexOptimizationLecture2.pdf
 
-convex-optimizationProblemSet1.pdf :: convex-optimizationproblemSet1Problem8.tex convex-optimizationproblemSet1Problem7.tex convex-optimizationproblemSet1Problem6.tex convex-optimizationproblemSet1Problem5.tex convex-optimizationproblemSet1Problem4.tex convex-optimizationproblemSet1Problem3.tex convex-optimizationproblemSet1Problem2.tex convex-optimizationproblemSet1Problem1.tex
+convexOptimizationProblemSet1.pdf :: convexOptimizationproblemSet1Problem8.tex convexOptimizationproblemSet1Problem7.tex convexOptimizationproblemSet1Problem6.tex convexOptimizationproblemSet1Problem5.tex convexOptimizationproblemSet1Problem4.tex convexOptimizationproblemSet1Problem3.tex convexOptimizationproblemSet1Problem2.tex convexOptimizationproblemSet1Problem1.tex
 
-all :: p1
 #all :: convexL1.pdf
 
 #julia.tex : ../julia/METADATA
