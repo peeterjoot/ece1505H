@@ -159,27 +159,29 @@ F5
 Proof:
 
 \begin{dmath}\label{eqn:convex-optimizationLecture2:164}
+\begin{aligned}
 \Norm{\Bz}_\conj
-= \sup_\Bx \setlr{ \Bz^\T \Bx | \Norm{\Bx}_2 \le 1 }
-= \sup_\Bx \setlr{ \Norm{\Bz}_2 \Norm{\Bx}_2 \cos\theta | \Norm{\Bx}_2 \le 1 }
-\le \sup_\Bx \setlr{ \Norm{\Bz}_2 \Norm{\Bx}_2 | \Norm{\Bx}_2 \le 1 }
-\le
+&= \sup_\Bx \setlr{ \Bz^\T \Bx | \Norm{\Bx}_2 \le 1 } \\
+&= \sup_\Bx \setlr{ \Norm{\Bz}_2 \Norm{\Bx}_2 \cos\theta | \Norm{\Bx}_2 \le 1 } \\
+&\le \sup_\Bx \setlr{ \Norm{\Bz}_2 \Norm{\Bx}_2 | \Norm{\Bx}_2 \le 1 } \\
+&\le
 \Norm{\cancel{\Bz}}_2
 \Norm{
 \frac{\Bz}{ \cancel{\Norm{\Bz}_2} }
-}_2
-=
+}_2 \\
+&=
 \Norm{\Bz}_2.
+\end{aligned}
 \end{dmath}
 
 \paragraph{\( l_1 \) dual}.
 For \( l_1 \), the dual is the \( l_\infty \) norm.  Proof:
 
-\begin{dmath}\label{eqn:convex-optimizationLecture2:184}
+\begin{equation}\label{eqn:convex-optimizationLecture2:184}
 \Norm{\Bz}_\conj
 =
 \sup_\Bx \setlr{ \Bz^\T \Bx | \Norm{\Bx}_1 \le 1 },
-\end{dmath}
+\end{equation}
 
 but
 \begin{dmath}\label{eqn:convex-optimizationLecture2:204}
@@ -210,11 +212,11 @@ F6
 \paragraph{\( l_\infty \) dual}.
 
 F7
-\begin{dmath}\label{eqn:convex-optimizationLecture2:244}
+\begin{equation}\label{eqn:convex-optimizationLecture2:244}
 \Norm{\Bz}_\conj
 =
 \sup_\Bx \setlr{ \Bz^\T \Bx | \Norm{\Bx}_\infty \le 1 }.
-\end{dmath}
+\end{equation}
 
 Here
 \begin{dmath}\label{eqn:convex-optimizationLecture2:264}
@@ -253,6 +255,9 @@ x_i^\conj
 
 \subsection{Calculus}
 
+\input{calculus.tex}
+
+\subsection{Original Calculus lecture notes.}
 \subsubsection{Gradient}
 
 Consider a scalar function

@@ -27,14 +27,16 @@ THISBOOK_DEPS += $(PDFS_FROM_EPS)
 
 include ../latex/make.rules
 
-all :: p1 j
+all :: p1 l2
 
-.PHONY: p1 j l2
+.PHONY: p1 l2
 p1 : ProblemSet1.pdf
 
 l2: convexOptimizationLecture2.pdf
+convexOptimizationLecture2.pdf : calculus.tex
 
-j : jacobianAndHessian.pdf
+#j : jacobianAndHessian.pdf
+#jacobianAndHessian.pdf : calculus.tex
 
 ProblemSet1.pdf :: ProblemSet1Problem8.tex ProblemSet1Problem7.tex ProblemSet1Problem6.tex ProblemSet1Problem5.tex ProblemSet1Problem4.tex ProblemSet1Problem3.tex ProblemSet1Problem2.tex ProblemSet1Problem1.tex
 
