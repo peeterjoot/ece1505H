@@ -30,3 +30,5 @@ perl -p -i ../latex/bin/latexRegex.pl ProblemSet1Problem7.tex
 
 ../latex/bin/lgrep ProblemSet1Problem8.tex | tee o ; . ./o
 perl -p -i ../latex/bin/latexRegex.pl ProblemSet1Problem8.tex
+../latex/bin/lgrep jacobianAndHessian.tex | tee o ; . ./o
+perl -p -i ../latex/bin/latexRegex.pl jacobianAndHessian.tex
