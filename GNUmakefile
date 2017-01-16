@@ -33,10 +33,7 @@ all :: p1 l2
 p1 : ProblemSet1.pdf
 
 l2: convexOptimizationLecture2.pdf
-convexOptimizationLecture2.pdf : calculus.tex quadraticFormGradient.tex
-
-#j : jacobianAndHessian.pdf
-#jacobianAndHessian.pdf : calculus.tex
+convexOptimizationLecture2.pdf : jacobianAndHessian.tex quadraticFormGradient.tex
 
 ProblemSet1.pdf :: ProblemSet1Problem8.tex ProblemSet1Problem7.tex ProblemSet1Problem6.tex ProblemSet1Problem5.tex ProblemSet1Problem4.tex ProblemSet1Problem3.tex ProblemSet1Problem2.tex ProblemSet1Problem1.tex
 

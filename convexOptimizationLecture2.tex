@@ -27,15 +27,15 @@ Peeter's lecture notes from class.  These may be incoherent and rough.
 
 These are notes for the UofT course ECE1505H, Convex Optimization, taught by Prof. Stark Draper, covering \textchapref{{1}} \citep{boyd2004convex} content.
 
-\section{Mathematical background}
+\paragraph{Topics}
 
 \begin{itemize}
 \item Calculus: Derivatives and Jacobians, Gradients, Hessians, approximation functions.
 \item Linear algebra, Matrices, decompositions, ...
 \end{itemize}
 
-\subsection{Norms}
-\paragraph{Vector space}
+\section{Norms}
+%\paragraph{Vector space}
 
 \makedefinition{Vector space}{dfn:convex-optimizationLecture2:1}{
 A set of elements (vectors) that is closed under vector addition and scaling.
@@ -137,6 +137,8 @@ In an inner product space we say \( \Bx \) and \( \By \) are orthogonal vectors 
 \( \innerproduct{\Bx}{\By} = 0 \).
 
 F4
+
+\section{Dual norm}
 
 \makedefinition{Dual norm}{dfn:convex-optimizationLecture2:20}{
 Let \( \Norm{ \cdot } \) be a norm in \R{n}.  The ``dual'' norm \( \Norm{ \cdot }_\conj \) is defined as
@@ -255,9 +257,9 @@ x_i^\conj
 \right.
 \end{dmath}
 
-\subsection{Calculus}
+%\subsection{Calculus}
 
-\input{calculus.tex}
+\input{jacobianAndHessian.tex}
 
 %\subsection{Original Calculus lecture notes.}
 %\subsubsection{Gradient}
