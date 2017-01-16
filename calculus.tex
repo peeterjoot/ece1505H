@@ -178,6 +178,284 @@ With this notation, the first Taylor expansion, in terms of the Jacobian matrix 
 }
 %\end{dmath}
 
+\paragraph{Gradient}
+
+The gradient provides a linear approximation of a function about a point \( \Bx_0 \in \Rm{n} \).
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:484}
+F(\Bx)
+\approx F(\Bx_0) + \spacegrad F(\Bx_0)^\T \lr{ \Bx - \Bx_0 }.
+=
+F(\Bx_0) + \innerproduct{ \spacegrad F(\Bx_0)}{ \Bx - \Bx_0 },
+\end{dmath}
+
+or
+\begin{equation}\label{eqn:convex-optimizationLecture2:504}
+F(\Bx + \Delta \Bx)
+=
+F(\Bx) + \innerproduct{ \spacegrad F(\Bx)}{ \Delta \Bx }.
+\end{equation}
+
+This can be thought of as the definition of the gradient in an inner product space.  It will be possible to find the structure of the gradient by considering a pertubation of a function about a point.
+
+\input{quadraticFormGradient.tex}
+
+\paragraph{Symmetric matrices}
+
+Let \( S^n \) be the set of symmetric matrices
+
+\begin{equation}\label{eqn:convex-optimizationLecture2:444}
+S^n = \setlr{ P \in \Rm{n\times n} | P = P^\T},
+\end{equation}
+
+then
+%In particular, for a symmetric matrix \( P \), this means
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:464}
+\spacegrad (\Bx^\T P \Bx) = 2 P \Bx.
+\end{dmath}
+
+\subsubsection{Chain rule}
+
+The gradients or Jacobians for compositions of functions can also be calculated
+
+\maketheorem{Chain rule}{thm:calculus:1}{
+
+Given functions
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:684}
+\begin{aligned}
+F &: \Rm{n} \rightarrow \Rm{m} \\
+g &: \Rm{m} \rightarrow \Rm{p},
+\end{aligned}
+\end{dmath}
+
+%With \( h(\Bx) = g(F(\Bx) \),
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:704}
+D (g(F(\Bx)))
+%h(\Bx) 
+= \evalbar{D g}{F(\Bx)} \evalbar{D F}{\Bx}.
+\end{dmath}
+} % theorem
+
+Consider a non-square case such as \( n = 4, m = 3, p = 2 \)
+
+\begin{dmath}\label{eqn:calculus:n}
+F(\Bx) = 
+\begin{bmatrix}
+F_1(\Bx) \\
+F_2(\Bx) \\
+F_3(\Bx) \\
+\end{bmatrix},
+\end{dmath}
+
+and
+\begin{dmath}\label{eqn:calculus:n}
+g(\By) 
+=
+\begin{bmatrix}
+g_1(\By) \\
+g_2(\By) \\
+\end{bmatrix}.
+\end{dmath}
+
+For such a function
+
+\begin{dmath}\label{eqn:calculus:n}
+\PD{x_1}{g(F(\Bx))}
+=
+\begin{bmatrix}
+\PDi{x_1}{g_1(F(\Bx))} \\
+\PDi{x_1}{g_2(F(\Bx))}
+\end{bmatrix}
+\end{dmath}
+
+\paragraph{XXX}
+
+When \( g \) is a scalar function, the chain rule can be expressed in terms of the 
+gradient
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:724}
+\spacegrad 
+(g(F(\Bx)))
+%h(\Bx) 
+=
+\evalbar{\lr{
+D F
+}^\T}{\Bx}
+\evalbar{\spacegrad g}{F(\Bx)}.
+\end{dmath}
+
+%Note: \( \spacegrad h(\Bx) = D h(\Bx)^\T \) if \( p = 1 \).
+%Also, 
+%if \( p = 1 \),
+%\( \spacegrad g(F(\Bx)) = (D g(F(\Bx)))^\T \).
+
+\paragraph{Example 1:}
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:524}
+\begin{aligned}
+F &: \Rm{n} \rightarrow \bbR \\
+g &: \bbR \rightarrow \bbR,
+\end{aligned}
+\end{dmath}
+
+and let
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:544}
+h(\Bx) = g(F(\Bx)),
+\end{dmath}
+
+for \( \Bx \in \Rm{n} \), then
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:564}
+\spacegrad h(\Bx)
+=
+g'(F(\Bx)) \spacegrad F(\Bx).
+\end{dmath}
+
+\paragraph{Example 2:}
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:584}
+\begin{aligned}
+F &: \Rm{n} \rightarrow \Rm{n} \\
+g &: \Rm{n} \rightarrow \bbR,
+\end{aligned}
+\end{dmath}
+
+and let
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:604}
+h(\Bx)
+= g(F(\Bx))
+= g\lr{
+\begin{bmatrix}
+F_1(\Bx) \\
+F_2(\Bx) \\
+\vdots \\
+F_n(\Bx) \\
+\end{bmatrix}
+}
+\end{dmath}
+
+for \( \Bx \in \Rm{n} \), then
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:624}
+\PD{x_k}{h(\Bx)}
+=
+\PD{F_1}{g}
+\PD{x_k}{F_1}
++
+\PD{F_2}{g}
+\PD{x_k}{F_2}
++
+\cdots
+\end{dmath}
+
+With
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:644}
+D F(\Bx)
+=
+\begin{bmatrix}
+\PD{x_1}{F_1} & \PD{x_2}{F_1} & \cdots & \PD{x_n}{F_1} \\
+\PD{x_1}{F_2} & \PD{x_2}{F_2} & \cdots & \PD{x_n}{F_2} \\
+\vdots & & \vdots & \\
+\PD{x_1}{F_n} & \PD{x_2}{F_n} & \cdots & \PD{x_n}{F_n} \\
+\end{bmatrix}
+\end{dmath}
+
+the gradient \( \spacegrad g = (D g)^\T \) is
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:664}
+\spacegrad h(\Bx)
+=
+\evalbar{ (D F)^\T }{\Bx}
+\spacegrad g(F(\Bx)),
+\end{dmath}
+
+or
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:665}
+D (g(F(\Bx)))
+=
+\evalbar{D g}{F(\Bx)}
+\evalbar{D F}{\Bx}.
+\end{dmath}
+
+\paragraph{Affine functions}
+
+An important example are affine functions of \( \Bx \)
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:744}
+\begin{aligned}
+F &: \Rm{n} \rightarrow \Rm{n} \\
+g &: \Rm{n} \rightarrow \bbR,
+\end{aligned}
+\end{dmath}
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:764}
+F(\Bx) = A \Bx + \Bb,
+\end{dmath}
+
+where \( A \) is an \( n \times n \) matrix and \( \Bb \) is an \( n \times 1 \) column vector.
+
+Given a function
+
+\begin{equation}\label{eqn:convex-optimizationLecture2:784}
+h(\Bx) = g(F(\Bx)) = g(A \Bx + \Bb).
+\end{equation}
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:804}
+F(\Bx)
+= A \Bx + \Bb
+=
+\begin{bmatrix}
+a_1^\T \\
+a_2^\T \\
+\vdots \\
+a_n^\T \\
+\end{bmatrix}
+\Bx
++
+\Bb
+=
+\begin{bmatrix}
+\innerproduct{a_1}{\Bx} \\
+\innerproduct{a_2}{\Bx} \\
+\vdots \\
+\innerproduct{a_n}{\Bx}
+\end{bmatrix}
++
+\Bb
+=
+\begin{bmatrix}
+\sum_{i = 1}^n a_{1i} x_i \\
+\sum_{i = 1}^n a_{2i} x_i \\
+\vdots \\
+\sum_{i = 1}^n a_{ni} x_i
+\vdots \\
+\end{bmatrix}
++
+\Bb
+=
+\begin{bmatrix}
+F_1(\Bx) \\
+F_2(\Bx) \\
+\vdots \\
+F_n(\Bx) \\
+\end{bmatrix}
++
+\Bb,
+\end{dmath}
+
+so
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:824}
+D F(\Bx) = A.
+\end{dmath}
+
 \subsubsection{The Hessian matrix}
 
 For scalar valued functions, the text expresses the second order expansion of a function in terms of the Jacobian and Hessian matrices
@@ -220,3 +498,29 @@ In explicit matrix form the Hessian is
 
 Is there a similar nice matrix structure for the Hessian of a function \( f : \bbR^n \rightarrow \bbR^m \)?
 
+\makeexample{Second order scalar function}{example:calculus:2}{
+Given
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:864}
+F(\Bx)
+= \inv{2} \Bx^\T P \Bx
++ \Bq^\T \Bx
++ \Bc,
+\end{dmath}
+
+where \( P \) is a symmetric matrix \( P = P^\T \), then
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:884}
+\spacegrad F
+=
+\inv{2} \lr{ P + P^\T } \Bx + \Bq
+=
+P \Bx + \Bq,
+\end{dmath}
+
+and
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:904}
+\spacegrad^2 F  P.
+\end{dmath}
+} % example

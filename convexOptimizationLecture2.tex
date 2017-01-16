@@ -1,5 +1,5 @@
 %
-% Copyright © 2016 Peeter Joot.  All Rights Reserved.
+% Copyright © 2017 Peeter Joot.  All Rights Reserved.
 % Licenced as described in the file LICENSE under the root directory of this GIT repository.
 %
 \input{../latex/blogpost.tex}
@@ -165,7 +165,7 @@ Proof:
 &= \sup_\Bx \setlr{ \Norm{\Bz}_2 \Norm{\Bx}_2 \cos\theta | \Norm{\Bx}_2 \le 1 } \\
 &\le \sup_\Bx \setlr{ \Norm{\Bz}_2 \Norm{\Bx}_2 | \Norm{\Bx}_2 \le 1 } \\
 &\le
-\Norm{\cancel{\Bz}}_2
+\cancel{\Norm{\Bz}_2}
 \Norm{
 \frac{\Bz}{ \cancel{\Norm{\Bz}_2} }
 }_2 \\
@@ -234,13 +234,15 @@ Here
 \end{dmath}
 
 So
-\begin{dmath}\label{eqn:convex-optimizationLecture2:284}
+\begin{equation}\label{eqn:convex-optimizationLecture2:284}
 \Norm{\Bz}_\conj
 \le
 \sum_{i=1}^n \Abs{z_i}
 =
 \Norm{\Bz}_1.
-\end{dmath}
+\end{equation}
+
+Statement from the lecture: I'm not sure where this fits:
 
 \begin{dmath}\label{eqn:convex-optimizationLecture2:304}
 x_i^\conj
@@ -257,379 +259,45 @@ x_i^\conj
 
 \input{calculus.tex}
 
-\subsection{Original Calculus lecture notes.}
-\subsubsection{Gradient}
-
-Consider a scalar function
-
-\begin{equation}\label{eqn:convex-optimizationLecture2:344}
-F: \Rm{n} \rightarrow \bbR
-\end{equation}
-
-where for \( \Bx \in \Rm{n} \)
-
-\begin{dmath}\label{eqn:convex-optimizationLecture2:364}
-\spacegrad F(\Bx)
-=
-\begin{bmatrix}
-\PD{x_1}{F(\Bx)} \\
-\PD{x_2}{F(\Bx)} \\
-\vdots \\
-\PD{x_n}{F(\Bx)}
-\end{bmatrix}
-\end{dmath}
-
-Example:
-
-\begin{dmath}\label{eqn:convex-optimizationLecture2:384}
-F(\Bx)
-= \Bx^\T P \Bx
-=
-\begin{bmatrix}
-x_1 & x_2 & \cdots & x_n
-\end{bmatrix}
-\begin{bmatrix}
-P_{11} & P_{12} & \cdots & P_{1n} \\
-P_{21} & P_{22} & \cdots & P_{2n} \\
-\cdots
-P_{n1} & P_{n2} & \cdots & P_{nn} \\
-\end{bmatrix}
-\begin{bmatrix}
-x_1 \\ x_2 \\ \vdots \\ x_n
-\end{bmatrix}
-=
-\begin{bmatrix}
-x_1 & x_2 & \cdots & x_n
-\end{bmatrix}
-\lr{
-x_1
-\begin{bmatrix}
-P_{11} \\
-P_{21} \\
-\vdots \\
-P_{n1} \\
-\end{bmatrix}
-+
-x_2
-\begin{bmatrix}
-P_{12} \\
-P_{22} \\
-\vdots \\
-P_{n2} \\
-\end{bmatrix}
-+
-\cdots
-}
-=
-\sum x_j
-\begin{bmatrix}
-x_1 & x_2 & \cdots & x_n
-\end{bmatrix}
-\begin{bmatrix}
-P_{1j} \\
-P_{2j} \\
-\vdots \\
-P_{nj} \\
-\end{bmatrix}
-=
-\sum_j x_j \sum_i x_i P_{ij}
-=
-\sum_{i,j = 1}^n x_i x_j P_{ij},
-\end{dmath}
-
-We want to show that
-\begin{dmath}\label{eqn:convex-optimizationLecture2:404}
-\spacegrad F(\Bx) = \lr{P + P^\T } \Bx.
-\end{dmath}
-
-Consider the k-th derivative
-
-\begin{dmath}\label{eqn:convex-optimizationLecture2:424}
-\PD{x_k}{} F(\Bx)
-=
-\PD{x_k}{}
-\lr{
-P_{kk} x_k^2
-+
-\sum_{i \ne k} x_i x_k \lr{ P_{ik} + P_{ki} }
-}
-=
-2 P_{kk} x_k + 2
-\sum_{i \ne k} x_i \frac{\lr{ P_{ik} + P_{ki} }}{2}
-=
-\sum_{i}^n x_i \frac{\lr{ P_{ik} + P_{ki} }}{2}
-=
-\sum_{i}^n \lr{ P_{ik} + P_{ki} } x_i
-,
-\end{dmath}
-
-which proves \cref{eqn:convex-optimizationLecture2:404}.
-
-\paragraph{Symmetric matrices}
-
-Let \( S \) be the set of symmetric matrices
-
-\begin{equation}\label{eqn:convex-optimizationLecture2:444}
-S = \setlr{ P \in \Rm{n\times n} | P = P^\T},
-\end{equation}
-
-then
-%In particular, for a symmetric matrix \( P \), this means
-
-\begin{dmath}\label{eqn:convex-optimizationLecture2:464}
-\spacegrad \Bx^\T P \Bx = 2 P \Bx.
-\end{dmath}
-
-\paragraph{Gradient}
-
-The gradient provides a linear approximation of a function about a point \( \Bx_0 \in \Rm{n} \).
-
-\begin{dmath}\label{eqn:convex-optimizationLecture2:484}
-F(\Bx)
-\approx F(\Bx_0) + \spacegrad F(\Bx_0)^\T \lr{ \Bx - \Bx_0 }.
-=
-F(\Bx_0) + \innerproduct{ \spacegrad F(\Bx_0)}{ \Bx - \Bx_0 },
-\end{dmath}
-
-or
-\begin{equation}\label{eqn:convex-optimizationLecture2:504}
-F(\Bx + \Delta \Bx)
-=
-F(\Bx) + \innerproduct{ \spacegrad F(\Bx)}{ \Delta \Bx }.
-\end{equation}
-
-This can be thought of as the definition of the gradient in an inner product space.  It will be possible to find the structure of the gradient by considering a pertubation of a function about a point.
-
-\subsubsection{Chain rule}
-
-Gradients for compositions of functions.
-
-\paragraph{Example 1:}
-
-\begin{dmath}\label{eqn:convex-optimizationLecture2:524}
-\begin{aligned}
-F &: \Rm{n} \rightarrow \bbR \\
-g &: \bbR \rightarrow \bbR,
-\end{aligned}
-\end{dmath}
-
-and let
-
-\begin{dmath}\label{eqn:convex-optimizationLecture2:544}
-h(\Bx) = g(F(\Bx)),
-\end{dmath}
-
-for \( \Bx \in \Rm{n} \), then
-
-\begin{dmath}\label{eqn:convex-optimizationLecture2:564}
-\spacegrad h(\Bx)
-=
-g'(F(\Bx)) \spacegrad F(\Bx).
-\end{dmath}
-
-\paragraph{Example 2:}
-
-\begin{dmath}\label{eqn:convex-optimizationLecture2:584}
-\begin{aligned}
-F &: \Rm{n} \rightarrow \Rm{n} \\
-g &: \Rm{n} \rightarrow \bbR,
-\end{aligned}
-\end{dmath}
-
-and let
-
-\begin{dmath}\label{eqn:convex-optimizationLecture2:604}
-h(\Bx)
-= g(F(\Bx))
-= g\lr{
-\begin{bmatrix}
-F_1(\Bx) \\
-F_2(\Bx) \\
-\vdots \\
-F_n(\Bx) \\
-\end{bmatrix}
-}
-\end{dmath}
-
-for \( \Bx \in \Rm{n} \), then
-
-\begin{dmath}\label{eqn:convex-optimizationLecture2:624}
-\PD{x_k}{h(\Bx)}
-=
-\PD{F_1}{g}
-\PD{x_k}{F_1}
-+
-\PD{F_2}{g}
-\PD{x_k}{F_2}
-+
-\cdots
-\end{dmath}
-
-Let
-
-\begin{dmath}\label{eqn:convex-optimizationLecture2:644}
-D F(\Bx)
-=
-\begin{bmatrix}
-\PD{x_1}{F_1} & \PD{x_2}{F_1} & \PD{x_n}{F_1} \\
-\PD{x_1}{F_2} & \PD{x_2}{F_2} & \PD{x_n}{F_2} \\
-\vdots \\
-\PD{x_1}{F_n} & \PD{x_2}{F_n} & \PD{x_n}{F_n} \\
-\end{bmatrix}
-\end{dmath}
-
-so
-
-\begin{dmath}\label{eqn:convex-optimizationLecture2:664}
-\spacegrad h(\Bx)
-=
-\lr{ D F(\Bx) }^\T
-\spacegrad g(F(\Bx)).
-\end{dmath}
-
-\paragraph{In general}
-
-\begin{dmath}\label{eqn:convex-optimizationLecture2:684}
-\begin{aligned}
-F &: \Rm{n} \rightarrow \Rm{m} \\
-g &: \Rm{m} \rightarrow \Rm{p},
-\end{aligned}
-\end{dmath}
-
-With \( h(\Bx) = g(F(\Bx) \),
-
-\begin{dmath}\label{eqn:convex-optimizationLecture2:704}
-D h(\Bx) = D g(F(\Bx)) D F(\Bx),
-\end{dmath}
-
-and
-\begin{dmath}\label{eqn:convex-optimizationLecture2:724}
-\spacegrad h(\Bx) =
-\lr{
-D F(\Bx)
-}^\T
-\spacegrad g(F(\Bx))
-\end{dmath}
-
-Note: \( \spacegrad h(\Bx) = D h(\Bx)^\T \) if \( p = 1 \).
-
-EXERSIZE: work this out for a general non-square case such as \( n = 4, m = 3, p = 2 \).
-
-\paragraph{Affine functions}
-
-An important example are affine functions of \( \Bx \)
-
-\begin{dmath}\label{eqn:convex-optimizationLecture2:744}
-\begin{aligned}
-F &: \Rm{n} \rightarrow \Rm{n} \\
-g &: \Rm{n} \rightarrow \bbR,
-\end{aligned}
-\end{dmath}
-
-\begin{dmath}\label{eqn:convex-optimizationLecture2:764}
-F(\Bx) = A \Bx + \Bb,
-\end{dmath}
-
-where \( A \) is an \( n \times n \) matrix and \( \Bb \) is an \( n \times 1 \) column vector.
-
-Given a function
-
-\begin{equation}\label{eqn:convex-optimizationLecture2:784}
-h(\Bx) = g(F(\Bx)) = g(A \Bx + \Bb).
-\end{equation}
-
-\begin{dmath}\label{eqn:convex-optimizationLecture2:804}
-F(\Bx)
-= A \Bx + \Bb
-=
-\begin{bmatrix}
-a_1^\T \\
-a_2^\T \\
-\vdots \\
-a_n^\T \\
-\end{bmatrix}
-\Bx
-+
-\Bb
-=
-\begin{bmatrix}
-\innerproduct{a_1}{\Bx} \\
-\innerproduct{a_2}{\Bx} \\
-\vdots \\
-\innerproduct{a_n}{\Bx}
-\end{bmatrix}
-+
-\Bb
-=
-\begin{bmatrix}
-\sum_{i = 1}^n a_{1i} x_i \\
-\sum_{i = 1}^n a_{2i} x_i \\
-\vdots \\
-\sum_{i = 1}^n a_{ni} x_i
-\vdots \\
-\end{bmatrix}
-+
-\Bb
-=
-\begin{bmatrix}
-F_1(\Bx) \\
-F_2(\Bx) \\
-\vdots \\
-F_n(\Bx) \\
-\end{bmatrix}
-+
-\Bb,
-\end{dmath}
-
-so
-
-\begin{dmath}\label{eqn:convex-optimizationLecture2:824}
-D F(\Bx) = A.
-\end{dmath}
-
-\subsubsection{Second derivative.}
-
-The second derivative for \( \Rm{n} \rightarrow \bbR \), the ``Hessian'' is
-
-\begin{dmath}\label{eqn:convex-optimizationLecture2:844}
-\spacegrad^2 F =
-\begin{bmatrix}
-\frac{\partial^2 F}{\partial x_i \partial x_j }
-\end{bmatrix}
-=
-\begin{bmatrix}
-\frac{\partial^2 F}{\partial x_1^2 } & \frac{\partial^2 F}{\partial x_1 \partial x_2} & \cdots & \frac{\partial^2 F}{\partial x_1 \partial x_n} \\
-\frac{\partial^2 F}{\partial x_2 \partial x_1 } & \frac{\partial^2 F}{\partial x_2^2 } & \cdots & \frac{\partial^2 F}{\partial x_2 \partial x_n} \\
-\vdots \\
-\end{bmatrix}
-\end{dmath}
-
-\paragraph{Example}
-
-Given
-
-\begin{dmath}\label{eqn:convex-optimizationLecture2:864}
-F(\Bx)
-= \inv{2} \Bx^\T P \Bx
-+ \Bq^\T \Bx
-+ \Bc,
-\end{dmath}
-
-where \( P = P^\T \), then
-
-\begin{dmath}\label{eqn:convex-optimizationLecture2:884}
-\spacegrad F
-=
-\inv{2} \lr{ P + P^\T } \Bx + \Bq
-=
-P \Bx + \Bq,
-\end{dmath}
-
-and
-
-\begin{dmath}\label{eqn:convex-optimizationLecture2:904}
-\spacegrad^2 F  P.
-\end{dmath}
-
+%\subsection{Original Calculus lecture notes.}
+%\subsubsection{Gradient}
+%
+%Consider a scalar function
+%
+%\begin{equation}\label{eqn:convex-optimizationLecture2:344}
+%F: \Rm{n} \rightarrow \bbR
+%\end{equation}
+%
+%where for \( \Bx \in \Rm{n} \)
+%
+%\begin{dmath}\label{eqn:convex-optimizationLecture2:364}
+%\spacegrad F(\Bx)
+%=
+%\begin{bmatrix}
+%\PD{x_1}{F(\Bx)} \\
+%\PD{x_2}{F(\Bx)} \\
+%\vdots \\
+%\PD{x_n}{F(\Bx)}
+%\end{bmatrix}
+%\end{dmath}
+%
+
+%\subsubsection{Second derivative.}
+%
+%The second derivative for \( \Rm{n} \rightarrow \bbR \), the ``Hessian'' is
+%
+%\begin{dmath}\label{eqn:convex-optimizationLecture2:844}
+%\spacegrad^2 F =
+%\begin{bmatrix}
+%\frac{\partial^2 F}{\partial x_i \partial x_j }
+%\end{bmatrix}
+%=
+%\begin{bmatrix}
+%\frac{\partial^2 F}{\partial x_1^2 } & \frac{\partial^2 F}{\partial x_1 \partial x_2} & \cdots & \frac{\partial^2 F}{\partial x_1 \partial x_n} \\
+%\frac{\partial^2 F}{\partial x_2 \partial x_1 } & \frac{\partial^2 F}{\partial x_2^2 } & \cdots & \frac{\partial^2 F}{\partial x_2 \partial x_n} \\
+%\vdots \\
+%\end{bmatrix}
+%\end{dmath}
+%
 \EndArticle
 %\EndNoBibArticle

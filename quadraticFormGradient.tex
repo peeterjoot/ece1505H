@@ -1,0 +1,90 @@
+%
+% Copyright © 2017 Peeter Joot.  All Rights Reserved.
+% Licenced as described in the file LICENSE under the root directory of this GIT repository.
+%
+\makeexample{Quadratic form}{example:quadraticForm:1}{
+
+\begin{equation}\label{eqn:convex-optimizationLecture2:384}
+F(\Bx)
+= \Bx^\T P \Bx
+%=
+%\begin{bmatrix}
+%x_1 & x_2 & \cdots & x_n
+%\end{bmatrix}
+%\begin{bmatrix}
+%P_{11} & P_{12} & \cdots & P_{1n} \\
+%P_{21} & P_{22} & \cdots & P_{2n} \\
+%\vdots & & & \\
+%P_{n1} & P_{n2} & \cdots & P_{nn} \\
+%\end{bmatrix}
+%\begin{bmatrix}
+%x_1 \\ x_2 \\ \vdots \\ x_n
+%\end{bmatrix}
+%=
+%\begin{bmatrix}
+%x_1 & x_2 & \cdots & x_n
+%\end{bmatrix}
+%\lr{
+%x_1
+%\begin{bmatrix}
+%P_{11} \\
+%P_{21} \\
+%\vdots \\
+%P_{n1} \\
+%\end{bmatrix}
+%+
+%x_2
+%\begin{bmatrix}
+%P_{12} \\
+%P_{22} \\
+%\vdots \\
+%P_{n2} \\
+%\end{bmatrix}
+%+
+%\cdots
+%}
+%=
+%\sum x_j
+%\begin{bmatrix}
+%x_1 & x_2 & \cdots & x_n
+%\end{bmatrix}
+%\begin{bmatrix}
+%P_{1j} \\
+%P_{2j} \\
+%\vdots \\
+%P_{nj} \\
+%\end{bmatrix}
+%=
+%\sum_j x_j \sum_i x_i P_{ij}
+=
+\sum_{i,j = 1}^n x_i x_j P_{ij},
+\end{equation}
+
+We want to show that
+\begin{dmath}\label{eqn:convex-optimizationLecture2:404}
+\spacegrad F(\Bx) = \lr{P + P^\T } \Bx.
+\end{dmath}
+
+Consider the k-th derivative
+
+\begin{dmath}\label{eqn:convex-optimizationLecture2:424}
+\PD{x_k}{} F(\Bx)
+=
+\PD{x_k}{}
+\lr{
+P_{kk} x_k^2
++
+\sum_{i \ne k} x_i x_k \lr{ P_{ik} + P_{ki} }
+}
+=
+2 P_{kk} x_k + 2
+\sum_{i \ne k} x_i \frac{\lr{ P_{ik} + P_{ki} }}{2}
+=
+\sum_{i}^n x_i \frac{\lr{ P_{ik} + P_{ki} }}{2}
+=
+\sum_{i}^n \lr{ P_{ik} + P_{ki} } x_i
+,
+\end{dmath}
+
+which proves \cref{eqn:convex-optimizationLecture2:404}.
+} % example
