@@ -25,19 +25,25 @@ THISBOOK_DEPS += $(PDFS_FROM_EPS)
 
 #CLEAN_TARGETS += ps5mathematica.tex ps9mathematica.tex
 
+SPELLCHECK := $(patsubst %.tex,%.sp,$(wildcard *.tex))
+
 include ../latex/make.rules
 
-all :: p1 l2
+all :: p1 l3
 
-.PHONY: p1 l2
+.PHONY: p1 l3
 p1 : ProblemSet1.pdf
 
-l2: convexOptimizationLecture2.pdf
-convexOptimizationLecture2.pdf : jacobianAndHessian.tex quadraticFormGradient.tex
+l3: convexOptimizationLecture3.pdf
 
 ProblemSet1.pdf :: ProblemSet1Problem8.tex ProblemSet1Problem7.tex ProblemSet1Problem6.tex ProblemSet1Problem5.tex ProblemSet1Problem4.tex ProblemSet1Problem3.tex ProblemSet1Problem2.tex ProblemSet1Problem1.tex
 
-#all :: convexL1.pdf
+.PHONY: spellcheck
+spellcheck: $(SPELLCHECK)
+
+%.sp : %.tex
+	spellcheck $^
+	touch $@
 
 #julia.tex : ../julia/METADATA
 #mathematica.tex : ../mathematica/METADATA

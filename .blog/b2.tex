@@ -1,7 +1,26 @@
-%
-% Copyright © 2017 Peeter Joot.  All Rights Reserved.
-% Licenced as described in the file LICENSE under the root directory of this GIT repository.
-%
+\input{../latex/blogpost.tex}
+\renewcommand{\basename}{convex-optimization2}
+\renewcommand{\dirname}{notes/ece1505/}
+\newcommand{\keywords}{ECE1505H}
+\input{../latex/peeter_prologue_print2.tex}
+
+\usepackage{ece1505}
+\usepackage{peeters_braket}
+\usepackage{peeters_figures}
+\usepackage{mathtools}
+\usepackage{siunitx}
+\usepackage{peeters_layout_exercise}
+
+\beginArtNoToc
+\generatetitle{ECE1505H Convex Optimization.  Lecture 2: Mathematical background.  Taught by Prof.\ Stark Draper}
+\label{chap:convex-optimization2}
+
+\paragraph{Disclaimer}
+
+Peeter's lecture notes from class.  These may be incoherent and rough.
+
+These are notes for the UofT course ECE1505H, Convex Optimization, taught by Prof. Stark Draper, covering \textchapref{{1}} \citep{boyd2004convex} content.
+
 \paragraph{Topics}
 
 \begin{itemize}
@@ -10,15 +29,12 @@
 \end{itemize}
 
 \section{Norms}
-%\paragraph{Vector space}
 
 \makedefinition{Vector space}{dfn:convex-optimizationLecture2:1}{
 A set of elements (vectors) that is closed under vector addition and scaling.
 } % definition
 
-This generalizes the directed arrow concept of vector space (
-\cref{fig:L2XPlusY:L2XPlusYFig1})
-that is familiar from geometry.
+This generalizes the directed arrow concept of vector space (\cref{fig:L2XPlusY:L2XPlusYFig1}) that is familiar from geometry.
 
 \imageFigure{../figures/ece1505-convex-optimization/L2XPlusYFig1}{Vector addition.}{fig:L2XPlusY:L2XPlusYFig1}{0.2}
 
@@ -143,7 +159,6 @@ This is a limit over the unit ball of \( \Norm{\cdot} \).
 
 Dual of the \( l_2 \) is the \( l_2 \) norm.
 
-%The calculation procedure is sketched in \cref{fig:unitBallL2:unitBallL2Fig5}.
 \imageFigure{../figures/ece1505-convex-optimization/unitBallL2Fig5}{\(l_2\) dual norm determination.}{fig:unitBallL2:unitBallL2Fig5}{0.2}
 
 Proof:
@@ -197,12 +212,10 @@ so
 \Norm{\Bz}_\infty.
 \end{dmath}
 
-%\cref{fig:unitBallL1:unitBallL1Fig6}.
 \imageFigure{../figures/ece1505-convex-optimization/unitBallL1Fig6}{\(l_1\) dual norm determination.}{fig:unitBallL1:unitBallL1Fig6}{0.2}
 
 \paragraph{\( l_\infty \) dual}.
 
-%\cref{fig:unitBallLinf:unitBallLinfFig7}.
 \imageFigure{../figures/ece1505-convex-optimization/unitBallLinfFig7}{\(l_\infty\) dual norm determination.}{fig:unitBallLinf:unitBallLinfFig7}{0.2}
 
 \begin{equation}\label{eqn:convex-optimizationLecture2:244}
@@ -248,4 +261,4 @@ x_i^\conj
 \right.
 \end{dmath}
 
-\input{jacobianAndHessian.tex}
+\EndArticle
