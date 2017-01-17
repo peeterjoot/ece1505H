@@ -41,6 +41,12 @@ These are notes for the UofT course ECE1505H, Convex Optimization, taught by Pro
 A set of elements (vectors) that is closed under vector addition and scaling.
 } % definition
 
+This generalizes the directed arrow concept of vector space (
+\cref{fig:L2XPlusY:L2XPlusYFig1})
+that is familiar from geometry.
+
+\imageFigure{../figures/ece1505-convex-optimization/L2XPlusYFig1}{Vector addition.}{fig:L2XPlusY:L2XPlusYFig1}{0.2}
+
 \makedefinition{Normed vector spaces}{dfn:convex-optimizationLecture2:2}{
 A vector space with a notion of lenght of any signle vector, the ``norm''.
 } % definition
@@ -107,6 +113,10 @@ For \( p = \infty \), this is
 
 } % definition
 
+The regions of the unit ball under the \( l_1, l_2, and l_\infty \) norms are plotted in \cref{fig:L2Norms:L2NormsFig2}.
+
+\imageFigure{../figures/ece1505-convex-optimization/L2NormsFig2}{Some unit ball regions.}{fig:L2Norms:L2NormsFig2}{0.3}
+
 The \( l_2 \) norm is not only familiar, but can be ``induced'' by an inner product
 
 \begin{equation}\label{eqn:convex-optimizationLecture2:84}
@@ -119,14 +129,15 @@ which is not true for all norms.  The norm induced by this inner product is
 \Norm{\Bx}_2 = \sqrt{ \innerproduct{\Bx}{\By} }
 \end{dmath}
 
-Inner product spaces have a notion of angle given by
+Inner product spaces have a notion of angle 
+(\cref{fig:L2XYTheta:L2XYThetaFig3})
+given by
 
 \begin{dmath}\label{eqn:convex-optimizationLecture2:124}
 \innerproduct{\Bx}{\By} = \Norm{\Bx} \Norm{\By} \cos \theta,
 \end{dmath}
 
-F3
-
+\imageFigure{../figures/ece1505-convex-optimization/L2XYThetaFig3}{Inner product induced angle.}{fig:L2XYTheta:L2XYThetaFig3}{0.2}
 and always satify the Cauchy-Schwartz inequality
 
 \begin{dmath}\label{eqn:convex-optimizationLecture2:144}
@@ -134,9 +145,10 @@ and always satify the Cauchy-Schwartz inequality
 \end{dmath}
 
 In an inner product space we say \( \Bx \) and \( \By \) are orthogonal vectors \( \Bx \perp \By \) if
-\( \innerproduct{\Bx}{\By} = 0 \).
+\( \innerproduct{\Bx}{\By} = 0 \), as sketched in
+\cref{fig:L2XYRightAngle:L2XYRightAngleFig4}.
 
-F4
+\imageFigure{../figures/ece1505-convex-optimization/L2XYRightAngleFig4}{Orthogonality.}{fig:L2XYRightAngle:L2XYRightAngleFig4}{0.2}
 
 \section{Dual norm}
 
@@ -156,7 +168,8 @@ This is a limit over the unit ball of \( \Norm{\cdot} \).
 
 Dual of the \( l_2 \) is the \( l_2 \) norm.
 
-F5
+%The calculation procedure is sketched in \cref{fig:unitBallL2:unitBallL2Fig5}.
+\imageFigure{../figures/ece1505-convex-optimization/unitBallL2Fig5}{\(l_2\) dual norm determination.}{fig:unitBallL2:unitBallL2Fig5}{0.2}
 
 Proof:
 
@@ -209,11 +222,14 @@ so
 \Norm{\Bz}_\infty.
 \end{dmath}
 
-F6
+%\cref{fig:unitBallL1:unitBallL1Fig6}.
+\imageFigure{../figures/ece1505-convex-optimization/unitBallL1Fig6}{\(l_1\) dual norm determination.}{fig:unitBallL1:unitBallL1Fig6}{0.2}
 
 \paragraph{\( l_\infty \) dual}.
 
-F7
+%\cref{fig:unitBallLinf:unitBallLinfFig7}.
+\imageFigure{../figures/ece1505-convex-optimization/unitBallLinfFig7}{\(l_\infty\) dual norm determination.}{fig:unitBallLinf:unitBallLinfFig7}{0.2}
+
 \begin{equation}\label{eqn:convex-optimizationLecture2:244}
 \Norm{\Bz}_\conj
 =
