@@ -10,15 +10,15 @@
 
 \usepackage{ece1505}
 \usepackage{peeters_braket}
-%\usepackage{peeters_layout_exercise}
+\usepackage{peeters_layout_exercise}
 \usepackage{peeters_figures}
 \usepackage{mathtools}
 \usepackage{siunitx}
 \usepackage{macros_cal}
 
 \beginArtNoToc
-\generatetitle{ECE1505H Convex Optimization.  Lecture 3: XXX.  Taught by Prof.\ Stark Draper}
-%\chapter{XXX}
+\generatetitle{ECE1505H Convex Optimization.  Lecture 3: Matrix functions and types of Sets.  Taught by Prof.\ Stark Draper}
+%\chapter{Matrix functions and types of Sets}
 \label{chap:convexOptimization3}
 
 \paragraph{Disclaimer}
@@ -27,7 +27,7 @@ Peeter's lecture notes from class.  These may be incoherent and rough.
 
 These are notes for the UofT course ECE1505H, Convex Optimization, taught by Prof. Stark Draper, covering \textchapref{{1}} \citep{boyd2004convex} content.
 
-\paragraph{YYY}
+\section{Matrix inner product}
 
 \( \bbR^{m\times n} \) set of \( m \times n \) matrices.  Can define an inner product between a pair of matrices \( X, Y \in \bbR^{m\times n} \)
 
@@ -174,7 +174,7 @@ Consider \( F : S^n \rightarrow \bbR \), and define
 F(X) = \log \det X,
 \end{dmath}
 
-%%%Here \( \dom F = S^n_{++} \).
+Here \( \dom F = S^n_{++} \).
 
 Task: Find \( \spacegrad F \)
 
@@ -331,7 +331,7 @@ A set \( C \subseteq \bbR^n \) is affine if \( \forall \Bx_1, \Bx_2 \in C \) the
 
 This can be rewritten as
 
-\begin{dmath}\label{eqn:convexOptimizationLecture3:n}
+\begin{dmath}\label{eqn:convexOptimizationLecture3:600}
 \Bx_2 + \theta (\Bx_1 - \Bx_2),
 \end{dmath}
 
@@ -339,15 +339,15 @@ where \( \theta \) is a scaling.  This is a line.
 
 The solution to a set of linear equations
 
-\begin{dmath}\label{eqn:convexOptimizationLecture3:n}
+\begin{dmath}\label{eqn:convexOptimizationLecture3:620}
 C = \setlr{ \Bx | A \Bx = \Bb },
 \end{dmath}
 
 is an affine set.
 
-\begin{dmath}\label{eqn:convexOptimizationLecture3:n}
-A (\theta \Bx_1 + (1 - \theta) \Bx_2) 
-= 
+\begin{dmath}\label{eqn:convexOptimizationLecture3:640}
+A (\theta \Bx_1 + (1 - \theta) \Bx_2)
+=
 \theta A \Bx_1 + (1 - \theta) A \Bx_2
 =
 \theta \Bb + (1 - \theta) \Bb
@@ -356,13 +356,13 @@ A (\theta \Bx_1 + (1 - \theta) \Bx_2)
 
 An affine combination of points \( \Bx_1, \Bx_2, \cdots \Bx_n \) is
 
-\begin{dmath}\label{eqn:convexOptimizationLecture3:n}
-\sum_{i = 1}^n \theta_i \Bx_i, 
+\begin{dmath}\label{eqn:convexOptimizationLecture3:660}
+\sum_{i = 1}^n \theta_i \Bx_i,
 \end{dmath}
 
 such that for \( \theta_i \in bbR \)
 
-\begin{dmath}\label{eqn:convexOptimizationLecture3:n}
+\begin{dmath}\label{eqn:convexOptimizationLecture3:680}
 \sum_{i = 1}^n \theta_i = 1.
 \end{dmath}
 
@@ -372,7 +372,7 @@ An affine set contains all affine combinations of points in the set.
 
 A set \( C \subseteq \bbR^n \) is convex if \( \forall \Bx_1, \Bx_2 \in C \) and \( \forall \theta \in \bbR, \theta \in [0,1] \), the combination
 
-\begin{dmath}\label{eqn:convexOptimizationLecture3:n}
+\begin{dmath}\label{eqn:convexOptimizationLecture3:700}
 \theta \Bx_1 + (1 - \theta) \Bx_2 \in C.
 \end{dmath}
 } % definition
@@ -383,34 +383,36 @@ F1-4:
 
 A convex combination of \( \Bx_1, \Bx_2, \cdots \Bx_n \)
 
-\begin{dmath*}
+\begin{equation*}
 \sum_{i = 1}^n \theta_i \Bx_i
-\end{dmath*}
+\end{equation*}
 
 such that \( \forall \theta \ge 0, \sum_{i = 1}^n \theta_i =1 \)
 
-Convex hull of a set C is a set of all convex combinations of points in C.
+Convex hull of a set \( C \) is a set of all convex combinations of points in \(C\).
 
-\begin{dmath}\label{eqn:convexOptimizationLecture3:n}
-\conv(C) = \setlr{ \sum \theta_i \Bx_i | \Bx_i \in C, \theta_i \ge 0, \sum \theta_i = 1 }.
+\begin{dmath}\label{eqn:convexOptimizationLecture3:720}
+\conv(C) = \setlr{ \sum_{i=1}^n \theta_i \Bx_i | \Bx_i \in C, \theta_i \ge 0, \sum_{i=1}^n \theta_i = 1 }.
 \end{dmath}
 } % definition
 
 F5
 
-Cones
+\makedefinition{Cones.}{dfn:convexOptimizationLecture3:4}{
 
-A set C is a cond if \forall x in C and \forall \theta \ge 0 we have \theta \Bx \in C.
+A set \(C\) is a cond if \( \forall \Bx \in C \) and \( \forall \theta \ge 0 \) we have \( \theta \Bx \in C\).
 
-Scale uot if \theta > 1.  Scale in if \theta < 1.
+Scale out if \(\theta > 1\).
+Scale in if \(\theta < 1\).
 
 F6
 
-A convex cond is a cone that is also a convex set.
+A convex cond is a cone that is also a convex set.  A conic combination is
 
-Conic combination
-
-\sum \theta_i x_i, \theta_i \ge 0
+\begin{equation*}
+\sum_{i=1}^n \theta_i \Bx_i, \theta_i \ge 0.
+\end{equation*}
+} % definition
 
 F7
 
@@ -418,29 +420,29 @@ T1
 
 \section{hyperplances and half spaces}
 
-Hyperplane \setlr{ \Bx | \Ba^\T \Bx = \Bb, \Ba \ne 0 }
+Hyperplane \( \setlr{ \Bx | \Ba^\T \Bx = \Bb, \Ba \ne 0 } \)
 
 F8-9
 
 Find a \( \Bx_0 \) such that \( \Ba^\T \Bx_0 = \Bb \)
 
-\begin{dmath}\label{eqn:convexOptimizationLecture3:n}
-\setlr{\Bx | \Ba^\T \Bx = b } 
-= 
+\begin{dmath}\label{eqn:convexOptimizationLecture3:740}
+\setlr{\Bx | \Ba^\T \Bx = b }
+=
 \setlr{\Bx | \Ba^\T (\Bx -\Bx_0) = 0 }
 =
 \Bx_0 + \Ba^\perp
 \end{dmath}
 
-This is the subspace defined perpendicular a \Ba shifted \by \Bx_0
+This is the subspace defined perpendicular a \( \Ba \) shifted by \(\Bx_0\).
 
-\begin{dmath}\label{eqn:convexOptimizationLecture3:n}
-\Ba^\perp = \setlr{ \Bv | \Ba^\T \Bv = 0 }
+\begin{dmath}\label{eqn:convexOptimizationLecture3:760}
+\Ba^\perp = \setlr{ \Bv | \Ba^\T \Bv = 0 }.
 \end{dmath}
 
 \section{Half space}
 
-\begin{dmath}\label{eqn:convexOptimizationLecture3:n}
+\begin{dmath}\label{eqn:convexOptimizationLecture3:780}
 \setlr{ \Bx | \Ba^\T \Bx = \Bb }
 = \setlr{ \Bx | \Ba^\T (\Bx - \Bx_0) \le 0 }
 = \setlr{ \Bx | \innerproduct{ \Ba }{\Bx - \Bx_0 } \le 0 }
