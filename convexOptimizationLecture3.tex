@@ -1,5 +1,5 @@
 %
-% Copyright © 2016 Peeter Joot.  All Rights Reserved.
+% Copyright © 2017 Peeter Joot.  All Rights Reserved.
 % Licenced as described in the file LICENSE under the root directory of this GIT repository.
 %
 \input{../latex/blogpost.tex}
@@ -8,12 +8,13 @@
 \newcommand{\keywords}{ECE1505H}
 \input{../latex/peeter_prologue_print2.tex}
 
-%\usepackage{ece1505}
+\usepackage{ece1505}
 \usepackage{peeters_braket}
 %\usepackage{peeters_layout_exercise}
 \usepackage{peeters_figures}
 \usepackage{mathtools}
 \usepackage{siunitx}
+\usepackage{macros_cal}
 
 \beginArtNoToc
 \generatetitle{ECE1505H Convex Optimization.  Lecture 3: XXX.  Taught by Prof.\ Stark Draper}
@@ -27,6 +28,423 @@ Peeter's lecture notes from class.  These may be incoherent and rough.
 These are notes for the UofT course ECE1505H, Convex Optimization, taught by Prof. Stark Draper, covering \textchapref{{1}} \citep{boyd2004convex} content.
 
 \paragraph{YYY}
+
+\( \bbR^{m\times n} \) set of \( m \times n \) matrices.  Can define an inner product between a pair of matrices \( X, Y \in \bbR^{m\times n} \)
+
+\begin{dmath}\label{eqn:convexOptimizationLecture3:20}
+\innerproduct{X}{Y} = \sum_{i = 1}^m \sum_{j = 1}^n X_{ij} Y_{ij} = \Tr( X^\T Y)
+\end{dmath}
+
+\begin{dmath}\label{eqn:convexOptimizationLecture3:40}
+\Norm{X }_F = \sqrt{
+\innerproduct{X}{X} }
+=
+\sum_{i = 1}^m \sum_{j = 1}^n X_{ij}^2 = \Tr( X^\T X)
+\end{dmath}
+
+Think about \( A \in \bbR^{m \times n} \) as a transform from \R{n} to \R{m}
+
+Range of A : \( \calR(A) = \setlr{ A \Bx | \Bx \in \bbR^n } \).
+
+Nullspace of A: \( \calN(A) = \setlr{ \Bx | A \Bx = 0 } \).
+
+To understand operation of \( A \) decompose \( A \) using the singular value decomposition (SVD)
+
+\begin{dmath}\label{eqn:convexOptimizationLecture3:60}
+\begin{aligned}
+A &= U \Sigma V^\T \\
+A &\in \bbR^{m \times n} \\
+U &\in \bbR^{m \times r} \\
+V &\in \bbR^{n \times r}
+\end{aligned}
+\end{dmath}
+
+both \( U \) and \( V \) are orthogonal
+
+\begin{dmath}\label{eqn:convexOptimizationLecture3:80}
+\begin{aligned}
+U^\T U &= I \in \bbR^{r \times r}
+V^\T V &= I \in \bbR^{r \times r}
+\end{aligned}
+\end{dmath}
+
+Operation of \( A \) on \( \Bx \in \bbR^n \).  Here \( \Sigma \) is a diagonal matrix of ``singular'' values \( \sigma_1, \sigma_2, \cdots, \sigma_r \) \( \sigma_1 \ge \sigma_2 \ge \cdots \ge \sigma_r \), and \( r \) is the rank of \(A\).
+
+For simplicity consider square case \( m = n \)
+
+\begin{dmath}\label{eqn:convexOptimizationLecture3:100}
+A \Bx = \lr{ U \Sigma V^\T } \Bx.
+\end{dmath}
+
+The first product \( V^\T \Bx \) is a rotation, which can be checked by looking at the length
+
+\begin{dmath}\label{eqn:convexOptimizationLecture3:120}
+\Norm{ V^\T \Bx}_2
+= \sqrt{ \Bx^\T V V^\T \Bx }
+= \sqrt{ \Bx^\T \Bx }
+= \Norm{ \Bx }_2,
+\end{dmath}
+
+which shows that the length of the vector is unchanged after application of the linear transformation represented by \( V^\T \) so that operation must be a rotation.
+
+Similarly the operation of \( U \) on \( \Sigma V^\T \Bx \) also must be a rotation.  The operation \( \Sigma = [\sigma_i]_i \) applies a scaling operation to each component of the vector \( V^\T \Bx \).
+
+All linear (square) transformations can therefore be thought of as a rotate-scale-rotate operation.  Often the \( A \) of interest will be symmetric \( A = A^\T \).
+
+\section{Set of symmetric matrices}
+
+Let \( S^n \) be the set of real, symmetric \( n \times n \) matrices.  When \( A \in S^n \) then it is possible to factor \( A \) as
+
+\begin{dmath}\label{eqn:convexOptimizationLecture3:140}
+A = Q \Lambda Q^\T,
+\end{dmath}
+
+where \( Q \) is an orthongonal matrix, and \( \Lambda = \diag( \lambda_1, \lambda_2, \cdots \lambda_n\).  Here \( \lambda_i \in \bbR \forall i \) are the (real) eigenvalues of \( A \).
+
+A real symmetric matrix \( A \in S^n\)
+is ``postive semi-definite'' if
+
+\begin{equation}\label{eqn:convexOptimizationLecture3:160}
+\Bv^\T A \Bv \ge 0 \forall \Bv \in \bbR^n, \Bv \ne 0,
+\end{equation}
+and is ``postive definite'' if
+
+\begin{equation}\label{eqn:convexOptimizationLecture3:180}
+\Bv^\T A \Bv > 0 \forall \Bv \in \bbR^n, \Bv \ne 0.
+\end{equation}
+
+The set of such matrixes is denoted \( S^n_{+} \), and \( S^n_{++} \) respectively.
+
+Consider \( A \in S^n_{+} \) (or \( S^n_{++} \) )
+
+\begin{dmath}\label{eqn:convexOptimizationLecture3:200}
+A = Q \Lambda Q^\T,
+\end{dmath}
+
+possible since the matrix is symmetric.  For such a matrix
+
+\begin{dmath}\label{eqn:convexOptimizationLecture3:220}
+\Bv^\T A \Bv
+=
+\Bv^\T Q \Lambda A^\T \Bv
+=
+\Bw^\T \Lambda \Bw,
+\end{dmath}
+
+where \( \Bw = A^\T \Bv \).  Such a product is
+
+\begin{dmath}\label{eqn:convexOptimizationLecture3:240}
+\Bv^\T A \Bv
+=
+\sum_{i = 1}^n \lambda_i w_i^2.
+\end{dmath}
+
+So, if \( \lambda_i \ge 0 \) (\(\lambda_i > 0 \) ) then \( \sum_{i = 1}^n \lambda_i w_i^2 \) is non-negative (positive) \( \forall \Bw \in \bbR^n, \Bw \ne 0 \).  Since \( \Bw \) is just a rotated version of \( \Bv \) this also holds for all \( \Bv \).  A necessary and sufficient condition for \( A \in S^n_{+} \) (\( S^n_{++} \) ) is \( \lambda_i \ge 0 \) (\(\lambda_i > 0\)).
+
+\section{Square root of positive semi-definite matrix}
+
+Generalizing the matrix power relationships such as
+
+\begin{dmath}\label{eqn:convexOptimizationLecture3:260}
+A^2 =
+Q \Lambda Q^\T
+Q \Lambda Q^\T,
+\end{dmath}
+
+the square root (non-unique) of a square matrix can be written
+
+\begin{dmath}\label{eqn:convexOptimizationLecture3:280}
+A^{1/2} = Q
+\begin{bmatrix}
+\sqrt{\lambda_1} &                  &        &  \\
+                 & \sqrt{\lambda_2} &        & \\
+                 &                  & \ddots & \\
+                 &                  &        & \sqrt{\lambda_n} \\
+\end{bmatrix}
+Q^\T,
+\end{dmath}
+
+since \( A^{1/2} A^{1/2} = A \), regardless of the sign picked for the square roots in question.
+
+\section{Functions of matrices}
+
+Consider \( F : S^n \rightarrow \bbR \), and define
+
+\begin{dmath}\label{eqn:convexOptimizationLecture3:300}
+F(X) = \log \det X,
+\end{dmath}
+
+%%%Here \( \dom F = S^n_{++} \).
+
+Task: Find \( \spacegrad F \)
+
+Look at \( \log \det ( X + \Delta X ) \)
+
+\begin{dmath}\label{eqn:convexOptimizationLecture3:320}
+\log \det ( X + \Delta X )
+=
+\log \det ( X^{1/2} (I + X^{-1/2} \Delta X X^{-1/2}) X^{1/2} )
+=
+\log \det ( X (I + X^{-1/2} \Delta X X^{-1/2}) )
+=
+\log \det X  + \log \det (I + X^{-1/2} \Delta X X^{-1/2}) .
+\end{dmath}
+
+Let \( X^{-1/2} \Delta X X^{-1/2} = M \) where \( \lambda_i \) are the eigenvalues of \( M : M \Bv = \lambda_i \Bv \) when \( \Bv \) is an eigenvector of \( M \).  In particular
+
+\begin{dmath}\label{eqn:convexOptimizationLecture3:340}
+(I + M) \Bv =
+(1 + \lambda_i) \Bv,
+\end{dmath}
+
+where \( 1 + \lambda_i \) are the eigenvalues of the \( I + M \) matrix.  This gives
+
+\begin{dmath}\label{eqn:convexOptimizationLecture3:360}
+\log \det ( X + \Delta X )
+=
+\log \det X +
+\log \prod_{i = 1}^n (1 + \lambda_i)
+=
+\log \det X +
+\sum_{i = 1}^n \log (1 + \lambda_i).
+\end{dmath}
+
+If \( \lambda_i \) are sufficiently ``small'', then \( \log ( 1 + \lambda_i ) \approx \lambda_i \), giving
+
+\begin{dmath}\label{eqn:convexOptimizationLecture3:380}
+\log \det ( X + \Delta X )
+=
+\log \det X +
+\sum_{i = 1}^n \lambda_i
+\approx
+\log \det X +
+\Tr( X^{-1/2} \Delta X X^{-1/2} ).
+\end{dmath}
+
+Since
+\begin{dmath}\label{eqn:convexOptimizationLecture3:400}
+\Tr( A B ) = \Tr( B A ),
+\end{dmath}
+
+% also used above:
+%%%\det (A B) = \det (BA) = \det A \det B
+
+this trace operation can be written as
+
+\begin{dmath}\label{eqn:convexOptimizationLecture3:420}
+\log \det ( X + \Delta X )
+\approx
+\log \det X +
+\Tr( X^{-1} \Delta X )
+=
+\log \det X +
+\innerproduct{ X^{-1}}{\Delta X},
+\end{dmath}
+
+so
+\begin{dmath}\label{eqn:convexOptimizationLecture3:440}
+\spacegrad F(X) = X^{-1}.
+\end{dmath}
+
+%%This trace is the ``matrix inner product''.
+
+consider \( X \in \bbR^{1 \times 1} \) to check
+
+\begin{dmath}\label{eqn:convexOptimizationLecture3:460}
+\frac{d}{dx} \lr{ \log \det X } = \frac{d}{dx} \lr{ \log x } = \inv{x} = x^{-1}.
+\end{dmath}
+
+This procedure of finding the gradient is was basically to do a first order pertubation of the function, and then read off the gradient from the result.
+
+\section{Second order pertubations}
+
+\begin{itemize}
+\item To get first order approximation found the part that varied linearly in \( \Delta X \).
+\item To get the second order part, perturb \( X^{-1} \) by \( \Delta X \) and see how that pertubation varies in \( \Delta X \).
+\end{itemize}
+
+For \( F(X) = X^{-1} \), this is
+
+\begin{dmath}\label{eqn:convexOptimizationLecture3:480}
+(X + \Delta X)^{-1}
+=
+\lr{ X^{1/2} (I + X^{-1/2} \Delta X X^{-1/2} ) X^{1/2} }^{-1}
+=
+X^{-1/2} (I + X^{-1/2} \Delta X X^{-1/2} )^{-1} X^{-1/2}
+\end{dmath}
+
+To be proven in the homework (for ``small'' A)
+
+\begin{dmath}\label{eqn:convexOptimizationLecture3:500}
+(I + A)^{-1} \approx I - A.
+\end{dmath}
+
+This gives
+
+\begin{dmath}\label{eqn:convexOptimizationLecture3:520}
+(X + \Delta X)^{-1}
+=
+X^{-1/2} (I - X^{-1/2} \Delta X X^{-1/2} ) X^{-1/2}
+=
+X^{-1} - X^{-1} \Delta X X^{-1}
+\end{dmath}
+
+Since the term \( X^{-1} \Delta X X^{-1} \) varies linearly in \( \Delta X \) the first and second order changes are respectively
+
+\begin{dmath}\label{eqn:convexOptimizationLecture3:540}
+\begin{aligned}
+&\innerproduct{X^{-1}}{\Delta X} \\
+&\innerproduct{-X^{-1} \Delta X X^{-1}}{\Delta X},
+\end{aligned}
+\end{dmath}
+
+so
+
+\begin{dmath}\label{eqn:convexOptimizationLecture3:560}
+F( X + \Delta X) = F(X) +
+\innerproduct{X^{-1}}{\Delta X}
++\inv{2} \innerproduct{-X^{-1} \Delta X X^{-1}}{\Delta X},
+\end{dmath}
+
+or
+\begin{dmath}\label{eqn:convexOptimizationLecture3:580}
+\log \det ( X + \Delta X) = \log \det X +
+\Tr( X^{-1} \Delta X )
+- \inv{2} \Tr( -X^{-1} \Delta X X^{-1} \Delta X ).
+\end{dmath}
+
+\section{Convex Sets}
+
+\begin{itemize}
+\item Types of sets: Affine, convex, cones
+\item Examples: Hyperplanes, polyhedra, balls, ellipses, norm balls, cone of PSD matrices.
+\end{itemize}
+
+\makedefinition{Affine set}{dfn:convexOptimizationLecture3:1}{
+
+A set \( C \subseteq \bbR^n \) is affine if \( \forall \Bx_1, \Bx_2 \in C \) then
+
+\begin{equation*}
+\theta \Bx_1 + (1 -\theta) \Bx_2 \in C, \qquad \forall \theta \in \bbR.
+\end{equation*}
+} % definition
+
+This can be rewritten as
+
+\begin{dmath}\label{eqn:convexOptimizationLecture3:n}
+\Bx_2 + \theta (\Bx_1 - \Bx_2),
+\end{dmath}
+
+where \( \theta \) is a scaling.  This is a line.
+
+The solution to a set of linear equations
+
+\begin{dmath}\label{eqn:convexOptimizationLecture3:n}
+C = \setlr{ \Bx | A \Bx = \Bb },
+\end{dmath}
+
+is an affine set.
+
+\begin{dmath}\label{eqn:convexOptimizationLecture3:n}
+A (\theta \Bx_1 + (1 - \theta) \Bx_2) 
+= 
+\theta A \Bx_1 + (1 - \theta) A \Bx_2
+=
+\theta \Bb + (1 - \theta) \Bb
+= \Bb.
+\end{dmath}
+
+An affine combination of points \( \Bx_1, \Bx_2, \cdots \Bx_n \) is
+
+\begin{dmath}\label{eqn:convexOptimizationLecture3:n}
+\sum_{i = 1}^n \theta_i \Bx_i, 
+\end{dmath}
+
+such that for \( \theta_i \in bbR \)
+
+\begin{dmath}\label{eqn:convexOptimizationLecture3:n}
+\sum_{i = 1}^n \theta_i = 1.
+\end{dmath}
+
+An affine set contains all affine combinations of points in the set.
+
+\makedefinition{Convex set}{dfn:convexOptimizationLecture3:2}{
+
+A set \( C \subseteq \bbR^n \) is convex if \( \forall \Bx_1, \Bx_2 \in C \) and \( \forall \theta \in \bbR, \theta \in [0,1] \), the combination
+
+\begin{dmath}\label{eqn:convexOptimizationLecture3:n}
+\theta \Bx_1 + (1 - \theta) \Bx_2 \in C.
+\end{dmath}
+} % definition
+
+F1-4:
+
+\makedefinition{Convex combination}{dfn:convexOptimizationLecture3:3}{
+
+A convex combination of \( \Bx_1, \Bx_2, \cdots \Bx_n \)
+
+\begin{dmath*}
+\sum_{i = 1}^n \theta_i \Bx_i
+\end{dmath*}
+
+such that \( \forall \theta \ge 0, \sum_{i = 1}^n \theta_i =1 \)
+
+Convex hull of a set C is a set of all convex combinations of points in C.
+
+\begin{dmath}\label{eqn:convexOptimizationLecture3:n}
+\conv(C) = \setlr{ \sum \theta_i \Bx_i | \Bx_i \in C, \theta_i \ge 0, \sum \theta_i = 1 }.
+\end{dmath}
+} % definition
+
+F5
+
+Cones
+
+A set C is a cond if \forall x in C and \forall \theta \ge 0 we have \theta \Bx \in C.
+
+Scale uot if \theta > 1.  Scale in if \theta < 1.
+
+F6
+
+A convex cond is a cone that is also a convex set.
+
+Conic combination
+
+\sum \theta_i x_i, \theta_i \ge 0
+
+F7
+
+T1
+
+\section{hyperplances and half spaces}
+
+Hyperplane \setlr{ \Bx | \Ba^\T \Bx = \Bb, \Ba \ne 0 }
+
+F8-9
+
+Find a \( \Bx_0 \) such that \( \Ba^\T \Bx_0 = \Bb \)
+
+\begin{dmath}\label{eqn:convexOptimizationLecture3:n}
+\setlr{\Bx | \Ba^\T \Bx = b } 
+= 
+\setlr{\Bx | \Ba^\T (\Bx -\Bx_0) = 0 }
+=
+\Bx_0 + \Ba^\perp
+\end{dmath}
+
+This is the subspace defined perpendicular a \Ba shifted \by \Bx_0
+
+\begin{dmath}\label{eqn:convexOptimizationLecture3:n}
+\Ba^\perp = \setlr{ \Bv | \Ba^\T \Bv = 0 }
+\end{dmath}
+
+\section{Half space}
+
+\begin{dmath}\label{eqn:convexOptimizationLecture3:n}
+\setlr{ \Bx | \Ba^\T \Bx = \Bb }
+= \setlr{ \Bx | \Ba^\T (\Bx - \Bx_0) \le 0 }
+= \setlr{ \Bx | \innerproduct{ \Ba }{\Bx - \Bx_0 } \le 0 }
+\end{dmath}
 
 \EndArticle
 %\EndNoBibArticle
