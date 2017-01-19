@@ -95,13 +95,13 @@ The regions of the unit ball under the \( l_1, l_2, and l_\infty \) norms are pl
 The \( l_2 \) norm is not only familiar, but can be ``induced'' by an inner product
 
 \begin{equation}\label{eqn:convex-optimizationLecture2:84}
-\innerproduct{\Bx}{\By} = \Bx^\T \By = \sum_{i = 1}^n x_i y_i,
+\innerprod{\Bx}{\By} = \Bx^\T \By = \sum_{i = 1}^n x_i y_i,
 \end{equation}
 
 which is not true for all norms.  The norm induced by this inner product is
 
 \begin{dmath}\label{eqn:convex-optimizationLecture2:104}
-\Norm{\Bx}_2 = \sqrt{ \innerproduct{\Bx}{\By} }
+\Norm{\Bx}_2 = \sqrt{ \innerprod{\Bx}{\By} }
 \end{dmath}
 
 Inner product spaces have a notion of angle
@@ -109,18 +109,18 @@ Inner product spaces have a notion of angle
 given by
 
 \begin{dmath}\label{eqn:convex-optimizationLecture2:124}
-\innerproduct{\Bx}{\By} = \Norm{\Bx} \Norm{\By} \cos \theta,
+\innerprod{\Bx}{\By} = \Norm{\Bx} \Norm{\By} \cos \theta,
 \end{dmath}
 
 \imageFigure{../figures/ece1505-convex-optimization/L2XYThetaFig3}{Inner product induced angle.}{fig:L2XYTheta:L2XYThetaFig3}{0.2}
 and always satisfy the Cauchy-Schwartz inequality
 
 \begin{dmath}\label{eqn:convex-optimizationLecture2:144}
-\innerproduct{\Bx}{\By} \le \Norm{\Bx}_2 \Norm{\By}_2.
+\innerprod{\Bx}{\By} \le \Norm{\Bx}_2 \Norm{\By}_2.
 \end{dmath}
 
 In an inner product space we say \( \Bx \) and \( \By \) are orthogonal vectors \( \Bx \perp \By \) if
-\( \innerproduct{\Bx}{\By} = 0 \), as sketched in
+\( \innerprod{\Bx}{\By} = 0 \), as sketched in
 \cref{fig:L2XYRightAngle:L2XYRightAngleFig4}.
 
 \imageFigure{../figures/ece1505-convex-optimization/L2XYRightAngleFig4}{Orthogonality.}{fig:L2XYRightAngle:L2XYRightAngleFig4}{0.2}

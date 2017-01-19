@@ -186,14 +186,14 @@ The gradient provides a linear approximation of a function about a point \( \Bx_
 F(\Bx)
 \approx F(\Bx_0) + \spacegrad F(\Bx_0)^\T \lr{ \Bx - \Bx_0 }.
 =
-F(\Bx_0) + \innerproduct{ \spacegrad F(\Bx_0)}{ \Bx - \Bx_0 },
+F(\Bx_0) + \innerprod{ \spacegrad F(\Bx_0)}{ \Bx - \Bx_0 },
 \end{dmath}
 
 or
 \begin{equation}\label{eqn:jacobianAndHessian:504}
 F(\Bx + \Delta \Bx)
 =
-F(\Bx) + \innerproduct{ \spacegrad F(\Bx)}{ \Delta \Bx }.
+F(\Bx) + \innerprod{ \spacegrad F(\Bx)}{ \Delta \Bx }.
 \end{equation}
 
 This can be thought of as the definition of the gradient in an inner product space.  It will be possible to find the structure of the gradient by considering a perturbation of a function about a point.
@@ -389,10 +389,10 @@ F(\Bx)
 %\Bb
 %=
 %\begin{bmatrix}
-%\innerproduct{a_1}{\Bx} \\
-%\innerproduct{a_2}{\Bx} \\
+%\innerprod{a_1}{\Bx} \\
+%\innerprod{a_2}{\Bx} \\
 %\vdots \\
-%\innerproduct{a_n}{\Bx}
+%\innerprod{a_n}{\Bx}
 %\end{bmatrix}
 %+
 %\Bb

@@ -33,7 +33,7 @@ These are notes for the UofT course ECE1505H, Convex Optimization, taught by Pro
 Given real matrices \( X, Y \in \bbR^{m\times n} \), one possible matrix inner product definition is
 
 \begin{dmath}\label{eqn:convexOptimizationLecture3:20}
-\innerproduct{X}{Y}
+\innerprod{X}{Y}
 = \Tr( X^\T Y)
 = \Tr \lr{ \sum_{k = 1}^m X_{ki} Y_{kj} }
 = \sum_{k = 1}^m \sum_{j = 1}^n X_{kj} Y_{kj}
@@ -46,7 +46,7 @@ This inner product induces a norm on the (matrix) vector space, called the Frobe
 \Norm{X }_F
 = \Tr( X^\T X)
 = \sqrt{
-\innerproduct{X}{X} }
+\innerprod{X}{X} }
 =
 \sum_{i = 1}^m \sum_{j = 1}^n X_{ij}^2.
 \end{dmath}
@@ -282,7 +282,7 @@ this trace operation can be written as
 \Tr( X^{-1} \Delta X )
 =
 \log \det X +
-\innerproduct{ X^{-1}}{\Delta X},
+\innerprod{ X^{-1}}{\Delta X},
 \end{dmath}
 
 so
@@ -374,9 +374,9 @@ The first trace can be expressed as an inner product
 \begin{dmath}\label{eqn:convexOptimizationLecture3:860}
 \Tr \lr{ (\spacegrad F)^\T \Delta X}
 =
-\innerproduct{ \spacegrad F }{\Delta X}
+\innerprod{ \spacegrad F }{\Delta X}
 =
-\innerproduct{ X^{-1} }{\Delta X}.
+\innerprod{ X^{-1} }{\Delta X}.
 \end{dmath}
 
 The second trace also has the structure of an inner product
@@ -386,7 +386,7 @@ The second trace also has the structure of an inner product
 =
 \Tr \lr{ (\Delta X)^\T (\spacegrad^2 F) \Delta X}
 =
-\innerproduct{ (\spacegrad^2 F)^\T \Delta X }{\Delta X},
+\innerprod{ (\spacegrad^2 F)^\T \Delta X }{\Delta X},
 \end{dmath}
 
 where a no-op trace could be inserted in the second order term since that quadratic form is already a scalar.
@@ -395,15 +395,15 @@ This \( (\spacegrad^2 F)^\T \Delta X \) term has essentially been found implicit
 \begin{dmath}\label{eqn:convexOptimizationLecture3:900}
 \Tr \lr{ (\Delta X)^\T (\spacegrad^2 F) \Delta X}
 =
-\innerproduct{ - X^{-1} \Delta X X^{-1} }{\Delta X},
+\innerprod{ - X^{-1} \Delta X X^{-1} }{\Delta X},
 \end{dmath}
 
 %Since the term \( X^{-1} \Delta X X^{-1} \) varies linearly in \( \Delta X \) the first and second order changes are respectively
 so
 \begin{dmath}\label{eqn:convexOptimizationLecture3:560}
 F( X + \Delta X) = F(X) +
-\innerproduct{X^{-1}}{\Delta X}
-+\inv{2} \innerproduct{-X^{-1} \Delta X X^{-1}}{\Delta X},
+\innerprod{X^{-1}}{\Delta X}
++\inv{2} \innerprod{-X^{-1} \Delta X X^{-1}}{\Delta X},
 \end{dmath}
 
 or
@@ -624,7 +624,7 @@ The half space is defined as
 \end{equation*}
 } % definition
 
-This can also be expressed as \( \setlr{ \Bx | \innerproduct{ \Ba }{\Bx - \Bx_0 } \le 0 } \).
+This can also be expressed as \( \setlr{ \Bx | \innerprod{ \Ba }{\Bx - \Bx_0 } \le 0 } \).
 
 %\EndArticle
 \EndNoBibArticle
