@@ -1,28 +1,51 @@
-%
-% Copyright © 2017 Peeter Joot.  All Rights Reserved.
-% Licenced as described in the file LICENSE under the root directory of this GIT repository.
-%
+\input{../latex/blogpost.tex}
+\renewcommand{\basename}{convexOptimization3}
+\renewcommand{\dirname}{notes/ece1505/}
+\newcommand{\keywords}{ECE1505H}
+\input{../latex/peeter_prologue_print2.tex}
+
+\usepackage{ece1505}
+\usepackage{peeters_braket}
+\usepackage{peeters_layout_exercise}
+\usepackage{peeters_figures}
+\usepackage{mathtools}
+\usepackage{siunitx}
+\usepackage{macros_cal}
+
+\beginArtNoToc
+\generatetitle{ECE1505H Convex Optimization.  Lecture 3: Matrix functions, SVD, and types of Sets.  Taught by Prof.\ Stark Draper}
+\label{chap:convexOptimization3}
+
+\paragraph{Disclaimer}
+
+Peeter's lecture notes from class.  These may be incoherent and rough.
+
+These are notes for the UofT course ECE1505H, Convex Optimization, taught by Prof. Stark Draper.
+
 \section{Matrix inner product}
 
 Given real matrices \( X, Y \in \bbR^{m\times n} \), one possible matrix inner product definition is
 
 \begin{dmath}\label{eqn:convexOptimizationLecture3:20}
+\begin{aligned}
 \innerprod{X}{Y}
-= \Tr( X^\T Y)
-= \Tr \lr{ \sum_{k = 1}^m X_{ki} Y_{kj} }
-= \sum_{k = 1}^m \sum_{j = 1}^n X_{kj} Y_{kj}
-= \sum_{i = 1}^m \sum_{j = 1}^n X_{ij} Y_{ij}.
+&= \Tr( X^\T Y) \\
+&= \Tr \lr{ \sum_{k = 1}^m X_{ki} Y_{kj} } \\
+&= \sum_{k = 1}^m \sum_{j = 1}^n X_{kj} Y_{kj} \\
+&= \sum_{i = 1}^m \sum_{j = 1}^n X_{ij} Y_{ij}.
+\end{aligned}
 \end{dmath}
 
 This inner product induces a norm on the (matrix) vector space, called the Frobenius norm
 
 \begin{dmath}\label{eqn:convexOptimizationLecture3:40}
+\begin{aligned}
 \Norm{X }_F
-= \Tr( X^\T X)
-= \sqrt{
-\innerprod{X}{X} }
-=
+&= \Tr( X^\T X) \\
+&= \sqrt{ \innerprod{X}{X} } \\
+&=
 \sum_{i = 1}^m \sum_{j = 1}^n X_{ij}^2.
+\end{aligned}
 \end{dmath}
 
 \section{Range, nullspace.}
@@ -90,10 +113,12 @@ A \Bx = \lr{ U \Sigma V^\T } \Bx.
 The first product \( V^\T \Bx \) is a rotation, which can be checked by looking at the length
 
 \begin{dmath}\label{eqn:convexOptimizationLecture3:120}
+\begin{aligned}
 \Norm{ V^\T \Bx}_2
-= \sqrt{ \Bx^\T V V^\T \Bx }
-= \sqrt{ \Bx^\T \Bx }
-= \Norm{ \Bx }_2,
+&= \sqrt{ \Bx^\T V V^\T \Bx } \\
+&= \sqrt{ \Bx^\T \Bx } \\
+&= \Norm{ \Bx }_2,
+\end{aligned}
 \end{dmath}
 
 which shows that the length of the vector is unchanged after application of the linear transformation represented by \( V^\T \) so that operation must be a rotation.
@@ -139,11 +164,13 @@ A = Q \Lambda Q^\T,
 possible since the matrix is symmetric.  For such a matrix
 
 \begin{dmath}\label{eqn:convexOptimizationLecture3:220}
+\begin{aligned}
 \Bv^\T A \Bv
-=
-\Bv^\T Q \Lambda A^\T \Bv
-=
+&=
+\Bv^\T Q \Lambda A^\T \Bv \\
+&=
 \Bw^\T \Lambda \Bw,
+\end{aligned}
 \end{dmath}
 
 where \( \Bw = A^\T \Bv \).  Such a product is
@@ -199,13 +226,15 @@ The task is to find \( \spacegrad F \), which can be done by looking at the pert
 \( \log \det ( X + \Delta X ) \)
 
 \begin{dmath}\label{eqn:convexOptimizationLecture3:320}
+\begin{aligned}
 \log \det ( X + \Delta X )
-=
-\log \det ( X^{1/2} (I + X^{-1/2} \Delta X X^{-1/2}) X^{1/2} )
-=
-\log \det ( X (I + X^{-1/2} \Delta X X^{-1/2}) )
-=
+&=
+\log \det ( X^{1/2} (I + X^{-1/2} \Delta X X^{-1/2}) X^{1/2} ) \\
+&=
+\log \det ( X (I + X^{-1/2} \Delta X X^{-1/2}) ) \\
+&=
 \log \det X  + \log \det (I + X^{-1/2} \Delta X X^{-1/2}).
+\end{aligned}
 \end{dmath}
 
 Let \( X^{-1/2} \Delta X X^{-1/2} = M \) where \( \lambda_i \) are the eigenvalues of \( M : M \Bv = \lambda_i \Bv \) when \( \Bv \) is an eigenvector of \( M \).  In particular
@@ -218,13 +247,15 @@ Let \( X^{-1/2} \Delta X X^{-1/2} = M \) where \( \lambda_i \) are the eigenvalu
 where \( 1 + \lambda_i \) are the eigenvalues of the \( I + M \) matrix.  Since the determinant is the product of the eigenvalues, this gives
 
 \begin{dmath}\label{eqn:convexOptimizationLecture3:360}
+\begin{aligned}
 \log \det ( X + \Delta X )
-=
+&=
 \log \det X +
-\log \prod_{i = 1}^n (1 + \lambda_i)
-=
+\log \prod_{i = 1}^n (1 + \lambda_i) \\
+&=
 \log \det X +
 \sum_{i = 1}^n \log (1 + \lambda_i).
+\end{aligned}
 \end{dmath}
 
 If \( \lambda_i \) are sufficiently ``small'', then \( \log ( 1 + \lambda_i ) \approx \lambda_i \), giving
@@ -244,9 +275,6 @@ Since
 \Tr( A B ) = \Tr( B A ),
 \end{dmath}
 
-% also used above:
-%%%\det (A B) = \det (BA) = \det A \det B
-
 this trace operation can be written as
 
 \begin{dmath}\label{eqn:convexOptimizationLecture3:420}
@@ -263,8 +291,6 @@ so
 \begin{dmath}\label{eqn:convexOptimizationLecture3:440}
 \spacegrad F(X) = X^{-1}.
 \end{dmath}
-
-%%This trace is the ``matrix inner product''.
 
 To check this, consider the simplest example with \( X \in \bbR^{1 \times 1} \), where we have
 
@@ -285,11 +311,13 @@ first order perturbation of the function.  The gradient can then be read off fro
 For \( G(X) = X^{-1} \), this is
 
 \begin{dmath}\label{eqn:convexOptimizationLecture3:480}
+\begin{aligned}
 (X + \Delta X)^{-1}
-=
-\lr{ X^{1/2} (I + X^{-1/2} \Delta X X^{-1/2} ) X^{1/2} }^{-1}
-=
+&=
+\lr{ X^{1/2} (I + X^{-1/2} \Delta X X^{-1/2} ) X^{1/2} }^{-1} \\
+&=
 X^{-1/2} (I + X^{-1/2} \Delta X X^{-1/2} )^{-1} X^{-1/2}
+\end{aligned}
 \end{dmath}
 
 To be proven in the homework (for ``small'' A)
@@ -301,19 +329,23 @@ To be proven in the homework (for ``small'' A)
 This gives
 
 \begin{dmath}\label{eqn:convexOptimizationLecture3:520}
+\begin{aligned}
 (X + \Delta X)^{-1}
-=
-X^{-1/2} (I - X^{-1/2} \Delta X X^{-1/2} ) X^{-1/2}
-=
+&=
+X^{-1/2} (I - X^{-1/2} \Delta X X^{-1/2} ) X^{-1/2} \\
+&=
 X^{-1} - X^{-1} \Delta X X^{-1},
+\end{aligned}
 \end{dmath}
 
 or
 
 \begin{dmath}\label{eqn:convexOptimizationLecture3:800}
+\begin{aligned}
 G(X + \Delta X)
-= G(X) + (D G) \Delta X
-= G(X) + (\spacegrad G)^\T \Delta X,
+&= G(X) + (D G) \Delta X \\
+&= G(X) + (\spacegrad G)^\T \Delta X,
+\end{aligned}
 \end{dmath}
 
 so
@@ -334,33 +366,30 @@ F(X)
 +
 \inv{2}
 \lr{ (\Delta X)^\T (\spacegrad^2 F) \Delta X}.
-%=
-%F(X)
-%+
-%\Tr \lr{ (\spacegrad F)^\T \Delta X}
-%+
-%\inv{2}
-%\Tr \lr{ (\Delta X)^\T (\spacegrad^2 F) \Delta X},
 \end{dmath}
 
 The first trace can be expressed as an inner product
 
 \begin{dmath}\label{eqn:convexOptimizationLecture3:860}
+\begin{aligned}
 \Tr \lr{ (\spacegrad F)^\T \Delta X}
-=
-\innerprod{ \spacegrad F }{\Delta X}
-=
+&=
+\innerprod{ \spacegrad F }{\Delta X} \\
+&=
 \innerprod{ X^{-1} }{\Delta X}.
+\end{aligned}
 \end{dmath}
 
 The second trace also has the structure of an inner product
 
 \begin{dmath}\label{eqn:convexOptimizationLecture3:880}
+\begin{aligned}
 (\Delta X)^\T (\spacegrad^2 F) \Delta X
-=
-\Tr \lr{ (\Delta X)^\T (\spacegrad^2 F) \Delta X}
-=
+&=
+\Tr \lr{ (\Delta X)^\T (\spacegrad^2 F) \Delta X} \\
+&=
 \innerprod{ (\spacegrad^2 F)^\T \Delta X }{\Delta X},
+\end{aligned}
 \end{dmath}
 
 where a no-op trace could be inserted in the second order term since that quadratic form is already a scalar.
@@ -372,7 +401,6 @@ This \( (\spacegrad^2 F)^\T \Delta X \) term has essentially been found implicit
 \innerprod{ - X^{-1} \Delta X X^{-1} }{\Delta X},
 \end{dmath}
 
-%Since the term \( X^{-1} \Delta X X^{-1} \) varies linearly in \( \Delta X \) the first and second order changes are respectively
 so
 \begin{dmath}\label{eqn:convexOptimizationLecture3:560}
 F( X + \Delta X) = F(X) +
@@ -386,10 +414,6 @@ or
 \Tr( X^{-1} \Delta X )
 - \inv{2} \Tr( X^{-1} \Delta X X^{-1} \Delta X ).
 \end{dmath}
-
-%FIXME: The trace operations in
-%\cref{eqn:convexOptimizationLecture3:840} weren't in the
-%Jacobian and Hessian expansion in lecture 2, nor in the text?  
 
 \section{Convex Sets}
 
@@ -425,12 +449,14 @@ C = \setlr{ \Bx | A \Bx = \Bb },
 is an affine set.  To check, note that
 
 \begin{dmath}\label{eqn:convexOptimizationLecture3:640}
+\begin{aligned}
 A (\theta \Bx_1 + (1 - \theta) \Bx_2)
-=
-\theta A \Bx_1 + (1 - \theta) A \Bx_2
-=
-\theta \Bb + (1 - \theta) \Bb
-= \Bb.
+&=
+\theta A \Bx_1 + (1 - \theta) A \Bx_2 \\
+&=
+\theta \Bb + (1 - \theta) \Bb \\
+&= \Bb.
+\end{aligned}
 \end{dmath}
 
 \makedefinition{Affine combination.}{dfn:convexOptimizationLecture3:71}{
@@ -599,3 +625,5 @@ The half space is defined as
 } % definition
 
 This can also be expressed as \( \setlr{ \Bx | \innerprod{ \Ba }{\Bx - \Bx_0 } \le 0 } \).
+
+\EndNoBibArticle
