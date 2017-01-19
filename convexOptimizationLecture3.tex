@@ -17,8 +17,8 @@
 \usepackage{macros_cal}
 
 \beginArtNoToc
-\generatetitle{ECE1505H Convex Optimization.  Lecture 3: Matrix functions and types of Sets.  Taught by Prof.\ Stark Draper}
-%\chapter{Matrix functions and types of Sets}
+\generatetitle{ECE1505H Convex Optimization.  Lecture 3: Matrix functions, SVD, and types of Sets.  Taught by Prof.\ Stark Draper}
+%\chapter{Matrix functions, SVD, and types of Sets}
 \label{chap:convexOptimization3}
 
 \paragraph{Disclaimer}
@@ -34,6 +34,8 @@ These are notes for the UofT course ECE1505H, Convex Optimization, taught by Pro
 \begin{dmath}\label{eqn:convexOptimizationLecture3:20}
 \innerproduct{X}{Y} = \sum_{i = 1}^m \sum_{j = 1}^n X_{ij} Y_{ij} = \Tr( X^\T Y)
 \end{dmath}
+
+This inner product induces a norm on the (matrix) vector space, called the Frobenius norm
 
 \begin{dmath}\label{eqn:convexOptimizationLecture3:40}
 \Norm{X }_F = \sqrt{
@@ -339,9 +341,9 @@ where \( \theta \) is a scaling.  This is a line.
 
 The solution to a set of linear equations
 
-\begin{dmath}\label{eqn:convexOptimizationLecture3:620}
+\begin{equation}\label{eqn:convexOptimizationLecture3:620}
 C = \setlr{ \Bx | A \Bx = \Bb },
-\end{dmath}
+\end{equation}
 
 is an affine set.
 
@@ -360,13 +362,32 @@ An affine combination of points \( \Bx_1, \Bx_2, \cdots \Bx_n \) is
 \sum_{i = 1}^n \theta_i \Bx_i,
 \end{dmath}
 
-such that for \( \theta_i \in bbR \)
+such that for \( \theta_i \in \bbR \)
 
 \begin{dmath}\label{eqn:convexOptimizationLecture3:680}
 \sum_{i = 1}^n \theta_i = 1.
 \end{dmath}
 
-An affine set contains all affine combinations of points in the set.
+An affine set contains all affine combinations of points in the set.  Examples of a couple 
+affine sets are sketched in
+\cref{fig:l3AffineFig1and2}.
+
+\imageTwoFigures
+{../figures/ece1505-convex-optimization/l3AffineFig1}
+{../figures/ece1505-convex-optimization/l3AffineFig2}
+{Affine.}
+{fig:l3AffineFig1and2}
+{scale=0.1}
+
+For comparison, a couple of non-affine sets are sketched in \cref
+{fig:l3NotAffineFig3and4}.
+
+\imageTwoFigures
+{../figures/ece1505-convex-optimization/l3NotAffineFig3}
+{../figures/ece1505-convex-optimization/l3NotAffineFig4}
+{Not affine.}
+{fig:l3NotAffineFig3and4}
+{scale=0.1}
 
 \makedefinition{Convex set}{dfn:convexOptimizationLecture3:2}{
 
@@ -377,52 +398,70 @@ A set \( C \subseteq \bbR^n \) is convex if \( \forall \Bx_1, \Bx_2 \in C \) and
 \end{dmath}
 } % definition
 
-F1-4:
-
 \makedefinition{Convex combination}{dfn:convexOptimizationLecture3:3}{
 
-A convex combination of \( \Bx_1, \Bx_2, \cdots \Bx_n \)
+A convex combination of \( \Bx_1, \Bx_2, \cdots \Bx_n \) is
 
 \begin{equation*}
-\sum_{i = 1}^n \theta_i \Bx_i
+\sum_{i = 1}^n \theta_i \Bx_i,
 \end{equation*}
 
-such that \( \forall \theta \ge 0, \sum_{i = 1}^n \theta_i =1 \)
+such that \( \forall \theta_i \ge 0 \)
 
-Convex hull of a set \( C \) is a set of all convex combinations of points in \(C\).
+\begin{equation*}
+\sum_{i = 1}^n \theta_i = 1
+\end{equation*}
 
-\begin{dmath}\label{eqn:convexOptimizationLecture3:720}
-\conv(C) = \setlr{ \sum_{i=1}^n \theta_i \Bx_i | \Bx_i \in C, \theta_i \ge 0, \sum_{i=1}^n \theta_i = 1 }.
-\end{dmath}
 } % definition
 
-F5
+\makedefinition{Convex hull.}{dfn:convexOptimizationLecture3:3a}{
+
+Convex hull of a set \( C \) is a set of all convex combinations of points in \(C\), denoted
+
+\begin{equation}\label{eqn:convexOptimizationLecture3:720}
+\conv(C) = \setlr{ \sum_{i=1}^n \theta_i \Bx_i | \Bx_i \in C, \theta_i \ge 0, \sum_{i=1}^n \theta_i = 1 }.
+\end{equation}
+} % definition
+
+A non-convex set can be converted into a convex hull by filling in all the combinations of points connecting points in the set, as sketched in \cref
+{fig:l3NotAffineHull:l3NotAffineHullFig6}.
+
+\imageTwoFigures{../figures/ece1505-convex-optimization/l3NotAffineHullFig5}
+{../figures/ece1505-convex-optimization/l3NotAffineHullFig6}
+{Convex hulls.}
+{fig:l3NotAffineHull:l3NotAffineHullFig6}
+{scale=0.1}
 
 \makedefinition{Cones.}{dfn:convexOptimizationLecture3:4}{
 
 A set \(C\) is a cond if \( \forall \Bx \in C \) and \( \forall \theta \ge 0 \) we have \( \theta \Bx \in C\).
 
-Scale out if \(\theta > 1\).
-Scale in if \(\theta < 1\).
+This scales out if \(\theta > 1\) and scales in if \(\theta < 1\).
 
-F6
-
-A convex cond is a cone that is also a convex set.  A conic combination is
+A convex cone is a cone that is also a convex set.  A conic combination is
 
 \begin{equation*}
 \sum_{i=1}^n \theta_i \Bx_i, \theta_i \ge 0.
 \end{equation*}
 } % definition
 
-F7
+A convex and non-convex 2D cone is sketched in \cref{fig:ConesFig8}
+
+\imageTwoFigures{../figures/ece1505-convex-optimization/l3ConvexConeFig7}
+{../figures/ece1505-convex-optimization/l3NotConvexConeFig8}
+{Convex and non-convex cone.}
+{fig:ConesFig8}
+{scale=0.1}
 
 T1
 
 \section{hyperplances and half spaces}
 
-Hyperplane \( \setlr{ \Bx | \Ba^\T \Bx = \Bb, \Ba \ne 0 } \)
+A hyperplane is \( \setlr{ \Bx | \Ba^\T \Bx = \Bb, \Ba \ne 0 } \).  A line and plane are examples of this general construct as sketched in
 
-F8-9
+\imageTwoFigures{../figures/ece1505-convex-optimization/l3hyperPlaneLineFig9}
+{../figures/ece1505-convex-optimization/l3hyperplanePlaneFig10}
+{Hyperplanes.}{fig:l3hyperPlaneLine:l3hyperPlanesFig9}{scale=0.1}
 
 Find a \( \Bx_0 \) such that \( \Ba^\T \Bx_0 = \Bb \)
 
@@ -436,9 +475,9 @@ Find a \( \Bx_0 \) such that \( \Ba^\T \Bx_0 = \Bb \)
 
 This is the subspace defined perpendicular a \( \Ba \) shifted by \(\Bx_0\).
 
-\begin{dmath}\label{eqn:convexOptimizationLecture3:760}
+\begin{equation}\label{eqn:convexOptimizationLecture3:760}
 \Ba^\perp = \setlr{ \Bv | \Ba^\T \Bv = 0 }.
-\end{dmath}
+\end{equation}
 
 \section{Half space}
 
