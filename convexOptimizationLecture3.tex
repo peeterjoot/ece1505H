@@ -25,7 +25,8 @@
 
 Peeter's lecture notes from class.  These may be incoherent and rough.
 
-These are notes for the UofT course ECE1505H, Convex Optimization, taught by Prof. Stark Draper, covering \textchapref{{1}} \citep{boyd2004convex} content.
+These are notes for the UofT course ECE1505H, Convex Optimization, taught by Prof. Stark Draper. 
+%, covering \textchapref{{1}} \citep{boyd2004convex} content.
 
 \section{Matrix inner product}
 
@@ -453,9 +454,20 @@ A convex and non-convex 2D cone is sketched in \cref{fig:ConesFig8}
 {fig:ConesFig8}
 {scale=0.1}
 
-T1
+A comparision of properties for different set types is tabulated in \cref{tab:affineConvexConic:1}.
 
-\section{hyperplances and half spaces}
+\captionedTable{Affine, Convex, and Conic properties.}{tab:affineConvexConic:1}{
+\centering
+\begin{tabular}{l|l|l|}
+\cline{2-3}
+                             & \( \theta_i \ge 0 \) & \( \sum \theta_i = 1 \) \\ \hline
+\multicolumn{1}{|l|}{Affine} & No                   & Yes                     \\ \hline
+\multicolumn{1}{|l|}{Convex} & Yes                  & Yes                     \\ \hline
+\multicolumn{1}{|l|}{Conic}  & Yes                  & No                      \\ \hline
+\end{tabular}
+}
+
+\section{Hyperplances and half spaces}
 
 A hyperplane is \( \setlr{ \Bx | \Ba^\T \Bx = \Bb, \Ba \ne 0 } \).  A line and plane are examples of this general construct as sketched in
 
@@ -487,5 +499,5 @@ This is the subspace defined perpendicular a \( \Ba \) shifted by \(\Bx_0\).
 = \setlr{ \Bx | \innerproduct{ \Ba }{\Bx - \Bx_0 } \le 0 }
 \end{dmath}
 
-\EndArticle
-%\EndNoBibArticle
+%\EndArticle
+\EndNoBibArticle
