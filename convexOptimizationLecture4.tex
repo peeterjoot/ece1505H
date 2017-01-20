@@ -17,17 +17,17 @@
 \usepackage{macros_cal}
 
 \beginArtNoToc
-\generatetitle{ECE1505H Convex Optimization.  Lecture 4: XXX.  Taught by Prof.\ Stark Draper}
-%\chapter{XXX}
+\generatetitle{ECE1505H Convex Optimization.  Lecture 4: Sets and convexity.  Taught by Prof.\ Stark Draper}
+%\chapter{Sets and convexity}
 \label{chap:convexOptimization4}
 
 \paragraph{Disclaimer}
 
 Peeter's lecture notes from class.  These may be incoherent and rough.
 
-These are notes for the UofT course ECE1505H, Convex Optimization, taught by Prof. Stark Draper, covering \textchapref{{1}} \citep{boyd2004convex} content.
+These are notes for the UofT course ECE1505H, Convex Optimization, taught by Prof. Stark Draper, covering \citep{boyd2004convex} content.
 
-\paragraph{Last time}
+%\paragraph{Last time}
 \paragraph{Today}
 
 \begin{itemize}
@@ -41,40 +41,41 @@ These are notes for the UofT course ECE1505H, Convex Optimization, taught by Pro
 
 Find some \( \Bx_0 \in \bbR^n \) such that \( \Ba^\T \Bx_0 = \Bb \), so
 
-\begin{dmath}\label{eqn:convexOptimizationLecture4:n}
+\begin{dmath}\label{eqn:convexOptimizationLecture4:20}
+\begin{aligned}
 \setlr{ \Bx | \Ba^\T \Bx = \Bb }
-=
-\setlr{ \Bx | \Ba^\T \Bx = \Ba^\T \Bx_0 }
-=
-\setlr{ \Bx | \Ba^\T (\Bx - \Bx_0) }
-=
+&=
+\setlr{ \Bx | \Ba^\T \Bx = \Ba^\T \Bx_0 } \\
+&=
+\setlr{ \Bx | \Ba^\T (\Bx - \Bx_0) } \\
+&=
 \Bx_0 + \Ba^\perp,
+\end{aligned}
 \end{dmath}
 
 where
 
-\begin{dmath}\label{eqn:convexOptimizationLecture4:n}
+\begin{equation}\label{eqn:convexOptimizationLecture4:40}
 \Ba^\perp = \setlr{ \Bv | \Ba^\T \Bv = 0 }.
-\end{dmath}
+\end{equation}
 
 F1
 
-Recall 
+Recall
 
-\begin{dmath}\label{eqn:convexOptimizationLecture4:n}
+\begin{equation}\label{eqn:convexOptimizationLecture4:60}
 \Norm{\Bz}_\conj = \sup_\Bx \setlr{ \Bz^\T \Bx | \Norm{\Bx} \le 1 }
-\end{dmath}
+\end{equation}
 
 Denote the optimizer of above as \( \Bx^\conj \).  By definition
-kA
 
-\begin{equation}\label{eqn:convexOptimizationLecture4:n}
+\begin{equation}\label{eqn:convexOptimizationLecture4:80}
 \Bz^\T \Bx^\conj \ge \Bz^\T \Bx \quad \forall \Bx, \Norm{\Bx} \le 1
 \end{equation}
 
-This defines a half aspace in which the unit ball
+This defines a half space in which the unit ball
 
-\begin{equation}\label{eqn:convexOptimizationLecture4:n}
+\begin{equation}\label{eqn:convexOptimizationLecture4:100}
 \setlr{ \Bx | \Bz^\T (\Bx - \Bx^\conj \le 0 }
 \end{equation}
 
@@ -94,9 +95,9 @@ Q: What was this optimizer point?
 
 \section{Polyhedra}
 
-\begin{equation}\label{eqn:convexOptimizationLecture4:n}
-\calP = \setlr{ \Bx | 
-\Ba_j^\T \Bx \le \Bb_j, j \in [1,m], 
+\begin{equation}\label{eqn:convexOptimizationLecture4:120}
+\calP = \setlr{ \Bx |
+\Ba_j^\T \Bx \le \Bb_j, j \in [1,m],
 \Bc_i^\T \Bx = \Bd_i, i \in [1,p]
 }
 =
@@ -108,15 +109,15 @@ where the final inequality and equality are component wise.
 Proving \( \calP \) is convex:
 
 \begin{itemize}
-\item Pick \(\Bx_1 \in \calP\), \(\B\Bx_2 \in \calP \)
+\item Pick \(\Bx_1 \in \calP\), \(\Bx_2 \in \calP \)
 \item Pick any \(\theta \in [0,1]\)
 \item Test \( \theta \Bx_1 + (1-\theta) \Bx_2 \).  Is it in \(\calP\)?
 \end{itemize}
 
-\begin{dmath}\label{eqn:convexOptimizationLecture4:n}
-A \lr{ \theta \Bx_1 + (1-\theta) \Bx_2 } 
+\begin{dmath}\label{eqn:convexOptimizationLecture4:140}
+A \lr{ \theta \Bx_1 + (1-\theta) \Bx_2 }
 =
-\theta A \Bx_1 + (1-\theta) A \Bx_2 
+\theta A \Bx_1 + (1-\theta) A \Bx_2
 \le
 \theta \Bb + (1-\theta) \Bb
 =
@@ -127,20 +128,20 @@ A \lr{ \theta \Bx_1 + (1-\theta) \Bx_2 }
 
 Euclidean ball for \( \Bx_c \in \bbR^n, r \in \bbR \)
 
-\begin{equation}\label{eqn:convexOptimizationLecture4:n}
-\calB(\Bx_c, r) 
+\begin{equation}\label{eqn:convexOptimizationLecture4:160}
+\calB(\Bx_c, r)
 = \setlr{ \Bx | \Norm{\Bx - \Bx_c}_2 \le r },
 \end{equation}
 
 or
-\begin{equation}\label{eqn:convexOptimizationLecture4:n}
-\calB(\Bx_c, r) 
+\begin{equation}\label{eqn:convexOptimizationLecture4:180}
+\calB(\Bx_c, r)
 = \setlr{ \Bx | \lr{\Bx - \Bx_c}^\T \lr{\Bx - \Bx_c} \le r^2 }.
 \end{equation}
 
 Let \( \Bx_1, \Bx_2 \), \(\theta \in [0,1]\)
 
-\begin{dmath}\label{eqn:convexOptimizationLecture4:n}
+\begin{dmath}\label{eqn:convexOptimizationLecture4:200}
 \Norm{ \theta \Bx_1 + (1-\theta) \Bx_2 - \Bx_c }_2
 =
 \Norm{ \theta (\Bx_1 - \Bx_c) + (1-\theta) (\Bx_2 - \Bx_c) }_2
@@ -157,8 +158,8 @@ Let \( \Bx_1, \Bx_2 \), \(\theta \in [0,1]\)
 
 \section{Ellipse}
 
-\begin{equation}\label{eqn:convexOptimizationLecture4:n}
-\calE(\Bx_c, P) 
+\begin{equation}\label{eqn:convexOptimizationLecture4:220}
+\calE(\Bx_c, P)
 =
 \setlr{ \Bx | (\Bx - \Bx_c)^\T P^{-1} (\Bx - \Bx_c) \le 1 },
 \end{equation}
@@ -167,34 +168,37 @@ where \( P \in S^n_{++} \).
 
 \begin{itemize}
 \item Euclidean ball is an ellipse with \( P = I r^2 \)
-\item Ellipse is image of Euclindean ball \( \calB(0,1) \) under affine mapping.
+\item Ellipse is image of Euclidean ball \( \calB(0,1) \) under affine mapping.
 \end{itemize}
 
 F5
 
 Given
 
-\begin{dmath}\label{eqn:convexOptimizationLecture4:n}
+\begin{dmath}\label{eqn:convexOptimizationLecture4:240}
 F(\Bu) = P^{1/2} \Bu + \Bx_c
 \end{dmath}
 
-\begin{dmath}\label{eqn:convexOptimizationLecture4:n}
+\begin{dmath}\label{eqn:convexOptimizationLecture4:260}
+\begin{aligned}
 \setlr{ F(\Bu) | \Norm{\Bu}_2 \le r }
-=
-\setlr{ P^{1/2} \Bu + \Bx_c | \Bu^\T \Bu \le r^2 }
-=
-\setlr{ \Bx | \Bx = P^{1/2} \Bu + \Bx_c, \Bu^\T \Bu \le r^2 }
-=
-\setlr{ \Bx | \Bu = P^{-1/2} (\Bx - \Bx_c), \Bu^\T \Bu \le r^2 }
-=
+&=
+\setlr{ P^{1/2} \Bu + \Bx_c | \Bu^\T \Bu \le r^2 } \\
+&=
+\setlr{ \Bx | \Bx = P^{1/2} \Bu + \Bx_c, \Bu^\T \Bu \le r^2 } \\
+&=
+\setlr{ \Bx | \Bu = P^{-1/2} (\Bx - \Bx_c), \Bu^\T \Bu \le r^2 } \\
+&=
 \setlr{ \Bx | (\Bx - \Bx_c)^\T P^{-1} (\Bx - \Bx_c) \le r^2 }
+\end{aligned}
 \end{dmath}
 
 \section{Geometry of an ellipse}
 
-Decomposition of positive definite matrix \( P \in S^n_{++} \subsetof S^n \) is:
+%\succeq
+Decomposition of positive definite matrix \( P \in S^n_{++} \subset S^n \) is:
 
-\begin{dmath}\label{eqn:convexOptimizationLecture4:n}
+\begin{dmath}\label{eqn:convexOptimizationLecture4:280}
 \begin{aligned}
 P &= Q \diag(\lambda_i) Q^\T \\
 Q^\T Q &= 1
@@ -205,15 +209,15 @@ where \( \lambda_i \in \bbR\), and \(\lambda_i > 0 \).
 
 The ellipse is defined by
 
-\begin{equation}\label{eqn:convexOptimizationLecture4:n}
-(\Bx - \Bx_c)^\T Q \diag(1/\lambda_i) (\Bx - \Bx_c) Q \le r^2 
+\begin{equation}\label{eqn:convexOptimizationLecture4:300}
+(\Bx - \Bx_c)^\T Q \diag(1/\lambda_i) (\Bx - \Bx_c) Q \le r^2
 \end{equation}
 
 The term \( (\Bx - \Bx_c)^\T Q \) projects \( \Bx - \Bx_c \) onto the columns of \( Q \).  Those columns are perpendicular since \( Q \) is an orthogonal matrix.
 
 Let
 
-\begin{equation}\label{eqn:convexOptimizationLecture4:n}
+\begin{equation}\label{eqn:convexOptimizationLecture4:320}
 \tilde{\Bx} = Q^\T (\Bx - \Bx_c),
 \end{equation}
 
@@ -221,26 +225,26 @@ this shifts the origin around \( \Bx_c \) and \( Q \) rotates into a new coordin
 
 The ellipse is therefore
 
-\begin{dmath}\label{eqn:convexOptimizationLecture4:n}
-\tilde{\Bx}^\T 
+\begin{equation}\label{eqn:convexOptimizationLecture4:340}
+\tilde{\Bx}^\T
 \begin{bmatrix}
 \inv{\lambda_1} &                &        & \\
                 &\inv{\lambda_2} &        & \\
                                  & \ddots & \\
-                &                &        & \inv{\lambda_n} 
+                &                &        & \inv{\lambda_n}
 \end{bmatrix}
 \tilde{\Bx}
 =
-\sum_{i = 1}^n \frac{\tilde{x}_i}^2}{\lambda_i} \le 1.
-\end{dmath}
+\sum_{i = 1}^n \frac{\tilde{x}_i^2}{\lambda_i} \le 1.
+\end{equation}
 
-An example is sketched for \( \lambda_1 > \lambda_2 \) in 
+An example is sketched for \( \lambda_1 > \lambda_2 \) in
 
-F6 
+F6
 
 \begin{itemize}
 \item \( \lambda_i \) tells us length of the semi-major axis.
-\item Larger \( \lambda_i \) means \( \tilde{x}_i^2 can be bigger and still satisfy constraint \( \le 1 \).
+\item Larger \( \lambda_i \) means \( \tilde{x}_i^2 \) can be bigger and still satisfy constraint \( \le 1 \).
 \item Volume of ellipse if proportional to \( \sqrt{ \det P } = \sqrt{ \prod_{i = 1}^n \lambda_i } \).
 \item When any \( \lambda_i \rightarrow 0 \) a dimension is lost and the volume goes to zero.  That removes the invertibility required.
 \end{itemize}
@@ -251,7 +255,7 @@ Ellipses will be seen a lot in this course, since we are interested in ``bowl'' 
 
 The norm ball
 
-\begin{equation}\label{eqn:convexOptimizationLecture4:n}
+\begin{equation}\label{eqn:convexOptimizationLecture4:360}
 \calB = \setlr{ \Bx | \Norm{\Bx} \le 1 },
 \end{equation}
 
@@ -259,19 +263,19 @@ is a convex set for all norms.  Proof:
 
 Take any \( \Bx, \By \in \calB \)
 
-\begin{dmath}\label{eqn:convexOptimizationLecture4:n}
+\begin{dmath}\label{eqn:convexOptimizationLecture4:380}
 \Norm{ \theta \Bx + (1 - \theta) \By }
 \le
 \Abs{\theta} \Norm{ \Bx } + \Abs{1 - \theta} \Norm{ \By }
 =
 \theta \Norm{ \Bx } + \lr{1 - \theta} \Norm{ \By }
 \lr
-\theta + \lr{1 - \theta} 
-= 
+\theta + \lr{1 - \theta}
+=
 1.
 \end{dmath}
 
-This is true for any p-norm \( 1 \le p \), \( \Norm{\Bx}_p = \lr{ \sum_{i = 1}^n \Abs{x_i}^p }^{1/p} \).  
+This is true for any p-norm \( 1 \le p \), \( \Norm{\Bx}_p = \lr{ \sum_{i = 1}^n \Abs{x_i}^p }^{1/p} \).
 
 F7
 
@@ -281,7 +285,7 @@ Recall that \( C \) is a cone if \( \forall \Bx \in C, \theta \ge 0, \theta \Bx 
 
 Impt cone of PSD matrices
 
-\begin{dmath}\label{eqn:convexOptimizationLecture4:n}
+\begin{dmath}\label{eqn:convexOptimizationLecture4:400}
 \begin{aligned}
 S^n &= \setlr{ X \in \bbR^{n \times n} | X = X^\T } \\
 S^n_{+} &= \setlr{ X \in S^n | \Bv^\T X \Bv \ge 0, \quad \forall v \in \bbR^n } \\
@@ -301,9 +305,9 @@ These have respectively
 
 \( X \in S^n_{+}\), then \( \theta X \in S^n_{+}, \quad \forall \theta \ge 0 \)
 
-\begin{dmath}\label{eqn:convexOptimizationLecture4:n}
-\Bv^\T (\theta X) \Bv 
-= \theta \Bv^\T \Bv 
+\begin{dmath}\label{eqn:convexOptimizationLecture4:420}
+\Bv^\T (\theta X) \Bv
+= \theta \Bv^\T \Bv
 \ge 0,
 \end{dmath}
 
@@ -311,10 +315,11 @@ since \( \theta \ge 0 \) and because \( X \in S^n_{+} \).
 
 Shorthand:
 
-\begin{dmath}\label{eqn:convexOptimizationLecture4:n}
+% succeq: curly \ge
+\begin{dmath}\label{eqn:convexOptimizationLecture4:440}
 \begin{aligned}
-X &\in S^n_{+} \implies X \curlyge 0
-X &\in S^n_{++} \implies X \curlyg 0.
+X &\in S^n_{+} \implies X \succeq 0
+X &\in S^n_{++} \implies X \succ 0.
 \end{aligned}
 \end{dmath}
 
@@ -324,11 +329,11 @@ Let \( A \in S^n_{+} \), \( B \in S^n_{+} \), \( \theta_1, \theta_2 \ge 0, \thet
 
 Show that \( \theta_1 A + \theta_2 B \in S^n_{+} \) :
 
-\begin{dmath}\label{eqn:convexOptimizationLecture4:n}
-\Bv^\T \lr{  \theta_1 A + \theta_2 B } \Bv 
+\begin{dmath}\label{eqn:convexOptimizationLecture4:460}
+\Bv^\T \lr{  \theta_1 A + \theta_2 B } \Bv
 =
-\theta_1 \Bv^\T A \Bv 
-+\theta_2 \Bv^\T B \Bv 
+\theta_1 \Bv^\T A \Bv
++\theta_2 \Bv^\T B \Bv
 \ge 0,
 \end{dmath}
 
@@ -338,7 +343,7 @@ F8
 
 Inequalities:
 
-Start with a proper cone \( K \subeq \bbR^n \)
+Start with a proper cone \( K \subseteq \bbR^n \)
 
 \begin{itemize}
 \item closed, convex
@@ -348,14 +353,14 @@ Start with a proper cone \( K \subeq \bbR^n \)
 
 F9
 
-The \( K \) defies a generalized inequality in \R{n} defined as ``\(\le_K\)''
+The \( K \) defines a generalized inequality in \R{n} defined as ``\(\le_K\)''
 
-Interpretting
+Interpreting
 
-\begin{dmath}\label{eqn:convexOptimizationLecture4:n}
+\begin{dmath}\label{eqn:convexOptimizationLecture4:480}
 \begin{aligned}
-\Bx \le_K \By &\rightleftarrow \By - \Bx \in K
-\Bx <_K \By   &\rightleftarrow \By - \Bx \in \interior K
+\Bx \le_K \By &\leftrightarrow \By - \Bx \in K
+\Bx <_K \By   &\leftrightarrow \By - \Bx \in \interior K
 \end{aligned}
 \end{dmath}
 
@@ -369,43 +374,45 @@ Example:1: \( K = \bbR^n_{+}, \Bx \in \bbR^n, \By \in \bbR^n \)
 
 F12: K is non-negative ``orthant''.
 
-\begin{equation}\label{eqn:convexOptimizationLecture4:n}
+\begin{equation}\label{eqn:convexOptimizationLecture4:500}
 \Bx \le_K \By \implies \By - \Bx \in K
 \end{equation}
 
 say:
 
-\begin{dmath}\label{eqn:convexOptimizationLecture4:n}
+\begin{dmath}\label{eqn:convexOptimizationLecture4:520}
 \begin{bmatrix}
-y_1 - x_1 
-y_2 - x_2 
+y_1 - x_1
+y_2 - x_2
 \end{bmatrix}
 \in R^2_{+}
 \end{dmath}
 
 Also:
 
+\begin{dmath}\label{eqn:convexOptimizationLecture4:540}
 K = R^1_{+}
+\end{dmath}
 
 F13
 
 (pointed, since it contains no rays)
 
-\begin{equation}\label{eqn:convexOptimizationLecture4:n}
+\begin{equation}\label{eqn:convexOptimizationLecture4:560}
 \Bx \le_K \By ,
 \end{equation}
 
 with respect to \( K = \bbR^n_{+} \) means that \( x_i \le y_i \) for all \( i \in [1,n]\).
 
-Example:2: For \( K = PSD \subeq \( S^n \),
+Example:2: For \( K = PSD \subseteq S^n \),
 
-\begin{equation}\label{eqn:convexOptimizationLecture4:n}
+\begin{equation}\label{eqn:convexOptimizationLecture4:580}
 \Bx \le_K \By ,
 \end{equation}
 
 means that
 
-\begin{equation}\label{eqn:convexOptimizationLecture4:n}
+\begin{equation}\label{eqn:convexOptimizationLecture4:600}
 \By - \Bx \in K = S^n_{+}.
 \end{equation}
 
@@ -417,28 +424,28 @@ means that
 
 Interpretation:
 
-\begin{equation}\label{eqn:convexOptimizationLecture4:n}
+\begin{equation}\label{eqn:convexOptimizationLecture4:620}
 \begin{aligned}
-\Bx \le_K \By &\rightleftarrow \By - \Bx \in K \\
-\Bx <_K \By   &\rightleftarrow \By - \Bx \in \interior K.
+\Bx \le_K \By &\leftrightarrow \By - \Bx \in K \\
+\Bx <_K \By   &\leftrightarrow \By - \Bx \in \interior K.
 \end{aligned}
 \end{equation}
 
 We'll use these with vectors and matrices so often the \( K \) subscript will often be dropped, writing instead (for vectors)
 
-\begin{equation}\label{eqn:convexOptimizationLecture4:n}
+\begin{equation}\label{eqn:convexOptimizationLecture4:640}
 \begin{aligned}
-\Bx \le \By &\rightleftarrow \By - \Bx \in \bbR^n_{+} \\
-\Bx < \By   &\rightleftarrow \By - \Bx \in \interior \bbR^n_{++}
+\Bx \le \By &\leftrightarrow \By - \Bx \in \bbR^n_{+} \\
+\Bx < \By   &\leftrightarrow \By - \Bx \in \interior \bbR^n_{++}
 \end{aligned}
 \end{equation}
 
 and for matrices
 
-\begin{equation}\label{eqn:convexOptimizationLecture4:n}
+\begin{equation}\label{eqn:convexOptimizationLecture4:660}
 \begin{aligned}
-\Bx \le \By &\rightleftarrow \By - \Bx \in S^n_{+} \\
-\Bx < \By   &\rightleftarrow \By - \Bx \in \interior S^n_{++}.
+\Bx \le \By &\leftrightarrow \By - \Bx \in S^n_{+} \\
+\Bx < \By   &\leftrightarrow \By - \Bx \in \interior S^n_{++}.
 \end{aligned}
 \end{equation}
 
@@ -449,8 +456,8 @@ Take the intersection of (perhaps infinitely many) sets \( S_\alpha \):
 If \( S_\alpha \) is (affine,convex, conic) for all \( \alpha \in A \) then
 
 %(upside down U)
-\begin{dmath}\label{eqn:convexOptimizationLecture4:n}
-\intersection_\alpha S_\alpha 
+\begin{dmath}\label{eqn:convexOptimizationLecture4:680}
+\cap_\alpha S_\alpha
 \end{dmath}
 
 is
@@ -459,23 +466,23 @@ is
 
 To prove in homework:
 
-\begin{equation}\label{eqn:convexOptimizationLecture4:n}
+\begin{equation}\label{eqn:convexOptimizationLecture4:700}
 \calP = \setlr{ \Bx | \Ba_i^\T \Bx \le \Bb_i, \Bc_j^\T \Bx = \Bd_j, \quad \forall i \cdots j }
 \end{equation}
 
 This is convex since the intersection of a bunch of hyperplane and half space constraints.
 
 \begin{enumerate}
-\item If \( S \subeq \bbR^n \) is convex then 
+\item If \( S \subseteq \bbR^n \) is convex then
 
-\begin{equation}\label{eqn:convexOptimizationLecture4:n}
+\begin{equation}\label{eqn:convexOptimizationLecture4:720}
 F(S) = \setlr{ F(\Bx) | \Bx \in S }
 \end{equation}
 
 is convex.
-\item If \( S \subeq \bbR^m \) then 
+\item If \( S \subseteq \bbR^m \) then
 
-\begin{equation}\label{eqn:convexOptimizationLecture4:n}
+\begin{equation}\label{eqn:convexOptimizationLecture4:740}
 F^{-1}(S) = \setlr{ \Bx | F(\Bx) \in S }
 \end{equation}
 
