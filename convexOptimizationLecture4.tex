@@ -59,7 +59,9 @@ where
 \Ba^\perp = \setlr{ \Bv | \Ba^\T \Bv = 0 }.
 \end{equation}
 
-F1
+%F1
+%\cref{fig:l4:l4Fig1}.
+\imageFigure{../figures/ece1505-convex-optimization/l4Fig1}{CAPTION: l4Fig1}{fig:l4:l4Fig1}{0.2}
 
 Recall
 
@@ -81,15 +83,19 @@ This defines a half space in which the unit ball
 
 Start with the \( l_1 \) norm, duals of \( l_1 \) is \( l_\infty \)
 
-F2
+%F2
+%\cref{fig:l4HalfspaceContiningUnitBall:l4HalfspaceContiningUnitBallFig2}.
+\imageFigure{../figures/ece1505-convex-optimization/l4HalfspaceContiningUnitBallFig2}{CAPTION: l4HalfspaceContiningUnitBallFig2}{fig:l4HalfspaceContiningUnitBall:l4HalfspaceContiningUnitBallFig2}{0.2}
 
-Similar pic for \( l_\infty \), for which the dual is the \( l_1 \) norm.  Here the optimizer point is at \( (1,1) \)
+Similar pic for \( l_\infty \), for which the dual is the \( l_1 \) norm, as sketched in
+\cref{fig:l4LinfinityUnitBallHalfSpace:l4LinfinityUnitBallHalfSpaceFig3}.
+Here the optimizer point is at \( (1,1) \)
 
-F3
+\imageFigure{../figures/ece1505-convex-optimization/l4LinfinityUnitBallHalfSpaceFig3}{CAPTION: l4LinfinityUnitBallHalfSpaceFig3}{fig:l4LinfinityUnitBallHalfSpace:l4LinfinityUnitBallHalfSpaceFig3}{0.2}
 
-and a similar pic for \( l_2 \), which is sketched in
+and a similar pic for \( l_2 \), which is sketched in \cref{fig:l4L2unitballhalfplane:l4L2unitballhalfplaneFig4}.
 
-F4
+\imageFigure{../figures/ece1505-convex-optimization/l4L2unitballhalfplaneFig4}{CAPTION: l4L2unitballhalfplaneFig4}{fig:l4L2unitballhalfplane:l4L2unitballhalfplaneFig4}{0.2}
 
 Q: What was this optimizer point?
 
@@ -171,7 +177,8 @@ where \( P \in S^n_{++} \).
 \item Ellipse is image of Euclidean ball \( \calB(0,1) \) under affine mapping.
 \end{itemize}
 
-F5
+%\cref{fig:l4CircleAndEllipse:l4CircleAndEllipseFig5}.
+\imageFigure{../figures/ece1505-convex-optimization/l4CircleAndEllipseFig5}{CAPTION: l4CircleAndEllipseFig5}{fig:l4CircleAndEllipse:l4CircleAndEllipseFig5}{0.2}
 
 Given
 
@@ -238,9 +245,8 @@ The ellipse is therefore
 \sum_{i = 1}^n \frac{\tilde{x}_i^2}{\lambda_i} \le 1.
 \end{equation}
 
-An example is sketched for \( \lambda_1 > \lambda_2 \) in
-
-F6
+An example is sketched for \( \lambda_1 > \lambda_2 \) in \cref{fig:l4EllipseGeometry:l4EllipseGeometryFig6Lambda1gtLambda2}.
+\imageFigure{../figures/ece1505-convex-optimization/l4EllipseGeometryFig6Lambda1gtLambda2}{Ellipse with \( \lambda_1 > \lambda_2 \).}{fig:l4EllipseGeometry:l4EllipseGeometryFig6Lambda1gtLambda2}{0.2}
 
 \begin{itemize}
 \item \( \lambda_i \) tells us length of the semi-major axis.
@@ -277,7 +283,13 @@ Take any \( \Bx, \By \in \calB \)
 
 This is true for any p-norm \( 1 \le p \), \( \Norm{\Bx}_p = \lr{ \sum_{i = 1}^n \Abs{x_i}^p }^{1/p} \).
 
-F7
+%F7
+%\cref{fig:l4:l4Fig7Pge1}.
+\imageFigure{../figures/ece1505-convex-optimization/l4Fig7Pge1}{CAPTION: l4Fig7Pge1}{fig:l4:l4Fig7Pge1}{0.2}
+
+The shape of a \( p < 1 \) norm unit ball is sketched in \cref{fig:l4PlessThan1:l4PlessThan1Fig7b} (lines connecting points in such a region can exit the region).
+
+\imageFigure{../figures/ece1505-convex-optimization/l4PlessThan1Fig7b}{CAPTION: l4PlessThan1Fig7b}{fig:l4PlessThan1:l4PlessThan1Fig7b}{0.2}
 
 \section{Cones}
 
@@ -339,7 +351,9 @@ Show that \( \theta_1 A + \theta_2 B \in S^n_{+} \) :
 
 since \( \theta_1 \ge 0, \theta_2 \ge 0, \Bv^\T A \Bv \ge 0, \Bv^\T B \Bv \ge 0 \).
 
-F8
+%F8
+%\cref{fig:l4cone:l4coneFig8}.
+\imageFigure{../figures/ece1505-convex-optimization/l4coneFig8}{CAPTION: l4coneFig8}{fig:l4cone:l4coneFig8}{0.2}
 
 Inequalities:
 
@@ -351,7 +365,9 @@ Start with a proper cone \( K \subseteq \bbR^n \)
 \item ``pointed'' (contains no lines)
 \end{itemize}
 
-F9
+%F9
+%\cref{fig:l4cone:l4coneFig9}.
+\imageFigure{../figures/ece1505-convex-optimization/l4coneFig9}{CAPTION: l4coneFig9}{fig:l4cone:l4coneFig9}{0.2}
 
 The \( K \) defines a generalized inequality in \R{n} defined as ``\(\le_K\)''
 
@@ -364,15 +380,23 @@ Interpreting
 \end{aligned}
 \end{dmath}
 
-F10
+%F10
+%\cref{fig:l4Cone:l4ConeFig10a}.
+\imageFigure{../figures/ece1505-convex-optimization/l4ConeFig10a}{CAPTION: l4ConeFig10a}{fig:l4Cone:l4ConeFig10a}{0.2}
+%\cref{fig:l4inequalityK:l4inequalityKFig10b}.
+\imageFigure{../figures/ece1505-convex-optimization/l4inequalityKFig10b}{CAPTION: l4inequalityKFig10b}{fig:l4inequalityK:l4inequalityKFig10b}{0.2}
 
 Why pointed?  Want if \( \Bx \le_K \By \) and \( \By \le_K \Bx \) with this \( K \) is a half space.
 
-F11
+%F11
+%\cref{fig:l4region:l4regionFig11}.
+\imageFigure{../figures/ece1505-convex-optimization/l4regionFig11}{CAPTION: l4regionFig11}{fig:l4region:l4regionFig11}{0.2}
 
 Example:1: \( K = \bbR^n_{+}, \Bx \in \bbR^n, \By \in \bbR^n \)
 
-F12: K is non-negative ``orthant''.
+%F12: K is non-negative ``orthant''.
+%\cref{fig:l4:l4Fig12}.
+\imageFigure{../figures/ece1505-convex-optimization/l4Fig12}{\(K\) is non-negative ``orthant''}{fig:l4:l4Fig12}{0.2}
 
 \begin{equation}\label{eqn:convexOptimizationLecture4:500}
 \Bx \le_K \By \implies \By - \Bx \in K
@@ -394,7 +418,9 @@ Also:
 K = R^1_{+}
 \end{dmath}
 
-F13
+%F13
+%\cref{fig:l4:l4Fig13}.
+\imageFigure{../figures/ece1505-convex-optimization/l4Fig13}{CAPTION: l4Fig13}{fig:l4:l4Fig13}{0.2}
 
 (pointed, since it contains no rays)
 
@@ -489,7 +515,9 @@ F^{-1}(S) = \setlr{ \Bx | F(\Bx) \in S }
 is convex.
 \end{enumerate}
 
-F14
+%F14
+%\cref{fig:l4:l4Fig14}.
+\imageFigure{../figures/ece1505-convex-optimization/l4Fig14}{CAPTION: l4Fig14}{fig:l4:l4Fig14}{0.2}
 
 \EndArticle
 %\EndNoBibArticle

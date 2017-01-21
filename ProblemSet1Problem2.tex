@@ -46,6 +46,35 @@ which, using the scaling property of a norm, can be seen to be equivalent to
 \end{dmath}
 
 In our derivation in class we used only the zeroth and first-order terms of the expansion.
+
+Some hints that outline one approach to the above result:
+
+\begin{enumerate}[(i)]
+\item
+One approach to proving the first statement (about non-singularity) is by contradiction: note
+that if \( I - A \) is singular then there exists a vector \( \Bv \) such that \((I - A) \Bv = 0 \) and work from
+there.
+\item Next, consider the telescoping sum
+
+\begin{dmath}\label{eqn:ProblemSet1Problem2:140}
+\sum_{k=0}^N A^k (I - A) = I - A^{N+1},
+\end{dmath}
+
+and show
+\begin{dmath}\label{eqn:ProblemSet1Problem2:160}
+\lim_{k \rightarrow \infty } A^k = 0.
+\end{dmath}
+
+\item
+To show that \( \lim_{k \rightarrow \infty } A^k = 0\), it is helpful first to prove that
+
+\begin{dmath}\label{eqn:ProblemSet1Problem2:180}
+\Norm{ A^{k+1} }_p \le \Norm{ A }_p \norm{ A^k }_p.
+\end{dmath}
+
+\item
+Finally, combine your above results and the properties of a norm to show the desired result.
+\end{enumerate}
 } % makeproblem
 
 \makeanswer{convex-optimization:problemSet1:2}{
