@@ -16,5 +16,117 @@ Write down the first three terms of the Taylor series expansion of \(f(\Bx)\) ar
 
 \makeanswer{convex-optimization:problemSet1:1}{
 
-TODO.
+Application of the chain rule, with
+
+\begin{dmath}\label{eqn:ProblemSet1Problem1:40}
+g_l(\Bx) = b_l - \Ba_l^\T \Bx,
+\end{dmath}
+
+gives
+
+\begin{dmath}\label{eqn:ProblemSet1Problem1:60}
+\spacegrad f(\Bx)
+=
+-
+\sum_{l=1}^m
+\spacegrad \log(g_l(\Bx))
+=
+-\sum_{l=1}^m
+\inv{g_l(\Bx)} \spacegrad g_l(\Bx)
+=
+-\sum_{l=1}^m
+\inv{b_l - \Ba_l^\T \Bx} \spacegrad (b_l - \Ba_l^\T \Bx)
+=
+-\sum_{l=1}^m
+\inv{b_l - \Ba_l^\T \Bx} (- \Ba_l),
+\end{dmath}
+
+or
+%\begin{dmath}\label{eqn:ProblemSet1Problem1:80}
+\boxedEquation{eqn:ProblemSet1Problem1:80}{
+\spacegrad f
+=
+\sum_{l=1}^m
+\frac{\Ba_l}{b_l - \Ba_l^\T \Bx}.
+}
+%\end{dmath}
+
+The Hessian components are
+
+\begin{dmath}\label{eqn:ProblemSet1Problem1:100}
+(\spacegrad^2 f)_{ij}
+=
+\frac{\partial^2 f}{\partial x_i \partial x_j}
+=
+\frac{\partial}{\partial x_i}
+\Be_j^\T \spacegrad f
+=
+\frac{\partial}{\partial x_i}
+\sum_{l=1}^m
+\frac{a_{lj}}{b_l - \Ba_l^\T \Bx}
+=
+\sum_{l=1}^m
+-\frac{a_{lj}(-a_{li})}{(b_l - \Ba_l^\T \Bx)^2},
+\end{dmath}
+
+or
+
+\boxedEquation{eqn:ProblemSet1Problem1:120}{
+\spacegrad^2 f
+=
+\sum_{l=1}^m
+\inv{(b_l - \Ba_l^\T \Bx)^2}
+{\begin{bmatrix}
+a_{li}
+a_{lj}
+\end{bmatrix}}_{ij}.
+}
+
+For the Taylor expansion, note that
+
+\begin{dmath}\label{eqn:ProblemSet1Problem1:140}
+(\Delta \Bx)^\T
+\spacegrad^2 f
+\Delta \Bx
+=
+\sum_{l=1}^m
+\inv{(b_l - \Ba_l^\T \Bx)^2}
+(\Delta x_j) a_{lj} a_{li} (\Delta x_i)
+=
+\sum_{l=1}^m
+\inv{(b_l - \Ba_l^\T \Bx)^2}
+(\Ba_l^\T \Delta x)^2,
+\end{dmath}
+
+so
+\begin{dmath}\label{eqn:ProblemSet1Problem1:160}
+f(\Bx_0 + \Delta \Bx)
+=
+f(\Bx_0)
++ (\spacegrad f)^\T (\Delta \Bx)
++ \inv{2}
+(\Delta \Bx)^\T
+(\spacegrad^2 f)
+(\Delta \Bx),
+\end{dmath}
+
+which is
+\boxedEquation{eqn:ProblemSet1Problem1:180}{
+f(\Bx_0 + \Delta \Bx)
+=
+\sum_{l=1}^m
+\lr{
+-\log \lr{ b_l - \Ba_l^\T \Bx_0 }
++
+\frac{\Ba_l^\T \Delta \Bx}{
+b_l - \Ba_l^\T \Bx_0
+}
++
+\inv{2}
+\frac{(\Ba_l^\T \Delta \Bx)^2}{
+(b_l - \Ba_l^\T \Bx_0)^2
+}.
+}
+}
+
 }

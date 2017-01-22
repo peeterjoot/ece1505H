@@ -14,8 +14,113 @@ Verify that \( \innerprod{A}{B} = \Tr(A^\T B) \) where \( A, B \in \calS^n \) sa
 \makeanswer{convex-optimization:problemSet1:3}{
 \makeSubAnswer{}{convex-optimization:problemSet1:3a}
 
-TODO.
+From \citep{damiano1988course},
+\makedefinition{Vector space.}{dfn:ProblemSet1Problem3:1}{
+A vector space is a set of elements (vectors),
+which is
+
+\begin{enumerate}[(i)]
+\item
+closed under scaling \( a \Bx \in V \, \forall \Bx \in V \),
+\item closed with respect to an additive operation \( \Bx + \By \in V\, \forall \Bx, \By \in V \), and
+\end{enumerate}
+for \( \Bx, \By, \Bz \in V \) and scalars \( c, d \in \bbR \) satisfies the following properties
+
+\begin{enumerate}
+\item \( (\Bx + \By) + \Bz = \Bx + (\By + \Bz ) \).
+\item \( \Bx + \By = \By + \Bx \).
+\item \( \Bx + \Bzero = \Bx\) for some vector \( \Bzero \in V \).
+\item There exists a vector \( -\Bx \in V \), such that \( \Bx + (-\Bx) = \Bzero\).
+\item \( c( \Bx + \By ) = c \Bx + c \By \).
+\item \( (c + d)\Bx = c \Bx + d \Bx \).
+\item \( (c d) \Bx = c (d \Bx) \).
+\item \( 1 \Bx = \Bx \).
+\end{enumerate}
+} % definition
+
+Properties 1-8 are all clearly satified by \( S^n \), leaving just closure to demonstrate.
+
+%For the particular case of the set of real symmetric matrices \( S^n \), the properties that have to be checked are really just closure under scaling and closure under addition.  To verify this,
+For \( A, B \in S^n \), with elements \( a_{ij} = a_{ji} \) and \( b_{ij} = b_{ji} \) respectively,
+the elements of the sum \( \alpha A + \beta B \) are
+
+\begin{dmath}\label{eqn:ProblemSet1Problem3:21}
+\alpha a_{ij} + \beta b_{ij}
+= \alpha a_{ji} + \beta b_{ji},
+\end{dmath}
+
+or
+\begin{dmath}\label{eqn:ProblemSet1Problem3:41}
+\alpha A + \beta B = (\alpha A + \beta B)^\T,
+\end{dmath}
+
+which demonstrates the closure properties.
 
 \makeSubAnswer{}{convex-optimization:problemSet1:3b}
-TODO.
+
+A real inner product over the vector space \( V \) has the properties (\citep{nicholson1990elementary})
+
+\begin{enumerate}
+\item \( \innerprod{A}{B} \in \bbR, \,\forall A,B \in V \).
+\item \( \innerprod{A}{B} = \innerprod{B}{A} \,\forall A,B \in V \).
+\item \( \innerprod{A + B}{C} = \innerprod{A}{C} + \innerprod{B}{C} \,\forall A,B,C \in V \).
+\item \( \innerprod{r A}{B} = r \innerprod{A,B}\,\forall A,B \in V, r \in \bbR \).
+\item \( \innerprod{A}{A} > 0 \,\forall A \ne 0 \in V \).
+\end{enumerate}
+
+For matrices \( A, B, C \in S^n \) with elements \( a_{ij}, b_{ij}, c_{ij} \) respectively, the proofs of these properties are
+
+\begin{enumerate}
+\item
+\begin{dmath}\label{eqn:ProblemSet1Problem3:61}
+\innerprod{A}{B} = \Tr A^\T B = \sum_k \Tr a_{ki} b_{kj} = \sum_{ki} a_{ki} b_{ki} \in \bbR. \qedmarker
+\end{dmath}
+\item
+Changing indexes in \cref{eqn:ProblemSet1Problem3:61}, and making use of \( a_{ij} = a_{ji} \) for matrices in \( S^n \), we have
+\begin{dmath}\label{eqn:ProblemSet1Problem3:81}
+\innerprod{A}{B} = \sum_{ij} a_{ij} b_{ij},
+\end{dmath}
+
+Similarly, the inner product in the reverse order is
+
+\begin{dmath}\label{eqn:ProblemSet1Problem3:101}
+\innerprod{B}{A} = \Tr B^\T A
+= \sum_k \Tr b_{ki} a_{kj}
+= \sum_{ki} b_{ki} a_{ki}
+= \sum_{ji} b_{ji} a_{ji}
+= \sum_{ji} a_{ij} b_{ij}
+= \innerprod{A}{B}. \qedmarker
+\end{dmath}
+\item
+\begin{dmath}\label{eqn:ProblemSet1Problem3:121}
+\innerprod{A + B}{C}
+= \Tr ((A + B)^\T C)
+= \Tr ((A^\T + B^\T) C)
+= \Tr (A^\T C + B^\T C)
+= \Tr (A^\T C) + \Tr (B^\T C)
+=
+\innerprod{A}{C}
++
+\innerprod{B}{C} .\qedmarker
+\end{dmath}
+\item
+\begin{dmath}\label{eqn:ProblemSet1Problem3:141}
+\innerprod{r A}{B}
+=
+\Tr (r A)^\T B
+=
+\Tr r A^\T B
+=
+r \Tr A^\T B
+= r \innerprod{A}{B}.\qedmarker
+\end{dmath}
+\item
+\begin{dmath}\label{eqn:ProblemSet1Problem3:161}
+\innerprod{A}{A}
+=
+\sum_{ij} a_{ij}^2,
+\end{dmath}
+
+which is greater than zero for \( A \ne 0 \).
+\end{enumerate}
 }
