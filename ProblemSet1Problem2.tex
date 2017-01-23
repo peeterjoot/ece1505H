@@ -80,8 +80,146 @@ Finally, combine your above results and the properties of a norm to show the des
 \makeanswer{convex-optimization:problemSet1:2}{
 \makeSubAnswer{}{convex-optimization:problemSet1:2a}
 
-TODO.
+A matrix \( A \in S^n_{++} \) admits a representation
+
+\begin{dmath}\label{eqn:ProblemSet1Problem2:200}
+A = Q \Lambda Q^\T,
+\end{dmath}
+
+so
+
+\begin{dmath}\label{eqn:ProblemSet1Problem2:220}
+\lr{I + A}^{-1}
+=
+\lr{ I + Q \Lambda Q^\T }^{-1}
+=
+\lr{ Q Q^\T + Q \Lambda Q^\T }^{-1}
+=
+\lr{ Q ( I + \Lambda ) Q^\T }^{-1}
+=
+Q ( I + \Lambda)^{-1} Q^\T.
+\end{dmath}
+
+This reduces the problem to the computation of \( ( I + \Lambda)^{-1} \), where \( \Lambda \) is a diagonal matrix.  Such a matrix inverts trivially, provided all the eigenvalues are sufficiently small \( \lambda_i \in [0, 1) \)
+
+\begin{dmath}\label{eqn:ProblemSet1Problem2:240}
+\inv{ I + \Lambda }
+=
+{\begin{bmatrix}
+\frac{\delta_{ij}}{ 1 + \lambda_i }
+\end{bmatrix}}_{ij}
+\approx
+[ \delta_{ij}( 1 - \lambda_i ) ]_{ij}
+=
+1 - \Lambda.
+\end{dmath}
+
+This gives
+
+\begin{dmath}\label{eqn:ProblemSet1Problem2:260}
+\lr{I + A}^{-1}
+=
+Q ( I + \Lambda)^{-1} Q^\T
+\approx
+Q ( I - \Lambda) Q^\T
+=
+I - A. \qedmarker
+\end{dmath}
+
 \makeSubAnswer{}{convex-optimization:problemSet1:2b}
 
-TODO.
+Removing the requirement that the matrix be symmetric, let
+
+\begin{dmath}\label{eqn:ProblemSet1Problem2:280}
+S_N
+= \sum_{k = 0}^{N-1} A^k.
+\end{dmath}
+
+As with a scalar geometric series the sum can be found by subtracting the difference \( S_N - S_{N+1} \)
+
+\begin{equation}\label{eqn:ProblemSetIProblem2:300}
+S_N - S_{N+I}
+=
+S_N(I - A)
+=
+I - A^N.
+\end{equation}
+
+If it can be shown that \( A^N \rightarrow 0 \), then this shows that \( I - A \) must be non-singular.  Additionally, rearranging for \( S^N \), this is
+
+\begin{dmath}\label{eqn:ProblemSetIProblem2:320}
+S_N = (I - A^N)(I-A)^{-1},
+\end{dmath}
+
+so if \( I - A^N \rightarrow I \), then \cref{eqn:ProblemSet1Problem2:60} has been proven.  Intuitively, if \( A^N \rightarrow 0 \), then \( I - A^N \rightarrow I \), but to make this more meaningful, we want to express this limiting statement in terms of a norm.  The matrix p-norm of this difference is
+
+\begin{dmath}\label{eqn:ProblemSet1Problem2:340}
+\Norm{I - A^N}_p
+= \sup_{\Bx \ne 0} \frac{ \Norm{ (I - A^N) \Bx }_p }{\Norm{\Bx}_p}
+= \max_{\Norm{\Bx}_p = 1} \Norm{ (I - A^N) \Bx }_p
+= \max_{\Norm{\Bx}_p = 1} \Norm{ \Bx - A^N \Bx }_p
+\le \max_{\Norm{\Bx}_p = 1} \Norm{ \Bx }_p + \Norm{ A^N \Bx }_p
+= 1 + \max_{\Norm{\Bx}_p = 1} \Norm{ A^N \Bx }_p.
+\end{dmath}
+
+The second last step uses the triangle law property of the norm.  Note that we did not prove that the p-norm has this property in class (called the Minkowski inequality for p-norms), but a nice proof can be found in \citep{tisdellMinkowski}.
+
+\Cref{eqn:ProblemSet1Problem2:340} shows that if \( \Norm{A^N}_p \rightarrow 0 \), that \( I - A \) is non-singular, and the inverse is given by \cref{eqn:ProblemSet1Problem2:60}.
+
+To examine this limit, 
+first consider the p-norm of a matrix-vector product
+
+\begin{dmath}\label{eqn:ProblemSet1Problem2:360}
+\Norm{A \Bx}_p
+=
+\lr{ \sum_{i = 1}^n \Abs{a_{ij} x_j}^p }^{1/p}
+\le
+\lr{ \sum_{i = 1}^n \Abs{a_{ij}}^p \Abs{x_j}^p }^{1/p}
+\le
+\lr{ \sum_{i = 1}^n \Abs{a_{ij}}^p }^{1/p} \lr{ \sum_{i = 1}^n \Abs{x_j}^p }^{1/p}
+=
+\Norm{A}_p \Norm{\Bx}_p.
+\end{dmath}
+
+For the norm of a product of matrices acting on a vector, this means that
+
+\begin{dmath}\label{eqn:ProblemSet1Problem2:380}
+\Norm{ A B \Bx }_p \le
+\Norm{ A }_p \Norm{B \Bx }_p
+\le
+\Norm{ A }_p \Norm{B}_p \Norm{ \Bx }_p,
+\end{dmath}
+
+in particular
+
+\begin{dmath}\label{eqn:ProblemSet1Problem2:400}
+\Norm{A^N \Bx}_p \le \lr{ \Norm{A}_p }^N \Norm{\Bx}_p,
+\end{dmath}
+
+and finally
+\begin{dmath}\label{eqn:ProblemSet1Problem2:420}
+\Norm{I - A^N}_p
+\le
+1 + \max_{\Norm{\Bx}_p = 1} \lr{ \Norm{ A }_p }^N \Norm{\Bx}_p
+= 1 + \lr{ \Norm{ A }_p }^N.
+\end{dmath}
+
+This tends to \( 1 \) as \( N \rightarrow \infty \) provided \( \lr{ \Norm{ A }_p } < 1\), proving the inverse power series identity given this constraint.  The only remaining thing to proof is to find the bound on the p-norm of \( (1-A)^{-1} \).  That is
+
+\begin{dmath}\label{eqn:ProblemSet1Problem2:440}
+\Norm{ (I - A)^{-1} }_p
+=
+\Norm{
+\sum_{k=0}^\infty A^k
+}_p
+\le
+\sum_{k=0}^\infty
+\Norm{
+A^k
+}_p
+\le
+\sum_{k=0}^\infty
+\lr{ \Norm{ A }_p }^k
+= \inv{ 1 - \Norm{A}_p }. \qedmarker
+\end{dmath}
 }
