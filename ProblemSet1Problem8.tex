@@ -2,8 +2,11 @@
 % Copyright © 2017 Peeter Joot.  All Rights Reserved.
 % Licenced as described in the file LICENSE under the root directory of this GIT repository.
 %
-\makeproblem{Expanded and restricted sets}{convex-optimization:problemSet1:8}{
-Problem 2.14(a) from Boyd \& Vandenberghe.
+\makeoproblem{Expanded and restricted sets}{convex-optimization:problemSet1:8}{
+\citep{boyd2004convex} pr. 2.14(a)}{
+Let \( S \subseteq \bbR^n \), and let \( \Norm{ \cdot } \) be a norm on \R{n}.
+
+For \( a \ge 0 \) we define \( S_a \) as \( \setlr{ \Bx | \dist(\Bx, S) \le a } \), where \( \dist(\Bx, S) = \inf_{\By \in S} \Norm{ \Bx - \By }\).  We refer to \( S_a \) as \( S \) expanded or extended by \( a \).  Show that if \( S \) is convex, then \( S_a \) is convex.
 } % makeproblem
 
 \makeanswer{convex-optimization:problemSet1:8}{
