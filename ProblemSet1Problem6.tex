@@ -51,14 +51,159 @@ Explain how to interpret this latter fact in terms of the interpretation of \( \
 \makeanswer{convex-optimization:problemSet1:6}{
 \makeSubAnswer{}{convex-optimization:problemSet1:6a}
 
-TODO.
+The eigenvalues were found to be \( \setlr{2,1} \) with respective eigenvectors
+
+\begin{dmath}\label{eqn:ProblemSet1Problem6:20}
+\begin{aligned}
+\Be_1 &= \inv{\sqrt{2}}
+\begin{bmatrix}
+1 \\
+-1
+\end{bmatrix} \\
+\Be_2 &= \inv{\sqrt{2}}
+\begin{bmatrix}
+1 \\
+1
+\end{bmatrix}.
+\end{aligned}
+\end{dmath}
+
+The ellipsoid is plotted in \cref{fig:ps1p6a:ps1p6aFig2}.
+
+\imageFigure{../figures/ece1505-convex-optimization/ps1p6aFig2}{}{fig:ps1p6a:ps1p6aFig2}{0.5}
+
 \makeSubAnswer{}{convex-optimization:problemSet1:6b}
 
-TODO.
+The eigenvalues were found to be \( \setlr{4,2} \) with respective eigenvectors
+
+\begin{dmath}\label{eqn:ProblemSet1Problem6:40}
+\begin{aligned}
+\Be_1 &= \inv{\sqrt{2}}
+\begin{bmatrix}
+1 \\
+1
+\end{bmatrix} \\
+\Be_2 &= \inv{\sqrt{2}}
+\begin{bmatrix}
+1 \\
+-1
+\end{bmatrix}.
+\end{aligned}
+\end{dmath}
+
+The ellipsoid is plotted in \cref{fig:ps1p6b:ps1p6bFig3}.
+
+\imageFigure{../figures/ece1505-convex-optimization/ps1p6bFig3}{}{fig:ps1p6b:ps1p6bFig3}{0.5}
+
 \makeSubAnswer{}{convex-optimization:problemSet1:6c}
 
-TODO.
+The eigenvalues were found to be \( \setlr{10,5} \) with respective eigenvectors
+
+\begin{dmath}\label{eqn:ProblemSet1Problem6:60}
+\begin{aligned}
+\Be_1 &= \inv{\sqrt{5}}
+\begin{bmatrix}
+2 \\
+-1
+\end{bmatrix} \\
+\Be_2 &= \inv{\sqrt{5}}
+\begin{bmatrix}
+1 \\
+2
+\end{bmatrix}.
+\end{aligned}
+\end{dmath}
+
+The ellipsoid is plotted in \cref{fig:ps1p6c:ps1p6cFig4}.
+
+\imageFigure{../figures/ece1505-convex-optimization/ps1p6cFig4}{}{fig:ps1p6c:ps1p6cFig4}{0.5}
+
 \makeSubAnswer{}{convex-optimization:problemSet1:6d}
 
-TODO.
+Some of the abstraction of the statement
+
+\begin{equation}\label{eqn:ProblemSet1Problem6:80}
+\calP = \setlr{ A \Bx| \Bx \in \calC }
+\end{equation}
+
+can be removed by expressing the matrix in terms of its columns \( A = [ \Ba_1 \Ba_2 \cdots \Ba_n ] \), and the vector in terms of coordinates \( \Bx = \sum x_i \Be_i\, x_i \in [0,1] \), so
+
+\begin{equation}\label{eqn:ProblemSet1Problem6:100}
+\calP = \setlr{ \sum \Ba_i x_i | x_i \in [0,1] },
+\end{equation}
+
+which shows that this set \( \calP \) is the span of the columns of the matrix \( A \).  The span of the columns takes a particularily simple form if a similarity transformation takes the matrix to its Jordan canonical form.  This is a basis for which the representation of the linear transformation leaves the matrix representation of that transformation either completely diagonal, or in specific upper triangular form with zeros everywhere but the superdiagonal (and only ones or zeros on the superdiagonal).  Such a similarity transformation
+
+\begin{dmath}\label{eqn:ProblemSet1Problem6:140}
+A = E J E^{-1},
+\end{dmath}
+
+is determinant preserving, since
+
+\begin{dmath}\label{eqn:ProblemSet1Problem6:160}
+\Abs{ A }
+= \Abs{ E } \Abs{ J } \Abs{ E^{-1} }
+= \Abs{ E } \Abs{ J } \inv{ \Abs{E} }
+= \Abs{ J }.
+\end{dmath}
+
+A couple examples are
+
+\begin{dmath}\label{eqn:ProblemSet1Problem6:120}
+\begin{bmatrix}
+3 & 1 \\
+0 & 3
+\end{bmatrix}, \quad
+\begin{bmatrix}
+1 & 0 \\
+0 & 2
+\end{bmatrix}, \quad
+\begin{bmatrix}
+\epsilon & 0 & 0 \\
+0        & 2 & 0 \\
+0        & 0 & 3
+\end{bmatrix}, \quad
+\begin{bmatrix}
+\epsilon & 0 & 0 \\
+0        & 2 & 1 \\
+0        & 0 & 2
+\end{bmatrix},
+\end{dmath}
+
+for which the respective sets \( \calP \) are sketched in \cref{fig:ps1p6d:ps1p6dFig1}.
+
+\imageFourFiguresTwoLines
+{../figures/ece1505-convex-optimization/ps1p6dFig1}
+{../figures/ece1505-convex-optimization/ps1p6dFig2}
+{../figures/ece1505-convex-optimization/ps1p6dFig3}
+{../figures/ece1505-convex-optimization/ps1p6dFig4}
+{Parallelopiped volumes}{fig:ps1p6d:ps1p6dFig1}{scale=0.15}
+
+Note that the parallelograms are altered by such a similarity transformation, but the (oriented area) given by the determinant is invariant.  This is illustrated in \cref{fig:ps1p6d:ps1p6dParallelogramsFig1} for 
+
+\begin{dmath}\label{eqn:ProblemSet1Problem6:n}
+\begin{bmatrix}
+3 & 1 \\
+-1 & 1
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 & 1 \\
+-1 & 1
+\end{bmatrix}
+\begin{bmatrix}
+1 & 1 \\
+0 & 1
+\end{bmatrix}
+\begin{bmatrix}
+\inv{2} & -\inv{2} \\
+\inv{2} & \inv{2}
+\end{bmatrix},
+\end{dmath}
+
+for which the oriented area given by the determinant is clearly unity in both cases.
+
+\imageFigure{../figures/ece1505-convex-optimization/ps1p6dParallelogramsFig1}{Parallelograms after similarity transformation}{fig:ps1p6d:ps1p6dParallelogramsFig1}{0.3}
+
+In a basis for which the matrix has its Jordan form, if any one of the eigenvalues is zero, then the volume of the parellopiped in that basis will be zero, since the parallopiped cannot have any volume along that dimension.  In the two three dimensional examples above, one of the eigenvalues was picked to be \( \epsilon \), something which could be made small in the limit.  When any eigenvector is decreased to zero in that matrix's Jordan basis representation, it is clear that the corresponding parallelopiped volume also goes to zero, as does the determinant (which is just the product of the diagonal elements in this representation).
 }
