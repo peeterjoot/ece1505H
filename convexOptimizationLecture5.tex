@@ -18,8 +18,8 @@
 \usepackage{enumerate}
 
 \beginArtNoToc
-\generatetitle{ECE1505H Convex Optimization.  Lecture 5: XXX.  Taught by Prof.\ Stark Draper}
-%\chapter{XXX}
+\generatetitle{ECE1505H Convex Optimization.  Lecture 5: Sets, epigraphs, quasi-convexity, and sublevel sets.  Taught by Prof.\ Stark Draper}
+%\chapter{Sets, epigraphs, quasi-convexity, and sublevel sets}
 \label{chap:convexOptimization5}
 
 \paragraph{Disclaimer}
@@ -49,7 +49,7 @@ These are notes for the UofT course ECE1505H, Convex Optimization, taught by Pro
 \paragraph{Clarification}
 
 \begin{equation}\label{eqn:convexOptimizationLecture5:20}
-x \le_K y \if y - x \in K
+x \le_K y \mathif y - x \in K
 \end{equation}
 
 F1
@@ -244,10 +244,10 @@ F6b: not strictly convex (understand).
 
 \makedefinition{Epigraph of a function}{dfn:convexOptimizationLecture5:400}{
 
-The epigraph \( \epigraph F \) of a function \( F : \bbR^n \rightarrow \bbR \) is
+The epigraph \( \epi F \) of a function \( F : \bbR^n \rightarrow \bbR \) is
 
 \begin{equation*}
-\epigraph F = \setlr{ (x,t) \in \bbR^{n +1} | x \in \dom F, t \ge F(x) },
+\epi F = \setlr{ (x,t) \in \bbR^{n +1} | x \in \dom F, t \ge F(x) },
 \end{equation*}
 
 where \( x \in \bbR^n, t \in \bbR \).
@@ -256,26 +256,26 @@ where \( x \in \bbR^n, t \in \bbR \).
 F7
 
 \maketheorem{Convexity and epigraph.}{thm:convexOptimizationLecture5:420}{
-If \( F \) is convex implies \( \epigraph F \) is a convex set.
+If \( F \) is convex implies \( \epi F \) is a convex set.
 } % theorem
 
 Proof:
 
-For convex function, a line segment connecting any 2 points on function is above the function.  i.e. it is \( \epigraph F \).
+For convex function, a line segment connecting any 2 points on function is above the function.  i.e. it is \( \epi F \).
 
 Many authors will go the other way around, showing \cref{dfn:convexOptimizationLecture5:400} from \cref{thm:convexOptimizationLecture5:420}.  That is:
 
-Pick any 2 points in \( \epigraph F \), \( (x,\mu) \in \epigraph F\) and \( (y, \nu) \in \epigraph F \).  Consider convex combination
+Pick any 2 points in \( \epi F \), \( (x,\mu) \in \epi F\) and \( (y, \nu) \in \epi F \).  Consider convex combination
 
 \begin{equation}\label{eqn:convexOptimizationLecture5:420}
 \theta( x, \mu ) + (1-\theta) (y, \nu) =
 (\theta x  (1-\theta) y, \theta \mu  (1-\theta) \nu )
-\in \epigraph F,
+\in \epi F,
 \end{equation}
 
-since \( \epigraph F \) is a convex set.
+since \( \epi F \) is a convex set.
 
-By definition of \( \epigraph F \)
+By definition of \( \epi F \)
 
 \begin{equation}\label{eqn:convexOptimizationLecture5:440}
 F( \theta x  (1-\theta) y ) \le \theta \mu  (1-\theta) \nu.
@@ -306,7 +306,7 @@ Examples:
 \item Linear and affine both convex and concave.  F8
 \item \( x^2 \) is convex F9
 \item \( \log x, \dom F = \bbR_{+} \) concave.  F10
-\item \( \Norm{x} \) is convex.  \( \Norm{ \theta x + (1-\theta) y } \le \theta \Norm{ x } + (1-\theta) \Norm{y }
+\item \( \Norm{x} \) is convex.  \( \Norm{ \theta x + (1-\theta) y } \le \theta \Norm{ x } + (1-\theta) \Norm{y } \).
 \item \( 1/x \) is convex on \( \setlr{ x | x > 0 } = \dom F \), and concave on \( \setlr{ x | x < 0 } = \dom F \).
 
 \begin{equation}\label{eqn:convexOptimizationLecture5:520}
@@ -356,11 +356,11 @@ Let
 is a convex set.
 
 \item
-\( \calA \intersection \epi F \)
+\( \calA \cap \epi F \)
 
 is a convex set since it is the intersection of convex sets.
 
-\item Project \( \calA \intersection \epi F \) onto \R{n} (i.e. domain of \( F \) ).  The projection is an affine mapping.  Image of a convex set through affine mapping is a convex set.
+\item Project \( \calA \cap \epi F \) onto \R{n} (i.e. domain of \( F \) ).  The projection is an affine mapping.  Image of a convex set through affine mapping is a convex set.
 \end{itemize}
 
 \makedefinition{Quasi-convex.}{dfn:convexOptimizationLecture5:600}{
@@ -399,8 +399,6 @@ F( \theta (A x + b) + (1-\theta) (A y + b) )
 \le
 \theta F( A x + b) + (1-\theta) F (A y + b)
 = \theta g(x) + (1-\theta) g(y).
-\end{dmath}
-\begin{dmath}\label{eqn:convexOptimizationLecture5:n}
 \end{dmath}
 
 \EndArticle
