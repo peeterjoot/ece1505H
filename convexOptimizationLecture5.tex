@@ -290,12 +290,12 @@ F( \theta x  (1-\theta) y ) \le \theta F(x)  (1-\theta) F(y).
 
 Sometimes convient to work with ``extended value function''
 
-\begin{dmath}\label{eqn:convexOptimizationLecture5:n}
-\tilde{F}(x) = 
+\begin{dmath}\label{eqn:convexOptimizationLecture5:500}
+\tilde{F}(x) =
 \left\{
 \begin{array}{l l}
 F(x) & \quad \mbox{If \( x \in \dom F\)} \\
-\infty & \quad \mbox{otherwise.} 
+\infty & \quad \mbox{otherwise.}
 \end{array}
 \right.
 \end{dmath}
@@ -309,20 +309,20 @@ Examples:
 \item \( \Norm{x} \) is convex.  \( \Norm{ \theta x + (1-\theta) y } \le \theta \Norm{ x } + (1-\theta) \Norm{y }
 \item \( 1/x \) is convex on \( \setlr{ x | x > 0 } = \dom F \), and concave on \( \setlr{ x | x < 0 } = \dom F \).
 
-\begin{equation}\label{eqn:convexOptimizationLecture5:n}
-\tilde{F}(x) = 
+\begin{equation}\label{eqn:convexOptimizationLecture5:520}
+\tilde{F}(x) =
 \left\{
 \begin{array}{l l}
 \inv{x} & \quad \mbox{If \( x > 0 \)} \\
-\infty & \quad \mbox{else.} 
+\infty & \quad \mbox{else.}
 \end{array}
 \right.
 \end{equation}
 \end{itemize}
 
-\makedefinition{Sublevel}{dfn:convexOptimizationLecture5:n}{
+\makedefinition{Sublevel}{dfn:convexOptimizationLecture5:540}{
 
-The sublevel set of a function \( F : \bbR^n \rightarrow \bbR \) is 
+The sublevel set of a function \( F : \bbR^n \rightarrow \bbR \) is
 
 \begin{equation*}
 C(\alpha) = \setlr{ x \in \dom F | F(x) \le \alpha }
@@ -331,11 +331,11 @@ C(\alpha) = \setlr{ x \in \dom F | F(x) \le \alpha }
 
 F11
 
-\maketheorem{}{thm:convexOptimizationLecture5:n}{
+\maketheorem{}{thm:convexOptimizationLecture5:560}{
 If \( F \) is convex then \( C(\alpha) \) is a convex set \( \forall \alpha \).
 } % theorem
 
-This is not an if and only if condition, as illustrated in 
+This is not an if and only if condition, as illustrated in
 
 F12
 
@@ -343,14 +343,14 @@ There \( C(\alpha) \) is convex, but the function itself is not.
 
 Proof:
 
-Since \( F \) is convex, then \( \epi F \) is a convex set.  
+Since \( F \) is convex, then \( \epi F \) is a convex set.
 
 \begin{itemize}
 \item
 Let
 
-\begin{dmath}\label{eqn:convexOptimizationLecture5:n}
-\calA = \setlr{ (x,t) | t = \alpha } 
+\begin{dmath}\label{eqn:convexOptimizationLecture5:580}
+\calA = \setlr{ (x,t) | t = \alpha }
 \end{dmath}
 
 is a convex set.
@@ -363,7 +363,7 @@ is a convex set since it is the intersection of convex sets.
 \item Project \( \calA \intersection \epi F \) onto \R{n} (i.e. domain of \( F \) ).  The projection is an affine mapping.  Image of a convex set through affine mapping is a convex set.
 \end{itemize}
 
-\makedefinition{Quasi-convex.}{dfn:convexOptimizationLecture5:n}{
+\makedefinition{Quasi-convex.}{dfn:convexOptimizationLecture5:600}{
 
 A function is quasi-convex if \underline{all} of its sublevle sets are convex.
 } % definition
@@ -380,25 +380,27 @@ Properties of convex functions:
 
 Note: for the last
 
-\begin{equation}\label{eqn:convexOptimizationLecture5:n}
+\begin{equation}\label{eqn:convexOptimizationLecture5:620}
 \begin{aligned}
 g &: \bbR^m \rightarrow \bbR  \\
 F &: \bbR^n \rightarrow \bbR  \\
 x &\in \bbR^m \\
 A &\in \bbR^{n \times m} \\
-b &\in \bbR^n 
+b &\in \bbR^n
 \end{aligned}
 \end{equation}
 
 Proof (of last):
 
-\begin{dmath}\label{eqn:convexOptimizationLecture5:n}
+\begin{dmath}\label{eqn:convexOptimizationLecture5:640}
 g( \theta x + (1-\theta) y )
 =
 F( \theta (A x + b) + (1-\theta) (A y + b) )
 \le
-\theta F( A x + b) + (1-\theta) F (A y + b) 
+\theta F( A x + b) + (1-\theta) F (A y + b)
 = \theta g(x) + (1-\theta) g(y).
+\end{dmath}
+\begin{dmath}\label{eqn:convexOptimizationLecture5:n}
 \end{dmath}
 
 \EndArticle
