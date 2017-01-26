@@ -1,0 +1,444 @@
+ECE1505H Convex Optimization. Lecture 4: Sets and convexity. Taught by Prof. Stark Draper
+
+<a href="http://peeterjoot.com/archives/math2017/convexOptimization4.pdf">[Click here for a PDF of this post with nicer formatting]</a>
+<h3>Disclaimer</h3>
+Peeter's lecture notes from class. These may be incoherent and rough.
+
+These are notes for the UofT course ECE1505H, Convex Optimization, taught by Prof. Stark Draper, covering [1] content.
+<h3>Today</h3>
+<ul>
+ 	<li>more on various sets: hyperplanes, half-spaces, polyhedra, balls, ellipses, norm balls, cone of PSD</li>
+ 	<li>generalize inequalities</li>
+ 	<li>operations that preserve convexity</li>
+ 	<li>separating and supporting hyperplanes.</li>
+</ul>
+<h2>Hyperplanes</h2>
+Find some \( \Bx_0 \in \mathbb{R}^n \) such that \( \Ba^\T \Bx_0 = \Bb \), so
+
+\begin{equation}\label{eqn:convexOptimizationLecture4:20}
+\begin{aligned}
+\setlr{ \Bx | \Ba^\T \Bx = \Bb }
+&amp;=
+\setlr{ \Bx | \Ba^\T \Bx = \Ba^\T \Bx_0 } \\
+&amp;=
+\setlr{ \Bx | \Ba^\T (\Bx - \Bx_0) } \\
+&amp;=
+\Bx_0 + \Ba^\perp,
+\end{aligned}
+\end{equation}
+
+where
+
+\begin{equation}\label{eqn:convexOptimizationLecture4:40}
+\Ba^\perp = \setlr{ \Bv | \Ba^\T \Bv = 0 }.
+\end{equation}
+
+[caption id="attachment_1987" align="aligncenter" width="300"]<a href="http://peeterjoot.com/wp-content/uploads/2017/01/l4Fig1.png"><img class="wp-image-1987 size-medium" src="http://peeterjoot.com/wp-content/uploads/2017/01/l4Fig1-300x220.png" width="300" height="220" /></a> fig. 1. Parallel hyperplanes.[/caption]
+
+&nbsp;
+
+Recall
+
+\begin{equation}\label{eqn:convexOptimizationLecture4:60}
+\Norm{\Bz}_\conj = \sup_\Bx \setlr{ \Bz^\T \Bx | \Norm{\Bx} \le 1 }
+\end{equation}
+
+Denote the optimizer of above as \( \Bx^\conj \). By definition
+
+\begin{equation}\label{eqn:convexOptimizationLecture4:80}
+\Bz^\T \Bx^\conj \ge \Bz^\T \Bx \quad \forall \Bx, \Norm{\Bx} \le 1
+\end{equation}
+
+This defines a half space in which the unit ball
+
+\begin{equation}\label{eqn:convexOptimizationLecture4:100}
+\setlr{ \Bx | \Bz^\T (\Bx - \Bx^\conj \le 0 }
+\end{equation}
+
+Start with the \( l_1 \) norm, duals of \( l_1 \) is \( l_\infty \)
+
+&nbsp;
+
+[caption id="attachment_1988" align="aligncenter" width="300"]<a href="http://peeterjoot.com/wp-content/uploads/2017/01/l4HalfspaceContiningUnitBallFig2.png"><img class="wp-image-1988 size-medium" src="http://peeterjoot.com/wp-content/uploads/2017/01/l4HalfspaceContiningUnitBallFig2-300x281.png" width="300" height="281" /></a> fig. 2. Half space containing unit ball.[/caption]
+
+Similar pic for \( l_\infty \), for which the dual is the \( l_1 \) norm, as sketched in fig. 3.  Here the optimizer point is at \( (1,1) \)
+
+&nbsp;
+
+[caption id="attachment_1989" align="aligncenter" width="300"]<a href="http://peeterjoot.com/wp-content/uploads/2017/01/l4LinfinityUnitBallHalfSpaceFig3.png"><img class="wp-image-1989 size-medium" src="http://peeterjoot.com/wp-content/uploads/2017/01/l4LinfinityUnitBallHalfSpaceFig3-300x276.png" width="300" height="276" /></a> fig. 3. Half space containing the unit ball for l_infinity[/caption]
+
+and a similar pic for \( l_2 \), which is sketched in fig. 4.
+
+&nbsp;
+
+[caption id="attachment_1990" align="aligncenter" width="300"]<a href="http://peeterjoot.com/wp-content/uploads/2017/01/l4L2unitballhalfplaneFig4.png"><img class="wp-image-1990 size-medium" src="http://peeterjoot.com/wp-content/uploads/2017/01/l4L2unitballhalfplaneFig4-300x243.png" width="300" height="243" /></a> fig. 4. Half space containing for l_2 unit ball.[/caption]
+
+Q: What was this optimizer point?
+<h2>Polyhedra</h2>
+\begin{equation}\label{eqn:convexOptimizationLecture4:120}
+\begin{aligned}
+\mathcal{P}
+&amp;= \setlr{ \Bx |
+\Ba_j^\T \Bx \le \Bb_j, j \in [1,m],
+\Bc_i^\T \Bx = \Bd_i, i \in [1,p]
+} \\
+&amp;=
+\setlr{ \Bx | A \Bx \le \Bb, C \Bx = d },
+\end{aligned}
+\end{equation}
+
+where the final inequality and equality are component wise.
+
+Proving \( \mathcal{P} \) is convex:
+<ul>
+ 	<li>Pick \(\Bx_1 \in \mathcal{P}\), \(\Bx_2 \in \mathcal{P} \)</li>
+ 	<li>Pick any \(\theta \in [0,1]\)</li>
+ 	<li>Test \( \theta \Bx_1 + (1-\theta) \Bx_2 \). Is it in \(\mathcal{P}\)?</li>
+</ul>
+\begin{equation}\label{eqn:convexOptimizationLecture4:140}
+\begin{aligned}
+A \lr{ \theta \Bx_1 + (1-\theta) \Bx_2 }
+&amp;=
+\theta A \Bx_1 + (1-\theta) A \Bx_2 \\
+&amp;\le
+\theta \Bb + (1-\theta) \Bb \\
+&amp;=
+\Bb.
+\end{aligned}
+\end{equation}
+<h2>Balls</h2>
+Euclidean ball for \( \Bx_c \in \mathbb{R}^n, r \in \mathbb{R} \)
+
+\begin{equation}\label{eqn:convexOptimizationLecture4:160}
+\mathcal{B}(\Bx_c, r)
+= \setlr{ \Bx | \Norm{\Bx - \Bx_c}_2 \le r },
+\end{equation}
+
+or
+\begin{equation}\label{eqn:convexOptimizationLecture4:180}
+\mathcal{B}(\Bx_c, r)
+= \setlr{ \Bx | \lr{\Bx - \Bx_c}^\T \lr{\Bx - \Bx_c} \le r^2 }.
+\end{equation}
+
+Let \( \Bx_1, \Bx_2 \), \(\theta \in [0,1]\)
+
+\begin{equation}\label{eqn:convexOptimizationLecture4:200}
+\begin{aligned}
+\Norm{ \theta \Bx_1 + (1-\theta) \Bx_2 - \Bx_c }_2
+&amp;=
+\Norm{ \theta (\Bx_1 - \Bx_c) + (1-\theta) (\Bx_2 - \Bx_c) }_2 \\
+&amp;\le
+\Norm{ \theta (\Bx_1 - \Bx_c)}_2 + \Norm{(1-\theta) (\Bx_2 - \Bx_c) }_2 \\
+&amp;=
+\Abs{\theta} \Norm{ \Bx_1 - \Bx_c}_2 + \Abs{1 -\theta} \Norm{ \Bx_2 - \Bx_c }_2 \\
+&amp;=
+\theta \Norm{ \Bx_1 - \Bx_c}_2 + \lr{1 -\theta} \Norm{ \Bx_2 - \Bx_c }_2 \\
+&amp;\le
+\theta r + (1 - \theta) r \\
+&amp;= r
+\end{aligned}
+\end{equation}
+<h2>Ellipse</h2>
+\begin{equation}\label{eqn:convexOptimizationLecture4:220}
+\mathcal{E}(\Bx_c, P)
+=
+\setlr{ \Bx | (\Bx - \Bx_c)^\T P^{-1} (\Bx - \Bx_c) \le 1 },
+\end{equation}
+
+where \( P \in S^n_{++} \).
+<ul>
+ 	<li>Euclidean ball is an ellipse with \( P = I r^2 \)</li>
+ 	<li>Ellipse is image of Euclidean ball \( \mathcal{B}(0,1) \) under affine mapping.</li>
+</ul>
+&nbsp;
+
+[caption id="attachment_1991" align="aligncenter" width="300"]<a href="http://peeterjoot.com/wp-content/uploads/2017/01/l4CircleAndEllipseFig5.png"><img class="wp-image-1991 size-medium" src="http://peeterjoot.com/wp-content/uploads/2017/01/l4CircleAndEllipseFig5-300x159.png" width="300" height="159" /></a> fig. 5. Circle and ellipse.[/caption]
+
+Given
+
+\begin{equation}\label{eqn:convexOptimizationLecture4:240}
+F(\Bu) = P^{1/2} \Bu + \Bx_c
+\end{equation}
+
+\begin{equation}\label{eqn:convexOptimizationLecture4:260}
+\begin{aligned}
+\setlr{ F(\Bu) | \Norm{\Bu}_2 \le r }
+&amp;=
+\setlr{ P^{1/2} \Bu + \Bx_c | \Bu^\T \Bu \le r^2 } \\
+&amp;=
+\setlr{ \Bx | \Bx = P^{1/2} \Bu + \Bx_c, \Bu^\T \Bu \le r^2 } \\
+&amp;=
+\setlr{ \Bx | \Bu = P^{-1/2} (\Bx - \Bx_c), \Bu^\T \Bu \le r^2 } \\
+&amp;=
+\setlr{ \Bx | (\Bx - \Bx_c)^\T P^{-1} (\Bx - \Bx_c) \le r^2 }
+\end{aligned}
+\end{equation}
+<h2>Geometry of an ellipse</h2>
+Decomposition of positive definite matrix \( P \in S^n_{++} \subset S^n \) is:
+
+\begin{equation}\label{eqn:convexOptimizationLecture4:280}
+\begin{aligned}
+P &amp;= Q \textrm{diag}(\lambda_i) Q^\T \\
+Q^\T Q &amp;= 1
+\end{aligned},
+\end{equation}
+
+where \( \lambda_i \in \mathbb{R}\), and \(\lambda_i &gt; 0 \). The ellipse is defined by
+
+\begin{equation}\label{eqn:convexOptimizationLecture4:300}
+(\Bx - \Bx_c)^\T Q \textrm{diag}(1/\lambda_i) (\Bx - \Bx_c) Q \le r^2
+\end{equation}
+
+The term \( (\Bx - \Bx_c)^\T Q \) projects \( \Bx - \Bx_c \) onto the columns of \( Q \). Those columns are perpendicular since \( Q \) is an orthogonal matrix. Let
+
+\begin{equation}\label{eqn:convexOptimizationLecture4:320}
+\tilde{\Bx} = Q^\T (\Bx - \Bx_c),
+\end{equation}
+
+this shifts the origin around \( \Bx_c \) and \( Q \) rotates into a new coordinate system. The ellipse is therefore
+
+\begin{equation}\label{eqn:convexOptimizationLecture4:340}
+\tilde{\Bx}^\T
+\begin{bmatrix}
+\inv{\lambda_1} &amp; &amp; &amp; \\
+&amp;\inv{\lambda_2} &amp; &amp; \\
+&amp; \ddots &amp; \\
+&amp; &amp; &amp; \inv{\lambda_n}
+\end{bmatrix}
+\tilde{\Bx}
+=
+\sum_{i = 1}^n \frac{\tilde{x}_i^2}{\lambda_i} \le 1.
+\end{equation}
+
+An example is sketched for \( \lambda_1 &gt; \lambda_2 \) below.
+
+&nbsp;
+
+[caption id="attachment_1992" align="aligncenter" width="300"]<a href="http://peeterjoot.com/wp-content/uploads/2017/01/l4EllipseGeometryFig6Lambda1gtLambda2.png"><img class="wp-image-1992 size-medium" src="http://peeterjoot.com/wp-content/uploads/2017/01/l4EllipseGeometryFig6Lambda1gtLambda2-300x196.png" width="300" height="196" /></a> Ellipse with \( \lambda_1 &gt; \lambda_2 \).[/caption]
+<ul>
+ 	<li>\( \lambda_i \) tells us length of the semi-major axis.</li>
+ 	<li>Larger \( \lambda_i \) means \( \tilde{x}_i^2 \) can be bigger and still satisfy constraint \( \le 1 \).</li>
+ 	<li>Volume of ellipse if proportional to \( \sqrt{ \det P } = \sqrt{ \prod_{i = 1}^n \lambda_i } \).</li>
+ 	<li>When any \( \lambda_i \rightarrow 0 \) a dimension is lost and the volume goes to zero. That removes the invertibility required.</li>
+</ul>
+Ellipses will be seen a lot in this course, since we are interested in ``bowl'' like geometries (and the ellipse is the image of a Euclidean ball).
+<h2>Norm ball.</h2>
+The norm ball
+
+\begin{equation}\label{eqn:convexOptimizationLecture4:360}
+\mathcal{B} = \setlr{ \Bx | \Norm{\Bx} \le 1 },
+\end{equation}
+
+is a convex set for all norms. Proof:
+
+Take any \( \Bx, \By \in \mathcal{B} \)
+
+\begin{equation}\label{eqn:convexOptimizationLecture4:380}
+\Norm{ \theta \Bx + (1 - \theta) \By }
+\le
+\Abs{\theta} \Norm{ \Bx } + \Abs{1 - \theta} \Norm{ \By }
+=
+\theta \Norm{ \Bx } + \lr{1 - \theta} \Norm{ \By }
+\lr
+\theta + \lr{1 - \theta}
+=
+1.
+\end{equation}
+
+This is true for any p-norm \( 1 \le p \), \( \Norm{\Bx}_p = \lr{ \sum_{i = 1}^n \Abs{x_i}^p }^{1/p} \).
+
+&nbsp;
+
+[caption id="attachment_1993" align="aligncenter" width="300"]<a href="http://peeterjoot.com/wp-content/uploads/2017/01/l4Fig7Pge1.png"><img class="wp-image-1993 size-medium" src="http://peeterjoot.com/wp-content/uploads/2017/01/l4Fig7Pge1-300x119.png" width="300" height="119" /></a> Norm ball.[/caption]
+
+The shape of a \( p &lt; 1 \) norm unit ball is sketched below (lines connecting points in such a region can exit the region).
+
+<a href="http://peeterjoot.com/wp-content/uploads/2017/01/l4PNormPLessThan1Fig7bpn.png"><img class="alignnone size-medium wp-image-1999" src="http://peeterjoot.com/wp-content/uploads/2017/01/l4PNormPLessThan1Fig7bpn-300x293.png" alt="" width="300" height="293" /></a>
+
+&nbsp;
+<h2>Cones</h2>
+Recall that \( C \) is a cone if \( \forall \Bx \in C, \theta \ge 0, \theta \Bx \in C \).
+
+Impt cone of PSD matrices
+
+\begin{equation}\label{eqn:convexOptimizationLecture4:400}
+\begin{aligned}
+S^n &amp;= \setlr{ X \in \mathbb{R}^{n \times n} | X = X^\T } \\
+S^n_{+} &amp;= \setlr{ X \in S^n | \Bv^\T X \Bv \ge 0, \quad \forall v \in \mathbb{R}^n } \\
+S^n_{++} &amp;= \setlr{ X \in S^n_{+} | \Bv^\T X \Bv &gt; 0, \quad \forall v \in \mathbb{R}^n } \\
+\end{aligned}
+\end{equation}
+
+These have respectively
+<ul>
+ 	<li>\( \lambda_i \in \mathbb{R} \)</li>
+ 	<li>\( \lambda_i \in \mathbb{R}_{+} \)</li>
+ 	<li>\( \lambda_i \in \mathbb{R}_{++} \)</li>
+</ul>
+\( S^n_{+} \) is a cone if:
+
+\( X \in S^n_{+}\), then \( \theta X \in S^n_{+}, \quad \forall \theta \ge 0 \)
+
+\begin{equation}\label{eqn:convexOptimizationLecture4:420}
+\Bv^\T (\theta X) \Bv
+= \theta \Bv^\T \Bv
+\ge 0,
+\end{equation}
+
+since \( \theta \ge 0 \) and because \( X \in S^n_{+} \).
+
+Shorthand:
+
+\begin{equation}\label{eqn:convexOptimizationLecture4:440}
+\begin{aligned}
+X &amp;\in S^n_{+} \Rightarrow X \succeq 0
+X &amp;\in S^n_{++} \Rightarrow X \succ 0.
+\end{aligned}
+\end{equation}
+
+Further \( S^n_{+} \) is a convex cone.
+
+Let \( A \in S^n_{+} \), \( B \in S^n_{+} \), \( \theta_1, \theta_2 \ge 0, \theta_1 + \theta_2 = 1 \), or \( \theta_2 = 1 - \theta_1 \).
+
+Show that \( \theta_1 A + \theta_2 B \in S^n_{+} \) :
+
+\begin{equation}\label{eqn:convexOptimizationLecture4:460}
+\Bv^\T \lr{ \theta_1 A + \theta_2 B } \Bv
+=
+\theta_1 \Bv^\T A \Bv
++\theta_2 \Bv^\T B \Bv
+\ge 0,
+\end{equation}
+
+since \( \theta_1 \ge 0, \theta_2 \ge 0, \Bv^\T A \Bv \ge 0, \Bv^\T B \Bv \ge 0 \).
+
+&nbsp;
+
+[caption id="attachment_1995" align="aligncenter" width="300"]<a href="http://peeterjoot.com/wp-content/uploads/2017/01/l4coneFig8.png"><img class="wp-image-1995 size-medium" src="http://peeterjoot.com/wp-content/uploads/2017/01/l4coneFig8-300x260.png" width="300" height="260" /></a> fig. 8. Cone.[/caption]
+
+Inequalities:
+
+Start with a proper cone \( K \subseteq \mathbb{R}^n \)
+<ul>
+ 	<li>closed, convex</li>
+ 	<li>non-empty interior (``solid'')</li>
+ 	<li>``pointed'' (contains no lines)</li>
+</ul>
+The \( K \) defines a generalized inequality in \R{n} defined as ``\(\le_K\)''
+
+Interpreting
+
+\begin{equation}\label{eqn:convexOptimizationLecture4:480}
+\begin{aligned}
+\Bx \le_K \By &amp;\leftrightarrow \By - \Bx \in K
+\Bx \end{aligned}
+\end{equation}
+
+Why pointed? Want if \( \Bx \le_K \By \) and \( \By \le_K \Bx \) with this \( K \) is a half space.
+
+Example:1: \( K = \mathbb{R}^n_{+}, \Bx \in \mathbb{R}^n, \By \in \mathbb{R}^n \)
+
+&nbsp;
+
+[caption id="attachment_1996" align="aligncenter" width="300"]<a href="http://peeterjoot.com/wp-content/uploads/2017/01/l4Fig12.png"><img class="wp-image-1996 size-medium" src="http://peeterjoot.com/wp-content/uploads/2017/01/l4Fig12-300x223.png" width="300" height="223" /></a> fig. 12. K is non-negative ``orthant''[/caption]
+
+\begin{equation}\label{eqn:convexOptimizationLecture4:500}
+\Bx \le_K \By \Rightarrow \By - \Bx \in K
+\end{equation}
+
+say:
+
+\begin{equation}\label{eqn:convexOptimizationLecture4:520}
+\begin{bmatrix}
+y_1 - x_1
+y_2 - x_2
+\end{bmatrix}
+\in R^2_{+}
+\end{equation}
+
+Also:
+
+\begin{equation}\label{eqn:convexOptimizationLecture4:540}
+K = R^1_{+}
+\end{equation}
+
+(pointed, since it contains no rays)
+
+\begin{equation}\label{eqn:convexOptimizationLecture4:560}
+\Bx \le_K \By ,
+\end{equation}
+
+with respect to \( K = \mathbb{R}^n_{+} \) means that \( x_i \le y_i \) for all \( i \in [1,n]\).
+
+Example:2: For \( K = PSD \subseteq S^n \),
+
+\begin{equation}\label{eqn:convexOptimizationLecture4:580}
+\Bx \le_K \By ,
+\end{equation}
+
+means that
+
+\begin{equation}\label{eqn:convexOptimizationLecture4:600}
+\By - \Bx \in K = S^n_{+}.
+\end{equation}
+<ul>
+ 	<li>Difference \( \By - \Bx \) is always in \( S \)</li>
+ 	<li>check if in \( K \) by checking if all eigenvalues \( \ge 0 \).</li>
+ 	<li>\( S^n_{++} \) is the interior of \( S^n_{+} \).</li>
+</ul>
+Interpretation:
+
+\begin{equation}\label{eqn:convexOptimizationLecture4:620}
+\begin{aligned}
+\Bx \le_K \By &amp;\leftrightarrow \By - \Bx \in K \\
+\Bx \end{aligned}
+\end{equation}
+
+We'll use these with vectors and matrices so often the \( K \) subscript will often be dropped, writing instead (for vectors)
+
+\begin{equation}\label{eqn:convexOptimizationLecture4:640}
+\begin{aligned}
+\Bx \le \By &amp;\leftrightarrow \By - \Bx \in \mathbb{R}^n_{+} \\
+\Bx &lt; \By &amp;\leftrightarrow \By - \Bx \in \textrm{int} \mathbb{R}^n_{++}
+\end{aligned}
+\end{equation}
+
+and for matrices
+
+\begin{equation}\label{eqn:convexOptimizationLecture4:660}
+\begin{aligned}
+\Bx \le \By &amp;\leftrightarrow \By - \Bx \in S^n_{+} \\
+\Bx &lt; \By &amp;\leftrightarrow \By - \Bx \in \textrm{int} S^n_{++}.
+\end{aligned}
+\end{equation}
+<h2>Intersection</h2>
+Take the intersection of (perhaps infinitely many) sets \( S_\alpha \):
+
+If \( S_\alpha \) is (affine,convex, conic) for all \( \alpha \in A \) then
+
+\begin{equation}\label{eqn:convexOptimizationLecture4:680}
+\cap_\alpha S_\alpha
+\end{equation}
+
+is (affine,convex, conic). To prove in homework:
+
+\begin{equation}\label{eqn:convexOptimizationLecture4:700}
+\mathcal{P} = \setlr{ \Bx | \Ba_i^\T \Bx \le \Bb_i, \Bc_j^\T \Bx = \Bd_j, \quad \forall i \cdots j }
+\end{equation}
+
+This is convex since the intersection of a bunch of hyperplane and half space constraints.
+<ol>
+ 	<li>If \( S \subseteq \mathbb{R}^n \) is convex then\begin{equation}\label{eqn:convexOptimizationLecture4:720}
+F(S) = \setlr{ F(\Bx) | \Bx \in S }
+\end{equation}is convex.</li>
+ 	<li>If \( S \subseteq \mathbb{R}^m \) then\begin{equation}\label{eqn:convexOptimizationLecture4:740}
+F^{-1}(S) = \setlr{ \Bx | F(\Bx) \in S }
+\end{equation}is convex. Such a mapping is sketched in fig. 14.</li>
+</ol>
+&nbsp;
+
+[caption id="attachment_1997" align="aligncenter" width="300"]<a href="http://peeterjoot.com/wp-content/uploads/2017/01/l4Fig14.png"><img class="wp-image-1997 size-medium" src="http://peeterjoot.com/wp-content/uploads/2017/01/l4Fig14-300x228.png" width="300" height="228" /></a> fig. 14. Mapping functions of sets.[/caption]
+<h1>References</h1>
+[1] Stephen Boyd and Lieven Vandenberghe. <em>Convex optimization</em>. Cambridge university press, 2004.
+
+[mathjax]

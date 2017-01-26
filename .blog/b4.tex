@@ -1,7 +1,36 @@
-%
-% Copyright © 2017 Peeter Joot.  All Rights Reserved.
-% Licenced as described in the file LICENSE under the root directory of this GIT repository.
-%
+\input{../latex/blogpost.tex}
+\renewcommand{\basename}{convexOptimization4}
+\renewcommand{\dirname}{notes/ece1505/}
+\newcommand{\keywords}{ECE1505H}
+\input{../latex/peeter_prologue_print2.tex}
+
+\usepackage{ece1505}
+\usepackage{peeters_braket}
+\usepackage{peeters_layout_exercise}
+\usepackage{peeters_figures}
+\usepackage{mathtools}
+\usepackage{siunitx}
+\usepackage{macros_cal}
+
+\beginArtNoToc
+\generatetitle{ECE1505H Convex Optimization.  Lecture 4: Sets and convexity.  Taught by Prof.\ Stark Draper}
+\label{chap:convexOptimization4}
+
+\paragraph{Disclaimer}
+
+Peeter's lecture notes from class.  These may be incoherent and rough.
+
+These are notes for the UofT course ECE1505H, Convex Optimization, taught by Prof. Stark Draper, covering \citep{boyd2004convex} content.
+
+\paragraph{Today}
+
+\begin{itemize}
+\item more on various sets: hyperplanes, half-spaces, polyhedra, balls, ellipses, norm balls, cone of PSD
+\item generalize inequalities
+\item operations that preserve convexity
+\item separating and supporting hyperplanes.
+\end{itemize}
+
 \section{Hyperplanes}
 
 Find some \( \Bx_0 \in \bbR^n \) such that \( \Ba^\T \Bx_0 = \Bb \), so
@@ -24,8 +53,6 @@ where
 \Ba^\perp = \setlr{ \Bv | \Ba^\T \Bv = 0 }.
 \end{equation}
 
-%F1
-%\cref{fig:l4:l4Fig1}.
 \imageFigure{../figures/ece1505-convex-optimization/l4Fig1}{Parallel hyperplanes.}{fig:l4:l4Fig1}{0.2}
 
 Recall
@@ -48,8 +75,6 @@ This defines a half space in which the unit ball
 
 Start with the \( l_1 \) norm, duals of \( l_1 \) is \( l_\infty \)
 
-%F2
-%\cref{fig:l4HalfspaceContiningUnitBall:l4HalfspaceContiningUnitBallFig2}.
 \imageFigure{../figures/ece1505-convex-optimization/l4HalfspaceContiningUnitBallFig2}{Half space containing unit ball.}{fig:l4HalfspaceContiningUnitBall:l4HalfspaceContiningUnitBallFig2}{0.2}
 
 Similar pic for \( l_\infty \), for which the dual is the \( l_1 \) norm, as sketched in
@@ -67,12 +92,15 @@ Q: What was this optimizer point?
 \section{Polyhedra}
 
 \begin{equation}\label{eqn:convexOptimizationLecture4:120}
-\calP = \setlr{ \Bx |
+\begin{aligned}
+\calP 
+&= \setlr{ \Bx |
 \Ba_j^\T \Bx \le \Bb_j, j \in [1,m],
 \Bc_i^\T \Bx = \Bd_i, i \in [1,p]
-}
-=
+} \\
+&=
 \setlr{ \Bx | A \Bx \le \Bb, C \Bx = d },
+\end{aligned}
 \end{equation}
 
 where the final inequality and equality are component wise.
@@ -86,13 +114,15 @@ Proving \( \calP \) is convex:
 \end{itemize}
 
 \begin{dmath}\label{eqn:convexOptimizationLecture4:140}
+\begin{aligned}
 A \lr{ \theta \Bx_1 + (1-\theta) \Bx_2 }
-=
-\theta A \Bx_1 + (1-\theta) A \Bx_2
-\le
-\theta \Bb + (1-\theta) \Bb
-=
+&=
+\theta A \Bx_1 + (1-\theta) A \Bx_2 \\
+&\le
+\theta \Bb + (1-\theta) \Bb \\
+&=
 \Bb.
+\end{aligned}
 \end{dmath}
 
 \section{Balls}
@@ -113,18 +143,20 @@ or
 Let \( \Bx_1, \Bx_2 \), \(\theta \in [0,1]\)
 
 \begin{dmath}\label{eqn:convexOptimizationLecture4:200}
+\begin{aligned}
 \Norm{ \theta \Bx_1 + (1-\theta) \Bx_2 - \Bx_c }_2
-=
-\Norm{ \theta (\Bx_1 - \Bx_c) + (1-\theta) (\Bx_2 - \Bx_c) }_2
-\le
-\Norm{ \theta (\Bx_1 - \Bx_c)}_2 + \Norm{(1-\theta) (\Bx_2 - \Bx_c) }_2
-=
-\Abs{\theta} \Norm{ \Bx_1 - \Bx_c}_2 + \Abs{1 -\theta} \Norm{ \Bx_2 - \Bx_c }_2
-=
-\theta \Norm{ \Bx_1 - \Bx_c}_2 + \lr{1 -\theta} \Norm{ \Bx_2 - \Bx_c }_2
-\le
-\theta r + (1 - \theta) r
-= r
+&=
+\Norm{ \theta (\Bx_1 - \Bx_c) + (1-\theta) (\Bx_2 - \Bx_c) }_2 \\
+&\le
+\Norm{ \theta (\Bx_1 - \Bx_c)}_2 + \Norm{(1-\theta) (\Bx_2 - \Bx_c) }_2 \\
+&=
+\Abs{\theta} \Norm{ \Bx_1 - \Bx_c}_2 + \Abs{1 -\theta} \Norm{ \Bx_2 - \Bx_c }_2 \\
+&=
+\theta \Norm{ \Bx_1 - \Bx_c}_2 + \lr{1 -\theta} \Norm{ \Bx_2 - \Bx_c }_2 \\
+&\le
+\theta r + (1 - \theta) r \\
+&= r
+\end{aligned}
 \end{dmath}
 
 \section{Ellipse}
@@ -142,7 +174,6 @@ where \( P \in S^n_{++} \).
 \item Ellipse is image of Euclidean ball \( \calB(0,1) \) under affine mapping.
 \end{itemize}
 
-%\cref{fig:l4CircleAndEllipse:l4CircleAndEllipseFig5}.
 \imageFigure{../figures/ece1505-convex-optimization/l4CircleAndEllipseFig5}{Circle and ellipse.}{fig:l4CircleAndEllipse:l4CircleAndEllipseFig5}{0.2}
 
 Given
@@ -167,7 +198,6 @@ F(\Bu) = P^{1/2} \Bu + \Bx_c
 
 \section{Geometry of an ellipse}
 
-%\succeq
 Decomposition of positive definite matrix \( P \in S^n_{++} \subset S^n \) is:
 
 \begin{dmath}\label{eqn:convexOptimizationLecture4:280}
@@ -194,7 +224,6 @@ Let
 \end{equation}
 
 this shifts the origin around \( \Bx_c \) and \( Q \) rotates into a new coordinate system.
-
 The ellipse is therefore
 
 \begin{equation}\label{eqn:convexOptimizationLecture4:340}
@@ -211,6 +240,7 @@ The ellipse is therefore
 \end{equation}
 
 An example is sketched for \( \lambda_1 > \lambda_2 \) in \cref{fig:l4EllipseGeometry:l4EllipseGeometryFig6Lambda1gtLambda2}.
+
 \imageFigure{../figures/ece1505-convex-optimization/l4EllipseGeometryFig6Lambda1gtLambda2}{Ellipse with \( \lambda_1 > \lambda_2 \).}{fig:l4EllipseGeometry:l4EllipseGeometryFig6Lambda1gtLambda2}{0.2}
 
 \begin{itemize}
@@ -248,13 +278,10 @@ Take any \( \Bx, \By \in \calB \)
 
 This is true for any p-norm \( 1 \le p \), \( \Norm{\Bx}_p = \lr{ \sum_{i = 1}^n \Abs{x_i}^p }^{1/p} \).
 
-%F7
-%\cref{fig:l4:l4Fig7Pge1}.
 \imageFigure{../figures/ece1505-convex-optimization/l4Fig7Pge1}{Norm ball.}{fig:l4:l4Fig7Pge1}{0.2}
 
 The shape of a \( p < 1 \) norm unit ball is sketched in \cref{fig:l4PlessThan1:l4PlessThan1Fig7b} (lines connecting points in such a region can exit the region).
 
-%\imageFigure{../figures/ece1505-convex-optimization/l4PlessThan1Fig7b}{CAPTION: l4PlessThan1Fig7b}{fig:l4PlessThan1:l4PlessThan1Fig7b}{0.2}
 \imageFigure{../figures/ece1505-convex-optimization/l4PNormPLessThan1Fig7b}{Unit ball for \( l_{0.6} \) ``p-norm''.}{fig:l4PlessThan1:l4PlessThan1Fig7b}{0.2}
 
 \section{Cones}
@@ -293,7 +320,6 @@ since \( \theta \ge 0 \) and because \( X \in S^n_{+} \).
 
 Shorthand:
 
-% succeq: curly \ge
 \begin{dmath}\label{eqn:convexOptimizationLecture4:440}
 \begin{aligned}
 X &\in S^n_{+} \implies X \succeq 0
@@ -317,8 +343,6 @@ Show that \( \theta_1 A + \theta_2 B \in S^n_{+} \) :
 
 since \( \theta_1 \ge 0, \theta_2 \ge 0, \Bv^\T A \Bv \ge 0, \Bv^\T B \Bv \ge 0 \).
 
-%F8
-%\cref{fig:l4cone:l4coneFig8}.
 \imageFigure{../figures/ece1505-convex-optimization/l4coneFig8}{Cone.}{fig:l4cone:l4coneFig8}{0.2}
 
 Inequalities:
@@ -331,10 +355,6 @@ Start with a proper cone \( K \subseteq \bbR^n \)
 \item ``pointed'' (contains no lines)
 \end{itemize}
 
-%F9
-%\cref{fig:l4cone:l4coneFig9}.
-%\imageFigure{../figures/ece1505-convex-optimization/l4coneFig9}{CAPTION: l4coneFig9}{fig:l4cone:l4coneFig9}{0.2}
-
 The \( K \) defines a generalized inequality in \R{n} defined as ``\(\le_K\)''
 
 Interpreting
@@ -346,22 +366,10 @@ Interpreting
 \end{aligned}
 \end{dmath}
 
-%F10
-%\cref{fig:l4Cone:l4ConeFig10a}.
-%\imageFigure{../figures/ece1505-convex-optimization/l4ConeFig10a}{CAPTION: l4ConeFig10a}{fig:l4Cone:l4ConeFig10a}{0.2}
-%\cref{fig:l4inequalityK:l4inequalityKFig10b}.
-%\imageFigure{../figures/ece1505-convex-optimization/l4inequalityKFig10b}{CAPTION: l4inequalityKFig10b}{fig:l4inequalityK:l4inequalityKFig10b}{0.2}
-
 Why pointed?  Want if \( \Bx \le_K \By \) and \( \By \le_K \Bx \) with this \( K \) is a half space.
-
-%F11
-%\cref{fig:l4region:l4regionFig11}.
-%\imageFigure{../figures/ece1505-convex-optimization/l4regionFig11}{CAPTION: l4regionFig11}{fig:l4region:l4regionFig11}{0.2}
 
 Example:1: \( K = \bbR^n_{+}, \Bx \in \bbR^n, \By \in \bbR^n \)
 
-%F12: K is non-negative ``orthant''.
-%\cref{fig:l4:l4Fig12}.
 \imageFigure{../figures/ece1505-convex-optimization/l4Fig12}{\(K\) is non-negative ``orthant''}{fig:l4:l4Fig12}{0.2}
 
 \begin{equation}\label{eqn:convexOptimizationLecture4:500}
@@ -383,10 +391,6 @@ Also:
 \begin{dmath}\label{eqn:convexOptimizationLecture4:540}
 K = R^1_{+}
 \end{dmath}
-
-%F13
-%\cref{fig:l4:l4Fig13}.
-%\imageFigure{../figures/ece1505-convex-optimization/l4Fig13}{CAPTION: l4Fig13}{fig:l4:l4Fig13}{0.2}
 
 (pointed, since it contains no rays)
 
@@ -447,16 +451,11 @@ Take the intersection of (perhaps infinitely many) sets \( S_\alpha \):
 
 If \( S_\alpha \) is (affine,convex, conic) for all \( \alpha \in A \) then
 
-%(upside down U)
 \begin{dmath}\label{eqn:convexOptimizationLecture4:680}
 \cap_\alpha S_\alpha
 \end{dmath}
 
-is
-
-(affine,convex, conic).
-
-To prove in homework:
+is (affine,convex, conic).  To prove in homework:
 
 \begin{equation}\label{eqn:convexOptimizationLecture4:700}
 \calP = \setlr{ \Bx | \Ba_i^\T \Bx \le \Bb_i, \Bc_j^\T \Bx = \Bd_j, \quad \forall i \cdots j }
@@ -481,5 +480,6 @@ F^{-1}(S) = \setlr{ \Bx | F(\Bx) \in S }
 is convex.  Such a mapping is sketched in \cref{fig:l4:l4Fig14}.
 \end{enumerate}
 
-%F14
 \imageFigure{../figures/ece1505-convex-optimization/l4Fig14}{Mapping functions of sets.}{fig:l4:l4Fig14}{0.2}
+
+\EndArticle

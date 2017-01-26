@@ -1,20 +1,46 @@
-%
-% Copyright © 2017 Peeter Joot.  All Rights Reserved.
-% Licenced as described in the file LICENSE under the root directory of this GIT repository.
-%
-%\chapter{Sets, epigraphs, quasi-convexity, and sublevel sets}
+\input{../latex/blogpost.tex}
+\renewcommand{\basename}{convexOptimization5}
+\renewcommand{\dirname}{notes/ece1505/}
+\newcommand{\keywords}{ECE1505H}
+\input{../latex/peeter_prologue_print2.tex}
+
+\usepackage{ece1505}
+\usepackage{peeters_braket}
+\usepackage{peeters_layout_exercise}
+\usepackage{peeters_figures}
+\usepackage{mathtools}
+\usepackage{siunitx}
+\usepackage{macros_cal}
+\usepackage{enumerate}
+
+\beginArtNoToc
+\generatetitle{ECE1505H Convex Optimization.  Lecture 5: Sets, epigraphs, quasi-convexity, and sublevel sets.  Taught by Prof.\ Stark Draper}
 \label{chap:convexOptimization5}
 
-%%% from last class:
-%%\section{Clarification}
-%%
-%%\begin{equation}\label{eqn:convexOptimizationLecture5:20}
-%%\Bx \le_K \By \mathif \By - \Bx \in K
-%%\end{equation}
-%%
-%%%\cref{fig:l5:l5Fig1c}.
-%%\imageFigure{../figures/ece1505-convex-optimization/l5Fig1c}{}{fig:l5:l5Fig1c}{0.2}
-%%
+\section{Disclaimer}
+
+Peeter's lecture notes from class.  These may be incoherent and rough.
+
+These are notes for the UofT course ECE1505H, Convex Optimization, taught by Prof. Stark Draper, from \citep{boyd2004convex}.
+
+\section{Last time}
+
+\begin{itemize}
+\item examples of sets: planes, half spaces, balls, ellipses, cone of positive semi-definite matrices
+\item generalized inequalities
+\item examples of convexity preserving operations
+\end{itemize}
+
+\section{Today}
+
+\begin{itemize}
+\item more examples of convexity preserving operations
+\item separating and supporting hyperplanes
+\item basic definitions of convex functions
+\item epigraphs, quasi-convexity, sublevel sets
+\item first and second order conditions for convexity of differentiable functions.
+\end{itemize}
+
 \section{Operations that preserve convexity}
 
 If \( S_\alpha \) is convex \( \forall \alpha \in A \), then
@@ -84,11 +110,13 @@ Example :
 is convex.  This can be seen by writing
 
 \begin{equation}\label{eqn:convexOptimizationLecture5:200}
+\begin{aligned}
 \setlr{ \Bx | \Norm{ A \Bx + \Bb } \le 1 }
-=
-\setlr{ \Bx | \Norm{ F(\Bx) } \le 1 }
-=
+&=
+\setlr{ \Bx | \Norm{ F(\Bx) } \le 1 } \\
+&=
 \setlr{ \Bx | F(\Bx) \in \calB  },
+\end{aligned}
 \end{equation}
 
 where \( \calB = \setlr{ \By | \Norm{\By} \le 1 } \).  This is the pre-image (under \(F()\)) of a unit norm ball.
@@ -214,12 +242,8 @@ F(\theta \Bx + (1-\theta) \By ) < \theta F(\Bx) + (1-theta) F(\By).
 \item Strictly concave function \( F \) means \( -F \) is strictly convex.
 \item Examples:
 
-%\cref{fig:l5:l5Fig6a}.
 \imageFigure{../figures/ece1505-convex-optimization/l5Fig6a}{Not convex or concave.}{fig:l5:l5Fig6a}{0.2}
-%\cref{fig:l5:l5Fig6b}.
 \imageFigure{../figures/ece1505-convex-optimization/l5Fig6b}{Not strictly convex}{fig:l5:l5Fig6b}{0.2}
-%F6a: not convex or concave.
-%F6b: not strictly convex (understand).
 \end{itemize}
 
 \makedefinition{Epigraph of a function}{dfn:convexOptimizationLecture5:400}{
@@ -233,8 +257,6 @@ The epigraph \( \epi F \) of a function \( F : \bbR^n \rightarrow \bbR \) is
 where \( \Bx \in \bbR^n, t \in \bbR \).
 } % definition
 
-%F7
-%\cref{fig:l5:l5Fig7}.
 \imageFigure{../figures/ece1505-convex-optimization/l5Fig7}{Epigraph.}{fig:l5:l5Fig7}{0.3}
 
 \maketheorem{Convexity and epigraph.}{thm:convexOptimizationLecture5:420}{
@@ -314,10 +336,7 @@ C(\alpha) = \setlr{ \Bx \in \dom F | F(\Bx) \le \alpha }
 \end{equation*}
 } % definition
 
-%F11
-%\cref{fig:l5:l5Fig11a}.
 \imageFigure{../figures/ece1505-convex-optimization/l5Fig11a}{Convex sublevel.}{fig:l5:l5Fig11a}{0.2}
-%\cref{fig:l5:l5Fig11b}.
 \imageFigure{../figures/ece1505-convex-optimization/l5Fig11b}{Non-convex sublevel.}{fig:l5:l5Fig11b}{0.2}
 
 \maketheorem{}{thm:convexOptimizationLecture5:560}{
@@ -382,10 +401,14 @@ A &\in \bbR^{n \times m} \\
 Proof (of last):
 
 \begin{dmath}\label{eqn:convexOptimizationLecture5:640}
+\begin{aligned}
 g( \theta \Bx + (1-\theta) \By )
-=
-F( \theta (A \Bx + \Bb) + (1-\theta) (A \By + \Bb) )
-\le
-\theta F( A \Bx + \Bb) + (1-\theta) F (A \By + \Bb)
-= \theta g(\Bx) + (1-\theta) g(\By).
+&=
+F( \theta (A \Bx + \Bb) + (1-\theta) (A \By + \Bb) ) \\
+&\le
+\theta F( A \Bx + \Bb) + (1-\theta) F (A \By + \Bb) \\
+&= \theta g(\Bx) + (1-\theta) g(\By).
+\end{aligned}
 \end{dmath}
+
+\EndArticle

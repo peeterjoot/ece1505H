@@ -1,0 +1,344 @@
+<a href="http://peeterjoot.com/archives/math2017//convexOptimization5.pdf">[Click here for a PDF of this post with nicer formatting]</a>
+<h2>Disclaimer</h2>
+Peeter's lecture notes from class. These may be incoherent and rough.
+
+These are notes for the UofT course ECE1505H, Convex Optimization, taught by Prof. Stark Draper, from [1].
+<h2>Last time</h2>
+<ul>
+ 	<li>examples of sets: planes, half spaces, balls, ellipses, cone of positive semi-definite matrices</li>
+ 	<li>generalized inequalities</li>
+ 	<li>examples of convexity preserving operations</li>
+</ul>
+<h2>Today</h2>
+<ul>
+ 	<li>more examples of convexity preserving operations</li>
+ 	<li>separating and supporting hyperplanes</li>
+ 	<li>basic definitions of convex functions</li>
+ 	<li>epigraphs, quasi-convexity, sublevel sets</li>
+ 	<li>first and second order conditions for convexity of differentiable functions.</li>
+</ul>
+<h2>Operations that preserve convexity</h2>
+If \( S_\alpha \) is convex \( \forall \alpha \in A \), then
+
+\begin{equation}\label{eqn:convexOptimizationLecture5:40}
+\cup_{\alpha \in A} S_\alpha,
+\end{equation}
+
+is convex.
+
+Example:
+
+\begin{equation}\label{eqn:convexOptimizationLecture5:60}
+F(\Bx) = A \Bx + \Bb
+\end{equation}
+
+\begin{equation}\label{eqn:convexOptimizationLecture5:80}
+\begin{aligned}
+\Bx &amp;\in \mathbb{R}^n \\
+A &amp;\in \mathbb{R}^{m \times n} \\
+F &amp;: \mathbb{R}^{n} \rightarrow \mathbb{R}^m \\
+\Bb &amp;\in \mathbb{R}^m
+\end{aligned}
+\end{equation}
+<ol>
+ 	<li>If \( S \in \mathbb{R}^n \) is convex, then\begin{equation}\label{eqn:convexOptimizationLecture5:100}
+F(S) = \setlr{ F(\Bx) | \Bx \in S }
+\end{equation}is convex if \( F \) is affine.</li>
+ 	<li>If \( S \in \mathbb{R}^m \) is convex, then\begin{equation}\label{eqn:convexOptimizationLecture5:120}
+F^{-1}(S) = \setlr{ \Bx | F(\Bx) \in S }
+\end{equation}
+
+is convex.</li>
+</ol>
+Example:
+
+\begin{equation}\label{eqn:convexOptimizationLecture5:140}
+\setlr{ \By | \By = A \Bx + \Bb, \Norm{\Bx} \le 1}
+\end{equation}
+
+is convex. Here \( A \Bx + \Bb \) is an affine function (\(F(\Bx)\). This is the image of a (convex) unit ball, through an affine map.
+
+Earlier saw when defining ellipses
+
+\begin{equation}\label{eqn:convexOptimizationLecture5:160}
+\By = P^{1/2} \Bx + \Bx_c
+\end{equation}
+
+Example :
+
+\begin{equation}\label{eqn:convexOptimizationLecture5:180}
+\setlr{ \Bx | \Norm{ A \Bx + \Bb } \le 1 },
+\end{equation}
+
+is convex. This can be seen by writing
+
+\begin{equation}\label{eqn:convexOptimizationLecture5:200}
+\begin{aligned}
+\setlr{ \Bx | \Norm{ A \Bx + \Bb } \le 1 }
+&amp;=
+\setlr{ \Bx | \Norm{ F(\Bx) } \le 1 } \\
+&amp;=
+\setlr{ \Bx | F(\Bx) \in \mathcal{B} },
+\end{aligned}
+\end{equation}
+
+where \( \mathcal{B} = \setlr{ \By | \Norm{\By} \le 1 } \). This is the pre-image (under \(F()\)) of a unit norm ball.
+
+Example:
+
+\begin{equation}\label{eqn:convexOptimizationLecture5:220}
+\setlr{ \Bx \in \mathbb{R}^n | x_1 A_1 + x_2 A_2 + \cdots x_n A_n \le \mathcal{B} }
+\end{equation}
+
+where \( A_i \in S^m \) and \( \mathcal{B} \in S^m \), and the inequality is a matrix inequality. This is a convex set. The constraint is a ``linear matrix inequality'' (LMI).
+
+This has to do with an affine map:
+
+\begin{equation}\label{eqn:convexOptimizationLecture5:240}
+F(\Bx) = B - 1 x_1 A_1 - x_2 A_2 - \cdots x_n A_n \ge 0
+\end{equation}
+
+(positive semi-definite inequality). This is a mapping
+
+\begin{equation}\label{eqn:convexOptimizationLecture5:480}
+F : \mathbb{R}^n \rightarrow S^m,
+\end{equation}
+
+since all \( A_i \) and \( B \) are in \( S^m \).
+
+This \( F(\Bx) = B - A(\Bx) \) is a constant and a factor linear in x, so is affine. Can be written
+
+\begin{equation}\label{eqn:convexOptimizationLecture5:260}
+\setlr{ \Bx | B - A(\Bx) \ge 0 }
+=
+\setlr{ \Bx | B - A(\Bx) \in S^m_{+} }
+\end{equation}
+
+This is a pre-image of a cone of PSD matrices, which is convex. Therefore, this is a convex set.
+<h2>Separating hyperplanes</h2>
+Theorem: Separating hyperplanes
+
+If \( S, T \subseteq \mathbb{R}^n \) are convex and disjoint
+i.e. \( S \cup T = 0\), then
+there exists on \( \Ba \in \mathbb{R}^n \) \( \Ba \ne 0 \) and a \( \Bb \in \mathbb{R}^n \) such that
+
+\begin{equation*}
+\Ba^\T \Bx \ge \Bb \, \forall \Bx \in S
+\end{equation*}
+
+and
+\begin{equation*}
+\Ba^\T \Bx &lt; \Bb \,\forall \Bx \in T.
+\end{equation*}
+
+An example of a hyperplanes that separates two sets and two sets that are not separable is sketched in fig 1.1
+
+<a href="http://peeterjoot.com/wp-content/uploads/2017/01/Screen-Shot-2017-01-25-at-10.55.05-PM.png"><img class="alignnone size-medium wp-image-2006" src="http://peeterjoot.com/wp-content/uploads/2017/01/Screen-Shot-2017-01-25-at-10.55.05-PM-300x148.png" alt="" width="300" height="148" /></a>
+
+Proof in the book.
+
+Theorem: Supporting hyperplane
+If \( S \) is convex then \( \forall x_0 \in \partial S = \textrm{cl}(S) \ \textrm{int}(S) \), where
+\( \partial S \) is the boundary of \( S \), then \( \exists \) an \( \Ba \ne 0 \in \mathbb{R}^n \) such that \( \Ba^\T \Bx \le \Ba^\T x_0 \, \forall \Bx \in S \).
+
+Here \( \ \) denotes ``without''.
+
+An example is sketched in fig. 3, for which
+
+[caption id="attachment_2007" align="alignnone" width="300"]<a href="http://peeterjoot.com/wp-content/uploads/2017/01/l5Fig3.png"><img class="wp-image-2007 size-medium" src="http://peeterjoot.com/wp-content/uploads/2017/01/l5Fig3-300x272.png" width="300" height="272" /></a> fig. 3. Supporting hyperplane.[/caption]
+<ul>
+ 	<li>The vector \( \Ba \) perpendicular to tangent plane.</li>
+ 	<li>inner product \( \Ba^\T (\Bx - \Bx_0) \le 0 \).</li>
+</ul>
+A set with a supporting hyperplane is sketched in fig 4a whereas fig 4b shows that there is not necessarily a unique supporting hyperplane at any given point, even if \( S \) is convex.
+
+&nbsp;
+
+[caption id="attachment_2008" align="alignnone" width="300"]<a href="http://peeterjoot.com/wp-content/uploads/2017/01/l5Fig4a.png"><img class="wp-image-2008 size-medium" src="http://peeterjoot.com/wp-content/uploads/2017/01/l5Fig4a-300x266.png" width="300" height="266" /></a> fig 4a. Set with supporting hyperplane.[/caption]
+
+&nbsp;
+
+[caption id="attachment_2009" align="alignnone" width="300"]<a href="http://peeterjoot.com/wp-content/uploads/2017/01/l5Fig4b.png"><img class="wp-image-2009 size-medium" src="http://peeterjoot.com/wp-content/uploads/2017/01/l5Fig4b-300x255.png" width="300" height="255" /></a> fig 4b. No unique supporting hyperplane possible.[/caption]
+<h2>basic definitions of convex functions</h2>
+Theorem: Convex functions
+If \( F : \mathbb{R}^n \rightarrow \mathbb{R} \) is defined on a convex domain (i.e. \( \textrm{dom} F \subseteq \mathbb{R}^n \) is a convex set), then \( F \) is convex if \( \forall \Bx, \By \in \textrm{dom} F \), \( \forall \theta \in [0,1] \in \mathbb{R} \)
+
+\begin{equation}\label{eqn:convexOptimizationLecture5:340}
+F( \theta \Bx + (1-\theta) \By \le \theta F(\Bx) + (1-\theta) F(\By)
+\end{equation}
+
+An example is sketched in fig. 5.
+
+&nbsp;
+
+[caption id="attachment_2010" align="alignnone" width="300"]<a href="http://peeterjoot.com/wp-content/uploads/2017/01/l5Fig5.png"><img class="wp-image-2010 size-medium" src="http://peeterjoot.com/wp-content/uploads/2017/01/l5Fig5-300x192.png" width="300" height="192" /></a> fig. 5. Example of convex function.[/caption]
+
+Remarks
+<ul>
+ 	<li>Require \( \textrm{dom} F \) to be a convex set. This is required so that the function at the point \( \theta u + (1-\theta) v \) can be evaluated. i.e. so that \( F(\theta u + (1-\theta) v) \) is well defined. Example: \( \textrm{dom} F = (-\infty, 0] \cup [1, \infty) \) is not okay, because a linear combination in \( (0,1) \) would be undesirable.</li>
+ 	<li>Parameter \( \theta \) is ``how much up'' the line segment connecting \( (u, F(u) \) and \( (v, F(v) \). This line segment never below the bottom of the bowl.
+The function is \underlineAndIndex{concave}, if \( -F \) is convex.
+i.e. If the convex function is flipped upside down. That is\begin{equation}\label{eqn:convexOptimizationLecture5:360}
+F(\theta \Bx + (1-\theta) \By ) \ge \theta F(\Bx) + (1-\theta) F(\By) \,\forall \Bx,\By \in \textrm{dom} F, \theta \in [0,1].
+\end{equation}</li>
+ 	<li>a ``strictly'' convex function means \(\forall \theta \in [0,1] \)\begin{equation}\label{eqn:convexOptimizationLecture5:380}
+F(\theta \Bx + (1-\theta) \By ) &lt; \theta F(\Bx) + (1-theta) F(\By).
+\end{equation}</li>
+ 	<li>Strictly concave function \( F \) means \( -F \) is strictly convex.</li>
+ 	<li>Examples:\imageFigure{../figures/ece1505-convex-optimization/l5Fig6a}{}{fig:l5:l5Fig6a}{0.2}
+
+[caption id="attachment_2011" align="alignnone" width="300"]<a href="http://peeterjoot.com/wp-content/uploads/2017/01/l5Fig6a.png"><img class="wp-image-2011 size-medium" src="http://peeterjoot.com/wp-content/uploads/2017/01/l5Fig6a-300x236.png" width="300" height="236" /></a> fig 6a. Not convex or concave.[/caption]
+
+&nbsp;
+
+[caption id="attachment_2012" align="alignnone" width="300"]<a href="http://peeterjoot.com/wp-content/uploads/2017/01/l5Fig6b.png"><img class="wp-image-2012 size-medium" src="http://peeterjoot.com/wp-content/uploads/2017/01/l5Fig6b-300x265.png" width="300" height="265" /></a> fig 6b. Not strictly convex[/caption]</li>
+</ul>
+Definition: Epigraph of a function
+
+The epigraph \( \textrm{epi} F \) of a function \( F : \mathbb{R}^n \rightarrow \mathbb{R} \) is
+
+\begin{equation*}
+\textrm{epi} F = \setlr{ (\Bx,t) \in \mathbb{R}^{n +1} | \Bx \in \textrm{dom} F, t \ge F(\Bx) },
+\end{equation*}
+
+where \( \Bx \in \mathbb{R}^n, t \in \mathbb{R} \).
+
+&nbsp;
+
+[caption id="attachment_2013" align="alignnone" width="300"]<a href="http://peeterjoot.com/wp-content/uploads/2017/01/l5Fig7.png"><img class="wp-image-2013 size-medium" src="http://peeterjoot.com/wp-content/uploads/2017/01/l5Fig7-300x300.png" width="300" height="300" /></a> fig. 7. Epigraph.[/caption]
+
+Theorem: Convexity and epigraph.
+If \( F \) is convex implies \( \textrm{epi} F \) is a convex set.
+
+Proof:
+
+For convex function, a line segment connecting any 2 points on function is above the function. i.e. it is \( \textrm{epi} F \).
+
+Many authors will go the other way around, showing \ref{dfn:convexOptimizationLecture5:400} from \ref{thm:convexOptimizationLecture5:420}. That is:
+
+Pick any 2 points in \( \textrm{epi} F \), \( (\Bx,\mu) \in \textrm{epi} F\) and \( (\By, \nu) \in \textrm{epi} F \). Consider convex combination
+
+\begin{equation}\label{eqn:convexOptimizationLecture5:420}
+\theta( \Bx, \mu ) + (1-\theta) (\By, \nu) =
+(\theta \Bx (1-\theta) \By, \theta \mu (1-\theta) \nu )
+\in \textrm{epi} F,
+\end{equation}
+
+since \( \textrm{epi} F \) is a convex set.
+
+By definition of \( \textrm{epi} F \)
+
+\begin{equation}\label{eqn:convexOptimizationLecture5:440}
+F( \theta \Bx (1-\theta) \By ) \le \theta \mu (1-\theta) \nu.
+\end{equation}
+
+Picking \( \mu = F(\Bx), \nu = F(\By) \) gives
+\begin{equation}\label{eqn:convexOptimizationLecture5:460}
+F( \theta \Bx (1-\theta) \By ) \le \theta F(\Bx) (1-\theta) F(\By).
+\end{equation}
+<h2>Extended value function</h2>
+Sometimes convenient to work with ``extended value function''
+
+\begin{equation}\label{eqn:convexOptimizationLecture5:500}
+\tilde{F}(\Bx) =
+\left\{
+\begin{array}{l l}
+F(\Bx) &amp; \quad \mbox{If \( \Bx \in \textrm{dom} F\)} \\
+\infty &amp; \quad \mbox{otherwise.}
+\end{array}
+\right.
+\end{equation}
+
+Examples:
+<ul>
+ 	<li>Linear (affine) functions (fig. 8) are both convex and concave.
+
+[caption id="attachment_2014" align="alignnone" width="300"]<a href="http://peeterjoot.com/wp-content/uploads/2017/01/l5Fig8.png"><img class="wp-image-2014 size-medium" src="http://peeterjoot.com/wp-content/uploads/2017/01/l5Fig8-300x113.png" width="300" height="113" /></a> fig. 8. Linear functions.[/caption]</li>
+ 	<li>\( x^2 \) is convex, sketched in fig. 9.
+
+[caption id="attachment_2015" align="alignnone" width="300"]<a href="http://peeterjoot.com/wp-content/uploads/2017/01/l5Fig9.png"><img class="wp-image-2015 size-medium" src="http://peeterjoot.com/wp-content/uploads/2017/01/l5Fig9-300x224.png" width="300" height="224" /></a> fig. 9. Convex (quadratic.)[/caption]</li>
+ 	<li>\( \log x, \textrm{dom} F = \mathbb{R}_{+} \) concave, sketched in fig. 10.
+
+[caption id="attachment_2016" align="alignnone" width="300"]<a href="http://peeterjoot.com/wp-content/uploads/2017/01/l5Fig10.png"><img class="wp-image-2016 size-medium" src="http://peeterjoot.com/wp-content/uploads/2017/01/l5Fig10-300x249.png" width="300" height="249" /></a> fig. 10. Concave (logarithm.)[/caption]</li>
+ 	<li>\( \Norm{\Bx} \) is convex. \( \Norm{ \theta \Bx + (1-\theta) \By } \le \theta \Norm{ \Bx } + (1-\theta) \Norm{\By } \).</li>
+ 	<li>\( 1/x \) is convex on \( \setlr{ x | x &gt; 0 } = \textrm{dom} F \), and concave on \( \setlr{ x | x &lt; 0 } = \textrm{dom} F \). \begin{equation}\label{eqn:convexOptimizationLecture5:520} \tilde{F}(x) = \left\{ \begin{array}{l l} \inv{x} &amp; \quad \mbox{If \( x &gt; 0 \)} \\
+\infty &amp; \quad \mbox{else.}
+\end{array}
+\right.
+\end{equation}</li>
+</ul>
+Definition: Sublevel
+
+The sublevel set of a function \( F : \mathbb{R}^n \rightarrow \mathbb{R} \) is
+
+\begin{equation*}
+C(\alpha) = \setlr{ \Bx \in \textrm{dom} F | F(\Bx) \le \alpha }
+\end{equation*}
+
+&nbsp;
+
+[caption id="attachment_2017" align="alignnone" width="300"]<a href="http://peeterjoot.com/wp-content/uploads/2017/01/l5Fig11a.png"><img class="wp-image-2017 size-medium" src="http://peeterjoot.com/wp-content/uploads/2017/01/l5Fig11a-300x138.png" width="300" height="138" /></a> Convex sublevel[/caption]
+
+&nbsp;
+
+[caption id="attachment_2018" align="alignnone" width="300"]<a href="http://peeterjoot.com/wp-content/uploads/2017/01/l5Fig11b.png"><img class="wp-image-2018 size-medium" src="http://peeterjoot.com/wp-content/uploads/2017/01/l5Fig11b-300x142.png" width="300" height="142" /></a> Non-convex sublevel.[/caption]
+
+Theorem:
+If \( F \) is convex then \( C(\alpha) \) is a convex set \( \forall \alpha \).
+
+This is not an if and only if condition, as illustrated in fig. 12.
+
+&nbsp;
+
+[caption id="attachment_2019" align="alignnone" width="300"]<a href="http://peeterjoot.com/wp-content/uploads/2017/01/l5Fig12.png"><img class="wp-image-2019 size-medium" src="http://peeterjoot.com/wp-content/uploads/2017/01/l5Fig12-300x174.png" width="300" height="174" /></a> fig. 12. Convex sublevel does not imply convexity.[/caption]
+
+There \( C(\alpha) \) is convex, but the function itself is not.
+
+Proof:
+
+Since \( F \) is convex, then \( \textrm{epi} F \) is a convex set.
+<ul>
+ 	<li>Let\begin{equation}\label{eqn:convexOptimizationLecture5:580}
+\mathcal{A} = \setlr{ (\Bx,t) | t = \alpha }
+\end{equation}is a convex set.</li>
+ 	<li>\( \mathcal{A} \cap \textrm{epi} F \)is a convex set since it is the intersection of convex sets.</li>
+ 	<li>Project \( \mathcal{A} \cap \textrm{epi} F \) onto \R{n} (i.e. domain of \( F \) ). The projection is an affine mapping. Image of a convex set through affine mapping is a convex set.</li>
+</ul>
+Definition: Quasi-convex.
+
+A function is quasi-convex if \underline{all} of its sublevel sets are convex.
+<h2>Composing convex functions</h2>
+Properties of convex functions:
+<ul>
+ 	<li>If \( F \) is convex, then \( \alpha F \) is convex \( \forall \alpha &gt; 0 \).</li>
+ 	<li>If \( F_1, F_2 \) are convex, then the sum \( F_1 + F_2 \) is convex.</li>
+ 	<li>If \( F \) is convex, then \( g(\Bx) = F(A \Bx + \Bb) \) is convex \( \forall \Bx \in \setlr{ \Bx | A \Bx + \Bb \in \textrm{dom} F } \).</li>
+</ul>
+Note: for the last
+
+\begin{equation}\label{eqn:convexOptimizationLecture5:620}
+\begin{aligned}
+g &amp;: \mathbb{R}^m \rightarrow \mathbb{R} \\
+F &amp;: \mathbb{R}^n \rightarrow \mathbb{R} \\
+\Bx &amp;\in \mathbb{R}^m \\
+A &amp;\in \mathbb{R}^{n \times m} \\
+\Bb &amp;\in \mathbb{R}^n
+\end{aligned}
+\end{equation}
+
+Proof (of last):
+
+\begin{equation}\label{eqn:convexOptimizationLecture5:640}
+\begin{aligned}
+g( \theta \Bx + (1-\theta) \By )
+&amp;=
+F( \theta (A \Bx + \Bb) + (1-\theta) (A \By + \Bb) ) \\
+&amp;\le
+\theta F( A \Bx + \Bb) + (1-\theta) F (A \By + \Bb) \\
+&amp;= \theta g(\Bx) + (1-\theta) g(\By).
+\end{aligned}
+\end{equation}
+<h1>References</h1>
+[1] Stephen Boyd and Lieven Vandenberghe. <em>Convex optimization</em>. Cambridge university press, 2004.
+
+[mathjax]
