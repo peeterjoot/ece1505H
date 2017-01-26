@@ -22,13 +22,13 @@
 %\chapter{Sets, epigraphs, quasi-convexity, and sublevel sets}
 \label{chap:convexOptimization5}
 
-\paragraph{Disclaimer}
+\section{Disclaimer}
 
 Peeter's lecture notes from class.  These may be incoherent and rough.
 
 These are notes for the UofT course ECE1505H, Convex Optimization, taught by Prof. Stark Draper, from \citep{boyd2004convex}.
 
-\paragraph{Last time}
+\section{Last time}
 
 \begin{itemize}
 \item examples of sets: planes, half spaces, balls, ellipses, cone of positive semi-definite matrixes
@@ -36,7 +36,7 @@ These are notes for the UofT course ECE1505H, Convex Optimization, taught by Pro
 \item examples of convexity preserving operations
 \end{itemize}
 
-\paragraph{Today}
+\section{Today}
 
 \begin{itemize}
 \item more examples of convexity preserving operations
@@ -46,15 +46,17 @@ These are notes for the UofT course ECE1505H, Convex Optimization, taught by Pro
 \item first and second order conditions for convexity of differentiable functions.
 \end{itemize}
 
-\paragraph{Clarification}
-
-\begin{equation}\label{eqn:convexOptimizationLecture5:20}
-x \le_K y \mathif y - x \in K
-\end{equation}
-
-F1
-
-\paragraph{Operations that preserve convexity}
+%%% from last class:
+%%\section{Clarification}
+%%
+%%\begin{equation}\label{eqn:convexOptimizationLecture5:20}
+%%\Bx \le_K \By \mathif \By - \Bx \in K
+%%\end{equation}
+%%
+%%%\cref{fig:l5:l5Fig1c}.
+%%\imageFigure{../figures/ece1505-convex-optimization/l5Fig1c}{}{fig:l5:l5Fig1c}{0.2}
+%%
+\section{Operations that preserve convexity}
 
 If \( S_\alpha \) is convex \( \forall \alpha \in A \), then
 
@@ -85,7 +87,7 @@ F &: \bbR^{n} \rightarrow \bbR^m \\
 If \( S \in \bbR^n \) is convex, then
 
 \begin{equation}\label{eqn:convexOptimizationLecture5:100}
-F(S) = \setlr{ F(x) | x \in S }
+F(S) = \setlr{ F(\Bx) | \Bx \in S }
 \end{equation}
 
 is convex if \( F \) is affine.
@@ -94,7 +96,7 @@ is convex if \( F \) is affine.
 If \( S \in \bbR^m \) is convex, then
 
 \begin{equation}\label{eqn:convexOptimizationLecture5:120}
-F^{-1}(S) = \setlr{ x | F(x) \in S }
+F^{-1}(S) = \setlr{ \Bx | F(\Bx) \in S }
 \end{equation}
 
 is convex.
@@ -103,39 +105,39 @@ is convex.
 Example:
 
 \begin{equation}\label{eqn:convexOptimizationLecture5:140}
-\setlr{ y | y = A x + b, \Norm{x} \le 1}
+\setlr{ \By | \By = A \Bx + \Bb, \Norm{\Bx} \le 1}
 \end{equation}
 
-is convex.  Here \( A x + b \) is an affine function (\(F(x)\).  This is the image of a (convex) unit ball, through an affine map.
+is convex.  Here \( A \Bx + \Bb \) is an affine function (\(F(\Bx)\).  This is the image of a (convex) unit ball, through an affine map.
 
 Earlier saw when defining ellipses
 
 \begin{equation}\label{eqn:convexOptimizationLecture5:160}
-y = P^{1/2} x + x_c
+\By = P^{1/2} \Bx + \Bx_c
 \end{equation}
 
 Example :
 
 \begin{equation}\label{eqn:convexOptimizationLecture5:180}
-\setlr{ x | \Norm{ A x + b } \le 1 },
+\setlr{ \Bx | \Norm{ A \Bx + \Bb } \le 1 },
 \end{equation}
 
 is convex.  This can be seen by writing
 
 \begin{equation}\label{eqn:convexOptimizationLecture5:200}
-\setlr{ x | \Norm{ A x + b } \le 1 }
+\setlr{ \Bx | \Norm{ A \Bx + \Bb } \le 1 }
 =
-\setlr{ x | \Norm{ F(x) } \le 1 }
+\setlr{ \Bx | \Norm{ F(\Bx) } \le 1 }
 =
-\setlr{ x | F(x) \in \calB  },
+\setlr{ \Bx | F(\Bx) \in \calB  },
 \end{equation}
 
-where \( \calB = \setlr{ y | \Norm{y} \le 1 } \).  This is the pre-image (under \(F()\)) of a unit norm ball.
+where \( \calB = \setlr{ \By | \Norm{\By} \le 1 } \).  This is the pre-image (under \(F()\)) of a unit norm ball.
 
 Example:
 
 \begin{equation}\label{eqn:convexOptimizationLecture5:220}
-\setlr{ x \in \bbR^n | x_1 A_1 + x_2 A_2 + \cdots x_n A_n \le \calB }
+\setlr{ \Bx \in \bbR^n | x_1 A_1 + x_2 A_2 + \cdots x_n A_n \le \calB }
 \end{equation}
 
 where \( A_i \in S^m \) and \( \calB \in S^m \), and the inequality is a matrix inequality.  This is a convex set.  The constraint is a ``linear matrix inequality'' (LMI).
@@ -143,7 +145,7 @@ where \( A_i \in S^m \) and \( \calB \in S^m \), and the inequality is a matrix 
 This has to do with an affine map:
 
 \begin{equation}\label{eqn:convexOptimizationLecture5:240}
-F(x) = B - 1 x_1 A_1 - x_2 A_2 - \cdots x_n A_n \ge 0
+F(\Bx) = B - 1 x_1 A_1 - x_2 A_2 - \cdots x_n A_n \ge 0
 \end{equation}
 
 (positive semi-definite inequality).  This is a mapping
@@ -154,70 +156,85 @@ F : \bbR^n \rightarrow S^m,
 
 since all \( A_i \) and \( B \) are in \( S^m \).
 
-This \( F(x) = B - A(x) \) is a constant and a factor linear in x, so is affine.  Can be written
+This \( F(\Bx) = B - A(\Bx) \) is a constant and a factor linear in x, so is affine.  Can be written
 
 \begin{equation}\label{eqn:convexOptimizationLecture5:260}
-\setlr{ x | B - A(x) \ge 0 }
+\setlr{ \Bx | B - A(\Bx) \ge 0 }
 =
-\setlr{ x | B - A(x) \in S^m_{+} }
+\setlr{ \Bx | B - A(\Bx) \in S^m_{+} }
 \end{equation}
 
 This is a pre-image of a cone of PSD matrices, which is convex.  Therefore, this is a convex set.
 
-\paragraph{Separating hyperplanes}
+\section{Separating hyperplanes}
 
 \maketheorem{Separating hyperplanes}{thm:convexOptimizationLecture5:280}{
 
 If \( S, T \subseteq \bbR^n \) are convex and disjoint
 i.e. \( S \cup T = 0\), then
-there exists on \( a \in \bbR^n \) \( a \ne 0 \) and a \( b \in \bbR^n \) such that
+there exists on \( \Ba \in \bbR^n \) \( \Ba \ne 0 \) and a \( \Bb \in \bbR^n \) such that
 
 \begin{equation*}
-a^\T x \ge b \, \forall x \in S
+\Ba^\T \Bx \ge \Bb \, \forall \Bx \in S
 \end{equation*}
 
 and
 \begin{equation*}
-a^\T x < b \,\forall x \in T.
+\Ba^\T \Bx < \Bb \,\forall \Bx \in T.
 \end{equation*}
 } % theorem
 
-F2
+An example of a hyperplanes that separates two sets and two sets that are not separable is sketched in
+\cref{fig:l5:l5Fig2a}.
+
+\imageTwoFigures
+{../figures/ece1505-convex-optimization/l5Fig2a}
+{../figures/ece1505-convex-optimization/l5Fig2b}
+{separable and non-separable sets}
+{fig:l5:l5Fig2a}
+{scale=0.1}
 
 Proof in the book.
 
 \maketheorem{Supporting hyperplane}{thm:convexOptimizationLecture5:300}{
 If \( S \) is convex then \( \forall x_0 \in \partial S = \closure(S) \ \interior(S) \), where
-\( \partial S \) is the boundary of \( S \), then \( \exists \) an \( a \ne 0 \in \bbR^n \) such that \( \Ba^\T x \le \Ba^\T x_0 \, \forall x \in S \).
+\( \partial S \) is the boundary of \( S \), then \( \exists \) an \( \Ba \ne 0 \in \bbR^n \) such that \( \Ba^\T \Bx \le \Ba^\T x_0 \, \forall \Bx \in S \).
 
 } % theorem
 
 Here \( \ \) denotes ``without''.
 
-F3
+An example is sketched in \cref{fig:l5:l5Fig3}, for which
 
-In this example
+\imageFigure{../figures/ece1505-convex-optimization/l5Fig3}{Supporting hyperplane.}{fig:l5:l5Fig3}{0.2}
 
 \begin{itemize}
-\item vector \( \Ba \) perpenticular to tangent plane.
-\item inner product \( a^\T (x - x_0) \le 0 \).
+\item The vector \( \Ba \) perpenticular to tangent plane.
+\item inner product \( \Ba^\T (\Bx - \Bx_0) \le 0 \).
 \end{itemize}
 
-F4
+A set with a supporting hyperplane is sketched in
+\cref{fig:l5:l5Fig4a}, whereas 
+\cref{fig:l5:l5Fig4b}
+shows that there is not neccessarily a unique supporting hyperplane at any given point, even if \( S \) is convex.
 
-F4b shows that there is not neccessarily a unique supporting hyperplane at any given point, even if \( S \) is convex.
+\imageFigure{../figures/ece1505-convex-optimization/l5Fig4a}{Set with supporting hyperplane.}{fig:l5:l5Fig4a}{0.2}
 
-\paragraph{basic definitions of convex functions}
+\imageFigure{../figures/ece1505-convex-optimization/l5Fig4b}{No unique supporting hyperplane possible.}{fig:l5:l5Fig4b}{0.2}
+
+\section{basic definitions of convex functions}
 
 \maketheorem{Convex functions}{thm:convexOptimizationLecture5:320}{
-If \( F : \bbR^n \rightarrow \bbR \) is defined on a convex domain (i.e. \( \dom F \subseteq \bbR^n \) is a convex set), then \( F \) is convex if \( \forall x, y \in \dom F \), \( \forall \theta \in [0,1] \in \bbR \)
+If \( F : \bbR^n \rightarrow \bbR \) is defined on a convex domain (i.e. \( \dom F \subseteq \bbR^n \) is a convex set), then \( F \) is convex if \( \forall \Bx, \By \in \dom F \), \( \forall \theta \in [0,1] \in \bbR \)
 
 \begin{equation}\label{eqn:convexOptimizationLecture5:340}
-F( \theta x + (1-\theta) y \le \theta F(x) + (1-theta) F(y)
+F( \theta \Bx + (1-\theta) \By \le \theta F(\Bx) + (1-\theta) F(\By)
 \end{equation}
 } % theorem
 
-F5.
+An example is sketched in \cref{fig:l5:l5Fig5}.
+
+\imageFigure{../figures/ece1505-convex-optimization/l5Fig5}{Example of convex function.}{fig:l5:l5Fig5}{0.4}
 
 Remarks
 
@@ -228,18 +245,22 @@ The function is \underlineAndIndex{concave}, if \( -F \) is convex.
 i.e. If the convex function is flipped upside down.  That is
 
 \begin{equation}\label{eqn:convexOptimizationLecture5:360}
-F(\theta x + (1-\theta) y ) \ge \theta F(x) + (1-theta) F(y) \,\forall x,y \in \dom F, \theta \in [0,1].
+F(\theta \Bx + (1-\theta) \By ) \ge \theta F(\Bx) + (1-\theta) F(\By) \,\forall \Bx,\By \in \dom F, \theta \in [0,1].
 \end{equation}
 \item a ``strictly'' convex function means \(\forall \theta \in [0,1] \)
 
 \begin{equation}\label{eqn:convexOptimizationLecture5:380}
-F(\theta x + (1-\theta) y ) < \theta F(x) + (1-theta) F(y).
+F(\theta \Bx + (1-\theta) \By ) < \theta F(\Bx) + (1-theta) F(\By).
 \end{equation}
 \item Strictly concave function \( F \) means \( -F \) is strictly convex.
 \item Examples:
 
-F6a: not convex or concave.
-F6b: not strictly convex (understand).
+%\cref{fig:l5:l5Fig6a}.
+\imageFigure{../figures/ece1505-convex-optimization/l5Fig6a}{Not convex or concave.}{fig:l5:l5Fig6a}{0.2}
+%\cref{fig:l5:l5Fig6b}.
+\imageFigure{../figures/ece1505-convex-optimization/l5Fig6b}{Not strictly convex}{fig:l5:l5Fig6b}{0.2}
+%F6a: not convex or concave.
+%F6b: not strictly convex (understand).
 \end{itemize}
 
 \makedefinition{Epigraph of a function}{dfn:convexOptimizationLecture5:400}{
@@ -247,13 +268,15 @@ F6b: not strictly convex (understand).
 The epigraph \( \epi F \) of a function \( F : \bbR^n \rightarrow \bbR \) is
 
 \begin{equation*}
-\epi F = \setlr{ (x,t) \in \bbR^{n +1} | x \in \dom F, t \ge F(x) },
+\epi F = \setlr{ (\Bx,t) \in \bbR^{n +1} | \Bx \in \dom F, t \ge F(\Bx) },
 \end{equation*}
 
-where \( x \in \bbR^n, t \in \bbR \).
+where \( \Bx \in \bbR^n, t \in \bbR \).
 } % definition
 
-F7
+%F7
+%\cref{fig:l5:l5Fig7}.
+\imageFigure{../figures/ece1505-convex-optimization/l5Fig7}{Epigraph.}{fig:l5:l5Fig7}{0.3}
 
 \maketheorem{Convexity and epigraph.}{thm:convexOptimizationLecture5:420}{
 If \( F \) is convex implies \( \epi F \) is a convex set.
@@ -265,11 +288,11 @@ For convex function, a line segment connecting any 2 points on function is above
 
 Many authors will go the other way around, showing \cref{dfn:convexOptimizationLecture5:400} from \cref{thm:convexOptimizationLecture5:420}.  That is:
 
-Pick any 2 points in \( \epi F \), \( (x,\mu) \in \epi F\) and \( (y, \nu) \in \epi F \).  Consider convex combination
+Pick any 2 points in \( \epi F \), \( (\Bx,\mu) \in \epi F\) and \( (\By, \nu) \in \epi F \).  Consider convex combination
 
 \begin{equation}\label{eqn:convexOptimizationLecture5:420}
-\theta( x, \mu ) + (1-\theta) (y, \nu) =
-(\theta x  (1-\theta) y, \theta \mu  (1-\theta) \nu )
+\theta( \Bx, \mu ) + (1-\theta) (\By, \nu) =
+(\theta \Bx  (1-\theta) \By, \theta \mu  (1-\theta) \nu )
 \in \epi F,
 \end{equation}
 
@@ -278,23 +301,23 @@ since \( \epi F \) is a convex set.
 By definition of \( \epi F \)
 
 \begin{equation}\label{eqn:convexOptimizationLecture5:440}
-F( \theta x  (1-\theta) y ) \le \theta \mu  (1-\theta) \nu.
+F( \theta \Bx  (1-\theta) \By ) \le \theta \mu  (1-\theta) \nu.
 \end{equation}
 
-Picking \( \mu = F(x), \nu = F(y) \) gives
+Picking \( \mu = F(\Bx), \nu = F(\By) \) gives
 \begin{equation}\label{eqn:convexOptimizationLecture5:460}
-F( \theta x  (1-\theta) y ) \le \theta F(x)  (1-\theta) F(y).
+F( \theta \Bx  (1-\theta) \By ) \le \theta F(\Bx)  (1-\theta) F(\By).
 \end{equation}
 
-\paragraph{Extended value function}
+\section{Extended value function}
 
 Sometimes convient to work with ``extended value function''
 
 \begin{dmath}\label{eqn:convexOptimizationLecture5:500}
-\tilde{F}(x) =
+\tilde{F}(\Bx) =
 \left\{
 \begin{array}{l l}
-F(x) & \quad \mbox{If \( x \in \dom F\)} \\
+F(\Bx) & \quad \mbox{If \( \Bx \in \dom F\)} \\
 \infty & \quad \mbox{otherwise.}
 \end{array}
 \right.
@@ -303,10 +326,13 @@ F(x) & \quad \mbox{If \( x \in \dom F\)} \\
 Examples:
 
 \begin{itemize}
-\item Linear and affine both convex and concave.  F8
-\item \( x^2 \) is convex F9
-\item \( \log x, \dom F = \bbR_{+} \) concave.  F10
-\item \( \Norm{x} \) is convex.  \( \Norm{ \theta x + (1-\theta) y } \le \theta \Norm{ x } + (1-\theta) \Norm{y } \).
+\item Linear (affine) functions (\cref{fig:l5:l5Fig8}) are both convex and concave.
+\imageFigure{../figures/ece1505-convex-optimization/l5Fig8}{Linear functions.}{fig:l5:l5Fig8}{0.2}
+\item \( x^2 \) is convex, sketched in \cref{fig:l5:l5Fig9}.
+\imageFigure{../figures/ece1505-convex-optimization/l5Fig9}{Convex (quadratic.)}{fig:l5:l5Fig9}{0.2}
+\item \( \log x, \dom F = \bbR_{+} \) concave, sketched in \cref{fig:l5:l5Fig10}.
+\imageFigure{../figures/ece1505-convex-optimization/l5Fig10}{Concave (logarithm.)}{fig:l5:l5Fig10}{0.2}
+\item \( \Norm{\Bx} \) is convex.  \( \Norm{ \theta \Bx + (1-\theta) \By } \le \theta \Norm{ \Bx } + (1-\theta) \Norm{\By } \).
 \item \( 1/x \) is convex on \( \setlr{ x | x > 0 } = \dom F \), and concave on \( \setlr{ x | x < 0 } = \dom F \).
 
 \begin{equation}\label{eqn:convexOptimizationLecture5:520}
@@ -325,19 +351,23 @@ Examples:
 The sublevel set of a function \( F : \bbR^n \rightarrow \bbR \) is
 
 \begin{equation*}
-C(\alpha) = \setlr{ x \in \dom F | F(x) \le \alpha }
+C(\alpha) = \setlr{ \Bx \in \dom F | F(\Bx) \le \alpha }
 \end{equation*}
 } % definition
 
-F11
+%F11
+%\cref{fig:l5:l5Fig11a}.
+\imageFigure{../figures/ece1505-convex-optimization/l5Fig11a}{Convex sublevel.}{fig:l5:l5Fig11a}{0.2}
+%\cref{fig:l5:l5Fig11b}.
+\imageFigure{../figures/ece1505-convex-optimization/l5Fig11b}{Non-convex sublevel.}{fig:l5:l5Fig11b}{0.2}
 
 \maketheorem{}{thm:convexOptimizationLecture5:560}{
 If \( F \) is convex then \( C(\alpha) \) is a convex set \( \forall \alpha \).
 } % theorem
 
-This is not an if and only if condition, as illustrated in
+This is not an if and only if condition, as illustrated in \cref{fig:l5:l5Fig12}.
 
-F12
+\imageFigure{../figures/ece1505-convex-optimization/l5Fig12}{Convex sublevel does not imply convexity.}{fig:l5:l5Fig12}{0.2}
 
 There \( C(\alpha) \) is convex, but the function itself is not.
 
@@ -349,9 +379,9 @@ Since \( F \) is convex, then \( \epi F \) is a convex set.
 \item
 Let
 
-\begin{dmath}\label{eqn:convexOptimizationLecture5:580}
-\calA = \setlr{ (x,t) | t = \alpha }
-\end{dmath}
+\begin{equation}\label{eqn:convexOptimizationLecture5:580}
+\calA = \setlr{ (\Bx,t) | t = \alpha }
+\end{equation}
 
 is a convex set.
 
@@ -365,17 +395,17 @@ is a convex set since it is the intersection of convex sets.
 
 \makedefinition{Quasi-convex.}{dfn:convexOptimizationLecture5:600}{
 
-A function is quasi-convex if \underline{all} of its sublevle sets are convex.
+A function is quasi-convex if \underline{all} of its sublevel sets are convex.
 } % definition
 
-\paragraph{composing convex functions}
+\section{Composing convex functions}
 
 Properties of convex functions:
 
 \begin{itemize}
 \item If \( F \) is convex, then \( \alpha F \) is convex \( \forall \alpha > 0 \).
 \item If \( F_1, F_2 \) are convex, then the sum \( F_1 + F_2 \) is convex.
-\item If \( F \) is convex, then \( g(x) = F(A x + b) \) is convex \( \forall x \in \setlr{ x | A x + b \in \dom F } \).
+\item If \( F \) is convex, then \( g(\Bx) = F(A \Bx + \Bb) \) is convex \( \forall \Bx \in \setlr{ \Bx | A \Bx + \Bb \in \dom F } \).
 \end{itemize}
 
 Note: for the last
@@ -384,21 +414,21 @@ Note: for the last
 \begin{aligned}
 g &: \bbR^m \rightarrow \bbR  \\
 F &: \bbR^n \rightarrow \bbR  \\
-x &\in \bbR^m \\
+\Bx &\in \bbR^m \\
 A &\in \bbR^{n \times m} \\
-b &\in \bbR^n
+\Bb &\in \bbR^n
 \end{aligned}
 \end{equation}
 
 Proof (of last):
 
 \begin{dmath}\label{eqn:convexOptimizationLecture5:640}
-g( \theta x + (1-\theta) y )
+g( \theta \Bx + (1-\theta) \By )
 =
-F( \theta (A x + b) + (1-\theta) (A y + b) )
+F( \theta (A \Bx + \Bb) + (1-\theta) (A \By + \Bb) )
 \le
-\theta F( A x + b) + (1-\theta) F (A y + b)
-= \theta g(x) + (1-\theta) g(y).
+\theta F( A \Bx + \Bb) + (1-\theta) F (A \By + \Bb)
+= \theta g(\Bx) + (1-\theta) g(\By).
 \end{dmath}
 
 \EndArticle
