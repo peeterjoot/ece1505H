@@ -19,11 +19,77 @@ Prove that the inverse (or pre-) image of \( \calS \) under \(f\), i.e., \( f^{-
 \makeanswer{convex-optimization:problemSet1:7}{
 \makeSubAnswer{}{convex-optimization:problemSet1:7a}
 
-TODO.
+It is sufficient to
+consider the non-empty intersection of two convex sets \( A,B \), such as the intersection of polygons crudely sketched in \cref{fig:ps1p7:ps1p7Fig1}.
+
+\imageFigure{../figures/ece1505-convex-optimization/ps1p7Fig1}{Intersection of plane polygons.}{fig:ps1p7:ps1p7Fig1}{0.3}
+
+Any two points \( \Bx, \By \) in the intersection, are also contained in \( A, B \) and by convexity of \( A,B\) we must have both
+
+\begin{dmath}\label{eqn:ProblemSet1Problem7:20}
+\begin{aligned}
+\setlr{ \theta \Bx + (1-\theta) \By | \theta \in [0,1] } &\subseteq A \\
+\setlr{ \theta \Bx + (1-\theta) \By | \theta \in [0,1] } &\subseteq B,
+\end{aligned}
+\end{dmath}
+
+so for any \( \theta \in [0,1] \), and any points \( \Bx, \By \in A \cap B \), we have
+
+\begin{dmath}\label{eqn:ProblemSet1Problem7:40}
+\theta \Bx + (1-\theta) \By \in A \cap B,
+\end{dmath}
+
+which means that \( A \cap B \) is convex.
+
 \makeSubAnswer{}{convex-optimization:problemSet1:7b}
 
-TODO.
+An affine function (linear function, plus translation), has the general form
+
+\begin{dmath}\label{eqn:ProblemSet1Problem7:60}
+f(\Bx) = A \Bx + \Bb,
+\end{dmath}
+
+Given a point \( \Bz \in S \), and a \( \theta \in [0,1] \)
+
+\begin{dmath}\label{eqn:ProblemSet1Problem7:80}
+\Bz = \theta \Bx + (1-\theta) \By,
+\end{dmath}
+
+the image of that point is
+
+\begin{dmath}\label{eqn:ProblemSet1Problem7:100}
+f( \theta \Bx + (1-\theta)\By )
+=
+A ( \theta \Bx + (1-\theta)\By ) + \Bb
+=
+A ( \theta (\Bx - \By) + \By ) + \Bb
+=
+\theta ( A \Bx + \Bb - A \By - \Bb ) + A \By + \Bb
+=
+\theta ( A \Bx + \Bb ) + (1 -\theta) (A \By + \Bb)
+=
+\theta f(\Bx) + (1-\theta) f(\By),
+\end{dmath}
+
+which is an affine combination.  This means that the set of such points, the image of \( f \) is a convex set.
+
 \makeSubAnswer{}{convex-optimization:problemSet1:7c}
 
-TODO.
+Running the steps above backwards, given \( \setlr{ f(\Bx) } \in S \), and \( \theta \in [0,1] \) then
+
+\begin{dmath}\label{eqn:ProblemSet1Problem7:120}
+\theta f(\Bx) + (1-\theta) f(\By)
+=
+\theta ( A \Bx + \Bb ) + (1 -\theta) (A \By + \Bb)
+=
+\theta ( A \Bx + \Bb - A \By - \Bb ) + A \By + \Bb
+=
+A ( \theta (\Bx - \By) + \By ) + \Bb
+=
+A ( \theta \Bx + (1-\theta)\By ) + \Bb
+=
+f( \theta \Bx + (1-\theta)\By ).
+\end{dmath}
+
+This shows that the set of points \( \setlr{ \theta \Bx + (1-\theta)\By } \) is a convex set, proving the result.
 }

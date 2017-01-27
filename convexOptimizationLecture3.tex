@@ -497,9 +497,9 @@ such that \( \forall \theta_i \ge 0 \)
 
 Convex hull of a set \( C \) is a set of all convex combinations of points in \(C\), denoted
 
-\begin{equation}\label{eqn:convexOptimizationLecture3:720}
+\begin{equation*}
 \conv(C) = \setlr{ \sum_{i=1}^n \theta_i \Bx_i | \Bx_i \in C, \theta_i \ge 0, \sum_{i=1}^n \theta_i = 1 }.
-\end{equation}
+\end{equation*}
 } % definition
 
 A non-convex set can be converted into a convex hull by filling in all the combinations of points connecting points in the set, as sketched in \cref
@@ -532,7 +532,31 @@ A convex and non-convex 2D cone is sketched in \cref{fig:ConesFig8}
 {fig:ConesFig8}
 {scale=0.1}
 
-A comparison of properties for different set types is tabulated in \cref{tab:affineConvexConic:1}.
+Like the convex null, it is possible to define affine and conic hulls.  These are
+
+\makedefinition{Affine hull.}{dfn:convexOptimizationLecture3:920}{
+
+Affine hull of a set \( C \) is a set of all affine combinations of points in \(C\), denoted
+
+\begin{equation*}
+\affine(C) = \setlr{ \sum_{i=1}^n \theta_i \Bx_i | \Bx_i \in C, \theta_i \in \bbR, \sum_{i=1}^n \theta_i = 1 }.
+\end{equation*}
+} % definition
+
+\makedefinition{Conic hull.}{dfn:convexOptimizationLecture3:940}{
+
+Conic hull of a set \( C \) is a set of all conic combinations of points in \(C\), denoted
+
+\begin{equation*}
+\conic(C) = \setlr{ \sum_{i=1}^n \theta_i \Bx_i | \Bx_i \in C, \theta_i \ge 0 }.
+\end{equation*}
+} % definition
+
+% Fixme: this prevents the table from being embedded in a definition.  Is there a way to
+% force the table to be emmitted after the definition without clearpage?
+\clearpage
+
+A comparison of these three types of hulls are tabulated in \cref{tab:affineConvexConic:1}.
 
 \captionedTable{Affine, Convex, and Conic properties.}{tab:affineConvexConic:1}{
 \centering

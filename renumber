@@ -40,3 +40,5 @@ perl -p -i ../latex/bin/latexRegex.pl convexOptimizationLecture3.tex
 perl -p -i ../latex/bin/latexRegex.pl convexOptimizationLecture4.tex
 ../latex/bin/lgrep convexOptimizationLecture5.tex | tee o ; . ./o
 perl -p -i ../latex/bin/latexRegex.pl convexOptimizationLecture5.tex
+../latex/bin/lgrep convexOptimizationLecture6.tex | tee o ; . ./o
+perl -p -i ../latex/bin/latexRegex.pl convexOptimizationLecture6.tex

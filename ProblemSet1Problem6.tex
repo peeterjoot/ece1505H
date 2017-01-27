@@ -132,7 +132,7 @@ can be removed by expressing the matrix in terms of its columns \( A = [ \Ba_1 \
 \calP = \setlr{ \sum \Ba_i x_i | x_i \in [0,1] },
 \end{equation}
 
-which shows that this set \( \calP \) is the span of the columns of the matrix \( A \) over the unit cube.  The span of the columns takes a particularily simple form if the linear transformation represented by the matrix is represented in a basis for which that transformation takes its
+which shows that this set \( \calP \) is the span of the columns of the matrix \( A \) over the unit cube.  The span of the columns takes a particularly simple form if the linear transformation represented by the matrix is represented in a basis for which that transformation takes its
 Jordan canonical form \citep{damiano1988course}.
 This is a basis for which the matrix representation of the linear transformation is either completely diagonal, or in specific upper triangular form with zeros everywhere but the superdiagonal (and only ones or zeros on the superdiagonal).  Such a similarity transformation
 
@@ -179,7 +179,7 @@ for which the respective sets \( \calP \) are sketched in \cref{fig:ps1p6d:ps1p6
 {../figures/ece1505-convex-optimization/ps1p6dFig2}
 {../figures/ece1505-convex-optimization/ps1p6dFig3}
 {../figures/ece1505-convex-optimization/ps1p6dFig4}
-{Parallelopiped volumes}{fig:ps1p6d:ps1p6dFig1}{scale=0.15}
+{Parallelepiped volumes}{fig:ps1p6d:ps1p6dFig1}{scale=0.15}
 
 Note that the parallelograms are altered by such a similarity transformation, but the (oriented area) given by the determinant is invariant.  This is illustrated in \cref{fig:ps1p6d:ps1p6dParallelogramsFig1} for
 
@@ -207,9 +207,9 @@ for which the oriented area given by the determinant is unity in both cases.
 
 \imageFigure{../figures/ece1505-convex-optimization/ps1p6dParallelogramsFig1}{Parallelograms after similarity transformation}{fig:ps1p6d:ps1p6dParallelogramsFig1}{0.3}
 
-In a basis for which the matrix has its Jordan form, if any one of the eigenvalues is zero, then the volume of the parellopiped in that basis will be zero, since the parallopiped cannot have any volume along that dimension.  In the two three dimensional examples above, one of the eigenvalues was picked to be \( \epsilon \), a quantity that can be made arbitrarily small.  When any eigenvector is decreased to zero in that matrix's Jordan basis representation, it is clear that the corresponding parallelopiped volume also goes to zero, as does the determinant (which is just the product of the diagonal elements in this representation).
+In a basis for which the matrix has its Jordan form, if any one of the eigenvalues is zero, then the volume of the parallelepiped in that basis will be zero, since the parallelepiped cannot have any volume along that dimension.  In the two three dimensional examples above, one of the eigenvalues was picked to be \( \epsilon \), a quantity that can be made arbitrarily small.  When any eigenvector is decreased to zero in that matrix's Jordan basis representation, it is clear that the corresponding parallelepiped volume also goes to zero, as does the determinant (which is just the product of the diagonal elements in this representation).
 
 In summary, if \( n - r \ne 0 \) is the number of zero eigenvalues of a matrix (where \( n \) is the dimension, and \( r \) is the rank), then
-parallopiped represented by the span of the columns of a matrix over the unit cube has no volume (and zero determinant), because
-such a parallopiped will have no height along \( n - r \) dimensions.
+parallelepiped represented by the span of the columns of a matrix over the unit cube has no volume (and zero determinant), because
+such a parallelepiped will have no height along \( n - r \) dimensions.
 }

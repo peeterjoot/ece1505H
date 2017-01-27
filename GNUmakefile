@@ -29,14 +29,17 @@ SPELLCHECK := $(patsubst %.tex,%.sp,$(wildcard *.tex))
 
 include ../latex/make.rules
 
-all :: p1 l5
+all :: l6
+#all :: p2
 
-.PHONY: p1 l5
+.PHONY: l6 p1
 p1 : ProblemSet1.pdf
-
-l5: convexOptimizationLecture5.pdf
+p2 : ProblemSet2.pdf
+l6: convexOptimizationLecture6.pdf
 
 ProblemSet1.pdf :: ProblemSet1Problem8.tex ProblemSet1Problem7.tex ProblemSet1Problem6.tex ProblemSet1Problem5.tex ProblemSet1Problem4.tex ProblemSet1Problem3.tex ProblemSet1Problem2.tex ProblemSet1Problem1.tex
+
+ProblemSet2.pdf :: ProblemSet2Problem8.tex ProblemSet2Problem7.tex ProblemSet2Problem6.tex ProblemSet2Problem5.tex ProblemSet2Problem4.tex ProblemSet2Problem3.tex ProblemSet2Problem2.tex ProblemSet2Problem1.tex
 
 .PHONY: spellcheck
 spellcheck: $(SPELLCHECK)

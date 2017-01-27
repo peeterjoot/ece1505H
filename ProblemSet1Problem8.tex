@@ -11,5 +11,29 @@ For \( a \ge 0 \) we define \( S_a \) as \( \setlr{ \Bx | \dist(\Bx, S) \le a } 
 
 \makeanswer{convex-optimization:problemSet1:8}{
 
-TODO.
+The geometry of this set extension is sketched in \cref{fig:ps1p8:ps1p8Fig1}.
+
+\imageFigure{../figures/ece1505-convex-optimization/ps1p8Fig1}{Expanded convex set.}{fig:ps1p8:ps1p8Fig1}{0.3}
+
+The sphere of radius \( a \) centered on a point \( \By \in S \), as sketched in \cref{fig:ps1p8:ps1p8Fig2}, is
+
+\imageFigure{../figures/ece1505-convex-optimization/ps1p8Fig2}{Sphere of radius \( a \).}{fig:ps1p8:ps1p8Fig2}{0.2}
+
+\begin{dmath}\label{eqn:ProblemSet1Problem8:20}
+\setlr{ \By + \theta a \rcap},
+\end{dmath}
+
+where \( \theta \in [0,1] \) and \( \rcap \) is a unit vector directed outwards from \( \By \).  If \( \Bx \) is a point on the exterior of that sphere, the set of points in the sphere can be written
+
+\begin{dmath}\label{eqn:ProblemSet1Problem8:40}
+\setlr{ \By + \theta a \rcap}
+=
+\setlr{ \By + \theta a \frac{\Bx - \By}{\Norm{\Bx - \By}} }
+=
+\setlr{ \By + \theta (\Bx - \By) }
+=
+\setlr{ \theta \Bx + (1-\theta) \By }.
+\end{dmath}
+
+The union of such spheres, over all \( \By \in S \), is precisely the set \( S_a \), seen to be the convex combinations of points \( \Bx \in S_a, \By \in S \), or \( \Bx, \By \in S \).
 }
