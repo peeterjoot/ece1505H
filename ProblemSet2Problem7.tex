@@ -2,12 +2,23 @@
 % Copyright © 2017 Peeter Joot.  All Rights Reserved.
 % Licenced as described in the file LICENSE under the root directory of this GIT repository.
 %
-\makeproblem{description}{convexOptimization:problemSet2:7}{
-\makesubproblem{}{convexOptimization:problemSet2:7a}
+\makeoproblem{Kullback-Leibler divergence and the information inequality}{convexOptimization:problemSet2:7}{\citep{boyd2004convex} pr. 3.13}{
+Let \( D_{kl} \) be the Kullback-Liebler divergence, as defined in (3.17).  Prove the information inequality:
+
+\begin{equation}\label{eqn:ProblemSet2Problem7:20}
+D_{kl}(\Bu,\Bv) \ge 0,
+\end{equation}
+
+for all \( \Bu, \Bv \in \bbR^n_{++} \).  Also show that \( D_{kl}(\Bu,\Bv) = 0 \) if and only if \( \Bu = \Bv \).
+
+\paragraph{Hint:} The Kullback-Liebler divergence can be expressed as
+
+\begin{equation}\label{eqn:ProblemSet2Problem7:40}
+D_{kl}(\Bu,\Bv) = f(\Bu) - f(\Bv) - \lr{ \spacegrad f(\Bv)}^\T (\Bu - \Bv).
+\end{equation}
 } % makeproblem
 
 \makeanswer{convexOptimization:problemSet2:7}{
-\makeSubAnswer{}{convexOptimization:problemSet2:7a}
 
 TODO.
 }
