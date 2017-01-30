@@ -2,12 +2,39 @@
 % Copyright © 2017 Peeter Joot.  All Rights Reserved.
 % Licenced as described in the file LICENSE under the root directory of this GIT repository.
 %
-\makeproblem{description}{convexOptimization:problemSet2:5}{
+\makeproblem{Maximum likelyhood estimation.}{convexOptimization:problemSet2:5}{
+In this problem, we are given a set of data points \((x_i,y_i)\), \( i = 1 \cdots 100\). We wish to fit a quadratic
+model,
+
+\begin{equation}\label{eqn:ProblemSet2Problem5:20}
+y_i = a x_i^2 + b x_i + c + n_i,
+\end{equation}
+to the data. Here, \((a, b, c)\) are the parameters to be determined and
+\( n_i \) is the unknown observation noise. The \((x_i, y_i)\) points are contained in a file \matlabText{dataForMLest.mat}
+available on the course webpage.  You may load the data to \matlabText{MATLAB} using the command
+\matlabText{load ps01data}
+and view them using \( \matlabText{scatter(x,y,'+')}\). Please use the same data set and find the
+maximum likelihood estimate of \((a, b, c)\) assuming \(n_i\)'s are i.i.d. when
+
 \makesubproblem{}{convexOptimization:problemSet2:5a}
+\( n_i \sim N(0, 1)\);
+\makesubproblem{}{convexOptimization:problemSet2:5b}
+\(n_i\) is always positive and \( p_{n_i}(z) = e^{-z} u(z)\) where \(u(\cdot)\) is the unit step function.
+
+Please plot the data and the models on the same \matlabText{MATLAB} figure and submit the figgure as a part of
+your solution.
+(\matlabText{MATLAB} has built-in functions to solve many optimization problems. For example, \matlabText{linprog}
+solves a linear programming problem, quadprog solves a quadratic programming problem. You
+may use \matlabText{help linprog} to get more details.
+
+\paragraph{Hint:} \partref{convexOptimization:problemSet2:5a} has an analytic solution.)
 } % makeproblem
 
 \makeanswer{convexOptimization:problemSet2:5}{
 \makeSubAnswer{}{convexOptimization:problemSet2:5a}
+
+TODO.
+\makeSubAnswer{}{convexOptimization:problemSet2:5b}
 
 TODO.
 }
