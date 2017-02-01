@@ -40,7 +40,9 @@ These are notes for the UofT course ECE1505H, Convex Optimization, taught by Pro
 
 \( F_1 \) and \( F_2 \) convex implies \( \max( F_1, F_2) \) convex.
 
-F1
+%F1
+%\cref{fig:l6:l6Fig1}.
+\imageFigure{../figures/ece1505-convex-optimization/l6Fig1}{CAPTION: l6Fig1}{fig:l6:l6Fig1}{0.3}
 
 Note that \( \min(F_1, F_2) \) is NOT convex.
 
@@ -69,7 +71,9 @@ F(\Bx) \ge F(\Bx_0) + \lr{\spacegrad F(\Bx_0)}^\T (\Bx - \Bx_0).
 
 This is the first order Taylor expansion.  If \( n = 1 \), this is \( F(x) \ge F(x_0) + F'(x_0) ( x - x_0) \).
 
-F3
+%F3
+%\cref{fig:l6:l6Fig3}.
+\imageFigure{../figures/ece1505-convex-optimization/l6Fig3}{CAPTION: l6Fig3}{fig:l6:l6Fig3}{0.3}
 
 The first order condition says a convex function \underline{always} lies above its first order approximation.  When differentiable, the supporting plane is the tangent plane.
 When differentiable, the
@@ -387,7 +391,9 @@ F(\Bx + t \Bv)
 
 Which is true for all \( \Bx, \Bx + t \Bv \in \dom F \).  Note that the quantity \( t \Bv \) is a shift.
 
-F4
+%F4
+%\cref{fig:l6:l6Fig4}.
+\imageFigure{../figures/ece1505-convex-optimization/l6Fig4}{CAPTION: l6Fig4}{fig:l6:l6Fig4}{0.3}
 
 \paragraph{Epigraph}
 
@@ -420,9 +426,14 @@ t - F(\Bx_0)
 With \( \Bw =
 \begin{bmatrix}
 \lr{ \spacegrad F(\Bx_0) }^\T & -1
-\end{bmatrix} \), the geometry of the epigraph relation to the half plane is sketched in
+\end{bmatrix} \), the geometry of the epigraph relation to the half plane is sketched in \cref{fig:l6:l6Fig5}.
 
-F5
+\imageFigure{../figures/ece1505-convex-optimization/l6Fig5}{CAPTION: l6Fig5}{fig:l6:l6Fig5}{0.3}
+
+\paragraph{For where?}
+
+\cref{fig:l6:l6Fig2}.
+\imageFigure{../figures/ece1505-convex-optimization/l6Fig2}{CAPTION: l6Fig2}{fig:l6:l6Fig2}{0.3}
 
 \EndArticle
 %\EndNoBibArticle
