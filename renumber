@@ -77,3 +77,5 @@ perl -p -i ../latex/bin/latexRegex.pl ProblemSet2Problem10.tex
 perl -p -i ../latex/bin/latexRegex.pl ProblemSet2.tex
 ../latex/bin/lgrep convexOptimizationLecture7.tex | tee o ; . ./o
 perl -p -i ../latex/bin/latexRegex.pl convexOptimizationLecture7.tex
+../latex/bin/lgrep convexOptimizationLecture8.tex | tee o ; . ./o
+perl -p -i ../latex/bin/latexRegex.pl convexOptimizationLecture8.tex

@@ -24,7 +24,7 @@
 
 Peeter's lecture notes from class.  These may be incoherent and rough.
 
-These are notes for the UofT course ECE1505H, Convex Optimization, taught by Prof. Stark Draper, covering \textchapref{{1}} \citep{boyd2004convex} content.
+These are notes for the UofT course ECE1505H, Convex Optimization, taught by Prof. Stark Draper, from \citep{boyd2004convex}.
 
 \paragraph{Today}
 
@@ -34,7 +34,7 @@ These are notes for the UofT course ECE1505H, Convex Optimization, taught by Pro
 \item Examples
 \end{itemize}
 
-Example
+\paragraph{Example:}
 
 \begin{dmath}\label{eqn:convexOptimizationLecture7:20}
 \begin{aligned}
@@ -45,7 +45,7 @@ F''(x) &= 2 > 0
 
 strictly convex.
 
-Example
+\paragraph{Example:}
 
 \begin{dmath}\label{eqn:convexOptimizationLecture7:40}
 \begin{aligned}
@@ -56,7 +56,7 @@ F''(x) &= 6 x.
 
 Not always non-negative, so not convex.  However \( x^3 \) is convex on \( \dom F = \bbR_{+} \).
 
-Example:
+\paragraph{Example:}
 
 \begin{dmath}\label{eqn:convexOptimizationLecture7:60}
 \begin{aligned}
@@ -71,7 +71,7 @@ F''(x) &= \alpha(\alpha-1) x^{\alpha-2}.
 
 This is convex on \( \bbR_{+} \), if \( \alpha \ge 1 \), or \( \alpha \le 0 \).
 
-Example:
+\paragraph{Example:}
 
 \begin{dmath}\label{eqn:convexOptimizationLecture7:80}
 \begin{aligned}
@@ -83,7 +83,7 @@ F''(x) &= -\inv{x^2} \le 0
 
 This is concave.
 
-Example:
+\paragraph{Example:}
 
 \begin{dmath}\label{eqn:convexOptimizationLecture7:100}
 \begin{aligned}
@@ -93,11 +93,11 @@ F''(x) &= \inv{x}
 \end{aligned}
 \end{dmath}
 
-This is strictly convext on
+This is strictly convex on
 \( \bbR_{++} \), where
 \( F''(x) \ge 0 \).
 
-Example
+\paragraph{Example:}
 
 \begin{dmath}\label{eqn:convexOptimizationLecture7:120}
 \begin{aligned}
@@ -114,7 +114,7 @@ Such functions are plotted in
 \cref{fig:l7eToAlphaX:l7eToAlphaXFig2}, and are
 convex function for all \( \alpha \).
 
-Example:
+\paragraph{Example:}
 
 For symmetric \( P \in S^n \)
 
@@ -128,11 +128,11 @@ F(\Bx) &= \Bx^\T P \Bx + 2 \Bq^\T \Bx + r \\
 
 This is convex(concave) if \( P \ge 0 \) (\( P \le 0\)).
 
-Example:
+\paragraph{Example:}
 
 A quadratic function
 
-\begin{dmath}\label{eqn:convexOptimizationLecture7:n}
+\begin{dmath}\label{eqn:convexOptimizationLecture7:780}
 F(x, y) = x^2 + y^2 + 3 x y,
 \end{dmath}
 
@@ -221,7 +221,7 @@ F(x,x)
 
 so it is convex along this line.
 
-Example:
+\paragraph{Example:}
 
 \begin{dmath}\label{eqn:convexOptimizationLecture7:280}
 F(\Bx) = \sqrt{ x_1 x_2 },
@@ -283,6 +283,10 @@ v_1 & v_2
 \lr{ \inv{x_1^2} v_1 -\inv{x_1 x_2} v_2 } v_1 +
 \lr{ -\inv{x_1 x_2} v_1 + \inv{x_2^2} v_2 } v_2
 =
+\inv{x_1^2} v_1^2 
++ \inv{x_2^2} v_2^2
+-2 \inv{x_1 x_2} v_1 v_2 
+=
 \lr{
 \frac{v_1}{x_1}
 -\frac{v_2}{x_2}
@@ -300,21 +304,21 @@ F(x) = \lr{ \prod_{i = 1}^n x_i }^{1/n},
 
 which is concave (prove on homework).
 
-\paragraph{summary}
+\paragraph{Summary.}
 
 If \( F \) is differentiable in \R{n}, then check the curvature of the function along all lines.  i.e.  At all locations and in all directions.
 
 If the Hessian is PSD at all \( \Bx \in \dom F \), that is
 
-\begin{dmath}\label{eqn:convexOptimizationLecture7:400}
+\begin{equation}\label{eqn:convexOptimizationLecture7:400}
 \spacegrad^2 F \ge 0 \, \forall \Bx \in \dom F,
-\end{dmath}
+\end{equation}
 
 then the function is convex.
 
-\paragraph{more examples of convex, but not nessessarily differentiable functions}
+\paragraph{more examples of convex, but not necessarily differentiable functions}
 
-Example:
+\paragraph{Example:}
 Over \( \dom F = \bbR^n \)
 
 \begin{dmath}\label{eqn:convexOptimizationLecture7:420}
@@ -329,7 +333,7 @@ F((3,-1) &= 3
 \end{aligned}
 \end{dmath}
 
-Example:
+\paragraph{Example:}
 
 \begin{dmath}\label{eqn:convexOptimizationLecture7:460}
 F(\Bx) = \max_{i = 1}^n F_i(\Bx),
@@ -345,7 +349,7 @@ F_i(\Bx)
 
 max of a set of convex functions is a convex function.
 
-Example:
+\paragraph{Example:}
 
 \begin{dmath}\label{eqn:convexOptimizationLecture7:500}
 F(x) =
@@ -368,7 +372,7 @@ F(x) = \max x_i + x_j + x_k
 (i,j,k) \in \binom{n}{3}
 \end{dmath}
 
-Example:
+\paragraph{Example:}
 
 For \( \Ba \in \bbR^n \) and \( b_i \in \bbR \)
 
@@ -382,7 +386,7 @@ This \( b_i - \Ba^\T \Bx \) is an affine function of \( \Bx \) so it doesn't aff
 
 Since \( \log \) is concave, \( -\log \) is convex.  Convex functions of affine function of \( \Bx \) is convex function of \( \Bx \).
 
-Example:
+\paragraph{Example:}
 \begin{dmath}\label{eqn:convexOptimizationLecture7:580}
 F(\Bx) = \sup_{\By \in C} \Norm{ \Bx -  \By }
 \end{dmath}
@@ -390,7 +394,7 @@ F(\Bx) = \sup_{\By \in C} \Norm{ \Bx -  \By }
 %F3
 \imageFigure{../figures/ece1505-convex-optimization/l7MaxFuncFig3}{Max length function}{fig:l7MaxFunc:l7MaxFuncFig3}{0.3}
 
-Here \( C \subseteq \bbR^n \) is not neccessarily convex.  We are using \( \sup \) here because the set \( C \) may be open.  This function is the length of the line from \( \Bx \) to the point in \( C \) that is furthest from \( \Bx \).
+Here \( C \subseteq \bbR^n \) is not necessarily convex.  We are using \( \sup \) here because the set \( C \) may be open.  This function is the length of the line from \( \Bx \) to the point in \( C \) that is furthest from \( \Bx \).
 
 \begin{itemize}
 \item \( \Bx - \By \) is linear in \( \Bx \)
@@ -398,7 +402,7 @@ Here \( C \subseteq \bbR^n \) is not neccessarily convex.  We are using \( \sup 
 \item \( F(\Bx) = \sup_{\By \in C} \Norm{ \Bx -  \By } \).  Each \( \By \) index is a convex function.  Taking max of those.
 \end{itemize}
 
-Example:
+\paragraph{Example:}
 
 \begin{dmath}\label{eqn:convexOptimizationLecture7:600}
 F(\Bx) = \inf_{\By \in C} \Norm{ \Bx -  \By }.
@@ -408,14 +412,14 @@ Min and max of two convex functions are plotted in
 \cref{fig:l7minAndMax:l7minAndMaxFig4}.
 \imageFigure{../figures/ece1505-convex-optimization/l7minAndMaxFig4}{Min and max}{fig:l7minAndMax:l7minAndMaxFig4}{0.3}
 
-The max is observed to be convex, whereas the min is not nessessarily so.  
+The max is observed to be convex, whereas the min is not necessarily so.
 %Consider the 2d example of a min length function sketched in \cref{fig:l7MaxFunc:l7MaxFuncFig3}, where
 
-\begin{dmath}\label{eqn:convexOptimizationLecture7:n}
+\begin{dmath}\label{eqn:convexOptimizationLecture7:800}
 F(\Bz) = F(\theta \Bx + (1-\theta) \By) \ge \theta F(\Bx) + (1-\theta)F(\By).
 \end{dmath}
 
-This is not neccessarily convex for all sets \( C \subseteq \bbR^n \), because the \( \inf \) of a bunch of convex function is not ncessarily convex.  However, if \( C \) is convex, then \( F(\Bx) \) is convex.
+This is not necessarily convex for all sets \( C \subseteq \bbR^n \), because the \( \inf \) of a bunch of convex function is not necessarily convex.  However, if \( C \) is convex, then \( F(\Bx) \) is convex.
 
 \paragraph{Consequences of convexity for differentiable functions}
 
@@ -461,11 +465,11 @@ F(\Bx^\conj) \le F(\Bx)
 \imageFigure{../figures/ece1505-convex-optimization/l7MinFuncFig5}{CAPTION: l7MinFuncFig5}{fig:l7MinFunc:l7MinFuncFig5}{0.3}
 
 \maketheorem{}{thm:convexOptimizationLecture7:700}{
-Suppose \( F \) is twice continuously differentiable (not neccessarily convex)
+Suppose \( F \) is twice continuously differentiable (not necessarily convex)
 
 \begin{itemize}
 \item
-If \( \Bx^\conj\) is a local optimimum then
+If \( \Bx^\conj\) is a local optimum then
 
 \begin{equation*}
 \begin{aligned}
@@ -483,7 +487,7 @@ If
 \end{aligned},
 \end{equation*}
 
-then \( \Bx^\conj\) is a local optimimum.
+then \( \Bx^\conj\) is a local optimum.
 \end{itemize}
 } % theorem
 

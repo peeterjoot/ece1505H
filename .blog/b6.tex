@@ -1,18 +1,40 @@
-%
-% Copyright © 2017 Peeter Joot.  All Rights Reserved.
-% Licenced as described in the file LICENSE under the root directory of this GIT repository.
-%
-%\begin{itemize}
-%\item First and second order conditions for convexity of differentiable functions.
-%\item Consequences of convexity: local and global optimality.
-%\item Properties.
-%\end{itemize}
+\input{../latex/blogpost.tex}
+\renewcommand{\basename}{convexOptimization6}
+\renewcommand{\dirname}{notes/ece1505/}
+\newcommand{\keywords}{ECE1505H}
+\input{../latex/peeter_prologue_print2.tex}
+
+\usepackage{ece1505}
+\usepackage{peeters_braket}
+\usepackage{peeters_layout_exercise}
+\usepackage{peeters_figures}
+\usepackage{macros_qed}
+\usepackage{mathtools}
+\usepackage{siunitx}
+\usepackage{enumerate}
+
+\beginArtNoToc
+\generatetitle{ECE1505H Convex Optimization.  Lecture 6: First and second order conditions.  Taught by Prof.\ Stark Draper}
+\label{chap:convexOptimization6}
+
+\paragraph{Disclaimer}
+
+Peeter's lecture notes from class.  These may be incoherent and rough.
+
+These are notes for the UofT course ECE1505H, Convex Optimization, taught by Prof. Stark Draper, covering \textchapref{{1}} \citep{boyd2004convex} content.
+
+\paragraph{Today}
+
+\begin{itemize}
+\item First and second order conditions for convexity of differentiable functions.
+\item Consequences of convexity: local and global optimality.
+\item Properties.
+\end{itemize}
+
 \paragraph{Quasi-convex}
 
 \( F_1 \) and \( F_2 \) convex implies \( \max( F_1, F_2) \) convex.
 
-%\imageFigure{../figures/ece1505-convex-optimization/l6Fig1}{CAPTION: l6Fig1}{fig:l6:l6Fig1}{0.3}
-%\cref{fig:l7minAndMax:l7minAndMaxFig4}.
 \imageFigure{../figures/ece1505-convex-optimization/l7minAndMaxFig4}{Min and Max}{fig:l7minAndMax:l7minAndMaxFig4}{0.3}
 
 Note that \( \min(F_1, F_2) \) is NOT convex.
@@ -125,19 +147,21 @@ By assumption
 Compute
 
 \begin{dmath}\label{eqn:convexOptimizationLecture6:200}
+\begin{aligned}
 \theta F(x) + (1-\theta) F(y)
-\ge
+&\ge
 \theta \lr{  F(z) + F'(z) (x - z) }
-+ (1-\theta) \lr{  F(z) + F'(z) (y - z) }
-=
-F(z) + F'(z) \lr{ \theta( x - z) + (1-\theta) (y-z) }
-=
-F(z) + F'(z) \lr{ \theta x  + (1-\theta) y - \theta z - (1 -\theta) z }
-=
-F(z) + F'(z) \lr{ \theta x  + (1-\theta) y - z}
-=
-F(z) + F'(z) \lr{ z - z}
-= F(z).
++ (1-\theta) \lr{  F(z) + F'(z) (y - z) } \\
+&=
+F(z) + F'(z) \lr{ \theta( x - z) + (1-\theta) (y-z) } \\
+&=
+F(z) + F'(z) \lr{ \theta x  + (1-\theta) y - \theta z - (1 -\theta) z } \\
+&=
+F(z) + F'(z) \lr{ \theta x  + (1-\theta) y - z} \\
+&=
+F(z) + F'(z) \lr{ z - z} \\
+&= F(z).
+\end{aligned}
 \end{dmath}
 
 \paragraph{Proof of the 2nd order case for \( n = 1 \)}
@@ -267,13 +291,15 @@ and
 This is one function per row, for \( i \in [1,m], j \in [1,n] \).  This gives
 
 \begin{dmath}\label{eqn:convexOptimizationLecture6:600}
+\begin{aligned}
 \frac{d}{dt} F(\Bx + \Bv t)
-=
-\frac{d}{dt} F( g(t) )
-=
-\frac{d}{dt} h(t)
-= D h(t)
-= D F(g(t))  \cdot D g(t)
+&=
+\frac{d}{dt} F( g(t) ) \\
+&=
+\frac{d}{dt} h(t) \\
+&= D h(t) \\
+&= D F(g(t))  \cdot D g(t)
+\end{aligned}
 \end{dmath}
 
 The first matrix is in \( \bbR^{1\times n} \) whereas the second is in \( \bbR^{n\times 1} \), since
@@ -287,23 +313,25 @@ The first matrix is in \( \bbR^{1\times n} \) whereas the second is in \( \bbR^{
 That first matrix is
 
 \begin{dmath}\label{eqn:convexOptimizationLecture6:640}
+\begin{aligned}
 \evalbar{D F(\tilde{\Bx})}{\tilde{\Bx} = g(t)}
-=
+&=
 \evalbar{
 \lr{\begin{bmatrix}
 \PD{\tilde{x}_1}{ F(\tilde{\Bx})} &
 \PD{\tilde{x}_2}{ F(\tilde{\Bx})} & \cdots
 \PD{\tilde{x}_n}{ F(\tilde{\Bx})}
 \end{bmatrix}
-}}{ \tilde{\Bx} = g(t) = \Bx + t \Bv }
-=
+}}{ \tilde{\Bx} = g(t) = \Bx + t \Bv } \\
+&=
 \evalbar{
 \lr{ \spacegrad F(\tilde{\Bx}) }^\T
 }{
 \tilde{\Bx} = g(t)
-}
+} \\
 =
 \lr{ \spacegrad F(g(t)) }^\T.
+\end{aligned}
 \end{dmath}
 
 The second Jacobian is
@@ -353,17 +381,15 @@ h'(0) = \lr{ \spacegrad F(g(0))}^\T \Bv
 Finally
 
 \begin{dmath}\label{eqn:convexOptimizationLecture6:720}
+\begin{aligned}
 F(\Bx + t \Bv)
-\ge h(0) + h'(0) t
-= F(\Bx) + \lr{ \spacegrad F(\Bx) }^\T (t \Bv)
-= F(\Bx) + \innerprod{ \spacegrad F(\Bx) }{ t \Bv}.
+&\ge h(0) + h'(0) t \\
+&= F(\Bx) + \lr{ \spacegrad F(\Bx) }^\T (t \Bv) \\
+&= F(\Bx) + \innerprod{ \spacegrad F(\Bx) }{ t \Bv}.
+\end{aligned}
 \end{dmath}
 
 Which is true for all \( \Bx, \Bx + t \Bv \in \dom F \).  Note that the quantity \( t \Bv \) is a shift.
-
-%F4
-%\cref{fig:l6:l6Fig4}.
-%\imageFigure{../figures/ece1505-convex-optimization/l6Fig4}{CAPTION: l6Fig4}{fig:l6:l6Fig4}{0.3}
 
 \paragraph{Epigraph}
 
@@ -400,9 +426,4 @@ With \( \Bw =
 
 \imageFigure{../figures/ece1505-convex-optimization/l6Fig5}{Half planes and epigraph.}{fig:l6:l6Fig5}{0.3}
 
-%%\paragraph{For where?}
-%%
-%%\cref{fig:l6:l6Fig2}.
-%%\imageFigure{../figures/ece1505-convex-optimization/l6Fig2}{3D projection onto plane.}{fig:l6:l6Fig2}{0.3}
-%%
-%\EndArticle
+\EndArticle
