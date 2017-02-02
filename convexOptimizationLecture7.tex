@@ -10,14 +10,14 @@
 
 \usepackage{ece1505}
 \usepackage{peeters_braket}
-%\usepackage{peeters_layout_exercise}
+\usepackage{peeters_layout_exercise}
 \usepackage{peeters_figures}
 \usepackage{mathtools}
 \usepackage{siunitx}
 
 \beginArtNoToc
-\generatetitle{ECE1505H Convex Optimization.  Lecture 7: XXX.  Taught by Prof.\ Stark Draper}
-%\chapter{XXX}
+\generatetitle{ECE1505H Convex Optimization.  Lecture 7: Examples of convex and concave functions, local and global minimums.  Taught by Prof.\ Stark Draper}
+%\chapter{Examples of convex and concave functions, local and global minimums}
 \label{chap:convexOptimization7}
 
 \paragraph{Disclaimer}
@@ -66,7 +66,8 @@ F''(x) &= \alpha(\alpha-1) x^{\alpha-2}.
 \end{aligned}
 \end{dmath}
 
-F1
+%\cref{fig:l7xToTheN:l7xToTheNFig1}.
+\imageFigure{../figures/ece1505-convex-optimization/l7xToTheNFig1}{Powers of x.}{fig:l7xToTheN:l7xToTheNFig1}{0.3}
 
 This is convex on \( \bbR_{+} \), if \( \alpha \ge 1 \), or \( \alpha \le 0 \).
 
@@ -106,9 +107,12 @@ F''(x) &= \alpha^2 e^{\alpha x} \ge 0
 \end{aligned}
 \end{dmath}
 
-F2
+%F2
+\imageFigure{../figures/ece1505-convex-optimization/l7eToAlphaXFig2}{Exponential.}{fig:l7eToAlphaX:l7eToAlphaXFig2}{0.3}
 
-This is a convex function for all \( \alpha \).
+Such functions are plotted in
+\cref{fig:l7eToAlphaX:l7eToAlphaXFig2}, and are
+convex function for all \( \alpha \).
 
 Example:
 
@@ -126,7 +130,21 @@ This is convex(concave) if \( P \ge 0 \) (\( P \le 0\)).
 
 Example:
 
-For
+A quadratic function
+
+\begin{dmath}\label{eqn:convexOptimizationLecture7:n}
+F(x, y) = x^2 + y^2 + 3 x y,
+\end{dmath}
+
+that is neither convex nor concave is plotted in \cref{fig:l7quadratic3d:l7quadratic3dFig7a}
+
+\imageTwoFigures
+{../figures/ece1505-convex-optimization/l7quadratic3dFig7a}
+{../figures/ece1505-convex-optimization/l7quadraticContourFig7b}
+{Function with saddle point (3d and contours).}{fig:l7quadratic3d:l7quadratic3dFig7a}{scale=0.3}
+
+This function can be put in matrix form
+
 \begin{dmath}\label{eqn:convexOptimizationLecture7:160}
 F(x, y) = x^2 + y^2 + 3 x y
 =
@@ -140,8 +158,10 @@ x & y
 \begin{bmatrix}
 x \\
  y
-\end{bmatrix}
+\end{bmatrix},
 \end{dmath}
+
+and has the Hessian
 
 \begin{dmath}\label{eqn:convexOptimizationLecture7:180}
 \spacegrad^2 F
@@ -158,7 +178,7 @@ x \\
 = 2 P.
 \end{dmath}
 
-Is this PSD?  Check eigenvalues
+From the plot we know that this is not PSD, but this can be confirmed by checking the eigenvalues
 
 \begin{dmath}\label{eqn:convexOptimizationLecture7:200}
 0 =
@@ -274,7 +294,7 @@ so \( \spacegrad^2 F \le 0 \).  This is a negative semi-definite function (conca
 
 This is an example of a more general result
 
-\begin{dmath}\label{eqn:convexOptimizationLecture7:n}
+\begin{dmath}\label{eqn:convexOptimizationLecture7:380}
 F(x) = \lr{ \prod_{i = 1}^n x_i }^{1/n},
 \end{dmath}
 
@@ -286,7 +306,7 @@ If \( F \) is differentiable in \R{n}, then check the curvature of the function 
 
 If the Hessian is PSD at all \( \Bx \in \dom F \), that is
 
-\begin{dmath}\label{eqn:convexOptimizationLecture7:n}
+\begin{dmath}\label{eqn:convexOptimizationLecture7:400}
 \spacegrad^2 F \ge 0 \, \forall \Bx \in \dom F,
 \end{dmath}
 
@@ -297,12 +317,12 @@ then the function is convex.
 Example:
 Over \( \dom F = \bbR^n \)
 
-\begin{dmath}\label{eqn:convexOptimizationLecture7:n}
+\begin{dmath}\label{eqn:convexOptimizationLecture7:420}
 F(\Bx) = \max_{i = 1}^n x_i
 \end{dmath}
 
 i.e.
-\begin{dmath}\label{eqn:convexOptimizationLecture7:n}
+\begin{dmath}\label{eqn:convexOptimizationLecture7:440}
 \begin{aligned}
 F((1,2) &= 2 \\
 F((3,-1) &= 3
@@ -311,13 +331,13 @@ F((3,-1) &= 3
 
 Example:
 
-\begin{dmath}\label{eqn:convexOptimizationLecture7:n}
+\begin{dmath}\label{eqn:convexOptimizationLecture7:460}
 F(\Bx) = \max_{i = 1}^n F_i(\Bx),
 \end{dmath}
 
-where 
+where
 
-\begin{dmath}\label{eqn:convexOptimizationLecture7:n}
+\begin{dmath}\label{eqn:convexOptimizationLecture7:480}
 F_i(\Bx)
 =
 ... ?
@@ -327,33 +347,33 @@ max of a set of convex functions is a convex function.
 
 Example:
 
-\begin{dmath}\label{eqn:convexOptimizationLecture7:n}
-F(x) = 
-x_{[1]} + 
-x_{[2]} + 
+\begin{dmath}\label{eqn:convexOptimizationLecture7:500}
+F(x) =
+x_{[1]} +
+x_{[2]} +
 x_{[3]}
 \end{dmath}
 
-where 
+where
 
 \( x_{[k]} \) is the k-th largest number in the list
 
 Write
 
-\begin{dmath}\label{eqn:convexOptimizationLecture7:n}
+\begin{dmath}\label{eqn:convexOptimizationLecture7:520}
 F(x) = \max x_i + x_j + x_k
 \end{dmath}
 
-\begin{dmath}\label{eqn:convexOptimizationLecture7:n}
-(i,j,k) \in \choose{n}{3}
+\begin{dmath}\label{eqn:convexOptimizationLecture7:540}
+(i,j,k) \in \binom{n}{3}
 \end{dmath}
 
 Example:
 
 For \( \Ba \in \bbR^n \) and \( b_i \in \bbR \)
 
-\begin{dmath}\label{eqn:convexOptimizationLecture7:n}
-F(\Bx) 
+\begin{dmath}\label{eqn:convexOptimizationLecture7:560}
+F(\Bx)
 = \sum_{i = 1}^n \log( b_i - \Ba^\T \Bx )^{-1}
 = -\sum_{i = 1}^n \log( b_i - \Ba^\T \Bx )
 \end{dmath}
@@ -363,11 +383,12 @@ This \( b_i - \Ba^\T \Bx \) is an affine function of \( \Bx \) so it doesn't aff
 Since \( \log \) is concave, \( -\log \) is convex.  Convex functions of affine function of \( \Bx \) is convex function of \( \Bx \).
 
 Example:
-\begin{dmath}\label{eqn:convexOptimizationLecture7:n}
+\begin{dmath}\label{eqn:convexOptimizationLecture7:580}
 F(\Bx) = \sup_{\By \in C} \Norm{ \Bx -  \By }
 \end{dmath}
 
-F3
+%F3
+\imageFigure{../figures/ece1505-convex-optimization/l7MaxFuncFig3}{Max length function}{fig:l7MaxFunc:l7MaxFuncFig3}{0.3}
 
 Here \( C \subseteq \bbR^n \) is not neccessarily convex.  We are using \( \sup \) here because the set \( C \) may be open.  This function is the length of the line from \( \Bx \) to the point in \( C \) that is furthest from \( \Bx \).
 
@@ -375,18 +396,24 @@ Here \( C \subseteq \bbR^n \) is not neccessarily convex.  We are using \( \sup 
 \item \( \Bx - \By \) is linear in \( \Bx \)
 \item \( g_\By(\Bx) = \Norm{\Bx - \By} \) is convex in \( \Bx \) since norms are convex functions.
 \item \( F(\Bx) = \sup_{\By \in C} \Norm{ \Bx -  \By } \).  Each \( \By \) index is a convex function.  Taking max of those.
-\item
 \end{itemize}
 
 Example:
 
-\begin{dmath}\label{eqn:convexOptimizationLecture7:n}
+\begin{dmath}\label{eqn:convexOptimizationLecture7:600}
 F(\Bx) = \inf_{\By \in C} \Norm{ \Bx -  \By }.
 \end{dmath}
 
-F4
+Min and max of two convex functions are plotted in
+\cref{fig:l7minAndMax:l7minAndMaxFig4}.
+\imageFigure{../figures/ece1505-convex-optimization/l7minAndMaxFig4}{Min and max}{fig:l7minAndMax:l7minAndMaxFig4}{0.3}
 
-F5 : % F(\Bz) = F(\theta \Bx + (1-\theta) \By) \ge \theta F(\Bx) + (1-\theta)F(\By)
+The max is observed to be convex, whereas the min is not nessessarily so.  
+%Consider the 2d example of a min length function sketched in \cref{fig:l7MaxFunc:l7MaxFuncFig3}, where
+
+\begin{dmath}\label{eqn:convexOptimizationLecture7:n}
+F(\Bz) = F(\theta \Bx + (1-\theta) \By) \ge \theta F(\Bx) + (1-\theta)F(\By).
+\end{dmath}
 
 This is not neccessarily convex for all sets \( C \subseteq \bbR^n \), because the \( \inf \) of a bunch of convex function is not ncessarily convex.  However, if \( C \) is convex, then \( F(\Bx) \) is convex.
 
@@ -394,23 +421,23 @@ This is not neccessarily convex for all sets \( C \subseteq \bbR^n \), because t
 
 \begin{itemize}
 \item Think about unconstrained functions \( \dom F = \bbR^n \).
-\item By first order condition \( F \) is convex iff the domain is convex and 
-\begin{dmath}\label{eqn:convexOptimizationLecture7:n}
+\item By first order condition \( F \) is convex iff the domain is convex and
+\begin{equation}\label{eqn:convexOptimizationLecture7:620}
 F(\Bx) \ge \lr{ \spacegrad F(\Bx)}^\T (\By - \Bx) \, \forall \Bx, \By \in \dom F.
-\end{dmath}
+\end{equation}
 \end{itemize}
 
-If \( F \) is convex and one can find an \( \Bx^\conj \in \dom F \) such that 
+If \( F \) is convex and one can find an \( \Bx^\conj \in \dom F \) such that
 
-\begin{dmath}\label{eqn:convexOptimizationLecture7:n}
+\begin{dmath}\label{eqn:convexOptimizationLecture7:640}
 \spacegrad F(\Bx^\conj) = 0,
 \end{dmath}
 
 then
 
-\begin{dmath}\label{eqn:convexOptimizationLecture7:n}
+\begin{equation}\label{eqn:convexOptimizationLecture7:660}
 F(\By) \ge F(\Bx^\conj) \, \forall \By \in \dom F.
-\end{dmath}
+\end{equation}
 
 If you can find the point where the gradient is zero (which can't always be found), then \( \Bx^\conj\) is a global minimum of \( F \).
 
@@ -418,21 +445,26 @@ Conversely, if \( \Bx^\conj \) is a global minimizer of \( F \), then \( \spaceg
 
 \paragraph{Local vs Global optimum}
 
-\makedefinition{Local optimum.}{dfn:convexOptimizationLecture7:n}{
-\( \Bx^\conj \) is a local optimum of \( F \) if \( \exists \epsilon > 0 \) such that \( \forall \Bx \), \( \Norm{\Bx - \Bx^\conj} < \epsilon \), we have 
+%\cref{fig:l7GlobalAndLocalMin:l7GlobalAndLocalMinFig6}.
+\imageFigure{../figures/ece1505-convex-optimization/l7GlobalAndLocalMinFig6}{Global and local minimums}{fig:l7GlobalAndLocalMin:l7GlobalAndLocalMinFig6}{0.3}
+
+\makedefinition{Local optimum.}{dfn:convexOptimizationLecture7:680}{
+\( \Bx^\conj \) is a local optimum of \( F \) if \( \exists \epsilon > 0 \) such that \( \forall \Bx \), \( \Norm{\Bx - \Bx^\conj} < \epsilon \), we have
 
 \begin{equation*}
-F(\Bx^\conj\) \le F(\Bx)
+F(\Bx^\conj) \le F(\Bx)
 \end{equation*}
 } % definition
 
-F6
+%F6
+%\cref{fig:l7MinFunc:l7MinFuncFig5}.
+\imageFigure{../figures/ece1505-convex-optimization/l7MinFuncFig5}{CAPTION: l7MinFuncFig5}{fig:l7MinFunc:l7MinFuncFig5}{0.3}
 
-\maketheorem{}{thm:convexOptimizationLecture7:n}{
-Suppose \( F \) is twice continuously differentiable (not neccessarily convex) 
+\maketheorem{}{thm:convexOptimizationLecture7:700}{
+Suppose \( F \) is twice continuously differentiable (not neccessarily convex)
 
 \begin{itemize}
-\item 
+\item
 If \( \Bx^\conj\) is a local optimimum then
 
 \begin{equation*}
@@ -460,18 +492,18 @@ Proof:
 \begin{itemize}
 \item Let \( \Bx^\conj \) be a local optimum.  Pick any \( \Bv \in \bbR^n \).
 
-\begin{dmath}\label{eqn:convexOptimizationLecture7:n}
-\lim_{t \rightarrow 0} \frac{ F(\Bx^\conj + t \Bv) - F(\Bx^\conj)}{t} 
+\begin{equation}\label{eqn:convexOptimizationLecture7:720}
+\lim_{t \rightarrow 0} \frac{ F(\Bx^\conj + t \Bv) - F(\Bx^\conj)}{t}
 = \lr{ \spacegrad F(\Bx^\conj) }^\T \Bv
 \ge 0.
-\end{dmath}
+\end{equation}
 \end{itemize}
 
 Here the fraction is \( \ge 0 \) since \( \Bx^\conj \) is a local optimum.
 
-Since the choice of \( \Bv \) is arbitrary, the only case that you can ensure that \( \ge 0, \forall \Bv \) is 
+Since the choice of \( \Bv \) is arbitrary, the only case that you can ensure that \( \ge 0, \forall \Bv \) is
 
-\begin{dmath}\label{eqn:convexOptimizationLecture7:n}
+\begin{dmath}\label{eqn:convexOptimizationLecture7:740}
 \spacegrad F = 0,
 \end{dmath}
 
@@ -481,11 +513,11 @@ This means that \( \spacegrad F(\Bx^\conj) = 0 \) if \( \Bx^\conj \) is a local 
 
 Consider the 2nd order derivative
 
-\begin{dmath}\label{eqn:convexOptimizationLecture7:n}
-\lim_{t \rightarrow 0} \frac{ F(\Bx^\conj + t \Bv) - F(\Bx^\conj)}{t^2} 
+\begin{dmath}\label{eqn:convexOptimizationLecture7:760}
+\lim_{t \rightarrow 0} \frac{ F(\Bx^\conj + t \Bv) - F(\Bx^\conj)}{t^2}
 =
-\lim_{t \rightarrow 0} \inv{t^2} 
-\lr{ 
+\lim_{t \rightarrow 0} \inv{t^2}
+\lr{
 F(\Bx^\conj) + t \lr{ \spacegrad F(\Bx^\conj) }^\T \Bv + \inv{2} t^2 \Bv^\T \spacegrad^2 F(\Bx^\conj) \Bv + O(t^3)
 - F(\Bx^\conj)
 }
