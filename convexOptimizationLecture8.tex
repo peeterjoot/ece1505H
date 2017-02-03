@@ -8,12 +8,13 @@
 \newcommand{\keywords}{ECE1505H}
 \input{../latex/peeter_prologue_print2.tex}
 
-%\usepackage{ece1505}
+\usepackage{ece1505}
 \usepackage{peeters_braket}
 %\usepackage{peeters_layout_exercise}
 \usepackage{peeters_figures}
 \usepackage{mathtools}
 \usepackage{siunitx}
+\usepackage{enumerate}
 
 \beginArtNoToc
 \generatetitle{ECE1505H Convex Optimization.  Lecture 8: XXX.  Taught by Prof.\ Stark Draper}
@@ -24,9 +25,445 @@
 
 Peeter's lecture notes from class.  These may be incoherent and rough.
 
-These are notes for the UofT course ECE1505H, Convex Optimization, taught by Prof. Stark Draper, covering \textchapref{{1}} \citep{boyd2004convex} content.
+These are notes for the UofT course ECE1505H, Convex Optimization, taught by Prof. Stark Draper, from \citep{boyd2004convex}.
 
-\paragraph{YYY}
+\paragraph{Today}
+
+\begin{itemize}
+\item Finish local vs global.
+\item Compositions of functions.
+\item Introduction to convex optimization problems.
+\end{itemize}
+
+\paragraph{Continuing proof:}
+
+We want to prove that if
+
+\begin{equation*}
+\begin{aligned}
+\spacegrad F(\Bx^\conj) &= 0 \\
+\spacegrad^2 F(\Bx^\conj) \ge 0
+\end{aligned},
+\end{equation*}
+
+then \( \Bx^\conj\) is a local optimum.
+
+Proof:
+
+Again, using Taylor approximation
+
+\begin{dmath}\label{eqn:convexOptimizationLecture8:20}
+F(\Bx^\conj + \Bv) = F(\Bx^\conj) + \lr{ \spacegrad F(\Bx^\conj)}^\T \Bv + \inv{2} \Bv^\T \spacegrad^2 F(\Bx^\conj) \Bv + o(\Norm{\Bv}^2)
+\end{dmath}
+
+The linear term is zero by assumption, whereas the Hessian term is given as \( > 0 \).  Any direction that you move in, if your move is small enough, this is going uphill at a local optimimum.
+
+\paragraph{Summarize:}
+
+For twice continuously differentiable functions, at a local optimimum \( \Bx^\conj \), then
+
+\begin{dmath}\label{eqn:convexOptimizationLecture8:40}
+\begin{aligned}
+\spacegrad F(\Bx^\conj) &= 0 \\
+\spacegrad^2 F(\Bx^\conj) \ge 0
+\end{aligned}
+\end{dmath}
+
+If, in addition, \( F \) is convex, then \( \spacegrad F(\Bx^\conj) = 0 \) implies that \( \Bx^\conj \) is a global optimum.  i.e. for (unconstrained) convex functions, local and global optimums are equivalent.
+
+\begin{itemize}
+\item It is possible that a convex function does not have a global optimum.  Examples are \( F(x) = e^x \), which has an \( \inf \), but no lowest point.
+
+%F1
+%\cref{fig:l8exponential:l8exponentialFig1}.
+\imageFigure{../figures/ece1505-convex-optimization/l8exponentialFig1}{CAPTION: l8exponentialFig1}{fig:l8exponential:l8exponentialFig1}{0.3}
+
+\item Our discussion has been for unconstrained functions.  For constrainted problems (next topic) is not not necessarily true that \( \spacegrad F(\Bx) = 0 \) implies that \( \Bx \) is a global optimium, even for \( F \) convex.
+
+%F2
+%\cref{fig:l8constrainedMin:l8constrainedMinFig2}.
+\imageFigure{../figures/ece1505-convex-optimization/l8constrainedMinFig2}{CAPTION: l8constrainedMinFig2}{fig:l8constrainedMin:l8constrainedMinFig2}{0.3}
+\end{itemize}
+
+\paragraph{Projection}
+
+Given \( \Bx \in \bbR^n, \By \in \bbR^p \), if \( h(\Bx,\By) \) is convex in \( \Bx, \By \), then
+
+\begin{dmath}\label{eqn:convexOptimizationLecture8:60}
+F(\Bx_0) = \inf_\By h(\Bx_0,\By)
+\end{dmath}
+
+is convex in \( \Bx\).
+
+F3 : epigraph of \( h \) is a filled in bowl.
+
+The intuition here is that shining light on the (filled) ``bowl''.  That is, the image of \( \epi h \) on the \( \By = 0 \) screen which we will show is a convex set.
+
+Proof:
+
+Since \( h \) is convex in \( \begin{bmatrix} \Bx \\ \By \end{bmatrix} \in \dom h \), then
+
+\begin{equation}\label{eqn:convexOptimizationLecture8:80}
+\epi h = \setlr{ (\Bx,\By,t) | t \ge h(\Bx,\By), \begin{bmatrix} \Bx \\ \By \end{bmatrix} \in \dom h },
+\end{equation}
+
+is a convex set.
+
+We also have to show that the domain of \( F \) is a convex set.  To show this note that
+
+\begin{dmath}\label{eqn:convexOptimizationLecture8:100}
+\begin{aligned}
+\dom F
+&= \setlr{ \Bx | \exists \By s.t. \begin{bmatrix} \Bx \\ \By \end{bmatrix} \in \dom h } \\
+&= \setlr{
+\begin{bmatrix}
+I & 0
+\end{bmatrix}
+\begin{bmatrix}
+\Bx \\
+\By
+\end{bmatrix}
+| \begin{bmatrix} \Bx \\ \By \end{bmatrix} \in \dom h
+}.
+\end{aligned}
+\end{dmath}
+
+This is an affine map of a convex set.  Therefore \( \dom F \) is a convex set.
+
+% F4
+\begin{dmath}\label{eqn:convexOptimizationLecture8:120}
+\begin{aligned}
+\epi F
+&=
+\setlr{ \begin{bmatrix} \Bx \\ \By \end{bmatrix} | t \ge \inf h(\Bx,\By), \Bx \in \dom F, \By: \begin{bmatrix} \Bx \\ \By \end{bmatrix} \in \dom h } \\
+&=
+\setlr{
+\begin{bmatrix}
+I & 0 & 0 \\
+0 & 0 & 1
+\end{bmatrix}
+\begin{bmatrix}
+\Bx \\
+\By \\
+t
+\end{bmatrix}
+|
+t \ge h(\Bx,\By), \begin{bmatrix} \Bx \\ \By \end{bmatrix} \in \dom h
+}.
+\end{aligned}
+\end{dmath}
+
+Example:
+
+The function
+
+\begin{dmath}\label{eqn:convexOptimizationLecture8:140}
+F(\Bx) = \inf_{\By \in C} \Norm{ \Bx - \By },
+\end{dmath}
+
+over \( \Bx \in \bbR^n, \By \in C \), ,is convex if \( C \) is a convex set.  Reason:
+
+\begin{itemize}
+\item \( \Bx - \By \) is linear in \((\Bx, \By)\).
+\item \( \Norm{ \Bx - \By } \) is a convex function if the domain is a convex set
+\item The domain is \( \bbR^n \times C \).  This will be a convex set if \( C \) is.
+\item \( h(\Bx, \By) = \Norm{\Bx -\By} \) is a convex function if \( \dom h \) is a convex set.  By setting \( \dom h = \bbR^n \times C \), if \( C \) is convex, \( \dom h \) is a convex set.
+\item \( F() \)
+\end{itemize}
+
+\paragraph{Composition of functions}
+
+Consider
+
+\begin{dmath}\label{eqn:convexOptimizationLecture8:160}
+\begin{aligned}
+F(\Bx) &= h(g(\Bx)) \\
+\dom F &= \setlr{ \Bx \in \dom g | g(\Bx) \in \dom h } \\
+F &: \bbR^n \rightarrow \bbR \\
+g &: \bbR^n \rightarrow \bbR \\
+h &: \bbR \rightarrow \bbR.
+\end{aligned}
+\end{dmath}
+
+Cases:
+\begin{enumerate}[(a)]
+\item \( g \) is convex, \( h \) is convex and non-decreasing.
+\item \( g \) is convex, \( h \) is convex and non-increasing.
+\end{enumerate}
+
+Show for 1D case ( \( n = 1 \)).  Get to \( n > 1 \) by applying to all lines.
+
+\begin{enumerate}[(a)]
+\item
+\begin{dmath}\label{eqn:convexOptimizationLecture8:180}
+\begin{aligned}
+F'(x) &= h'(g(x)) g'(x)
+F''(x) &=
+h''(g(x)) g'(x) g'(x)
++
+h'(g(x)) g''(x)
+=
+h''(g(x)) (g'(x))^2
++
+h'(g(x)) g''(x)
+\end{aligned}
+\end{dmath}
+
+F5a
+\item
+
+F5b
+\end{enumerate}
+
+\paragraph{Extending to multiple dimensions}
+
+\begin{dmath}\label{eqn:convexOptimizationLecture8:200}
+\begin{aligned}
+F(\Bx)
+&= h(g(\Bx))
+= h( g_1(\Bx), g_2(\Bx), \cdots g_k(\Bx) ) \\
+g &: \bbR^n \rightarrow \bbR \\
+h &: \bbR^k \rightarrow \bbR.
+\end{aligned}
+\end{dmath}
+
+is convex if \( g_i \) is convex for each \( i \in [1,k] \) and \( h \) is convex and non-decreasing in each argument.
+
+Proof:
+
+again assume \( n = 1 \), without loss of generality,
+
+\begin{dmath}\label{eqn:convexOptimizationLecture8:220}
+\begin{aligned}
+g &: \bbR \rightarrow \bbR^k \\
+h &: \bbR^k \rightarrow \bbR \\
+\end{aligned}
+\end{dmath}
+
+\begin{dmath}\label{eqn:convexOptimizationLecture8:240}
+F''(\Bx)
+=
+\begin{bmatrix}
+g_1(\Bx) & g_2(\Bx) & \cdots & g_k(\Bx)
+\end{bmatrix}
+\spacegrad^2 h(g(\Bx))
+\begin{bmatrix}
+g_1'(\Bx) \\ g_2'(\Bx) \\ \vdots \\ g_k'(\Bx)
+\end{bmatrix}
++
+\lr{ \spacegrad h(g(x)) }^\T
+\begin{bmatrix}
+g_1''(\Bx) \\ g_2''(\Bx) \\ \vdots \\ g_k''(\Bx)
+\end{bmatrix}
+\end{dmath}
+
+The Hessian is PSD.
+
+Example:
+
+\begin{dmath}\label{eqn:convexOptimizationLecture8:260}
+F(x) = \exp( g(x) ) = h( g(x) ),
+\end{dmath}
+
+where \( g \) is convex is convex, and \( h(y) = e^y \).  This implies that \( F \) is a convex function.
+
+F1
+
+Example:
+
+\begin{dmath}\label{eqn:convexOptimizationLecture8:280}
+F(x) = \inv{g(x)},
+\end{dmath}
+
+is convex if \( g(x) \) is concave and positive.  example: \( h(x) = 1/x, \dom h = \bbR_{++} \).
+
+%F6
+%\cref{fig:l8oneOverX:l8oneOverXFig6}.
+\imageFigure{../figures/ece1505-convex-optimization/l8oneOverXFig6}{CAPTION: l8oneOverXFig6}{fig:l8oneOverX:l8oneOverXFig6}{0.3}
+
+Example:
+
+\begin{equation}\label{eqn:convexOptimizationLecture8:300}
+F(x) = - \sum_{i = 1}^n \log( -F_i(x) )
+\end{equation}
+
+is convex on \( \setlr{ x | F_i(x) < 0 \forall i } \) if all \( F_i \) are convex.
+
+\begin{itemize}
+\item Due to \( dom F \), \( -F_i(x) > 0 \,\forall x \in \dom F \)
+\item \( \log(x) \) concave on \( \bbR_{++} \) so \( -\log \) convex also non-increasing.
+
+%F7
+%\cref{fig:l8MinusLogX:l8MinusLogXFig7}.
+\imageFigure{../figures/ece1505-convex-optimization/l8MinusLogXFig7}{CAPTION: l8MinusLogXFig7}{fig:l8MinusLogX:l8MinusLogXFig7}{0.3}
+\end{itemize}
+
+\begin{dmath}\label{eqn:convexOptimizationLecture8:320}
+F(x) = \sum h_i(x)
+\end{dmath}
+
+but
+\begin{dmath}\label{eqn:convexOptimizationLecture8:340}
+h_i(x) = -\log(-F_i(x))
+\end{dmath}
+
+F8: each \( h_i \) is confex, so this is a sum of convex functions, and is therefore convex.
+
+Example:
+
+Over \( \dom F = S^n_{++} \)
+
+\begin{dmath}\label{eqn:convexOptimizationLecture8:360}
+F(X) = \log \det X^{-1}
+\end{dmath}
+
+To show that this is convex, check all lines in domain.  A line in \( S^n_{++} \) is a 1D family of matrices
+
+\begin{dmath}\label{eqn:convexOptimizationLecture8:380}
+\tilde{F}(t) = \log \det( \lr{X_0 + t H}^{-1} ),
+\end{dmath}
+
+where \( X_0 \in S^n_{++}, t \in \bbR, H \in S^n \).
+
+F9
+
+For \( t \) small enough,
+
+\begin{dmath}\label{eqn:convexOptimizationLecture8:400}
+X_0 + t H \in S^n_{++}
+\end{dmath}
+
+\begin{dmath}\label{eqn:convexOptimizationLecture8:420}
+\tilde{F}(t)
+= \log \det( \lr{X_0 + t H}^{-1} )
+= \log \det\lr{ X_0^{-1/2} \lr{I + t X_0^{-1/2} H X_0^{-1/2} }^{-1} X_0^{-1/2} }
+= \log \det\lr{ X_0^{-1} \lr{I + t X_0^{-1/2} H X_0^{-1/2} }^{-1} }
+= \log \det X_0^{-1} + \log\det \lr{I + t X_0^{-1/2} H X_0^{-1/2} }^{-1}
+= \log \det X_0^{-1} - \log\det \lr{I + t X_0^{-1/2} H X_0^{-1/2} }
+= \log \det X_0^{-1} - \log\det \lr{I + t M }.
+\end{dmath}
+
+If \( \lambda_i \) are eigenvalues of \( M \), then \( 1 + t \lambda_i \) are eigenvalues of \( I + t M \).  i.e.:
+
+\begin{dmath}\label{eqn:convexOptimizationLecture8:440}
+(I + t M) \Bv
+ =
+I \Bv + t \lambda_i \Bv
+=
+(1 + t \lambda_i) \Bv.
+\end{dmath}
+
+This gives
+
+\begin{dmath}\label{eqn:convexOptimizationLecture8:460}
+\tilde{F}(t)
+= \log \det X_0^{-1} - \log \prod_{i = 1}^n (1 + t \lambda_i)
+= \log \det X_0^{-1} - \sum_{i = 1}^n \log (1 + t \lambda_i)
+\end{dmath}
+
+\begin{itemize}
+\item \( 1 + t \lambda_i \) is linear in \( t \).
+\item \( -\log \) is convex in its argument.
+\item sum of convex function is convex.
+\end{itemize}
+
+Example:
+
+\begin{dmath}\label{eqn:convexOptimizationLecture8:480}
+F(X) = \lambda_\max(X),
+\end{dmath}
+
+is convex on \( \dom F \in S^n \)
+
+(a)
+\begin{dmath}\label{eqn:convexOptimizationLecture8:500}
+\lambda_{\max} (X) = \sup_{\Norm{\Bv}_2 \le 1} \Bv^\T X \Bv,
+\end{dmath}
+
+\begin{dmath}\label{eqn:convexOptimizationLecture8:520}
+\begin{bmatrix}
+\lambda_1 &
+          & \lambda_2 &
+          &           & \ddots &
+          &           &        & \lambda_n
+\end{bmatrix}
+\end{dmath}
+
+Recall that a decomposition
+
+\begin{dmath}\label{eqn:convexOptimizationLecture8:540}
+\begin{aligned}
+X &= Q \Lambda Q^\T \\
+Q^\T Q = Q Q^\T = I
+\end{aligned}
+\end{dmath}
+
+can be used for any \( X \in S^n \).
+
+(b)
+
+Note that \( \Bv^\T X \Bv \) is linear in \( X \).  This is a max of a number of linear (and convex) functions, so it is convex.
+
+Last example:
+
+(non-symmetric matrices)
+
+\begin{dmath}\label{eqn:convexOptimizationLecture8:560}
+F(X) = \sigma_\max(X),
+\end{dmath}
+
+is convex on \( \dom F = \bbR^{m \times n} \).  Here
+
+\begin{dmath}\label{eqn:convexOptimizationLecture8:580}
+\sigma_\max(X) = \sup_{\Norm{\Bv}_2 = 1} \Norm{X \Bv}_2
+\end{dmath}
+
+This is called an operator norm of \( X \).  Using the SVD
+
+\begin{dmath}\label{eqn:convexOptimizationLecture8:600}
+\begin{aligned}
+X &= U \Sigma V^\T \\
+U &= \bbR^{m \times r} \\
+\Sigma &\in \diag \in \bbR{ r \times r } \\
+V^T &\in \bbR^{r \times n}.
+\end{aligned}
+\end{dmath}
+
+Have
+
+\begin{dmath}\label{eqn:convexOptimizationLecture8:620}
+\Norm{X \Bv}_2^2
+=
+\Norm{ U \Sigma V^\T \Bv }_2^2
+=
+\Bv^\T V \Sigma U^\T U \Sigma V^\T \Bv
+=
+\Bv^\T V \Sigma \Sigma V^\T \Bv
+=
+\Bv^\T V \Sigma^2 V^\T \Bv
+=
+\tilde{\Bv}^\T \Sigma^2 \tilde{\Bv},
+\end{dmath}
+
+where \( \tilde{\Bv} = \Bv^\T V \), so
+
+\begin{dmath}\label{eqn:convexOptimizationLecture8:640}
+\Norm{X \Bv}_2^2
+=
+\sum_{i = 1}^r \sigma_i^2 \Norm{\tilde{\Bv}}
+\le \sigma_\max^2 \Norm{\tilde{\Bv}}^2,
+\end{dmath}
+
+or
+\begin{dmath}\label{eqn:convexOptimizationLecture8:660}
+\Norm{X \Bv}_2
+\le \sqrt{ \sigma_\max^2 } \Norm{\tilde{\Bv}}
+\le
+\sigma_\max.
+\end{dmath}
+
+Set \( \Bv \) to the right singular value of \( X \) to get equality.
+
+%A2 to XX (Ryerson)
 
 \EndArticle
-%\EndNoBibArticle
