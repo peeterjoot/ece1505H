@@ -17,17 +17,17 @@
 \usepackage{enumerate}
 
 \beginArtNoToc
-\generatetitle{ECE1505H Convex Optimization.  Lecture 8: XXX.  Taught by Prof.\ Stark Draper}
-%\chapter{XXX}
+\generatetitle{ECE1505H Convex Optimization.  Lecture 8: Local vs. Global, and composition of functions.  Taught by Prof.\ Stark Draper}
+%\chapter{Local vs. Global, and composition of functions}
 \label{chap:convexOptimization8}
 
-\paragraph{Disclaimer}
+\section{Disclaimer}
 
 Peeter's lecture notes from class.  These may be incoherent and rough.
 
 These are notes for the UofT course ECE1505H, Convex Optimization, taught by Prof. Stark Draper, from \citep{boyd2004convex}.
 
-\paragraph{Today}
+\section{Today}
 
 \begin{itemize}
 \item Finish local vs global.
@@ -35,7 +35,7 @@ These are notes for the UofT course ECE1505H, Convex Optimization, taught by Pro
 \item Introduction to convex optimization problems.
 \end{itemize}
 
-\paragraph{Continuing proof:}
+\section{Continuing proof:}
 
 We want to prove that if
 
@@ -58,7 +58,7 @@ F(\Bx^\conj + \Bv) = F(\Bx^\conj) + \lr{ \spacegrad F(\Bx^\conj)}^\T \Bv + \inv{
 
 The linear term is zero by assumption, whereas the Hessian term is given as \( > 0 \).  Any direction that you move in, if your move is small enough, this is going uphill at a local optimum.
 
-\paragraph{Summarize:}
+\section{Summarize:}
 
 For twice continuously differentiable functions, at a local optimum \( \Bx^\conj \), then
 
@@ -95,7 +95,7 @@ The level sets of this objective function are plotted in \cref{fig:l8constrained
 \imageFigure{../figures/ece1505-convex-optimization/l8constrainedMinFig2}{Constrained problem with optimum not at the zero gradient point.}{fig:l8constrainedMin:l8constrainedMinFig2}{0.3}
 \end{itemize}
 
-\paragraph{Projection}
+\section{Projection}
 
 Given \( \Bx \in \bbR^n, \By \in \bbR^p \), if \( h(\Bx,\By) \) is convex in \( \Bx, \By \), then
 
@@ -106,7 +106,7 @@ F(\Bx_0) = \inf_\By h(\Bx_0,\By)
 is convex in \( \Bx\), as sketched in \cref{fig:l8convexProjection:l8convexProjectionFig3}.
 
 %F3 : epigraph of \( h \) is a filled in bowl.
-\imageFigure{../figures/ece1505-convex-optimization/l8convexProjectionFig3}{Epigraph of \( h \) is a filled bowl.}{fig:l8convexProjection:l8convexProjectionFig3}{0.3}
+\imageFigure{../figures/ece1505-convex-optimization/l8convexProjectionFig3}{Epigraph of \( h \) is a filled bowl.}{fig:l8convexProjection:l8convexProjectionFig3}{0.4}
 
 The intuition here is that shining light on the (filled) ``bowl''.  That is, the image of \( \epi h \) on the \( \By = 0 \) screen which we will show is a convex set.
 
@@ -128,7 +128,7 @@ We also have to show that the domain of \( F \) is a convex set.  To show this n
 &= \setlr{ \Bx | \exists \By s.t. \begin{bmatrix} \Bx \\ \By \end{bmatrix} \in \dom h } \\
 &= \setlr{
 \begin{bmatrix}
-I & 0
+I_{n\times n} & 0_{n \times p}
 \end{bmatrix}
 \begin{bmatrix}
 \Bx \\
@@ -141,7 +141,6 @@ I & 0
 
 This is an affine map of a convex set.  Therefore \( \dom F \) is a convex set.
 
-% F4
 \begin{dmath}\label{eqn:convexOptimizationLecture8:120}
 \begin{aligned}
 \epi F
@@ -164,7 +163,7 @@ t \ge h(\Bx,\By), \begin{bmatrix} \Bx \\ \By \end{bmatrix} \in \dom h
 \end{aligned}
 \end{dmath}
 
-Example:
+\paragraph{Example:}
 
 The function
 
@@ -182,7 +181,7 @@ over \( \Bx \in \bbR^n, \By \in C \), ,is convex if \( C \) is a convex set.  Re
 \item \( F() \)
 \end{itemize}
 
-\paragraph{Composition of functions}
+\section{Composition of functions}
 
 Consider
 
@@ -217,16 +216,25 @@ h'(g(x)) g''(x)
 h''(g(x)) (g'(x))^2
 +
 h'(g(x)) g''(x)
+= 
+\lr{ \ge 0 } \cdot \lr{ \ge 0 }^2 + \lr{ \ge 0 } \cdot \lr{ \ge 0 },
 \end{aligned}
 \end{dmath}
 
-F5a
+since \( h \) is respectively convex, and non-decreasing.
 \item
 
-F5b
+\begin{dmath}\label{eqn:convexOptimizationLecture8:180}
+\begin{aligned}
+F'(x) = 
+\lr{ \ge 0 } \cdot \lr{ \ge 0 }^2 + \lr{ \le 0 } \cdot \lr{ \le 0 },
+\end{aligned}
+\end{dmath}
+
+since \( h \) is respectively convex, and non-increasing, and g is concave.
 \end{enumerate}
 
-\paragraph{Extending to multiple dimensions}
+\section{Extending to multiple dimensions}
 
 \begin{dmath}\label{eqn:convexOptimizationLecture8:200}
 \begin{aligned}
@@ -270,7 +278,7 @@ g_1''(\Bx) \\ g_2''(\Bx) \\ \vdots \\ g_k''(\Bx)
 
 The Hessian is PSD.
 
-Example:
+\paragraph{Example:}
 
 \begin{dmath}\label{eqn:convexOptimizationLecture8:260}
 F(x) = \exp( g(x) ) = h( g(x) ),
@@ -278,9 +286,7 @@ F(x) = \exp( g(x) ) = h( g(x) ),
 
 where \( g \) is convex is convex, and \( h(y) = e^y \).  This implies that \( F \) is a convex function.
 
-F1
-
-Example:
+\paragraph{Example:}
 
 \begin{dmath}\label{eqn:convexOptimizationLecture8:280}
 F(x) = \inv{g(x)},
@@ -290,7 +296,7 @@ is convex if \( g(x) \) is concave and positive.  The most simple such example o
 
 \imageFigure{../figures/ece1505-convex-optimization/l8oneOverXFig6}{Inverse function is convex over positive domain.}{fig:l8oneOverX:l8oneOverXFig6}{0.2}
 
-Example:
+\paragraph{Example:}
 
 \begin{equation}\label{eqn:convexOptimizationLecture8:300}
 F(x) = - \sum_{i = 1}^n \log( -F_i(x) )
@@ -312,12 +318,13 @@ F(x) = \sum h_i(x)
 
 but
 \begin{dmath}\label{eqn:convexOptimizationLecture8:340}
-h_i(x) = -\log(-F_i(x))
+h_i(x) = -\log(-F_i(x)),
 \end{dmath}
 
-F8: each \( h_i \) is convex, so this is a sum of convex functions, and is therefore convex.
+which is a convex and non-increasing function (\(-\log\)), of a convex function \( -F_i(x) \).  Each 
+\( h_i \) is convex, so this is a sum of convex functions, and is therefore convex.
 
-Example:
+\paragraph{Example:}
 
 Over \( \dom F = S^n_{++} \)
 
@@ -375,7 +382,7 @@ This gives
 \item sum of convex function is convex.
 \end{itemize}
 
-Example:
+\paragraph{Example:}
 
 \begin{dmath}\label{eqn:convexOptimizationLecture8:480}
 F(X) = \lambda_\max(X),
