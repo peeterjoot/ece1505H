@@ -56,11 +56,11 @@ Again, using Taylor approximation
 F(\Bx^\conj + \Bv) = F(\Bx^\conj) + \lr{ \spacegrad F(\Bx^\conj)}^\T \Bv + \inv{2} \Bv^\T \spacegrad^2 F(\Bx^\conj) \Bv + o(\Norm{\Bv}^2)
 \end{dmath}
 
-The linear term is zero by assumption, whereas the Hessian term is given as \( > 0 \).  Any direction that you move in, if your move is small enough, this is going uphill at a local optimimum.
+The linear term is zero by assumption, whereas the Hessian term is given as \( > 0 \).  Any direction that you move in, if your move is small enough, this is going uphill at a local optimum.
 
 \paragraph{Summarize:}
 
-For twice continuously differentiable functions, at a local optimimum \( \Bx^\conj \), then
+For twice continuously differentiable functions, at a local optimum \( \Bx^\conj \), then
 
 \begin{dmath}\label{eqn:convexOptimizationLecture8:40}
 \begin{aligned}
@@ -72,17 +72,27 @@ For twice continuously differentiable functions, at a local optimimum \( \Bx^\co
 If, in addition, \( F \) is convex, then \( \spacegrad F(\Bx^\conj) = 0 \) implies that \( \Bx^\conj \) is a global optimum.  i.e. for (unconstrained) convex functions, local and global optimums are equivalent.
 
 \begin{itemize}
-\item It is possible that a convex function does not have a global optimum.  Examples are \( F(x) = e^x \), which has an \( \inf \), but no lowest point.
+\item It is possible that a convex function does not have a global optimum.  Examples are \( F(x) = e^x \)
+(\cref{fig:l8exponential:l8exponentialFig1})
+, which has an \( \inf \), but no lowest point.
 
-%F1
-%\cref{fig:l8exponential:l8exponentialFig1}.
-\imageFigure{../figures/ece1505-convex-optimization/l8exponentialFig1}{CAPTION: l8exponentialFig1}{fig:l8exponential:l8exponentialFig1}{0.3}
+\imageFigure{../figures/ece1505-convex-optimization/l8exponentialFig1}{Exponential has no global optimum.}{fig:l8exponential:l8exponentialFig1}{0.2}
 
-\item Our discussion has been for unconstrained functions.  For constrainted problems (next topic) is not not necessarily true that \( \spacegrad F(\Bx) = 0 \) implies that \( \Bx \) is a global optimium, even for \( F \) convex.
+\item Our discussion has been for unconstrained functions.  For constrained problems (next topic) is not not necessarily true that \( \spacegrad F(\Bx) = 0 \) implies that \( \Bx \) is a global optimum, even for \( F \) convex.
 
-%F2
-%\cref{fig:l8constrainedMin:l8constrainedMinFig2}.
-\imageFigure{../figures/ece1505-convex-optimization/l8constrainedMinFig2}{CAPTION: l8constrainedMinFig2}{fig:l8constrainedMin:l8constrainedMinFig2}{0.3}
+As an example of a constrained problem consider
+
+\begin{dmath}\label{eqn:convexOptimizationLecture8:n}
+\begin{aligned}
+\min &2 x^2 + y^2 \\
+x &\ge 3 \\
+y &\ge 5.
+\end{aligned}
+\end{dmath}
+
+The level sets of this objective function are plotted in \cref{fig:l8constrainedMin:l8constrainedMinFig2}.  The optimal point is at \( \Bx^\conj = (3,5) \), where \( \spacegrad F \ne 0 \).
+
+\imageFigure{../figures/ece1505-convex-optimization/l8constrainedMinFig2}{Constrained problem with optimum not at the zero gradient point.}{fig:l8constrainedMin:l8constrainedMinFig2}{0.3}
 \end{itemize}
 
 \paragraph{Projection}
@@ -93,9 +103,10 @@ Given \( \Bx \in \bbR^n, \By \in \bbR^p \), if \( h(\Bx,\By) \) is convex in \( 
 F(\Bx_0) = \inf_\By h(\Bx_0,\By)
 \end{dmath}
 
-is convex in \( \Bx\).
+is convex in \( \Bx\), as sketched in \cref{fig:l8convexProjection:l8convexProjectionFig3}.
 
-F3 : epigraph of \( h \) is a filled in bowl.
+%F3 : epigraph of \( h \) is a filled in bowl.
+\imageFigure{../figures/ece1505-convex-optimization/l8convexProjectionFig3}{Epigraph of \( h \) is a filled bowl.}{fig:l8convexProjection:l8convexProjectionFig3}{0.3}
 
 The intuition here is that shining light on the (filled) ``bowl''.  That is, the image of \( \epi h \) on the \( \By = 0 \) screen which we will show is a convex set.
 
@@ -275,11 +286,9 @@ Example:
 F(x) = \inv{g(x)},
 \end{dmath}
 
-is convex if \( g(x) \) is concave and positive.  example: \( h(x) = 1/x, \dom h = \bbR_{++} \).
+is convex if \( g(x) \) is concave and positive.  The most simple such example of such a function is \( h(x) = 1/x, \dom h = \bbR_{++} \), which is plotted in \cref{fig:l8oneOverX:l8oneOverXFig6}.
 
-%F6
-%\cref{fig:l8oneOverX:l8oneOverXFig6}.
-\imageFigure{../figures/ece1505-convex-optimization/l8oneOverXFig6}{CAPTION: l8oneOverXFig6}{fig:l8oneOverX:l8oneOverXFig6}{0.3}
+\imageFigure{../figures/ece1505-convex-optimization/l8oneOverXFig6}{Inverse function is convex over positive domain.}{fig:l8oneOverX:l8oneOverXFig6}{0.2}
 
 Example:
 
@@ -290,12 +299,11 @@ F(x) = - \sum_{i = 1}^n \log( -F_i(x) )
 is convex on \( \setlr{ x | F_i(x) < 0 \forall i } \) if all \( F_i \) are convex.
 
 \begin{itemize}
-\item Due to \( dom F \), \( -F_i(x) > 0 \,\forall x \in \dom F \)
-\item \( \log(x) \) concave on \( \bbR_{++} \) so \( -\log \) convex also non-increasing.
+\item Due to \( \dom F \), \( -F_i(x) > 0 \,\forall x \in \dom F \)
+\item \( \log(x) \) concave on \( \bbR_{++} \) so \( -\log \) convex also non-increasing (\cref{fig:l8MinusLogX:l8MinusLogXFig7}).
 
-%F7
-%\cref{fig:l8MinusLogX:l8MinusLogXFig7}.
-\imageFigure{../figures/ece1505-convex-optimization/l8MinusLogXFig7}{CAPTION: l8MinusLogXFig7}{fig:l8MinusLogX:l8MinusLogXFig7}{0.3}
+\imageFigure{../figures/ece1505-convex-optimization/l8MinusLogXFig7}{Negative logarithm convex over positive domain.}{fig:l8MinusLogX:l8MinusLogXFig7}{0.2}
+
 \end{itemize}
 
 \begin{dmath}\label{eqn:convexOptimizationLecture8:320}
@@ -307,7 +315,7 @@ but
 h_i(x) = -\log(-F_i(x))
 \end{dmath}
 
-F8: each \( h_i \) is confex, so this is a sum of convex functions, and is therefore convex.
+F8: each \( h_i \) is convex, so this is a sum of convex functions, and is therefore convex.
 
 Example:
 
@@ -463,7 +471,5 @@ or
 \end{dmath}
 
 Set \( \Bv \) to the right singular value of \( X \) to get equality.
-
-%A2 to XX (Ryerson)
 
 \EndArticle
