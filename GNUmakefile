@@ -29,13 +29,13 @@ SPELLCHECK := $(patsubst %.tex,%.sp,$(wildcard *.tex))
 
 include ../latex/make.rules
 
-all :: l8
+all :: l9
 #all :: p2
 
-.PHONY: p2 l8
+.PHONY: p2 l9
 #p1 : ProblemSet1.pdf
 p2 : ProblemSet2.pdf
-l8: convexOptimizationLecture8.pdf
+l9: convexOptimizationLecture9.pdf
 
 ProblemSet1.pdf :: ProblemSet1Problem8.tex
 ProblemSet1.pdf :: ProblemSet1Problem7.tex
