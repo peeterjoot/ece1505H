@@ -1,6 +1,11 @@
 THISDIR := ece1505-convex-optimization
 THISBOOK := ece1505
 
+export BOOKSUBVER := 1
+export BOOKMAJVER := 0
+# This isn't a good way to version.  It depends on the local git reflog history count.
+export REVCOUNTSTART := 62
+
 include ../latex/make.bookvars
 
 #ONCEFLAGS := -justonce
