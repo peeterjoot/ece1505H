@@ -10,10 +10,6 @@ SOURCE_DIRS += appendix
 FIGURES := ../figures/$(THISBOOK)
 SOURCE_DIRS += $(FIGURES)
 
-# also toggle redacted classicthesis-config.tex
-# FIXME: changing this flag should be a dependency of matlab.tex 
-#REDACTED := -redacted
-
 #GENERATED_SOURCES += matlab.tex 
 #GENERATED_SOURCES += mathematica.tex 
 #GENERATED_SOURCES += julia.tex 
