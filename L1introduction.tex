@@ -150,14 +150,11 @@ z_n
 \end{bmatrix}
 ,
 \end{dmath}
-
 or
 \begin{dmath}\label{eqn:L1introduction:240}
 \By = H \Bv + \Bz,
 \end{dmath}
-
-where \( \Bz \) is the error vector.  The problem is now reduced to to: Fit \( \By \) to be as close to \( H \Bv + \Bz \) as possible, or to minimize the norm of the error vector, or
-
+where \( \Bz \) is the error vector.  The problem is now reduced to : Fit \( \By \) to be as close to \( H \Bv + \Bz \) as possible, or to minimize the norm of the error vector, or
 \begin{dmath}\label{eqn:L1introduction:260}
 \min_\Bv \Norm{ \By - H \Bv }^2_2
 = \min_\Bv \lr{ \By - H \Bv }^\T \lr{ \By - H \Bv }
@@ -168,7 +165,6 @@ where \( \Bz \) is the error vector.  The problem is now reduced to to: Fit \( \
 \end{dmath}
 
 It is now possible to take the derivative with respect to the \( \Bv \) vector (i.e. the gradient with respect to the coordinates of the constraint vector)
-
 \begin{dmath}\label{eqn:L1introduction:280}
 \PD{\Bv}{}
 \lr{ \By^\T \By - 2 \By^\T H \Bv + \Bv^\T H^\T H \Bv }
@@ -176,22 +172,16 @@ It is now possible to take the derivative with respect to the \( \Bv \) vector (
 - 2 \By^\T H + 2 \Bv^\T H^\T H
 = 0,
 \end{dmath}
-
 or
-
 \begin{dmath}\label{eqn:L1introduction:300}
 (H^\T H) \Bv = H^\T \By,
 \end{dmath}
-
 so, assuming that \( H^\T H \) is invertible, the optimization problem has solution
-
 \begin{dmath}\label{eqn:L1introduction:320}
 \Bv^\conj =
 (H^\T H)^{-1} H^\T \By,
 \end{dmath}
-
 where
-
 \begin{dmath}\label{eqn:L1introduction:340}
 H^\T H
 =
@@ -211,20 +201,15 @@ x_n & 1
 \end{bmatrix}
 ,
 \end{dmath}
-
 as seen in the calculus approach.
-
 \section{Maximum Likelyhood Estimation (MLE).}
-
 It is reasonable to ask why the 2-norm was picked for the objective function?
-
 \begin{itemize}
 \item One justification is practical: Because we can solve the derivative equation.
 \item Another justification: In statistics the error vector \( \Bz = \By - H \Bv \) can be modeled as an IID (Independently and Identically Distributed) Gaussian random variable (i.e. noise).  Under this model, the use of the 2-norm can be viewed as a consequence of such an ML estimation problem (see \citep{boyd2004convex} ch. 7).
 \end{itemize}
 
 A Gaussian \cref{fig:Gaussian:GaussianFig4} IID model is given by
-
 \begin{subequations}
 \label{eqn:L1introduction:800}
 \begin{dmath}\label{eqn:L1introduction:360}
@@ -237,13 +222,9 @@ z_i = y_i - a x_i -b \sim N(O, O^2)
 P_Z(z) = \inv{\sqrt{2 \pi \sigma}} \exp\lr{ -\inv{2} z^2/\sigma^2 }.
 \end{dmath}
 \end{subequations}
-
 \imageFigure{../figures/ece1505-convex-optimization/GaussianFig4}{Gaussian probability distribution.}{fig:Gaussian:GaussianFig4}{0.2}
-
 \paragraph{MLE: Maximum Likelyhood Estimator}
-
 Pick \( (a,b) \) to maximize the probability of observed data.
-
 \begin{dmath}\label{eqn:L1introduction:420}
 (a^\conj, b^\conj)
 = \arg \max P( x, y ; a, b )
@@ -267,19 +248,15 @@ Taking logs gives
 \end{dmath}
 
 Here \( \arg \max \) is not the maximum of the function, but the value of the parameter (the argument) that maximizes the function.
-
 \paragraph{Double sides exponential noise}
-
 A double sided exponential distribution is plotted in \cref{fig:DoubleSidedExponentialDist:DoubleSidedExponentialDistFig5}, and has the mathematical form
 
 \begin{dmath}\label{eqn:L1introduction:460}
 P_Z(z) = \inv{2 c} \exp\lr{ -\inv{c} \Abs{z} }.
 \end{dmath}
-
 \imageFigure{../figures/ece1505-convex-optimization/DoubleSidedExponentialDistFig5}{Double sided exponential probability distribution.}{fig:DoubleSidedExponentialDist:DoubleSidedExponentialDistFig5}{0.2}
 
 The optimization problem is
-
 \begin{dmath}\label{eqn:L1introduction:480}
 \max_{a,b} \prod_{i = 1}^n P_z(z_i)
 =
@@ -294,7 +271,6 @@ The optimization problem is
 \end{dmath}
 
 This is a L1 norm problem
-
 \begin{dmath}\label{eqn:L1introduction:500}
 \min_{a,b} \sum_{i = 1}^n \Abs{ y_i - a x_i - b }.
 \end{dmath}
@@ -306,22 +282,16 @@ i.e.
 \end{dmath}
 
 This is still convex, but has no analytic solution, and is an example of a linear program.
-
 \subsection{Solution of linear program}
-
 Introduce helper variables \( t_1, \cdots, t_n \), and
 minimize \( \sum_i t_i \), such that
-
 \begin{dmath}\label{eqn:L1introduction:540}
-\Abs{ y_i - a x_i - b } \le t_i,
+\Abs{ y_i - a x_i - b } \le t_i.
 \end{dmath}
-
 This is now an optimization problem for \( a, b, t_1, \cdots t_n \).  A linear program is defined as
-
 \begin{dmath}\label{eqn:L1introduction:560}
 \min_{a, b, t_1, \cdots t_n} \sum_i t_i
 \end{dmath}
-
 such that
 \begin{dmath}\label{eqn:L1introduction:580}
 \begin{aligned}
@@ -329,11 +299,8 @@ y_i - a x_i - b \le t_i
 y_i - a x_i - b \ge -t_i
 \end{aligned}
 \end{dmath}
-
 \paragraph{Single sided exponential}
-
 What if your noise doesn't look double sided, with only noise for values \( x > 0 \).  Can define a single sided probability distribution, as that of \cref{fig:SingleSidedExponentialDist:SingleSidedExponentialDistFig6}.
-
 \imageFigure{../figures/ece1505-convex-optimization/SingleSidedExponentialDistFig6}{Single sided exponential distribution.}{fig:SingleSidedExponentialDist:SingleSidedExponentialDistFig6}{0.2}
 
 \begin{dmath}\label{eqn:L1introduction:600}
@@ -359,22 +326,16 @@ i.e. all \( z_i \) error values are always non-negative.
 \end{dmath}
 
 Problem becomes
-
 \begin{dmath}\label{eqn:L1introduction:640}
-\min_{a, b} \sum_i \lr{ y_i - a x_i - b }
+\min_{a, b} \sum_i \lr{ y_i - a x_i - b },
 \end{dmath}
-
 such that
 \begin{equation}\label{eqn:L1introduction:660}
 y_i - a x_i - b \ge t_i \qquad \forall i
 \end{equation}
-
 \paragraph{Uniform noise}
-
 For noise that is uniformly distributed in a range, as that of \cref{fig:stepProbabilityDist:stepProbabilityDistFig7}, which is constant in the range \( [-c,c] \) and zero outside that range.
-
 \imageFigure{../figures/ece1505-convex-optimization/stepProbabilityDistFig7}{Uniform probability distribution.}{fig:stepProbabilityDist:stepProbabilityDistFig7}{0.2}
-
 \begin{dmath}\label{eqn:L1introduction:680}
 P_Z(z) =
 \left\{
@@ -384,9 +345,7 @@ P_Z(z) =
 \end{array}
 \right.
 \end{dmath}
-
 or
-
 \begin{dmath}\label{eqn:L1introduction:700}
 \log P_Z(z) =
 \left\{
@@ -398,27 +357,22 @@ or
 \end{dmath}
 
 MLE solution
-
 \begin{dmath}\label{eqn:L1introduction:720}
 \max_{a,b} \prod_{i = 1}^n P(x, y; a, b)
 =
-\max_{a,b} \sum_{i = 1}^n \log P_Z( y_i - a x_i - b )
+\max_{a,b} \sum_{i = 1}^n \log P_Z( y_i - a x_i - b ).
 \end{dmath}
 
 Here the argument is constant if \( -c \le y_i - a x_i - b \le c \), so an ML solution is \underline{any} \( (a,b) \) such that
-
 \begin{equation}\label{eqn:L1introduction:740}
 \Abs{ y_i - a x_i - b } \le c \qquad \forall i \in 1, \cdots, n.
 \end{equation}
 
 This is a linear program known as a ``feasibility problem''.
-
 \begin{dmath}\label{eqn:L1introduction:760}
 \min d
 \end{dmath}
-
 such that
-
 \begin{dmath}\label{eqn:L1introduction:780}
 \begin{aligned}
 y_i - a x_i - b &\le d \\
@@ -427,9 +381,7 @@ y_i - a x_i - b &\ge -d
 \end{dmath}
 
 If \( d^\conj \le c \), then the problem is feasible, however, if \( d^\conj > c \) it is infeasible.
-
 \subsection{Method comparison}
-
 The double sided exponential, single sided exponential and uniform probability distributions of \cref{fig:threeDistributions} each respectively represent the point plots of the form \cref{fig:threeDistributionsSamples}.  The double sided exponential samples are distributed on both sides of the line, the single sided strictly above or on the line, and the uniform representing error bars distributed around the line of best fit.
 
 \imageThreeFiguresOneLine
