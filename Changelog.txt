@@ -1,0 +1,4 @@
+ece1505.V0.1.4.pdf (in progress.)
+- switch to 6x9 format.
+- update email address.
+- Fix hyphenation in listing.
