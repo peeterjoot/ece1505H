@@ -69,6 +69,9 @@ spellcheck: $(SPELLCHECK)
 	spellcheck $^
 	touch $@
 
+scrpage2.sty : ../latex/scrpage2.sty
+	cp $^ $@
+
 #julia.tex : ../julia/METADATA
 #mathematica.tex : ../mathematica/METADATA
 #matlab.tex : ../matlab/METADATA
