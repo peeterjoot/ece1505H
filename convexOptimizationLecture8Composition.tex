@@ -7,11 +7,11 @@
 \section{Projection}
 
 Given \( \Bx \in \bbR^n, \By \in \bbR^p \), if \( h(\Bx,\By) \) is convex in \( \Bx, \By \), then
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture8:60}
 F(\Bx_0) = \inf_\By h(\Bx_0,\By)
 \end{equation}
-
+%
 is convex in \( \Bx\), as sketched in \cref{fig:l8convexProjection:l8convexProjectionFig3}.
 
 %F3 : epigraph of \( h \) is a filled in bowl.
@@ -22,15 +22,15 @@ The intuition here is that shining light on the (filled) ``bowl''.  That is, the
 Proof:
 
 Since \( h \) is convex in \( \begin{bmatrix} \Bx \\ \By \end{bmatrix} \in \dom h \), then
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture8:80}
 \epi h = \setlr{ (\Bx,\By,t) | t \ge h(\Bx,\By), \begin{bmatrix} \Bx \\ \By \end{bmatrix} \in \dom h },
 \end{equation}
-
+%
 is a convex set.
 
 We also have to show that the domain of \( F \) is a convex set.  To show this note that
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture8:100}
 \begin{aligned}
 \dom F
@@ -47,9 +47,9 @@ I_{n\times n} & 0_{n \times p}
 }.
 \end{aligned}
 \end{equation}
-
+%
 This is an affine map of a convex set.  Therefore \( \dom F \) is a convex set.
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture8:120}
 \begin{aligned}
 \epi F
@@ -71,15 +71,15 @@ t \ge h(\Bx,\By), \begin{bmatrix} \Bx \\ \By \end{bmatrix} \in \dom h
 }.
 \end{aligned}
 \end{equation}
-
+%
 \paragraph{Example:}
 
 The function
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture8:140}
 F(\Bx) = \inf_{\By \in C} \Norm{ \Bx - \By },
 \end{equation}
-
+%
 over \( \Bx \in \bbR^n, \By \in C \), ,is convex if \( C \) is a convex set.  Reason:
 
 \begin{itemize}
@@ -93,7 +93,7 @@ over \( \Bx \in \bbR^n, \By \in C \), ,is convex if \( C \) is a convex set.  Re
 \section{Composition of functions}
 
 Consider
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture8:160}
 \begin{aligned}
 F(\Bx) &= h(g(\Bx)) \\
@@ -103,7 +103,7 @@ g &: \bbR^n \rightarrow \bbR \\
 h &: \bbR \rightarrow \bbR.
 \end{aligned}
 \end{equation}
-
+%
 Cases:
 \begin{enumerate}[(a)]
 \item \( g \) is convex, \( h \) is convex and non-decreasing.
@@ -129,20 +129,20 @@ h'(g(x)) g''(x) \\
 \lr{ \ge 0 } \cdot \lr{ \ge 0 }^2 + \lr{ \ge 0 } \cdot \lr{ \ge 0 },
 \end{aligned}
 \end{equation}
-
+%
 since \( h \) is respectively convex, and non-decreasing.
 \item
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture8:180b}
 F'(x) = 
 \lr{ \ge 0 } \cdot \lr{ \ge 0 }^2 + \lr{ \le 0 } \cdot \lr{ \le 0 },
 \end{equation}
-
+%
 since \( h \) is respectively convex, and non-increasing, and g is concave.
 \end{enumerate}
 
 \section{Extending to multiple dimensions}
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture8:200}
 \begin{aligned}
 F(\Bx)
@@ -152,20 +152,20 @@ g &: \bbR^n \rightarrow \bbR \\
 h &: \bbR^k \rightarrow \bbR.
 \end{aligned}
 \end{equation}
-
+%
 is convex if \( g_i \) is convex for each \( i \in [1,k] \) and \( h \) is convex and non-decreasing in each argument.
 
 Proof:
 
 again assume \( n = 1 \), without loss of generality,
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture8:220}
 \begin{aligned}
 g &: \bbR \rightarrow \bbR^k \\
 h &: \bbR^k \rightarrow \bbR \\
 \end{aligned}
 \end{equation}
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture8:240}
 F''(\Bx)
 =
@@ -182,33 +182,33 @@ g_1'(\Bx) \\ g_2'(\Bx) \\ \vdots \\ g_k'(\Bx)
 g_1''(\Bx) \\ g_2''(\Bx) \\ \vdots \\ g_k''(\Bx)
 \end{bmatrix}
 \end{equation}
-
+%
 The Hessian is PSD.
 
 \paragraph{Example:}
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture8:260}
 F(x) = \exp( g(x) ) = h( g(x) ),
 \end{equation}
-
+%
 where \( g \) is convex is convex, and \( h(y) = e^y \).  This implies that \( F \) is a convex function.
 
 \paragraph{Example:}
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture8:280}
 F(x) = \inv{g(x)},
 \end{equation}
-
+%
 is convex if \( g(x) \) is concave and positive.  The most simple such example of such a function is \( h(x) = 1/x, \dom h = \bbR_{++} \), which is plotted in \cref{fig:l8oneOverX:l8oneOverXFig6}.
 
 \imageFigure{../figures/ece1505-convex-optimization/l8oneOverXFig6}{Inverse function is convex over positive domain.}{fig:l8oneOverX:l8oneOverXFig6}{0.2}
 
 \paragraph{Example:}
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture8:300}
 F(x) = - \sum_{i = 1}^n \log( -F_i(x) )
 \end{equation}
-
+%
 is convex on \( \setlr{ x | F_i(x) < 0 \forall i } \) if all \( F_i \) are convex.
 
 \begin{itemize}
@@ -218,43 +218,43 @@ is convex on \( \setlr{ x | F_i(x) < 0 \forall i } \) if all \( F_i \) are conve
 \imageFigure{../figures/ece1505-convex-optimization/l8MinusLogXFig7}{Negative logarithm convex over positive domain.}{fig:l8MinusLogX:l8MinusLogXFig7}{0.2}
 
 \end{itemize}
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture8:320}
 F(x) = \sum h_i(x)
 \end{equation}
-
+%
 but
 \begin{equation}\label{eqn:convexOptimizationLecture8:340}
 h_i(x) = -\log(-F_i(x)),
 \end{equation}
-
+%
 which is a convex and non-increasing function (\(-\log\)), of a convex function \( -F_i(x) \).  Each 
 \( h_i \) is convex, so this is a sum of convex functions, and is therefore convex.
 
 \paragraph{Example:}
 
 Over \( \dom F = S^n_{++} \)
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture8:360}
 F(X) = \log \det X^{-1}
 \end{equation}
-
+%
 To show that this is convex, check all lines in domain.  A line in \( S^n_{++} \) is a 1D family of matrices
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture8:380}
 \tilde{F}(t) = \log \det( \lr{X_0 + t H}^{-1} ),
 \end{equation}
-
+%
 where \( X_0 \in S^n_{++}, t \in \bbR, H \in S^n \).
 
 F9
 
 For \( t \) small enough,
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture8:400}
 X_0 + t H \in S^n_{++}
 \end{equation}
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture8:420}
 \begin{aligned}
 \tilde{F}(t)
@@ -266,9 +266,9 @@ X_0 + t H \in S^n_{++}
 &= \log \det X_0^{-1} - \log\det \lr{I + t M }.
 \end{aligned}
 \end{equation}
-
+%
 If \( \lambda_i \) are eigenvalues of \( M \), then \( 1 + t \lambda_i \) are eigenvalues of \( I + t M \).  i.e.:
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture8:440}
 \begin{aligned}
 (I + t M) \Bv
@@ -276,15 +276,15 @@ If \( \lambda_i \) are eigenvalues of \( M \), then \( 1 + t \lambda_i \) are ei
 &= (1 + t \lambda_i) \Bv.
 \end{aligned}
 \end{equation}
-
+%
 This gives
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture8:460}
 \tilde{F}(t)
 = \log \det X_0^{-1} - \log \prod_{i = 1}^n (1 + t \lambda_i)
 = \log \det X_0^{-1} - \sum_{i = 1}^n \log (1 + t \lambda_i)
 \end{equation}
-
+%
 \begin{itemize}
 \item \( 1 + t \lambda_i \) is linear in \( t \).
 \item \( -\log \) is convex in its argument.
@@ -292,18 +292,18 @@ This gives
 \end{itemize}
 
 \paragraph{Example:}
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture8:480}
 F(X) = \lambda_\max(X),
 \end{equation}
-
+%
 is convex on \( \dom F \in S^n \)
 
 (a)
 \begin{equation}\label{eqn:convexOptimizationLecture8:500}
 \lambda_{\max} (X) = \sup_{\Norm{\Bv}_2 \le 1} \Bv^\T X \Bv,
 \end{equation}
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture8:520}
 \begin{bmatrix}
 \lambda_1 &           &        & \\
@@ -312,17 +312,17 @@ is convex on \( \dom F \in S^n \)
           &           &        & \lambda_n
 \end{bmatrix}
 \end{equation}
-
+%
 
 Recall that a decomposition
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture8:540}
 \begin{aligned}
 X &= Q \Lambda Q^\T \\
 Q^\T Q = Q Q^\T = I
 \end{aligned}
 \end{equation}
-
+%
 can be used for any \( X \in S^n \).
 
 (b)
@@ -332,19 +332,19 @@ Note that \( \Bv^\T X \Bv \) is linear in \( X \).  This is a max of a number of
 Last example:
 
 (non-symmetric matrices)
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture8:560}
 F(X) = \sigma_\max(X),
 \end{equation}
-
+%
 is convex on \( \dom F = \bbR^{m \times n} \).  Here
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture8:580}
 \sigma_\max(X) = \sup_{\Norm{\Bv}_2 = 1} \Norm{X \Bv}_2
 \end{equation}
-
+%
 This is called an operator norm of \( X \).  Using the SVD
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture8:600}
 \begin{aligned}
 X &= U \Sigma V^\T \\
@@ -353,9 +353,9 @@ U &= \bbR^{m \times r} \\
 V^T &\in \bbR^{r \times n}.
 \end{aligned}
 \end{equation}
-
+%
 Have
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture8:620}
 \begin{aligned}
 \Norm{X \Bv}_2^2
@@ -366,16 +366,16 @@ Have
 &= \tilde{\Bv}^\T \Sigma^2 \tilde{\Bv},
 \end{aligned}
 \end{equation}
-
+%
 where \( \tilde{\Bv} = \Bv^\T V \), so
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture8:640}
 \Norm{X \Bv}_2^2
 =
 \sum_{i = 1}^r \sigma_i^2 \Norm{\tilde{\Bv}}
 \le \sigma_\max^2 \Norm{\tilde{\Bv}}^2,
 \end{equation}
-
+%
 or
 \begin{equation}\label{eqn:convexOptimizationLecture8:660}
 \begin{aligned}
@@ -384,5 +384,5 @@ or
 &\le \sigma_\max.
 \end{aligned}
 \end{equation}
-
+%
 Set \( \Bv \) to the right singular value of \( X \) to get equality.

@@ -28,13 +28,13 @@ This is nice since it allows for checking for convexity, and is also nice numeri
 
 \makedefinition{First order condition}{dfn:convexOptimizationLecture6:20}{
 If
-
+%
 \begin{equation*}
 F : \bbR^n \rightarrow \bbR
 \end{equation*}
-
+%
 is differentiable, then \( F \) is convex iff \( \dom F \) is a convex set and \( \forall \Bx, \Bx_0 \in \dom F \)
-
+%
 \begin{equation*}
 F(\Bx) \ge F(\Bx_0) + \lr{\spacegrad F(\Bx_0)}^\T (\Bx - \Bx_0).
 \end{equation*}
@@ -62,13 +62,13 @@ An implication is that if \( F \) is convex, then \( F(x) \ge F(x_0) + F'(x_0) (
 Since \( F \) is convex, \( \dom F \) is convex.
 
 Consider any 2 points \( x, y \in \dom F \), and \( \theta \in [0,1] \).  Define
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture6:60}
 z = (1-\theta) x + \theta y \in \dom F,
 \end{equation}
-
+%
 then since \( \dom F \) is convex
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture6:80}
 \begin{aligned}
 F(z) 
@@ -76,46 +76,46 @@ F(z)
 &\le (1-\theta) F(x) + \theta F(y )
 \end{aligned}
 \end{equation}
-
+%
 Reordering
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture6:220}
 \theta F(x) \ge
 \theta F(x) + F(z) - F(x),
 \end{equation}
-
+%
 or
 \begin{equation}\label{eqn:convexOptimizationLecture6:100}
 F(y) \ge
 F(x) + \frac{F(x + \theta(y-x)) - F(x)}{\theta},
 \end{equation}
-
+%
 which is, in the limit,
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture6:120}
 F(y) \ge
 F(x) + F'(x) (y - x)\qedmarker
 \end{equation}
-
+%
 To prove the other direction, showing that
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture6:140}
 F(x) \ge F(x_0) + F'(x_0) (x - x_0),
 \end{equation}
-
+%
 implies that \( F \) is convex.
 Take any \( x, y \in \dom F \) and any \( \theta \in [0,1] \).  Define
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture6:160}
 z = \theta x + (1 -\theta) y,
 \end{equation}
-
+%
 which is in \( \dom F \) by assumption.  We want to show that
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture6:180}
 F(z) \le \theta F(x) + (1-\theta) F(y).
 \end{equation}
-
+%
 By assumption
 
 \begin{enumerate}[(i)]
@@ -124,7 +124,7 @@ By assumption
 \end{enumerate}
 
 Compute
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture6:200}
 \begin{aligned}
 \theta F(x) + (1-\theta) F(y)
@@ -136,43 +136,43 @@ Compute
 &= F(z).
 \end{aligned}
 \end{equation}
-
+%
 \paragraph{Proof of the 2nd order case for \( n = 1 \)}
 
 Want to prove that if
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture6:240}
 F : \bbR \rightarrow \bbR
 \end{equation}
-
+%
 is a convex function, then \( F''(x) \ge 0 \,\forall x \in \dom F \).
 
 By the first order conditions \( \forall x \ne y \in \dom F \)
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture6:260}
 \begin{aligned}
 F(y) &\ge F(x) + F'(x) (y - x)
 F(x) &\ge F(y) + F'(y) (x - y)
 \end{aligned}
 \end{equation}
-
+%
 Can combine and get
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture6:280}
 F'(x) (y-x) \le F(y) - F(x) \le F'(y)(y-x)
 \end{equation}
-
+%
 Subtract the two derivative terms for
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture6:340}
 \frac{(F'(y) - F'(x))(y - x)}{(y - x)^2} \ge 0,
 \end{equation}
-
+%
 or
 \begin{equation}\label{eqn:convexOptimizationLecture6:300}
 \frac{F'(y) - F'(x)}{y - x} \ge 0.
 \end{equation}
-
+%
 In the limit as \( y \rightarrow x \), this is
 \boxedEquation{eqn:convexOptimizationLecture6:320}{
 F''(x) \ge 0 \,\forall x \in \dom F.
@@ -185,35 +185,35 @@ If \( F''(x) \ge 0 \,\forall x \in \dom F \subseteq \bbR \), implies that \( F :
 Note that if \( F''(x) \ge 0 \), then \( F'(x) \) is non-decreasing in \( x \).
 
 i.e. If \( x < y \), where \( x, y \in \dom F\), then
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture6:360}
 F'(x) \le F'(y).
 \end{equation}
-
+%
 Consider any \( x,y \in \dom F\) such that \( x < y \), where
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture6:380}
 F(y) - F(x) = \int_x^y F'(t) dt \ge F'(x) \int_x^y 1 dt = F'(x) (y-x).
 \end{equation}
-
+%
 This tells us that
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture6:400}
 F(y) \ge F(x) + F'(x)(y - x),
 \end{equation}
-
+%
 which is the first order condition.  Similarly consider any \( x,y \in \dom F\) such that \( x < y \), where
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture6:420}
 F(y) - F(x) = \int_x^y F'(t) dt \le F'(y) \int_x^y 1 dt = F'(y) (y-x).
 \end{equation}
-
+%
 This tells us that
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture6:440}
 F(x) \ge F(y) + F'(y)(x - y).
 \end{equation}
-
+%
 \paragraph{Vector proof:}
 
 \( F \) is convex iff \( F(\Bx + t \Bv) \) is convex \( \forall \Bx,\Bv \in \bbR^n, t \in \bbR \), keeping \( \Bx + t \Bv \in \dom F\).
@@ -222,47 +222,47 @@ Let
 \begin{equation}\label{eqn:convexOptimizationLecture6:460}
 h(t ; \Bx, \Bv) = F(\Bx + t \Bv)
 \end{equation}
-
+%
 then \( h(t) \) satisfies scalar first and second order conditions for all \( \Bx, \Bv \).
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture6:480}
 h(t) = F(\Bx + t \Bv) = F(g(t)),
 \end{equation}
-
+%
 where \( g(t) = \Bx + t \Bv \), where
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture6:500}
 \begin{aligned}
 F &: \bbR^n \rightarrow \bbR \\
 g &: \bbR \rightarrow \bbR^n.
 \end{aligned}
 \end{equation}
-
+%
 This is expressing \( h(t) \) as a composition of two functions.  By the first order condition for scalar functions we know that
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture6:520}
 h(t) \ge h(0) + h'(0) t.
 \end{equation}
-
+%
 Note that
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture6:540}
 h(0) = \evalbar{F(\Bx + t \Bv)}{t = 0} = F(\Bx).
 \end{equation}
-
+%
 Let's figure out what \( h'(0) \) is.  Recall hat for any \( \tilde{F} : \bbR^n \rightarrow \bbR^m \)
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture6:560}
 D \tilde{F} \in \bbR^{m \times n},
 \end{equation}
-
+%
 and
 \begin{equation}\label{eqn:convexOptimizationLecture6:580}
 {D \tilde{F}(\Bx)}_{ij} = \PD{x_j}{\tilde{F_i}(\Bx)}
 \end{equation}
-
+%
 This is one function per row, for \( i \in [1,m], j \in [1,n] \).  This gives
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture6:600}
 \begin{aligned}
 \frac{d}{dt} F(\Bx + \Bv t)
@@ -272,17 +272,17 @@ This is one function per row, for \( i \in [1,m], j \in [1,n] \).  This gives
 &= D F(g(t))  \cdot D g(t).
 \end{aligned}
 \end{equation}
-
+%
 The first matrix is in \( \bbR^{1\times n} \) whereas the second is in \( \bbR^{n\times 1} \), since
 \( F : \bbR^n \rightarrow \bbR \) and \( g : \bbR \rightarrow \bbR^n \).  This gives
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture6:620}
 \frac{d}{dt} F(\Bx + \Bv t)
 = \evalbar{D F(\tilde{\Bx})}{\tilde{\Bx} = g(t)}  \cdot D g(t).
 \end{equation}
-
+%
 That first matrix is
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture6:640}
 \begin{aligned}
 \evalbar{D F(\tilde{\Bx})}{\tilde{\Bx} = g(t)}
@@ -304,9 +304,9 @@ That first matrix is
 \lr{ \spacegrad F(g(t)) }^\T.
 \end{aligned}
 \end{equation}
-
+%
 The second Jacobian is
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture6:660}
 D g(t)
 =
@@ -335,13 +335,13 @@ v_n \\
 =
 \Bv.
 \end{equation}
-
+%
 so
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture6:680}
 h'(t) = D h(t) = \lr{ \spacegrad F(g(t))}^\T \Bv,
 \end{equation}
-
+%
 and
 \begin{equation}\label{eqn:convexOptimizationLecture6:700}
 \begin{aligned}
@@ -350,9 +350,9 @@ h'(0)
 &= \lr{ \spacegrad F(\Bx)}^\T \Bv.
 \end{aligned}
 \end{equation}
-
+%
 Finally
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture6:720}
 \begin{aligned}
 F(\Bx + t \Bv)
@@ -361,7 +361,7 @@ F(\Bx + t \Bv)
 &= F(\Bx) + \innerprod{ \spacegrad F(\Bx) }{ t \Bv}.
 \end{aligned}
 \end{equation}
-
+%
 Which is true for all \( \Bx, \Bx + t \Bv \in \dom F \).  Note that the quantity \( t \Bv \) is a shift.
 
 %F4
@@ -371,20 +371,20 @@ Which is true for all \( \Bx, \Bx + t \Bv \in \dom F \).  Note that the quantity
 \paragraph{Epigraph}
 
 Recall that if \( (\Bx, t) \in \epi F \) then \( t \ge F(\Bx) \).
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture6:740}
 t \ge F(\Bx) \ge F(\Bx_0) + \lr{\spacegrad F(\Bx_0) }^\T (\Bx - \Bx_0),
 \end{equation}
-
+%
 or
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture6:760}
 0 \ge
 -(t - F(\Bx_0)) + \lr{\spacegrad F(\Bx_0) }^\T (\Bx - \Bx_0),
 \end{equation}
-
+%
 In block matrix form
-
+%
 \begin{equation}\label{eqn:convexOptimizationLecture6:780}
 0 \ge
 \begin{bmatrix}
@@ -395,7 +395,7 @@ In block matrix form
 t - F(\Bx_0)
 \end{bmatrix}
 \end{equation}
-
+%
 With \( \Bw =
 \begin{bmatrix}
 \lr{ \spacegrad F(\Bx_0) }^\T & -1

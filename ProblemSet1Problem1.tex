@@ -4,11 +4,11 @@
 %
 \makeproblem{Taylor series expansion}{convex-optimization:problemSet1:1}{
 Consider the function
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem1:20}
 f(\Bx) = -\sum_{l=1}^m \log( b_l - \Ba_l^\T \Bx ),
 \end{equation}
-
+%
 where \( \Bx \in \Rm{n} \), \( b_l \in \bbR \) and \( \Ba_l \in \Rm{n}\).
 Compute \( \spacegrad f(\Bx) \) and \( \spacegrad^2 f(\Bx)\).
 Write down the first three terms of the Taylor series expansion of \(f(\Bx)\) around some \(\Bx_0\).
@@ -18,13 +18,13 @@ Write down the first three terms of the Taylor series expansion of \(f(\Bx)\) ar
 \withproblemsetsParagraph{
 
 Application of the chain rule, with
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem1:40}
 g_l(\Bx) = b_l - \Ba_l^\T \Bx,
 \end{equation}
-
+%
 gives
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem1:60}
 \begin{aligned}
 \spacegrad f(\Bx)
@@ -34,7 +34,7 @@ gives
 &= -\sum_{l=1}^m \inv{b_l - \Ba_l^\T \Bx} (- \Ba_l),
 \end{aligned}
 \end{equation}
-
+%
 or
 %\begin{equation}\label{eqn:ProblemSet1Problem1:80}
 \boxedEquation{eqn:ProblemSet1Problem1:80}{
@@ -44,9 +44,9 @@ or
 \frac{\Ba_l}{b_l - \Ba_l^\T \Bx}.
 }
 %\end{equation}
-
+%
 The Hessian components are
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem1:100}
 \begin{aligned}
 (\spacegrad^2 f)_{ij}
@@ -56,7 +56,7 @@ The Hessian components are
 &= \sum_{l=1}^m -\frac{a_{lj}(-a_{li})}{(b_l - \Ba_l^\T \Bx)^2},
 \end{aligned}
 \end{equation}
-
+%
 or
 
 \boxedEquation{eqn:ProblemSet1Problem1:120}{
@@ -71,7 +71,7 @@ a_{lj}
 }
 
 For the Taylor expansion, note that
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem1:140}
 \begin{aligned}
 (\Delta \Bx)^\T
@@ -87,7 +87,7 @@ For the Taylor expansion, note that
 (\Ba_l^\T \Delta x)^2,
 \end{aligned}
 \end{equation}
-
+%
 so
 \begin{equation}\label{eqn:ProblemSet1Problem1:160}
 f(\Bx_0 + \Delta \Bx)
@@ -99,7 +99,7 @@ f(\Bx_0)
 (\spacegrad^2 f)
 (\Delta \Bx),
 \end{equation}
-
+%
 which is
 \boxedEquation{eqn:ProblemSet1Problem1:180}{
 f(\Bx_0 + \Delta \Bx)

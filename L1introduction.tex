@@ -80,7 +80,7 @@ One way to solve (for \( a, b \)): Take the derivatives
 \PD{b}{F_0} &= \sum_{i=1}^n 2 ( y_i - (a x_i + b) )(-1) = 0.
 \end{aligned}
 \end{equation}
-
+%
 This yields
 \begin{equation}\label{eqn:L1introduction:160}
 \begin{aligned}
@@ -145,7 +145,7 @@ where \( \Bz \) is the error vector.  The problem is now reduced to : Fit \( \By
 &= \min_\Bv \lr{ \By^\T \By - 2 \By^\T H \Bv + \Bv^\T H^\T H \Bv }.
 \begin{aligned}
 \end{equation}
-
+%
 It is now possible to take the derivative with respect to the \( \Bv \) vector (i.e. the gradient with respect to the coordinates of the constraint vector)
 \begin{equation}\label{eqn:L1introduction:280}
 \begin{aligned}
@@ -218,7 +218,7 @@ Pick \( (a,b) \) to maximize the probability of observed data.
 &= \arg \max \inv{\sqrt{2 \pi \sigma}} \exp\lr{ -\inv{2} (y_i - a x_i - b)^2/\sigma^2 }.
 \end{aligned}
 \end{equation}
-
+%
 Taking logs gives
 \begin{equation}\label{eqn:L1introduction:440}
 \begin{aligned}
@@ -232,11 +232,11 @@ Taking logs gives
 &= \arg \min \sum_i (y_i - a x_i - b)^2/\sigma^2
 \end{aligned}
 \end{equation}
-
+%
 Here \( \arg \max \) is not the maximum of the function, but the value of the parameter (the argument) that maximizes the function.
 \paragraph{Double sides exponential noise}
 A double sided exponential distribution is plotted in \cref{fig:DoubleSidedExponentialDist:DoubleSidedExponentialDistFig5}, and has the mathematical form
-
+%
 \begin{equation}\label{eqn:L1introduction:460}
 P_Z(z) = \inv{2 c} \exp\lr{ -\inv{c} \Abs{z} }.
 \end{equation}
@@ -251,18 +251,18 @@ The optimization problem is
 &= \max_{a,b} \lr{\inv{2 c}}^n \exp\lr{ -\inv{c} \sum_{i=1}^n \Abs{y_i - a x_i - b} }.
 \end{aligned}
 \end{equation}
-
+%
 This is a L1 norm problem
 \begin{equation}\label{eqn:L1introduction:500}
 \min_{a,b} \sum_{i = 1}^n \Abs{ y_i - a x_i - b }.
 \end{equation}
-
+%
 i.e.
-
+%
 \begin{equation}\label{eqn:L1introduction:520}
 \min_\Bv \Norm{ \By - H \Bv }_1.
 \end{equation}
-
+%
 This is still convex, but has no analytic solution, and is an example of a linear program.
 \subsection{Solution of linear program}
 Introduce helper variables \( t_1, \cdots, t_n \), and
@@ -284,7 +284,7 @@ y_i - a x_i - b \ge -t_i
 \paragraph{Single sided exponential}
 What if your noise doesn't look double sided, with only noise for values \( x > 0 \).  Can define a single sided probability distribution, as that of \cref{fig:SingleSidedExponentialDist:SingleSidedExponentialDistFig6}.
 \imageFigure{../figures/ece1505-convex-optimization/SingleSidedExponentialDistFig6}{Single sided exponential distribution.}{fig:SingleSidedExponentialDist:SingleSidedExponentialDistFig6}{0.2}
-
+%
 \begin{equation}\label{eqn:L1introduction:600}
 P_Z(z) =
 \left\{
@@ -294,9 +294,9 @@ P_Z(z) =
 \end{array}
 \right.
 \end{equation}
-
+%
 i.e. all \( z_i \) error values are always non-negative.
-
+%
 \begin{equation}\label{eqn:L1introduction:620}
 \log P_z(z) =
 \left\{
@@ -306,7 +306,7 @@ i.e. all \( z_i \) error values are always non-negative.
 \end{array}
 \right.
 \end{equation}
-
+%
 Problem becomes
 \begin{equation}\label{eqn:L1introduction:640}
 \min_{a, b} \sum_i \lr{ y_i - a x_i - b },
@@ -337,19 +337,19 @@ or
 \end{array}
 \right.
 \end{equation}
-
+%
 MLE solution
 \begin{equation}\label{eqn:L1introduction:720}
 \max_{a,b} \prod_{i = 1}^n P(x, y; a, b)
 =
 \max_{a,b} \sum_{i = 1}^n \log P_Z( y_i - a x_i - b ).
 \end{equation}
-
+%
 Here the argument is constant if \( -c \le y_i - a x_i - b \le c \), so an ML solution is \underline{any} \( (a,b) \) such that
 \begin{equation}\label{eqn:L1introduction:740}
 \Abs{ y_i - a x_i - b } \le c \qquad \forall i \in 1, \cdots, n.
 \end{equation}
-
+%
 This is a linear program known as a ``feasibility problem''.
 \begin{equation}\label{eqn:L1introduction:760}
 \min d
@@ -361,7 +361,7 @@ y_i - a x_i - b &\le d \\
 y_i - a x_i - b &\ge -d
 \end{aligned}
 \end{equation}
-
+%
 If \( d^\conj \le c \), then the problem is feasible, however, if \( d^\conj > c \) it is infeasible.
 \subsection{Method comparison}
 The double sided exponential, single sided exponential and uniform probability distributions of \cref{fig:threeDistributions} each respectively represent the point plots of the form \cref{fig:threeDistributionsSamples}.  The double sided exponential samples are distributed on both sides of the line, the single sided strictly above or on the line, and the uniform representing error bars distributed around the line of best fit.

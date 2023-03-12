@@ -53,7 +53,7 @@ Explain how to interpret this latter fact in terms of the interpretation of \( \
 \makeSubAnswer{}{convex-optimization:problemSet1:6a}
 
 The eigenvalues were found to be \( \setlr{2,1} \) with respective eigenvectors
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem6:20}
 \begin{aligned}
 \Be_1 &= \inv{\sqrt{2}}
@@ -68,7 +68,7 @@ The eigenvalues were found to be \( \setlr{2,1} \) with respective eigenvectors
 \end{bmatrix}.
 \end{aligned}
 \end{equation}
-
+%
 The ellipsoid is plotted in \cref{fig:ps1p6a:ps1p6aFig2}.
 
 \imageFigure{../figures/ece1505-convex-optimization/ps1p6aFig2}{}{fig:ps1p6a:ps1p6aFig2}{0.5}
@@ -76,7 +76,7 @@ The ellipsoid is plotted in \cref{fig:ps1p6a:ps1p6aFig2}.
 \makeSubAnswer{}{convex-optimization:problemSet1:6b}
 
 The eigenvalues were found to be \( \setlr{4,2} \) with respective eigenvectors
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem6:40}
 \begin{aligned}
 \Be_1 &= \inv{\sqrt{2}}
@@ -91,7 +91,7 @@ The eigenvalues were found to be \( \setlr{4,2} \) with respective eigenvectors
 \end{bmatrix}.
 \end{aligned}
 \end{equation}
-
+%
 The ellipsoid is plotted in \cref{fig:ps1p6b:ps1p6bFig3}.
 
 \imageFigure{../figures/ece1505-convex-optimization/ps1p6bFig3}{}{fig:ps1p6b:ps1p6bFig3}{0.5}
@@ -99,7 +99,7 @@ The ellipsoid is plotted in \cref{fig:ps1p6b:ps1p6bFig3}.
 \makeSubAnswer{}{convex-optimization:problemSet1:6c}
 
 The eigenvalues were found to be \( \setlr{10,5} \) with respective eigenvectors
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem6:60}
 \begin{aligned}
 \Be_1 &= \inv{\sqrt{5}}
@@ -114,7 +114,7 @@ The eigenvalues were found to be \( \setlr{10,5} \) with respective eigenvectors
 \end{bmatrix}.
 \end{aligned}
 \end{equation}
-
+%
 The ellipsoid is plotted in \cref{fig:ps1p6c:ps1p6cFig4}.
 
 \imageFigure{../figures/ece1505-convex-optimization/ps1p6cFig4}{}{fig:ps1p6c:ps1p6cFig4}{0.5}
@@ -122,27 +122,27 @@ The ellipsoid is plotted in \cref{fig:ps1p6c:ps1p6cFig4}.
 \makeSubAnswer{}{convex-optimization:problemSet1:6d}
 
 Some of the abstraction of the statement
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem6:80}
 \calP = \setlr{ A \Bx| \Bx \in \calC }
 \end{equation}
-
+%
 can be removed by expressing the matrix in terms of its columns \( A = [ \Ba_1 \Ba_2 \cdots \Ba_n ] \), and the vector in terms of coordinates \( \Bx = \sum x_i \Be_i\, x_i \in [0,1] \), so
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem6:100}
 \calP = \setlr{ \sum \Ba_i x_i | x_i \in [0,1] },
 \end{equation}
-
+%
 which shows that this set \( \calP \) is the span of the columns of the matrix \( A \) over the unit cube.  The span of the columns takes a particularly simple form if the linear transformation represented by the matrix is represented in a basis for which that transformation takes its
 Jordan canonical form \citep{damiano1988course}.
 This is a basis for which the matrix representation of the linear transformation is either completely diagonal, or in specific upper triangular form with zeros everywhere but the superdiagonal (and only ones or zeros on the superdiagonal).  Such a similarity transformation
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem6:140}
 A = E J E^{-1},
 \end{equation}
-
+%
 is determinant preserving, since
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem6:160}
 \begin{aligned}
 \Abs{ A }
@@ -151,9 +151,9 @@ is determinant preserving, since
 &= \Abs{ J }.
 \end{aligned}
 \end{equation}
-
+%
 A couple examples are
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem6:120}
 \begin{bmatrix}
 3 & 1 \\
@@ -174,7 +174,7 @@ A couple examples are
 0        & 0 & 2
 \end{bmatrix},
 \end{equation}
-
+%
 for which the respective sets \( \calP \) are sketched in \cref{fig:ps1p6d:ps1p6dFig1}.
 
 \imageFourFiguresTwoLines
@@ -185,7 +185,7 @@ for which the respective sets \( \calP \) are sketched in \cref{fig:ps1p6d:ps1p6
 {Parallelepiped volumes}{fig:ps1p6d:ps1p6dFig1}{scale=0.15}
 
 Note that the parallelograms are altered by such a similarity transformation, but the (oriented area) given by the determinant is invariant.  This is illustrated in \cref{fig:ps1p6d:ps1p6dParallelogramsFig1} for
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem6:180}
 \begin{bmatrix}
 3 & 1 \\
@@ -205,7 +205,7 @@ Note that the parallelograms are altered by such a similarity transformation, bu
 \inv{2} & \inv{2}
 \end{bmatrix},
 \end{equation}
-
+%
 for which the oriented area given by the determinant is unity in both cases.
 
 \imageFigure{../figures/ece1505-convex-optimization/ps1p6dParallelogramsFig1}{Parallelograms after similarity transformation}{fig:ps1p6d:ps1p6dParallelogramsFig1}{0.3}

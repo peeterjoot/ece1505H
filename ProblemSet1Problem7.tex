@@ -26,38 +26,38 @@ consider the non-empty intersection of two convex sets \( A,B \), such as the in
 \imageFigure{../figures/ece1505-convex-optimization/ps1p7Fig1}{Intersection of plane polygons.}{fig:ps1p7:ps1p7Fig1}{0.3}
 
 Any two points \( \Bx, \By \) in the intersection, are also contained in \( A, B \) and by convexity of \( A,B\) we must have both
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem7:20}
 \begin{aligned}
 \setlr{ \theta \Bx + (1-\theta) \By | \theta \in [0,1] } &\subseteq A \\
 \setlr{ \theta \Bx + (1-\theta) \By | \theta \in [0,1] } &\subseteq B,
 \end{aligned}
 \end{equation}
-
+%
 so for any \( \theta \in [0,1] \), and any points \( \Bx, \By \in A \cap B \), we have
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem7:40}
 \theta \Bx + (1-\theta) \By \in A \cap B,
 \end{equation}
-
+%
 which means that \( A \cap B \) is convex.
 
 \makeSubAnswer{}{convex-optimization:problemSet1:7b}
 
 An affine function (linear function, plus translation), has the general form
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem7:60}
 f(\Bx) = A \Bx + \Bb,
 \end{equation}
-
+%
 Given a point \( \Bz \in S \), and a \( \theta \in [0,1] \)
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem7:80}
 \Bz = \theta \Bx + (1-\theta) \By,
 \end{equation}
-
+%
 the image of that point is
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem7:100}
 \begin{aligned}
 f( \theta \Bx + (1-\theta)\By )
@@ -68,13 +68,13 @@ f( \theta \Bx + (1-\theta)\By )
 &= \theta f(\Bx) + (1-\theta) f(\By),
 \end{aligned}
 \end{equation}
-
+%
 which is an affine combination.  This means that the set of such points, the image of \( f \) is a convex set.
 
 \makeSubAnswer{}{convex-optimization:problemSet1:7c}
 
 Running the steps above backwards, given \( \setlr{ f(\Bx) } \in S \), and \( \theta \in [0,1] \) then
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem7:120}
 \begin{aligned}
 \theta f(\Bx) + (1-\theta) f(\By)
@@ -85,7 +85,7 @@ Running the steps above backwards, given \( \setlr{ f(\Bx) } \in S \), and \( \t
 &= f( \theta \Bx + (1-\theta)\By ).
 \end{aligned}
 \end{equation}
-
+%
 This shows that the set of points \( \setlr{ \theta \Bx + (1-\theta)\By } \) is a convex set, proving the result.
 } % redaction
 } % answer

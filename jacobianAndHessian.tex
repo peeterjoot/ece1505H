@@ -5,30 +5,30 @@
 \section{Multivariable Taylor approximation}
 
 The Taylor series expansion for a scalar function \( g : \bbR \rightarrow \bbR \) about the origin is just
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:20}
 g(t) = g(0) + t g'(0) + \frac{t^2}{2} g''(0) + \cdots
 \end{equation}
-
+%
 In particular
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:40}
 g(1) = g(0) + g'(0) + \frac{1}{2} g''(0) + \cdots
 \end{equation}
-
+%
 Now consider \( g(t) = f( \Bx + \Ba t ) \), where \( f : \bbR^n \rightarrow \bbR \), \( g(0) = f(\Bx) \), and \( g(1) = f(\Bx + \Ba) \).
 This trick, from
 \citep{hestenes1999nfc}
 allows for a direct expansion of the multivariable Taylor series of a scalar function
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:60}
 f( \Bx + \Ba)
 = f(\Bx)
 + \evalbar{\frac{df(\Bx + \Ba t)}{dt}}{t = 0} + \frac{1}{2} \evalbar{\frac{d^2f(\Bx + \Ba t)}{dt^2}}{t = 0} + \cdots
 \end{equation}
-
+%
 The first order term is
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:80}
 \begin{aligned}
 \evalbar{\frac{df(\Bx + \Ba t)}{dt}}{t = 0}
@@ -37,9 +37,9 @@ The first order term is
 &= \Ba \cdot \spacegrad f.
 \end{aligned}
 \end{equation}
-
+%
 Similarly, for the second order term
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:100}
 \begin{aligned}
 \evalbar{\frac{d^2 f(\Bx + \Ba t)}{dt^2}}{t = 0}
@@ -69,54 +69,54 @@ Similarly, for the second order term
 (\Ba \cdot \spacegrad)^2 f.
 \end{aligned}
 \end{equation}
-
+%
 The complete Taylor expansion of a scalar function \( f : \bbR^n \rightarrow \bbR \) is therefore
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:120}
 f(\Bx + \Ba)
 = f(\Bx) +
 \Ba \cdot \spacegrad f +
 \inv{2} \lr{ \Ba \cdot \spacegrad}^2 f + \cdots,
 \end{equation}
-
+%
 so the Taylor expansion has an exponential structure
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:140}
 f(\Bx + \Ba) = \sum_{k = 0}^\infty \inv{k!} \lr{ \Ba \cdot \spacegrad}^k f = e^{\Ba \cdot \spacegrad} f.
 \end{equation}
-
+%
 Should an approximation of a vector valued function \( \Bf : \bbR^n \rightarrow \bbR^m \) be desired it is only required to form a matrix of the components
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:160}
 \Bf(\Bx + \Ba)
 = \Bf(\Bx) +
 [\Ba \cdot \spacegrad f_i]_i +
 \inv{2} [\lr{ \Ba \cdot \spacegrad}^2 f_i]_i + \cdots,
 \end{equation}
-
+%
 where \( [.]_i \) denotes a column vector over the rows \( i \in [1,m] \), and \( f_i \) are the coordinates of \( \Bf \).
 
 \section{The Jacobian matrix}
 
 In \citep{boyd2004convex} the Jacobian \( D \Bf \) of a function \( \Bf : \bbR^n \rightarrow \bbR^m \) is defined in terms of the limit of the \( l_2 \) norm ratio
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:180}
 \frac{\Norm{\Bf(\Bz) - \Bf(\Bx) - (D \Bf) (\Bz - \Bx)}_2 }{ \Norm{\Bz - \Bx}_2 },
 \end{equation}
-
+%
 with the statement that the function \( \Bf \) has a derivative if this limit exists.  Here the Jacobian \( D \Bf \in \bbR^{m \times n} \) must be matrix valued.
 
 Let \( \Bz = \Bx + \Ba \), so the first order expansion of \cref{eqn:jacobianAndHessian:160} is
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:200}
 \Bf(\Bz)
 = \Bf(\Bx) + [\lr{ \Bz - \Bx } \cdot \spacegrad f_i]_i
 .
 %+ \inv{2} [(\lr{ \Bz - \Bx } \cdot \spacegrad)^2 f_i]_i.
 \end{equation}
-
+%
 With the (unproven) assumption that this Taylor expansion satisfies the norm limit criteria of \cref{eqn:jacobianAndHessian:180}, it is possible to extract the structure of the Jacobian by comparison
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:220}
 \begin{aligned}
 (D \Bf)
@@ -136,16 +136,16 @@ With the (unproven) assumption that this Taylor expansion satisfies the norm lim
 (\Bz - \Bx),
 \end{aligned}
 \end{equation}
-
+%
 so
 %\begin{equation}\label{eqn:jacobianAndHessian:240}
 \boxedEquation{eqn:jacobianAndHessian:240}{
 (D \Bf)_{ij} = \PD{x_j}{f_i}
 }
 %\end{equation}
-
+%
 Written out explicitly as a matrix the Jacobian is
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:320}
 D \Bf
 =
@@ -163,25 +163,25 @@ D \Bf
 (\spacegrad f_m)^\T
 \end{bmatrix}.
 \end{equation}
-
+%
 In particular, when the function is scalar valued
 \begin{equation}\label{eqn:jacobianAndHessian:360}
 D f = (\spacegrad f)^\T.
 \end{equation}
-
+%
 With this notation, the first Taylor expansion, in terms of the Jacobian matrix is
-
+%
 %\begin{equation}\label{eqn:jacobianAndHessian:260}
 \boxedEquation{eqn:jacobianAndHessian:260}{
 \Bf(\Bz)
 \approx \Bf(\Bx) + (D \Bf) \lr{ \Bz - \Bx }.
 }
 %\end{equation}
-
+%
 \paragraph{Gradient}
 
 The gradient provides a linear approximation of a function about a point \( \Bx_0 \in \Rm{n} \).
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:484}
 \begin{aligned}
 F(\Bx)
@@ -189,18 +189,18 @@ F(\Bx)
 &= F(\Bx_0) + \innerprod{ \spacegrad F(\Bx_0)}{ \Bx - \Bx_0 },
 \end{aligned}
 \end{equation}
-
+%
 or
 \begin{equation}\label{eqn:jacobianAndHessian:504}
 F(\Bx + \Delta \Bx)
 =
 F(\Bx) + \innerprod{ \spacegrad F(\Bx)}{ \Delta \Bx }.
 \end{equation}
-
+%
 This can be thought of as the definition of the gradient in an inner product space.  It will be possible to find the structure of the gradient by considering a perturbation of a function about a point.
 
 When \( g \) is a scalar function, the chain rule can be expressed in terms of the gradient
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:724}
 \spacegrad
 (g(F(\Bx)))
@@ -211,52 +211,52 @@ D F
 }^\T}{\Bx}
 \evalbar{\spacegrad g}{F(\Bx)}.
 \end{equation}
-
+%
 %Note: \( \spacegrad h(\Bx) = D h(\Bx)^\T \) if \( p = 1 \).
 %Also,
 %if \( p = 1 \),
 %\( \spacegrad g(F(\Bx)) = (D g(F(\Bx)))^\T \).
 
 \paragraph{Example 1:}
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:524}
 \begin{aligned}
 F &: \Rm{n} \rightarrow \bbR \\
 g &: \bbR \rightarrow \bbR,
 \end{aligned}
 \end{equation}
-
+%
 and let
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:544}
 h(\Bx) = g(F(\Bx)),
 \end{equation}
-
+%
 for \( \Bx \in \Rm{n} \), then
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:564}
 \spacegrad h(\Bx)
 =
 g'(F(\Bx)) \spacegrad F(\Bx).
 \end{equation}
-
+%
 \input{quadraticFormGradient.tex}
 
 \paragraph{Symmetric matrices}
 
 Let \( S^n \) be the set of symmetric matrices
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:444}
 S^n = \setlr{ P \in \Rm{n\times n} | P = P^\T},
 \end{equation}
-
+%
 then
 %In particular, for a symmetric matrix \( P \), this means
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:464}
 \spacegrad (\Bx^\T P \Bx) = 2 P \Bx.
 \end{equation}
-
+%
 \section{Chain rule}
 
 The gradients or Jacobians for compositions of functions can also be calculated
@@ -264,16 +264,16 @@ The gradients or Jacobians for compositions of functions can also be calculated
 \maketheorem{Chain rule}{thm:jacobianAndHessian:1}{
 
 Given functions
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:684}
 \begin{aligned}
 F &: \Rm{n} \rightarrow \Rm{m} \\
 g &: \Rm{m} \rightarrow \Rm{p},
 \end{aligned}
 \end{equation}
-
+%
 %With \( h(\Bx) = g(F(\Bx) \),
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:704}
 D (g(F(\Bx)))
 %h(\Bx)
@@ -284,16 +284,16 @@ D (g(F(\Bx)))
 \paragraph{Scalar valued composition}
 
 To illustrate this, first consider a scalar valued composition
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:584}
 \begin{aligned}
 F &: \Rm{n} \rightarrow \Rm{n} \\
 g &: \Rm{n} \rightarrow \bbR,
 \end{aligned}
 \end{equation}
-
+%
 and let
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:604}
 \begin{aligned}
 h(\Bx)
@@ -308,9 +308,9 @@ F_n(\Bx) \\
 }
 \end{aligned}
 \end{equation}
-
+%
 for \( \Bx \in \Rm{n} \), then
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:624}
 \PD{x_k}{h(\Bx)}
 =
@@ -322,9 +322,9 @@ for \( \Bx \in \Rm{n} \), then
 +
 \cdots
 \end{equation}
-
+%
 With
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:644}
 D F(\Bx)
 =
@@ -335,48 +335,48 @@ D F(\Bx)
 \PD{x_1}{F_n} & \PD{x_2}{F_n} & \cdots & \PD{x_n}{F_n} \\
 \end{bmatrix}
 \end{equation}
-
+%
 the gradient \( \spacegrad g = (D g)^\T \) is
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:664}
 \spacegrad h(\Bx)
 =
 \evalbar{ (D F)^\T }{\Bx}
 \spacegrad g(F(\Bx)),
 \end{equation}
-
+%
 or
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:665}
 D (g(F(\Bx)))
 =
 \evalbar{D g}{F(\Bx)}
 \evalbar{D F}{\Bx}.
 \end{equation}
-
+%
 \paragraph{Affine functions}
 
 An important example are affine functions of \( \Bx \)
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:744}
 \begin{aligned}
 F &: \Rm{n} \rightarrow \Rm{n} \\
 g &: \Rm{n} \rightarrow \bbR,
 \end{aligned}
 \end{equation}
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:764}
 F(\Bx) = A \Bx + \Bb,
 \end{equation}
-
+%
 where \( A \) is an \( n \times n \) matrix and \( \Bb \) is an \( n \times 1 \) column vector.
 
 Given a function
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:784}
 h(\Bx) = g(F(\Bx)) = g(A \Bx + \Bb).
 \end{equation}
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:804}
 F(\Bx)
 = A \Bx + \Bb
@@ -420,13 +420,13 @@ F(\Bx)
 %\Bb
 ,
 \end{equation}
-
+%
 so
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:824}
 D F(\Bx) = A,
 \end{equation}
-
+%
 and
 \begin{equation}\label{eqn:jacobianAndHessian:1064}
 \spacegrad (g(F(\Bx)))
@@ -434,13 +434,13 @@ and
 (A \Bx)^\T
 \evalbar{\spacegrad g}{F(\Bx)}.
 \end{equation}
-
+%
 \paragraph{General case}
 
 The proof of the general case
 can be essentially be performed by example, provided that example is sufficiently non-trivial, such as
 a non-square case such as \( n = 4, m = 3, p = 2 \)
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:924}
 F(\Bx) =
 \begin{bmatrix}
@@ -449,7 +449,7 @@ F_2(\Bx) \\
 F_3(\Bx) \\
 \end{bmatrix},
 \end{equation}
-
+%
 and
 \begin{equation}\label{eqn:jacobianAndHessian:944}
 g(\By)
@@ -459,9 +459,9 @@ g_1(\By) \\
 g_2(\By) \\
 \end{bmatrix}.
 \end{equation}
-
+%
 For such a function
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:964}
 \PD{x_1}{g(F(\Bx))}
 =
@@ -470,9 +470,9 @@ For such a function
 \PDi{x_1}{g_2(F(\Bx))}
 \end{bmatrix},
 \end{equation}
-
+%
 so
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:984}
 \begin{aligned}
 D g(F(\Bx))
@@ -488,9 +488,9 @@ D (g_2(F(\Bx))) \\
 \end{bmatrix}.
 \end{aligned}
 \end{equation}
-
+%
 This reduces the problem to the composition of a scalar and vector function, such as
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:1004}
 \begin{aligned}
 D (g_1(F(\Bx)))
@@ -512,7 +512,7 @@ D (g_1(F(\Bx)))
 D F(\Bx).
 \end{aligned}
 \end{equation}
-
+%
 The total Jacobian is
 \begin{equation}\label{eqn:jacobianAndHessian:1024}
 D g(F(\Bx))
@@ -522,32 +522,32 @@ D g(F(\Bx))
 \evalbar{D g_2}{F(\Bx)} D F(\Bx)
 \end{bmatrix},
 \end{equation}
-
+%
 which can be factored as
 \begin{equation}\label{eqn:jacobianAndHessian:1044}
 D (g(F(\Bx)))
 =
 \evalbar{D g}{F(\Bx)} D F(\Bx).
 \end{equation}.
-
+%
 \section{The Hessian matrix}
 
 For scalar valued functions, the text expresses the second order expansion of a function in terms of the Jacobian and Hessian matrices
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:380}
 f(\Bz)
 \approx f(\Bx) + (D f) \lr{ \Bz - \Bx }
 + \inv{2} \lr{ \Bz - \Bx }^\T (\spacegrad^2 f) \lr{ \Bz - \Bx }.
 \end{equation}
-
+%
 Because \( \spacegrad^2 \) is the usual notation for a Laplacian operator, this \( \spacegrad^2 f \in \bbR^{n \times n}\) notation for the Hessian matrix is not ideal in my opinion.  Ignoring that notational objection for this class, the structure of the Hessian matrix can be extracted by comparison with the coordinate expansion
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:300}
 \Ba^\T (\spacegrad^2 f) \Ba
 =
 \sum_{r,s = 1}^n a_r a_s \frac{\partial^2 f}{\partial x_r \partial x_s}
 \end{equation}
-
+%
 so
 %\begin{equation}\label{eqn:jacobianAndHessian:280}
 \boxedEquation{eqn:jacobianAndHessian:280}{
@@ -556,9 +556,9 @@ so
 \frac{\partial^2 f_i}{\partial x_i \partial x_j}.
 }
 %\end{equation}
-
+%
 In explicit matrix form the Hessian is
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:340}
 \spacegrad^2 f
 =
@@ -569,21 +569,21 @@ In explicit matrix form the Hessian is
 \frac{\partial^2 f}{\partial x_n \partial x_1} & \frac{\partial^2 f}{\partial x_n \partial x_2} & \cdots &\frac{\partial^2 f}{\partial x_n \partial x_n}
 \end{bmatrix}.
 \end{equation}
-
+%
 Is there a similar nice matrix structure for the Hessian of a function \( f : \bbR^n \rightarrow \bbR^m \)?
 
 \makeexample{Second order scalar function}{example:jacobianAndHessian:2}{
 Given
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:864}
 F(\Bx)
 = \inv{2} \Bx^\T P \Bx
 + \Bq^\T \Bx
 + \Bc,
 \end{equation}
-
+%
 where \( P \) is a symmetric matrix \( P = P^\T \), then
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:884}
 \begin{aligned}
 \spacegrad F
@@ -591,9 +591,9 @@ where \( P \) is a symmetric matrix \( P = P^\T \), then
 &= P \Bx + \Bq,
 \end{aligned}
 \end{equation}
-
+%
 and
-
+%
 \begin{equation}\label{eqn:jacobianAndHessian:904}
 \spacegrad^2 F
 =

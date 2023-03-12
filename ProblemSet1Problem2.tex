@@ -4,17 +4,17 @@
 %
 \makeproblem{Inversion formula for ``small'' matrices}{convex-optimization:problemSet1:2}{
 Prove the relation
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem2:20}
 (I + A)^{-1} = I - A,
 \end{equation}
-
+%
 for \(A\) ``small''.  We used this in class to derive the second order expansion of
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem2:40}
 \log \det(I + A).
 \end{equation}
-
+%
 Prove this result in two ways:
 \makesubproblem{}{convex-optimization:problemSet1:2a}
 First, prove this for the special case of \( A \in S^n_{++} \) where the eigenvalues are small.
@@ -22,29 +22,29 @@ This is what we needed in class. Use a decomposition of \( A \) and Taylor appro
 
 \makesubproblem{}{convex-optimization:problemSet1:2b}
 Next prove the general relation: If \( A \in \Rm{n \times n} \) and \( \Norm{A}_p < 1 \) then \( I - A \) is non-singular, and
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem2:60}
 \lr{ I - A }^{-1} = \sum_{k=0}^\infty A^k
 \end{equation}
-
+%
 where
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem2:80}
 \Norm{(I - A)^{-1}}_p \le \inv{1 - \Norm{A}_p}.
 \end{equation}
-
+%
 The p-th matrix norm \( \Norm{A}_p \) is defined in terms of the vector p-norm as
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem2:100}
 \Norm{A}_p = \sup_{\Bx \ne 0} \frac{\Norm{A \Bx }_p}{\Norm{\Bx}_p}
 \end{equation}
-
+%
 which, using the scaling property of a norm, can be seen to be equivalent to
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem2:120}
 \Norm{A}_p = \max_{\Norm{\Bx}_p = 1} \Norm{A \Bx}_p.
 \end{equation}
-
+%
 In our derivation in class we used only the zeroth and first-order terms of the expansion.
 
 Some hints that outline one approach to the above result:
@@ -55,23 +55,23 @@ One approach to proving the first statement (about non-singularity) is by contra
 that if \( I - A \) is singular then there exists a vector \( \Bv \) such that \((I - A) \Bv = 0 \) and work from
 there.
 \item Next, consider the telescoping sum
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem2:140}
 \sum_{k=0}^N A^k (I - A) = I - A^{N+1},
 \end{equation}
-
+%
 and show
 \begin{equation}\label{eqn:ProblemSet1Problem2:160}
 \lim_{k \rightarrow \infty } A^k = 0.
 \end{equation}
-
+%
 \item
 To show that \( \lim_{k \rightarrow \infty } A^k = 0\), it is helpful first to prove that
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem2:180}
 \Norm{ A^{k+1} }_p \le \Norm{ A }_p \norm{ A^k }_p.
 \end{equation}
-
+%
 \item
 Finally, combine your above results and the properties of a norm to show the desired result.
 \end{enumerate}
@@ -82,13 +82,13 @@ Finally, combine your above results and the properties of a norm to show the des
 \makeSubAnswer{}{convex-optimization:problemSet1:2a}
 
 A matrix \( A \in S^n_{++} \) admits a representation
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem2:200}
 A = Q \Lambda Q^\T,
 \end{equation}
-
+%
 so
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem2:220}
 \begin{aligned}
 \lr{I + A}^{-1}
@@ -98,9 +98,9 @@ so
 &= Q ( I + \Lambda)^{-1} Q^\T.
 \end{aligned}
 \end{equation}
-
+%
 This reduces the problem to the computation of \( ( I + \Lambda)^{-1} \), where \( \Lambda \) is a diagonal matrix.  Such a matrix inverts trivially, provided all the eigenvalues are sufficiently small \( \lambda_i \in [0, 1) \)
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem2:240}
 \begin{aligned}
 \inv{ I + \Lambda }
@@ -114,9 +114,9 @@ This reduces the problem to the computation of \( ( I + \Lambda)^{-1} \), where 
 1 - \Lambda.
 \end{aligned}
 \end{equation}
-
+%
 This gives
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem2:260}
 \begin{aligned}
 \lr{I + A}^{-1}
@@ -125,18 +125,18 @@ This gives
 &= I - A. \qedmarker
 \end{aligned}
 \end{equation}
-
+%
 \makeSubAnswer{}{convex-optimization:problemSet1:2b}
 
 Removing the requirement that the matrix be symmetric, let
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem2:280}
 S_N
 = \sum_{k = 0}^{N-1} A^k.
 \end{equation}
-
+%
 As with a scalar geometric series the sum can be found by subtracting the difference \( S_N - S_{N+1} \)
-
+%
 \begin{equation}\label{eqn:ProblemSetIProblem2:300}
 S_N - S_{N+I}
 =
@@ -144,15 +144,15 @@ S_N(I - A)
 =
 I - A^N.
 \end{equation}
-
+%
 If it can be shown that \( A^N \rightarrow 0 \), then this shows that \( I - A \) must be non-singular.  Additionally, rearranging for \( S^N \), this is
-
+%
 \begin{equation}\label{eqn:ProblemSetIProblem2:320}
 S_N = (I - A^N)(I-A)^{-1},
 \end{equation}
-
+%
 so if \( I - A^N \rightarrow I \), then \cref{eqn:ProblemSet1Problem2:60} has been proven.  Intuitively, if \( A^N \rightarrow 0 \), then \( I - A^N \rightarrow I \), but to make this more meaningful, we want to express this limiting statement in terms of a norm.  The matrix p-norm of this difference is
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem2:340}
 \Norm{I - A^N}_p
 &= \sup_{\Bx \ne 0} \frac{ \Norm{ (I - A^N) \Bx }_p }{\Norm{\Bx}_p} \\
@@ -161,14 +161,14 @@ so if \( I - A^N \rightarrow I \), then \cref{eqn:ProblemSet1Problem2:60} has be
 &\le \max_{\Norm{\Bx}_p = 1} \Norm{ \Bx }_p + \Norm{ A^N \Bx }_p \\
 &= 1 + \max_{\Norm{\Bx}_p = 1} \Norm{ A^N \Bx }_p.
 \end{equation}
-
+%
 The second last step uses the triangle law property of the norm.  Note that we did not prove that the p-norm has this property in class (called the Minkowski inequality for p-norms), but a nice proof can be found in \citep{tisdellMinkowski}.
 
 \Cref{eqn:ProblemSet1Problem2:340} shows that if \( \Norm{A^N}_p \rightarrow 0 \), that \( I - A \) is non-singular, and the inverse is given by \cref{eqn:ProblemSet1Problem2:60}.
 
 To examine this limit,
 first consider the p-norm of a matrix-vector product
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem2:360}
 \begin{aligned}
 \Norm{A \Bx}_p
@@ -178,22 +178,22 @@ first consider the p-norm of a matrix-vector product
 &= \Norm{A}_p \Norm{\Bx}_p.
 \end{aligned}
 \end{equation}
-
+%
 For the norm of a product of matrices acting on a vector, this means that
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem2:380}
 \Norm{ A B \Bx }_p \le
 \Norm{ A }_p \Norm{B \Bx }_p
 \le
 \Norm{ A }_p \Norm{B}_p \Norm{ \Bx }_p,
 \end{equation}
-
+%
 in particular
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem2:400}
 \Norm{A^N \Bx}_p \le \lr{ \Norm{A}_p }^N \Norm{\Bx}_p,
 \end{equation}
-
+%
 and finally
 \begin{equation}\label{eqn:ProblemSet1Problem2:420}
 \begin{aligned}
@@ -202,9 +202,9 @@ and finally
 &= 1 + \lr{ \Norm{ A }_p }^N.
 \end{aligned}
 \end{equation}
-
+%
 This tends to \( 1 \) as \( N \rightarrow \infty \) provided \( \lr{ \Norm{ A }_p } < 1\), proving the inverse power series identity given this constraint.  The only remaining thing to proof is to find the bound on the p-norm of \( (1-A)^{-1} \).  That is
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem2:440}
 \begin{aligned}
 \Norm{ (I - A)^{-1} }_p

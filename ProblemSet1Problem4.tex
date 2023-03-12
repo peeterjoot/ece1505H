@@ -5,7 +5,7 @@
 \makeproblem{Convex, affine, and conic hulls}{convex-optimization:problemSet1:4}{
 \makesubproblem{}{convex-optimization:problemSet1:4a}
 Consider the set
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem4:20}
 \calS = \setlr{
 \begin{bmatrix}
@@ -19,13 +19,13 @@ Consider the set
 }
 \subseteq \Rm{2}.
 \end{equation}
-
+%
 Sketch \(\conv(\calS)\), \(\affine(\calS)\) and \(\conic(\calS)\), respectively the convex, affine, and conic hulls of the set \(\calS\). Each is the union of all combinations of the respective type (convex, affine or conic).
 
 \makesubproblem{}{convex-optimization:problemSet1:4b}
 
 Repeat \partref{convex-optimization:problemSet1:4a} for the set
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem4:40}
 \calS = \setlr{
 \begin{bmatrix}
@@ -43,7 +43,7 @@ Repeat \partref{convex-optimization:problemSet1:4a} for the set
 }
 .
 \end{equation}
-
+%
 \makesubproblem{}{convex-optimization:problemSet1:4c}
 Consider a set \(\calS\). What are the respective inclusion relations between the convex hull, the affine hull, and the conic hull of \(\calS\). I.e., which of these three sets are always subsets of the other, regardless of the original \(\calS\)?
 } % makeproblem
@@ -68,7 +68,7 @@ Consider a set \(\calS\). What are the respective inclusion relations between th
 \makeSubAnswer{}{convex-optimization:problemSet1:4c}
 
 Recall that the respective sets in question are:
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem4:60}
 \begin{aligned}
 \conv(S) &= \setlr{ \sum_{i=1}^n \theta_i \Bx_i | \Bx_i \in S, \theta_i \ge 0, \sum_{i=1}^n \theta_i = 1 } \\
@@ -76,15 +76,15 @@ Recall that the respective sets in question are:
 \conic(S) &= \setlr{ \sum_{i=1}^n \theta_i \Bx_i | \Bx_i \in S, \theta_i \ge 0 }.
 \end{aligned}
 \end{equation}
-
+%
 The convex hull can always is always a subset of either of the affine or conic hulls, since it takes that same set and imposes additional restrictions on it
-
+%
 \begin{equation}\label{eqn:ProblemSet1Problem4:80}
 \begin{aligned}
 \conv(S) &\subseteq \conic(S) \\
 \conv(S) &\subseteq \affine(S).
 \end{aligned}
 \end{equation}
-
+%
 } % redaction
 } % answer

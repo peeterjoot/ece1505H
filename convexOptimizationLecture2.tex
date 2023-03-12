@@ -34,17 +34,17 @@ This course has a focus on optimization in \R{n}.  Complex spaces in the context
 
 \makedefinition{Norm.}{dfn:convex-optimizationLecture2:4}{
 A norm is a function operating on a vector
-
+%
 \begin{equation*}
 \Bx = ( x_1, x_2, \cdots, x_n )
 \end{equation*}
-
+%
 that provides a mapping
-
+%
 \begin{equation*}
 \Norm{ \cdot } : \Rm{n} \rightarrow \bbR,
 \end{equation*}
-
+%
 where
 
 \begin{itemize}
@@ -56,38 +56,38 @@ where
 } % definition
 
 \paragraph{Example: Euclidean norm}
-
+%
 \begin{equation}\label{eqn:convex-optimizationLecture2:24}
 \Norm{\Bx} = \sqrt{ \sum_{i = 1}^n x_i^2 }
 \end{equation}
-
+%
 \paragraph{Example: \(l_p\)-norms}
-
+%
 \begin{equation}\label{eqn:convex-optimizationLecture2:44}
 \Norm{\Bx}_p = \lr{ \sum_{i = 1}^n \Abs{x_i}^p }^{1/p}.
 \end{equation}
-
+%
 For \( p = 1 \), this is
-
+%
 \begin{equation}\label{eqn:convex-optimizationLecture2:64}
 \Norm{\Bx}_1 = \sum_{i = 1}^n \Abs{x_i},
 \end{equation}
-
+%
 For \( p = 2 \), this is the Euclidean norm \cref{eqn:convex-optimizationLecture2:24}.
 For \( p = \infty \), this is
-
+%
 \begin{equation}\label{eqn:convex-optimizationLecture2:324}
 \Norm{\Bx}_\infty = \max_{i = 1}^n \Abs{x_i}.
 \end{equation}
-
+%
 Note that it hasn't been proven here that \( \Norm{\Bx}_p \) satisfies the triangle inequality.  This is only the case for \( p \ge 1 \), and in general is known as the Minkowski identity \citep{triangleInequalityMathSE}.  The proof of this also requires Holder's inequality.  A very nice treatment of both can be found on Dr. Chris Tisdell's youtube channel (\citep{tisdellMinkowski}, \citep{tisdellHolder}).
 
 \makedefinition{Unit ball}{dfn:convex-optimizationLecture2:10}{
-
+%
 \begin{equation*}
 \setlr{ \Bx | \Norm{\Bx} \le 1 }
 \end{equation*}
-
+%
 } % definition
 
 The regions of the unit ball under the \( l_1, l_2, and l_\infty \) norms are plotted in \cref{fig:L2Norms:L2NormsFig2}.
@@ -95,32 +95,32 @@ The regions of the unit ball under the \( l_1, l_2, and l_\infty \) norms are pl
 \imageFigure{../figures/ece1505-convex-optimization/L2NormsFig2}{Some unit ball regions.}{fig:L2Norms:L2NormsFig2}{0.3}
 
 The \( l_2 \) norm is not only familiar, but can be ``induced'' by an inner product
-
+%
 \begin{equation}\label{eqn:convex-optimizationLecture2:84}
 \innerprod{\Bx}{\By} = \Bx^\T \By = \sum_{i = 1}^n x_i y_i,
 \end{equation}
-
+%
 which is not true for all norms.  The norm induced by this inner product is
-
+%
 \begin{equation}\label{eqn:convex-optimizationLecture2:104}
 \Norm{\Bx}_2 = \sqrt{ \innerprod{\Bx}{\By} }
 \end{equation}
-
+%
 Inner product spaces have a notion of angle
 (\cref{fig:L2XYTheta:L2XYThetaFig3})
 given by
-
+%
 \begin{equation}\label{eqn:convex-optimizationLecture2:124}
 \innerprod{\Bx}{\By} = \Norm{\Bx} \Norm{\By} \cos \theta,
 \end{equation}
-
+%
 \imageFigure{../figures/ece1505-convex-optimization/L2XYThetaFig3}{Inner product induced angle.}{fig:L2XYTheta:L2XYThetaFig3}{0.2}
 and always satisfy the Cauchy-Schwartz inequality
-
+%
 \begin{equation}\label{eqn:convex-optimizationLecture2:144}
 \innerprod{\Bx}{\By} \le \Norm{\Bx}_2 \Norm{\By}_2.
 \end{equation}
-
+%
 In an inner product space we say \( \Bx \) and \( \By \) are orthogonal vectors \( \Bx \perp \By \) if
 \( \innerprod{\Bx}{\By} = 0 \), as sketched in
 \cref{fig:L2XYRightAngle:L2XYRightAngleFig4}.
@@ -134,7 +134,7 @@ Let \( \Norm{ \cdot } \) be a norm in \R{n}.  The ``dual'' norm \( \Norm{ \cdot 
 \begin{equation*}
 \Norm{\Bz}_\conj = \sup_\Bx \setlr{ \Bz^\T \Bx | \Norm{\Bx} \le 1 }.
 \end{equation*}
-
+%
 where \( \sup \) is roughly the ``least upper bound''.
 \index{sup}
 
@@ -149,7 +149,7 @@ Dual of the \( l_2 \) is the \( l_2 \) norm.
 \imageFigure{../figures/ece1505-convex-optimization/unitBallL2Fig5}{\(l_2\) dual norm determination.}{fig:unitBallL2:unitBallL2Fig5}{0.2}
 
 Proof:
-
+%
 \begin{equation}\label{eqn:convex-optimizationLecture2:164}
 \begin{aligned}
 \Norm{\Bz}_\conj
@@ -165,16 +165,16 @@ Proof:
 \Norm{\Bz}_2.
 \end{aligned}
 \end{equation}
-
+%
 \paragraph{\( l_1 \) dual}.
 For \( l_1 \), the dual is the \( l_\infty \) norm.  Proof:
-
+%
 \begin{equation}\label{eqn:convex-optimizationLecture2:184}
 \Norm{\Bz}_\conj
 =
 \sup_\Bx \setlr{ \Bz^\T \Bx | \Norm{\Bx}_1 \le 1 },
 \end{equation}
-
+%
 but
 \begin{equation}\label{eqn:convex-optimizationLecture2:204}
 \begin{aligned}
@@ -188,7 +188,7 @@ but
 \sum_{i=1}^n \Abs{z_i x_i },
 \end{aligned}
 \end{equation}
-
+%
 so
 \begin{equation}\label{eqn:convex-optimizationLecture2:224}
 \begin{aligned}
@@ -201,7 +201,7 @@ so
 \Norm{\Bz}_\infty.
 \end{aligned}
 \end{equation}
-
+%
 %\cref{fig:unitBallL1:unitBallL1Fig6}.
 \imageFigure{../figures/ece1505-convex-optimization/unitBallL1Fig6}{\(l_1\) dual norm determination.}{fig:unitBallL1:unitBallL1Fig6}{0.2}
 
@@ -209,13 +209,13 @@ so
 
 %\cref{fig:unitBallLinf:unitBallLinfFig7}.
 \imageFigure{../figures/ece1505-convex-optimization/unitBallLinfFig7}{\(l_\infty\) dual norm determination.}{fig:unitBallLinf:unitBallLinfFig7}{0.2}
-
+%
 \begin{equation}\label{eqn:convex-optimizationLecture2:244}
 \Norm{\Bz}_\conj
 =
 \sup_\Bx \setlr{ \Bz^\T \Bx | \Norm{\Bx}_\infty \le 1 }.
 \end{equation}
-
+%
 Here
 \begin{equation}\label{eqn:convex-optimizationLecture2:264}
 \begin{aligned}
@@ -226,7 +226,7 @@ Here
 &= \Norm{\Bx}_\infty \sum_{i=1}^n \Abs{z_i}.
 \end{aligned}
 \end{equation}
-
+%
 So
 \begin{equation}\label{eqn:convex-optimizationLecture2:284}
 \Norm{\Bz}_\conj
@@ -235,9 +235,9 @@ So
 =
 \Norm{\Bz}_1.
 \end{equation}
-
+%
 Statement from the lecture: I'm not sure where this fits:
-
+%
 \begin{equation}\label{eqn:convex-optimizationLecture2:304}
 x_i^\conj
 =
@@ -248,5 +248,5 @@ x_i^\conj
 \end{array}
 \right.
 \end{equation}
-
+%
 \input{jacobianAndHessian.tex}
