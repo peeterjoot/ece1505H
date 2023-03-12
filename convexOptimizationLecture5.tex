@@ -19,9 +19,9 @@
 
 If \( S_\alpha \) is convex \( \forall \alpha \in A \), then
 
-\begin{dmath}\label{eqn:convexOptimizationLecture5:40}
+\begin{equation}\label{eqn:convexOptimizationLecture5:40}
 \cup_{\alpha \in A} S_\alpha,
-\end{dmath}
+\end{equation}
 
 is convex.
 
@@ -272,7 +272,7 @@ F( \theta \Bx  (1-\theta) \By ) \le \theta F(\Bx)  (1-\theta) F(\By).
 
 Sometimes convenient to work with ``extended value function''
 
-\begin{dmath}\label{eqn:convexOptimizationLecture5:500}
+\begin{equation}\label{eqn:convexOptimizationLecture5:500}
 \tilde{F}(\Bx) =
 \left\{
 \begin{array}{l l}
@@ -280,7 +280,7 @@ F(\Bx) & \quad \mbox{If \( \Bx \in \dom F\)} \\
 \infty & \quad \mbox{otherwise.}
 \end{array}
 \right.
-\end{dmath}
+\end{equation}
 
 Examples:
 
@@ -381,11 +381,11 @@ A &\in \bbR^{n \times m} \\
 
 Proof (of last):
 
-\begin{dmath}\label{eqn:convexOptimizationLecture5:640}
+\begin{equation}\label{eqn:convexOptimizationLecture5:640}
+\begin{aligned}
 g( \theta \Bx + (1-\theta) \By )
-=
-F( \theta (A \Bx + \Bb) + (1-\theta) (A \By + \Bb) )
-\le
-\theta F( A \Bx + \Bb) + (1-\theta) F (A \By + \Bb)
-= \theta g(\Bx) + (1-\theta) g(\By).
-\end{dmath}
+&= F( \theta (A \Bx + \Bb) + (1-\theta) (A \By + \Bb) ) \\
+&\le \theta F( A \Bx + \Bb) + (1-\theta) F (A \By + \Bb) \\
+&= \theta g(\Bx) + (1-\theta) g(\By).
+\end{aligned}
+\end{equation}

@@ -35,9 +35,9 @@ This course has a focus on optimization in \R{n}.  Complex spaces in the context
 \makedefinition{Norm.}{dfn:convex-optimizationLecture2:4}{
 A norm is a function operating on a vector
 
-\begin{dmath*}
+\begin{equation*}
 \Bx = ( x_1, x_2, \cdots, x_n )
-\end{dmath*}
+\end{equation*}
 
 that provides a mapping
 
@@ -57,36 +57,36 @@ where
 
 \paragraph{Example: Euclidean norm}
 
-\begin{dmath}\label{eqn:convex-optimizationLecture2:24}
+\begin{equation}\label{eqn:convex-optimizationLecture2:24}
 \Norm{\Bx} = \sqrt{ \sum_{i = 1}^n x_i^2 }
-\end{dmath}
+\end{equation}
 
 \paragraph{Example: \(l_p\)-norms}
 
-\begin{dmath}\label{eqn:convex-optimizationLecture2:44}
+\begin{equation}\label{eqn:convex-optimizationLecture2:44}
 \Norm{\Bx}_p = \lr{ \sum_{i = 1}^n \Abs{x_i}^p }^{1/p}.
-\end{dmath}
+\end{equation}
 
 For \( p = 1 \), this is
 
-\begin{dmath}\label{eqn:convex-optimizationLecture2:64}
+\begin{equation}\label{eqn:convex-optimizationLecture2:64}
 \Norm{\Bx}_1 = \sum_{i = 1}^n \Abs{x_i},
-\end{dmath}
+\end{equation}
 
 For \( p = 2 \), this is the Euclidean norm \cref{eqn:convex-optimizationLecture2:24}.
 For \( p = \infty \), this is
 
-\begin{dmath}\label{eqn:convex-optimizationLecture2:324}
+\begin{equation}\label{eqn:convex-optimizationLecture2:324}
 \Norm{\Bx}_\infty = \max_{i = 1}^n \Abs{x_i}.
-\end{dmath}
+\end{equation}
 
 Note that it hasn't been proven here that \( \Norm{\Bx}_p \) satisfies the triangle inequality.  This is only the case for \( p \ge 1 \), and in general is known as the Minkowski identity \citep{triangleInequalityMathSE}.  The proof of this also requires Holder's inequality.  A very nice treatment of both can be found on Dr. Chris Tisdell's youtube channel (\citep{tisdellMinkowski}, \citep{tisdellHolder}).
 
 \makedefinition{Unit ball}{dfn:convex-optimizationLecture2:10}{
 
-\begin{dmath*}
+\begin{equation*}
 \setlr{ \Bx | \Norm{\Bx} \le 1 }
-\end{dmath*}
+\end{equation*}
 
 } % definition
 
@@ -102,24 +102,24 @@ The \( l_2 \) norm is not only familiar, but can be ``induced'' by an inner prod
 
 which is not true for all norms.  The norm induced by this inner product is
 
-\begin{dmath}\label{eqn:convex-optimizationLecture2:104}
+\begin{equation}\label{eqn:convex-optimizationLecture2:104}
 \Norm{\Bx}_2 = \sqrt{ \innerprod{\Bx}{\By} }
-\end{dmath}
+\end{equation}
 
 Inner product spaces have a notion of angle
 (\cref{fig:L2XYTheta:L2XYThetaFig3})
 given by
 
-\begin{dmath}\label{eqn:convex-optimizationLecture2:124}
+\begin{equation}\label{eqn:convex-optimizationLecture2:124}
 \innerprod{\Bx}{\By} = \Norm{\Bx} \Norm{\By} \cos \theta,
-\end{dmath}
+\end{equation}
 
 \imageFigure{../figures/ece1505-convex-optimization/L2XYThetaFig3}{Inner product induced angle.}{fig:L2XYTheta:L2XYThetaFig3}{0.2}
 and always satisfy the Cauchy-Schwartz inequality
 
-\begin{dmath}\label{eqn:convex-optimizationLecture2:144}
+\begin{equation}\label{eqn:convex-optimizationLecture2:144}
 \innerprod{\Bx}{\By} \le \Norm{\Bx}_2 \Norm{\By}_2.
-\end{dmath}
+\end{equation}
 
 In an inner product space we say \( \Bx \) and \( \By \) are orthogonal vectors \( \Bx \perp \By \) if
 \( \innerprod{\Bx}{\By} = 0 \), as sketched in
@@ -150,7 +150,7 @@ Dual of the \( l_2 \) is the \( l_2 \) norm.
 
 Proof:
 
-\begin{dmath}\label{eqn:convex-optimizationLecture2:164}
+\begin{equation}\label{eqn:convex-optimizationLecture2:164}
 \begin{aligned}
 \Norm{\Bz}_\conj
 &= \sup_\Bx \setlr{ \Bz^\T \Bx | \Norm{\Bx}_2 \le 1 } \\
@@ -164,7 +164,7 @@ Proof:
 &=
 \Norm{\Bz}_2.
 \end{aligned}
-\end{dmath}
+\end{equation}
 
 \paragraph{\( l_1 \) dual}.
 For \( l_1 \), the dual is the \( l_\infty \) norm.  Proof:
@@ -176,28 +176,31 @@ For \( l_1 \), the dual is the \( l_\infty \) norm.  Proof:
 \end{equation}
 
 but
-\begin{dmath}\label{eqn:convex-optimizationLecture2:204}
+\begin{equation}\label{eqn:convex-optimizationLecture2:204}
+\begin{aligned}
 \Bz^\T \Bx
-=
+&=
 \sum_{i=1}^n z_i x_i \le
 \Abs{
 \sum_{i=1}^n z_i x_i
-}
-\le
+} \\
+&\le
 \sum_{i=1}^n \Abs{z_i x_i },
-\end{dmath}
+\end{aligned}
+\end{equation}
 
 so
-\begin{dmath}\label{eqn:convex-optimizationLecture2:224}
+\begin{equation}\label{eqn:convex-optimizationLecture2:224}
+\begin{aligned}
 \Norm{\Bz}_\conj
-=
-\sum_{i=1}^n \Abs{z_i}\Abs{ x_i }
-\le \lr{ \max_{j=1}^n \Abs{z_j} }
-\sum_{i=1}^n \Abs{ x_i }
-\le \lr{ \max_{j=1}^n \Abs{z_j} }
-=
+&= \sum_{i=1}^n \Abs{z_i}\Abs{ x_i } \\
+&\le \lr{ \max_{j=1}^n \Abs{z_j} }
+\sum_{i=1}^n \Abs{ x_i } \\
+&\le \lr{ \max_{j=1}^n \Abs{z_j} } \\
+&=
 \Norm{\Bz}_\infty.
-\end{dmath}
+\end{aligned}
+\end{equation}
 
 %\cref{fig:unitBallL1:unitBallL1Fig6}.
 \imageFigure{../figures/ece1505-convex-optimization/unitBallL1Fig6}{\(l_1\) dual norm determination.}{fig:unitBallL1:unitBallL1Fig6}{0.2}
@@ -214,19 +217,15 @@ so
 \end{equation}
 
 Here
-\begin{dmath}\label{eqn:convex-optimizationLecture2:264}
+\begin{equation}\label{eqn:convex-optimizationLecture2:264}
+\begin{aligned}
 \Bz^\T \Bx
-=
-\sum_{i=1}^n z_i x_i
-\le
-\sum_{i=1}^n \Abs{z_i}\Abs{ x_i }
-\le
-\lr{ \max_j \Abs{ x_j } }
-\sum_{i=1}^n \Abs{z_i}
-=
-\Norm{\Bx}_\infty
-\sum_{i=1}^n \Abs{z_i}.
-\end{dmath}
+&= \sum_{i=1}^n z_i x_i \\
+&\le \sum_{i=1}^n \Abs{z_i}\Abs{ x_i } \\
+&\le \lr{ \max_j \Abs{ x_j } } \sum_{i=1}^n \Abs{z_i} \\
+&= \Norm{\Bx}_\infty \sum_{i=1}^n \Abs{z_i}.
+\end{aligned}
+\end{equation}
 
 So
 \begin{equation}\label{eqn:convex-optimizationLecture2:284}
@@ -239,7 +238,7 @@ So
 
 Statement from the lecture: I'm not sure where this fits:
 
-\begin{dmath}\label{eqn:convex-optimizationLecture2:304}
+\begin{equation}\label{eqn:convex-optimizationLecture2:304}
 x_i^\conj
 =
 \left\{
@@ -248,6 +247,6 @@ x_i^\conj
 -1 & \quad \mbox{\( z_i \le 0 \)}
 \end{array}
 \right.
-\end{dmath}
+\end{equation}
 
 \input{jacobianAndHessian.tex}

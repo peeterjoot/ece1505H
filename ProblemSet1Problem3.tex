@@ -45,15 +45,15 @@ Properties 1-8 are all clearly satisfied by \( S^n \), leaving just closure to d
 For \( A, B \in S^n \), with elements \( a_{ij} = a_{ji} \) and \( b_{ij} = b_{ji} \) respectively,
 the elements of the sum \( \alpha A + \beta B \) are
 
-\begin{dmath}\label{eqn:ProblemSet1Problem3:21}
+\begin{equation}\label{eqn:ProblemSet1Problem3:21}
 \alpha a_{ij} + \beta b_{ij}
 = \alpha a_{ji} + \beta b_{ji},
-\end{dmath}
+\end{equation}
 
 or
-\begin{dmath}\label{eqn:ProblemSet1Problem3:41}
+\begin{equation}\label{eqn:ProblemSet1Problem3:41}
 \alpha A + \beta B = (\alpha A + \beta B)^\T,
-\end{dmath}
+\end{equation}
 
 which demonstrates the closure properties.
 
@@ -77,54 +77,54 @@ For matrices \( A, B, C \in S^n \) with elements \( a_{ij}, b_{ij}, c_{ij} \) re
 
 \begin{enumerate}
 \item
-\begin{dmath}\label{eqn:ProblemSet1Problem3:61}
+\begin{equation}\label{eqn:ProblemSet1Problem3:61}
 \innerprod{A}{B} = \Tr A^\T B = \sum_k \Tr a_{ki} b_{kj} = \sum_{ki} a_{ki} b_{ki} \in \bbR. \qedmarker
-\end{dmath}
+\end{equation}
 \item
 Changing indexes in \cref{eqn:ProblemSet1Problem3:61}, and making use of \( a_{ij} = a_{ji} \) for matrices in \( S^n \), we have
-\begin{dmath}\label{eqn:ProblemSet1Problem3:81}
+\begin{equation}\label{eqn:ProblemSet1Problem3:81}
 \innerprod{A}{B} = \sum_{ij} a_{ij} b_{ij},
-\end{dmath}
+\end{equation}
 
 Similarly, the inner product in the reverse order is
 
-\begin{dmath}\label{eqn:ProblemSet1Problem3:101}
+\begin{equation}\label{eqn:ProblemSet1Problem3:101}
+\begin{aligned}
 \innerprod{B}{A} = \Tr B^\T A
-= \sum_k \Tr b_{ki} a_{kj}
-= \sum_{ki} b_{ki} a_{ki}
-= \sum_{ji} b_{ji} a_{ji}
-= \sum_{ji} a_{ij} b_{ij}
-= \innerprod{A}{B}. \qedmarker
-\end{dmath}
+&= \sum_k \Tr b_{ki} a_{kj} \\
+&= \sum_{ki} b_{ki} a_{ki} \\
+&= \sum_{ji} b_{ji} a_{ji} \\
+&= \sum_{ji} a_{ij} b_{ij} \\
+&= \innerprod{A}{B}. \qedmarker
+\end{aligned}
+\end{equation}
 \item
-\begin{dmath}\label{eqn:ProblemSet1Problem3:121}
+\begin{equation}\label{eqn:ProblemSet1Problem3:121}
+\begin{aligned}
 \innerprod{A + B}{C}
-= \Tr ((A + B)^\T C)
-= \Tr ((A^\T + B^\T) C)
-= \Tr (A^\T C + B^\T C)
-= \Tr (A^\T C) + \Tr (B^\T C)
-=
-\innerprod{A}{C}
-+
-\innerprod{B}{C} .\qedmarker
-\end{dmath}
+&= \Tr ((A + B)^\T C) \\
+&= \Tr ((A^\T + B^\T) C) \\
+&= \Tr (A^\T C + B^\T C) \\
+&= \Tr (A^\T C) + \Tr (B^\T C) \\
+&= \innerprod{A}{C} + \innerprod{B}{C} .\qedmarker
+\end{aligned}
+\end{equation}
 \item
-\begin{dmath}\label{eqn:ProblemSet1Problem3:141}
+\begin{equation}\label{eqn:ProblemSet1Problem3:141}
+\begin{aligned}
 \innerprod{r A}{B}
-=
-\Tr (r A)^\T B
-=
-\Tr r A^\T B
-=
-r \Tr A^\T B
-= r \innerprod{A}{B}.\qedmarker
-\end{dmath}
+&= \Tr (r A)^\T B \\
+&= \Tr r A^\T B \\
+&= r \Tr A^\T B \\
+&= r \innerprod{A}{B}.\qedmarker
+\end{aligned}
+\end{equation}
 \item
-\begin{dmath}\label{eqn:ProblemSet1Problem3:161}
+\begin{equation}\label{eqn:ProblemSet1Problem3:161}
 \innerprod{A}{A}
 =
 \sum_{ij} a_{ij}^2,
-\end{dmath}
+\end{equation}
 
 which is greater than zero for \( A \ne 0 \).
 \end{enumerate}

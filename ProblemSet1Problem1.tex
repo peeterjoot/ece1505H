@@ -5,9 +5,9 @@
 \makeproblem{Taylor series expansion}{convex-optimization:problemSet1:1}{
 Consider the function
 
-\begin{dmath}\label{eqn:ProblemSet1Problem1:20}
+\begin{equation}\label{eqn:ProblemSet1Problem1:20}
 f(\Bx) = -\sum_{l=1}^m \log( b_l - \Ba_l^\T \Bx ),
-\end{dmath}
+\end{equation}
 
 where \( \Bx \in \Rm{n} \), \( b_l \in \bbR \) and \( \Ba_l \in \Rm{n}\).
 Compute \( \spacegrad f(\Bx) \) and \( \spacegrad^2 f(\Bx)\).
@@ -19,56 +19,43 @@ Write down the first three terms of the Taylor series expansion of \(f(\Bx)\) ar
 
 Application of the chain rule, with
 
-\begin{dmath}\label{eqn:ProblemSet1Problem1:40}
+\begin{equation}\label{eqn:ProblemSet1Problem1:40}
 g_l(\Bx) = b_l - \Ba_l^\T \Bx,
-\end{dmath}
+\end{equation}
 
 gives
 
-\begin{dmath}\label{eqn:ProblemSet1Problem1:60}
+\begin{equation}\label{eqn:ProblemSet1Problem1:60}
+\begin{aligned}
 \spacegrad f(\Bx)
-=
--
-\sum_{l=1}^m
-\spacegrad \log(g_l(\Bx))
-=
--\sum_{l=1}^m
-\inv{g_l(\Bx)} \spacegrad g_l(\Bx)
-=
--\sum_{l=1}^m
-\inv{b_l - \Ba_l^\T \Bx} \spacegrad (b_l - \Ba_l^\T \Bx)
-=
--\sum_{l=1}^m
-\inv{b_l - \Ba_l^\T \Bx} (- \Ba_l),
-\end{dmath}
+&= - \sum_{l=1}^m \spacegrad \log(g_l(\Bx)) \\
+&= -\sum_{l=1}^m \inv{g_l(\Bx)} \spacegrad g_l(\Bx) \\
+&= -\sum_{l=1}^m \inv{b_l - \Ba_l^\T \Bx} \spacegrad (b_l - \Ba_l^\T \Bx) \\
+&= -\sum_{l=1}^m \inv{b_l - \Ba_l^\T \Bx} (- \Ba_l),
+\end{aligned}
+\end{equation}
 
 or
-%\begin{dmath}\label{eqn:ProblemSet1Problem1:80}
+%\begin{equation}\label{eqn:ProblemSet1Problem1:80}
 \boxedEquation{eqn:ProblemSet1Problem1:80}{
 \spacegrad f
 =
 \sum_{l=1}^m
 \frac{\Ba_l}{b_l - \Ba_l^\T \Bx}.
 }
-%\end{dmath}
+%\end{equation}
 
 The Hessian components are
 
-\begin{dmath}\label{eqn:ProblemSet1Problem1:100}
+\begin{equation}\label{eqn:ProblemSet1Problem1:100}
+\begin{aligned}
 (\spacegrad^2 f)_{ij}
-=
-\frac{\partial^2 f}{\partial x_i \partial x_j}
-=
-\frac{\partial}{\partial x_i}
-\Be_j^\T \spacegrad f
-=
-\frac{\partial}{\partial x_i}
-\sum_{l=1}^m
-\frac{a_{lj}}{b_l - \Ba_l^\T \Bx}
-=
-\sum_{l=1}^m
--\frac{a_{lj}(-a_{li})}{(b_l - \Ba_l^\T \Bx)^2},
-\end{dmath}
+&= \frac{\partial^2 f}{\partial x_i \partial x_j} \\
+&= \frac{\partial}{\partial x_i} \Be_j^\T \spacegrad f \\
+&= \frac{\partial}{\partial x_i} \sum_{l=1}^m \frac{a_{lj}}{b_l - \Ba_l^\T \Bx} \\
+&= \sum_{l=1}^m -\frac{a_{lj}(-a_{li})}{(b_l - \Ba_l^\T \Bx)^2},
+\end{aligned}
+\end{equation}
 
 or
 
@@ -85,22 +72,24 @@ a_{lj}
 
 For the Taylor expansion, note that
 
-\begin{dmath}\label{eqn:ProblemSet1Problem1:140}
+\begin{equation}\label{eqn:ProblemSet1Problem1:140}
+\begin{aligned}
 (\Delta \Bx)^\T
 \spacegrad^2 f
 \Delta \Bx
-=
+&=
 \sum_{l=1}^m
 \inv{(b_l - \Ba_l^\T \Bx)^2}
-(\Delta x_j) a_{lj} a_{li} (\Delta x_i)
-=
+(\Delta x_j) a_{lj} a_{li} (\Delta x_i) \\
+&=
 \sum_{l=1}^m
 \inv{(b_l - \Ba_l^\T \Bx)^2}
 (\Ba_l^\T \Delta x)^2,
-\end{dmath}
+\end{aligned}
+\end{equation}
 
 so
-\begin{dmath}\label{eqn:ProblemSet1Problem1:160}
+\begin{equation}\label{eqn:ProblemSet1Problem1:160}
 f(\Bx_0 + \Delta \Bx)
 =
 f(\Bx_0)
@@ -109,7 +98,7 @@ f(\Bx_0)
 (\Delta \Bx)^\T
 (\spacegrad^2 f)
 (\Delta \Bx),
-\end{dmath}
+\end{equation}
 
 which is
 \boxedEquation{eqn:ProblemSet1Problem1:180}{

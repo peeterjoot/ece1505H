@@ -36,9 +36,9 @@ Proof:
 
 Again, using Taylor approximation
 
-\begin{dmath}\label{eqn:convexOptimizationLecture8:20}
+\begin{equation}\label{eqn:convexOptimizationLecture8:20}
 F(\Bx^\conj + \Bv) = F(\Bx^\conj) + \lr{ \spacegrad F(\Bx^\conj)}^\T \Bv + \inv{2} \Bv^\T \spacegrad^2 F(\Bx^\conj) \Bv + o(\Norm{\Bv}^2)
-\end{dmath}
+\end{equation}
 
 The linear term is zero by assumption, whereas the Hessian term is given as \( > 0 \).  Any direction that you move in, if your move is small enough, this is going uphill at a local optimum.
 
@@ -46,12 +46,12 @@ The linear term is zero by assumption, whereas the Hessian term is given as \( >
 
 For twice continuously differentiable functions, at a local optimum \( \Bx^\conj \), then
 
-\begin{dmath}\label{eqn:convexOptimizationLecture8:40}
+\begin{equation}\label{eqn:convexOptimizationLecture8:40}
 \begin{aligned}
 \spacegrad F(\Bx^\conj) &= 0 \\
 \spacegrad^2 F(\Bx^\conj) \ge 0
 \end{aligned}
-\end{dmath}
+\end{equation}
 
 If, in addition, \( F \) is convex, then \( \spacegrad F(\Bx^\conj) = 0 \) implies that \( \Bx^\conj \) is a global optimum.  i.e. for (unconstrained) convex functions, local and global optimums are equivalent.
 
@@ -65,13 +65,13 @@ If, in addition, \( F \) is convex, then \( \spacegrad F(\Bx^\conj) = 0 \) impli
 \item Our discussion has been for unconstrained functions.  For constrained problems (next topic) is not necessarily true that \( \spacegrad F(\Bx) = 0 \) implies that \( \Bx \) is a global optimum, even for \( F \) convex.
 
 As an example of a constrained problem consider
-\begin{dmath}\label{eqn:convexOptimizationLecture8:n}
+\begin{equation}\label{eqn:convexOptimizationLecture8:n}
 \begin{aligned}
 \min &2 x^2 + y^2 \\
 x &\ge 3 \\
 y &\ge 5.
 \end{aligned}
-\end{dmath}
+\end{equation}
 
 The level sets of this objective function are plotted in \cref{fig:l8constrainedMin:l8constrainedMinFig2}.  The optimal point is at \( \Bx^\conj = (3,5) \), where \( \spacegrad F \ne 0 \).
 \imageFigure{../figures/ece1505-convex-optimization/l8constrainedMinFig2}{Constrained problem with optimum not at the zero gradient point.}{fig:l8constrainedMin:l8constrainedMinFig2}{0.3}

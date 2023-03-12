@@ -54,7 +54,7 @@ Explain how to interpret this latter fact in terms of the interpretation of \( \
 
 The eigenvalues were found to be \( \setlr{2,1} \) with respective eigenvectors
 
-\begin{dmath}\label{eqn:ProblemSet1Problem6:20}
+\begin{equation}\label{eqn:ProblemSet1Problem6:20}
 \begin{aligned}
 \Be_1 &= \inv{\sqrt{2}}
 \begin{bmatrix}
@@ -67,7 +67,7 @@ The eigenvalues were found to be \( \setlr{2,1} \) with respective eigenvectors
 1
 \end{bmatrix}.
 \end{aligned}
-\end{dmath}
+\end{equation}
 
 The ellipsoid is plotted in \cref{fig:ps1p6a:ps1p6aFig2}.
 
@@ -77,7 +77,7 @@ The ellipsoid is plotted in \cref{fig:ps1p6a:ps1p6aFig2}.
 
 The eigenvalues were found to be \( \setlr{4,2} \) with respective eigenvectors
 
-\begin{dmath}\label{eqn:ProblemSet1Problem6:40}
+\begin{equation}\label{eqn:ProblemSet1Problem6:40}
 \begin{aligned}
 \Be_1 &= \inv{\sqrt{2}}
 \begin{bmatrix}
@@ -90,7 +90,7 @@ The eigenvalues were found to be \( \setlr{4,2} \) with respective eigenvectors
 -1
 \end{bmatrix}.
 \end{aligned}
-\end{dmath}
+\end{equation}
 
 The ellipsoid is plotted in \cref{fig:ps1p6b:ps1p6bFig3}.
 
@@ -100,7 +100,7 @@ The ellipsoid is plotted in \cref{fig:ps1p6b:ps1p6bFig3}.
 
 The eigenvalues were found to be \( \setlr{10,5} \) with respective eigenvectors
 
-\begin{dmath}\label{eqn:ProblemSet1Problem6:60}
+\begin{equation}\label{eqn:ProblemSet1Problem6:60}
 \begin{aligned}
 \Be_1 &= \inv{\sqrt{5}}
 \begin{bmatrix}
@@ -113,7 +113,7 @@ The eigenvalues were found to be \( \setlr{10,5} \) with respective eigenvectors
 2
 \end{bmatrix}.
 \end{aligned}
-\end{dmath}
+\end{equation}
 
 The ellipsoid is plotted in \cref{fig:ps1p6c:ps1p6cFig4}.
 
@@ -137,22 +137,24 @@ which shows that this set \( \calP \) is the span of the columns of the matrix \
 Jordan canonical form \citep{damiano1988course}.
 This is a basis for which the matrix representation of the linear transformation is either completely diagonal, or in specific upper triangular form with zeros everywhere but the superdiagonal (and only ones or zeros on the superdiagonal).  Such a similarity transformation
 
-\begin{dmath}\label{eqn:ProblemSet1Problem6:140}
+\begin{equation}\label{eqn:ProblemSet1Problem6:140}
 A = E J E^{-1},
-\end{dmath}
+\end{equation}
 
 is determinant preserving, since
 
-\begin{dmath}\label{eqn:ProblemSet1Problem6:160}
+\begin{equation}\label{eqn:ProblemSet1Problem6:160}
+\begin{aligned}
 \Abs{ A }
-= \Abs{ E } \Abs{ J } \Abs{ E^{-1} }
-= \Abs{ E } \Abs{ J } \inv{ \Abs{E} }
-= \Abs{ J }.
-\end{dmath}
+&= \Abs{ E } \Abs{ J } \Abs{ E^{-1} } \\
+&= \Abs{ E } \Abs{ J } \inv{ \Abs{E} } \\
+&= \Abs{ J }.
+\end{aligned}
+\end{equation}
 
 A couple examples are
 
-\begin{dmath}\label{eqn:ProblemSet1Problem6:120}
+\begin{equation}\label{eqn:ProblemSet1Problem6:120}
 \begin{bmatrix}
 3 & 1 \\
 0 & 3
@@ -171,7 +173,7 @@ A couple examples are
 0        & 2 & 1 \\
 0        & 0 & 2
 \end{bmatrix},
-\end{dmath}
+\end{equation}
 
 for which the respective sets \( \calP \) are sketched in \cref{fig:ps1p6d:ps1p6dFig1}.
 
@@ -184,7 +186,7 @@ for which the respective sets \( \calP \) are sketched in \cref{fig:ps1p6d:ps1p6
 
 Note that the parallelograms are altered by such a similarity transformation, but the (oriented area) given by the determinant is invariant.  This is illustrated in \cref{fig:ps1p6d:ps1p6dParallelogramsFig1} for
 
-\begin{dmath}\label{eqn:ProblemSet1Problem6:180}
+\begin{equation}\label{eqn:ProblemSet1Problem6:180}
 \begin{bmatrix}
 3 & 1 \\
 -1 & 1
@@ -202,7 +204,7 @@ Note that the parallelograms are altered by such a similarity transformation, bu
 \inv{2} & -\inv{2} \\
 \inv{2} & \inv{2}
 \end{bmatrix},
-\end{dmath}
+\end{equation}
 
 for which the oriented area given by the determinant is unity in both cases.
 

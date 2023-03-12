@@ -6,7 +6,7 @@
 
 Find some \( \Bx_0 \in \bbR^n \) such that \( \Ba^\T \Bx_0 = \Bb \), so
 
-\begin{dmath}\label{eqn:convexOptimizationLecture4:20}
+\begin{equation}\label{eqn:convexOptimizationLecture4:20}
 \begin{aligned}
 \setlr{ \Bx | \Ba^\T \Bx = \Bb }
 &=
@@ -16,7 +16,7 @@ Find some \( \Bx_0 \in \bbR^n \) such that \( \Ba^\T \Bx_0 = \Bb \), so
 &=
 \Bx_0 + \Ba^\perp,
 \end{aligned}
-\end{dmath}
+\end{equation}
 
 where
 
@@ -85,15 +85,14 @@ Proving \( \calP \) is convex:
 \item Test \( \theta \Bx_1 + (1-\theta) \Bx_2 \).  Is it in \(\calP\)?
 \end{itemize}
 
-\begin{dmath}\label{eqn:convexOptimizationLecture4:140}
+\begin{equation}\label{eqn:convexOptimizationLecture4:140}
+\begin{aligned}
 A \lr{ \theta \Bx_1 + (1-\theta) \Bx_2 }
-=
-\theta A \Bx_1 + (1-\theta) A \Bx_2
-\le
-\theta \Bb + (1-\theta) \Bb
-=
-\Bb.
-\end{dmath}
+&= \theta A \Bx_1 + (1-\theta) A \Bx_2 \\
+&\le \theta \Bb + (1-\theta) \Bb \\
+&= \Bb.
+\end{aligned}
+\end{equation}
 
 \section{Balls}
 
@@ -112,20 +111,17 @@ or
 
 Let \( \Bx_1, \Bx_2 \), \(\theta \in [0,1]\)
 
-\begin{dmath}\label{eqn:convexOptimizationLecture4:200}
+\begin{equation}\label{eqn:convexOptimizationLecture4:200}
+\begin{aligned}
 \Norm{ \theta \Bx_1 + (1-\theta) \Bx_2 - \Bx_c }_2
-=
-\Norm{ \theta (\Bx_1 - \Bx_c) + (1-\theta) (\Bx_2 - \Bx_c) }_2
-\le
-\Norm{ \theta (\Bx_1 - \Bx_c)}_2 + \Norm{(1-\theta) (\Bx_2 - \Bx_c) }_2
-=
-\Abs{\theta} \Norm{ \Bx_1 - \Bx_c}_2 + \Abs{1 -\theta} \Norm{ \Bx_2 - \Bx_c }_2
-=
-\theta \Norm{ \Bx_1 - \Bx_c}_2 + \lr{1 -\theta} \Norm{ \Bx_2 - \Bx_c }_2
-\le
-\theta r + (1 - \theta) r
-= r
-\end{dmath}
+&= \Norm{ \theta (\Bx_1 - \Bx_c) + (1-\theta) (\Bx_2 - \Bx_c) }_2 \\
+&\le \Norm{ \theta (\Bx_1 - \Bx_c)}_2 + \Norm{(1-\theta) (\Bx_2 - \Bx_c) }_2 \\
+&= \Abs{\theta} \Norm{ \Bx_1 - \Bx_c}_2 + \Abs{1 -\theta} \Norm{ \Bx_2 - \Bx_c }_2 \\
+&= \theta \Norm{ \Bx_1 - \Bx_c}_2 + \lr{1 -\theta} \Norm{ \Bx_2 - \Bx_c }_2 \\
+&\le \theta r + (1 - \theta) r \\
+&= r.
+\end{aligned}
+\end{equation}
 
 \section{Ellipse}
 
@@ -147,11 +143,11 @@ where \( P \in S^n_{++} \).
 
 Given
 
-\begin{dmath}\label{eqn:convexOptimizationLecture4:240}
+\begin{equation}\label{eqn:convexOptimizationLecture4:240}
 F(\Bu) = P^{1/2} \Bu + \Bx_c
-\end{dmath}
+\end{equation}
 
-\begin{dmath}\label{eqn:convexOptimizationLecture4:260}
+\begin{equation}\label{eqn:convexOptimizationLecture4:260}
 \begin{aligned}
 \setlr{ F(\Bu) | \Norm{\Bu}_2 \le r }
 &=
@@ -163,19 +159,19 @@ F(\Bu) = P^{1/2} \Bu + \Bx_c
 &=
 \setlr{ \Bx | (\Bx - \Bx_c)^\T P^{-1} (\Bx - \Bx_c) \le r^2 }
 \end{aligned}
-\end{dmath}
+\end{equation}
 
 \section{Geometry of an ellipse}
 
 %\succeq
 Decomposition of positive definite matrix \( P \in S^n_{++} \subset S^n \) is:
 
-\begin{dmath}\label{eqn:convexOptimizationLecture4:280}
+\begin{equation}\label{eqn:convexOptimizationLecture4:280}
 \begin{aligned}
 P &= Q \diag(\lambda_i) Q^\T \\
 Q^\T Q &= 1
 \end{aligned},
-\end{dmath}
+\end{equation}
 
 where \( \lambda_i \in \bbR\), and \(\lambda_i > 0 \).
 
@@ -234,17 +230,14 @@ is a convex set for all norms.  Proof:
 
 Take any \( \Bx, \By \in \calB \)
 
-\begin{dmath}\label{eqn:convexOptimizationLecture4:380}
+\begin{equation}\label{eqn:convexOptimizationLecture4:380}
+\begin{aligned}
 \Norm{ \theta \Bx + (1 - \theta) \By }
-\le
-\Abs{\theta} \Norm{ \Bx } + \Abs{1 - \theta} \Norm{ \By }
-=
-\theta \Norm{ \Bx } + \lr{1 - \theta} \Norm{ \By }
-\lr
-\theta + \lr{1 - \theta}
-=
-1.
-\end{dmath}
+&\le \Abs{\theta} \Norm{ \Bx } + \Abs{1 - \theta} \Norm{ \By } \\
+&= \theta \Norm{ \Bx } + \lr{1 - \theta} \Norm{ \By } \lr \theta + \lr{1 - \theta} \\
+&= 1.
+\end{aligned}
+\end{equation}
 
 This is true for any p-norm \( 1 \le p \), \( \Norm{\Bx}_p = \lr{ \sum_{i = 1}^n \Abs{x_i}^p }^{1/p} \).
 
@@ -263,13 +256,13 @@ Recall that \( C \) is a cone if \( \forall \Bx \in C, \theta \ge 0, \theta \Bx 
 
 Impt cone of PSD matrices
 
-\begin{dmath}\label{eqn:convexOptimizationLecture4:400}
+\begin{equation}\label{eqn:convexOptimizationLecture4:400}
 \begin{aligned}
 S^n &= \setlr{ X \in \bbR^{n \times n} | X = X^\T } \\
 S^n_{+} &= \setlr{ X \in S^n | \Bv^\T X \Bv \ge 0, \quad \forall v \in \bbR^n } \\
 S^n_{++} &= \setlr{ X \in S^n_{+} | \Bv^\T X \Bv > 0, \quad \forall v \in \bbR^n } \\
 \end{aligned}
-\end{dmath}
+\end{equation}
 
 These have respectively
 
@@ -283,23 +276,25 @@ These have respectively
 
 \( X \in S^n_{+}\), then \( \theta X \in S^n_{+}, \quad \forall \theta \ge 0 \)
 
-\begin{dmath}\label{eqn:convexOptimizationLecture4:420}
+\begin{equation}\label{eqn:convexOptimizationLecture4:420}
+\begin{aligned}
 \Bv^\T (\theta X) \Bv
-= \theta \Bv^\T \Bv
-\ge 0,
-\end{dmath}
+&= \theta \Bv^\T \Bv \\
+&\ge 0,
+\end{aligned}
+\end{equation}
 
 since \( \theta \ge 0 \) and because \( X \in S^n_{+} \).
 
 Shorthand:
 
 % succeq: curly \ge
-\begin{dmath}\label{eqn:convexOptimizationLecture4:440}
+\begin{equation}\label{eqn:convexOptimizationLecture4:440}
 \begin{aligned}
 X &\in S^n_{+} \implies X \succeq 0
 X &\in S^n_{++} \implies X \succ 0.
 \end{aligned}
-\end{dmath}
+\end{equation}
 
 Further \( S^n_{+} \) is a convex cone.
 
@@ -307,13 +302,13 @@ Let \( A \in S^n_{+} \), \( B \in S^n_{+} \), \( \theta_1, \theta_2 \ge 0, \thet
 
 Show that \( \theta_1 A + \theta_2 B \in S^n_{+} \) :
 
-\begin{dmath}\label{eqn:convexOptimizationLecture4:460}
+\begin{equation}\label{eqn:convexOptimizationLecture4:460}
 \Bv^\T \lr{  \theta_1 A + \theta_2 B } \Bv
 =
 \theta_1 \Bv^\T A \Bv
 +\theta_2 \Bv^\T B \Bv
 \ge 0,
-\end{dmath}
+\end{equation}
 
 since \( \theta_1 \ge 0, \theta_2 \ge 0, \Bv^\T A \Bv \ge 0, \Bv^\T B \Bv \ge 0 \).
 
@@ -339,12 +334,12 @@ The \( K \) defines a generalized inequality in \R{n} defined as ``\(\le_K\)''
 
 Interpreting
 
-\begin{dmath}\label{eqn:convexOptimizationLecture4:480}
+\begin{equation}\label{eqn:convexOptimizationLecture4:480}
 \begin{aligned}
 \Bx \le_K \By &\leftrightarrow \By - \Bx \in K
 \Bx <_K \By   &\leftrightarrow \By - \Bx \in \interior K
 \end{aligned}
-\end{dmath}
+\end{equation}
 
 %F10
 %\cref{fig:l4Cone:l4ConeFig10a}.
@@ -370,19 +365,19 @@ Example:1: \( K = \bbR^n_{+}, \Bx \in \bbR^n, \By \in \bbR^n \)
 
 say:
 
-\begin{dmath}\label{eqn:convexOptimizationLecture4:520}
+\begin{equation}\label{eqn:convexOptimizationLecture4:520}
 \begin{bmatrix}
 y_1 - x_1
 y_2 - x_2
 \end{bmatrix}
 \in R^2_{+}
-\end{dmath}
+\end{equation}
 
 Also:
 
-\begin{dmath}\label{eqn:convexOptimizationLecture4:540}
+\begin{equation}\label{eqn:convexOptimizationLecture4:540}
 K = R^1_{+}
-\end{dmath}
+\end{equation}
 
 %F13
 %\cref{fig:l4:l4Fig13}.
@@ -448,9 +443,9 @@ Take the intersection of (perhaps infinitely many) sets \( S_\alpha \):
 If \( S_\alpha \) is (affine,convex, conic) for all \( \alpha \in A \) then
 
 %(upside down U)
-\begin{dmath}\label{eqn:convexOptimizationLecture4:680}
+\begin{equation}\label{eqn:convexOptimizationLecture4:680}
 \cap_\alpha S_\alpha
-\end{dmath}
+\end{equation}
 
 is
 
