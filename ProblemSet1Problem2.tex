@@ -154,12 +154,14 @@ S_N = (I - A^N)(I-A)^{-1},
 so if \( I - A^N \rightarrow I \), then \cref{eqn:ProblemSet1Problem2:60} has been proven.  Intuitively, if \( A^N \rightarrow 0 \), then \( I - A^N \rightarrow I \), but to make this more meaningful, we want to express this limiting statement in terms of a norm.  The matrix p-norm of this difference is
 %
 \begin{equation}\label{eqn:ProblemSet1Problem2:340}
+\begin{aligned}
 \Norm{I - A^N}_p
 &= \sup_{\Bx \ne 0} \frac{ \Norm{ (I - A^N) \Bx }_p }{\Norm{\Bx}_p} \\
 &= \max_{\Norm{\Bx}_p = 1} \Norm{ (I - A^N) \Bx }_p \\
 &= \max_{\Norm{\Bx}_p = 1} \Norm{ \Bx - A^N \Bx }_p \\
 &\le \max_{\Norm{\Bx}_p = 1} \Norm{ \Bx }_p + \Norm{ A^N \Bx }_p \\
 &= 1 + \max_{\Norm{\Bx}_p = 1} \Norm{ A^N \Bx }_p.
+\end{aligned}
 \end{equation}
 %
 The second last step uses the triangle law property of the norm.  Note that we did not prove that the p-norm has this property in class (called the Minkowski inequality for p-norms), but a nice proof can be found in \citep{tisdellMinkowski}.
